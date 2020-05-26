@@ -18,12 +18,18 @@ class RandomWordsState extends State<RandomWords>{
         if(index >= _randomWordPairs.length){
           _randomWordPairs.addAll(generateWordPairs().take(10));
         }
-        return _buildRow(_randomWordPairs[index]);
+        return _buildRow(_randomWordPairs[index], _randomWordPairs.length);
       },
     );
   }
-  Widget _buildRow(WordPair pair){
-    return ListTile(title: Text(pair.asPascalCase));
+  Widget _buildRow(WordPair pair, int length){
+    return ListTile(
+      title: Text(
+        pair.asPascalCase, 
+        style:  TextStyle(          fontSize: 18.0         )
+      ),
+      subtitle: Text('Length is $length.toString()'),
+    );
   }
   Widget build(BuildContext context){
     return Scaffold(
