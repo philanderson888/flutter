@@ -633,3 +633,17 @@ I look forward to developing this theme!
 Phil Anderson
 
 May 2020
+
+
+## Extra - read API
+
+With my insatiable curiosity I now want to see if I can get some API data
+
+```yaml
+http: ^0.12.1
+```
+
+```java
+import 'package:http/http.dart';
+
+```

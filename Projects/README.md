@@ -6,6 +6,8 @@ This is a sequence of projects following [Traversy Media](https://www.youtube.co
 
 If you're following, have fun!
 
+### [API01](API01)
+
 ### [WordPair01](WordPair01)
 
 ### [WordPair02](WordPair02)
