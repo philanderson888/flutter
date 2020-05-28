@@ -17,16 +17,24 @@ May 2020
   - [Introduction](#introduction)
   - [Projects](#projects)
   - [Flutter Studio at https://flutterstudio.app](#flutter-studio-at-httpsflutterstudioapp)
-  - [Navigation](#navigation)
+  - [Starter Code](#starter-code)
+    - [yaml](#yaml)
+    - [default scaffolding](#default-scaffolding)
+    - [Default Clean Screen](#default-clean-screen)
     - [Default Layout For Two Basic Pages](#default-layout-for-two-basic-pages)
   - [Organising Items](#organising-items)
     - [Page](#page)
   - [Scaffold class](#scaffold-class)
   - [AppBar](#appbar)
-  - [Navigation](#navigation-1)
+  - [Navigation](#navigation)
   - [Organising Items](#organising-items-1)
     - [Drawer](#drawer)
     - [Themes](#themes)
+  - [Buttons](#buttons)
+    - [Generic Button](#generic-button)
+    - [Raised Button](#raised-button)
+  - [Text](#text)
+    - [ButtonClick01](#buttonclick01)
 
 ## Introduction
 
@@ -44,7 +52,118 @@ This can be used to quickly scaffold code for us without manual typing.
 
 Wow!
 
-## Navigation
+## Starter Code
+
+### yaml
+
+```yaml
+name: MultiPage01
+description: A new Flutter project.
+publish_to: 'none' 
+version: 1.0.0+1
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.3
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+flutter:
+  uses-material-design: true
+```
+
+### default scaffolding
+
+```java
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), 
+    );
+  }
+}
+```
+
+### Default Clean Screen
+
+```java
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
+}
+class Home extends StatelessWidget {
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home Screen"),
+      ),
+    );
+  }
+}
+```
+
 
 ### Default Layout For Two Basic Pages
 
@@ -94,6 +213,8 @@ class SecondScreen extends StatelessWidget {
   }
 }
 ```
+
+
 
 ## Organising Items 
 
@@ -196,3 +317,137 @@ final ThemeData themeData = ThemeData(
 backgroundColor: Theme.of(ctx).canvasColor,
 ```
 
+## Buttons
+
+### Generic Button
+
+```java
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Home(),
+    );
+  }
+}
+class Home extends StatelessWidget {
+  @override
+  void buttonPressed(){}
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home Screen"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          key:null, 
+          onPressed:buttonPressed,
+          color: const Color(0xFFe0e0e0),
+          child: Text("Button")
+        ),
+      ),
+    );
+  }
+}
+class Page1 extends StatelessWidget{
+  @override 
+  Widget build(BuildContext context){
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('Page 1'),
+      ),
+    );
+  }
+}
+```
+
+### Raised Button
+
+```java
+body: RaisedButton(
+  key:null, 
+  onPressed:buttonPressed,
+  color: const Color(0xFFe0e0e0),
+  child:
+    new Text(
+    "BUTTON",
+      style: new TextStyle(fontSize:12.0,
+      color: const Color(0xFF000000),
+      fontWeight: FontWeight.w200,
+      fontFamily: "Roboto"),
+    )
+  ),
+
+
+void buttonPressed(){}
+```
+
+## Text
+
+```
+Text("BUTTON 2",
+  style: new TextStyle(fontSize:12.0,
+  color: const Color(0xFF000000),
+  fontWeight: FontWeight.w200,
+  fontFamily: "Roboto"),
+)
+
+```
+
+### [ButtonClick01](ButtonClick01)
+
+```java
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: UpdateButton(),
+    );
+  }
+}
+class UpdateButton extends StatefulWidget{
+  UpdateButtonState createState() => UpdateButtonState();
+}
+class UpdateButtonState extends State{
+  String textHolder = 'Old Sample Text';
+  changeText(){
+    setState(() {
+      textHolder = 'New Sample Text';
+    });
+  }
+  @override
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home Screen"),
+      ),
+      body: Center(
+        child: new RaisedButton(
+          key:null, 
+          onPressed: () => changeText(),
+          color: const Color(0xFFe0e0e0),
+          child: Text('$textHolder')
+        ),
+      ),
+    );
+  }
+}
+class Page1 extends StatelessWidget{
+  @override 
+  Widget build(BuildContext context){
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text('Page 1'),
+      ),
+    );
+  }
+}
+```
