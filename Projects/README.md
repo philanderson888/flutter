@@ -18,11 +18,7 @@ A list of projects built in Flutter
 
 ### [API01](API01)
 
-This reads one single piece of API data
-
-### [API02](API02)
-
-Not complete
+This reads one single piece of API data and also a whole list of API data to the screen and console
 
 ### [RowsAndColumns01](RowsAndColumns01)
 
@@ -45,3 +41,7 @@ If you're following, have fun!
 ### [MultiPage02 - Simple app with super basic two pages](MultiPage02)
 
 ### [MultiPage03 - Rebuild from scratch of MultiPage02](MultiPage03)
+
+### [MultiPage04](MultiPage04)
+
+This app navigates 4 pages!
