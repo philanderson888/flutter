@@ -4,6 +4,7 @@
 - [getting started](#getting-started)
   - [table of contents](#table-of-contents)
   - [getting started with an online ide](#getting-started-with-an-online-ide)
+  - [installation](#installation)
   - [building your first project](#building-your-first-project)
     - [yaml](#yaml)
     - [default scaffolding](#default-scaffolding)
@@ -12,7 +13,31 @@
 
 ## getting started with an online ide
 
-We can get started quickly with flutter at this online ide [Flutter Studio at https://flutterstudio.app](https://flutterstudio.app)
+flutter can be tried out instantly online using flutter's own website at https://flutter.dev/
+
+It can also be used at [Flutter Studio](https://flutterstudio.app)
+
+## installation
+
+to install flutter download the zip file from https://flutter.dev/docs/get-started/install 
+
+Choose a location such as c:\users\username\ and unzip the zip file so the path to flutter becomes
+
+c:\users\username\flutter 
+
+add the `flutter\bin` path to your environment variables, for example in the example above the path would be `c:\users\username\flutter\bin` which would be added to your `path` system variable 
+
+On Windows, to do this, complete the following steps
+1. Hit the Windows key
+2. Type `env`
+3. Select `edit system environment variables`
+4. Choose `environment variables`
+5. In `system variables` find `path` and click `edit` 
+6. Click `new` to add a new entry to the path variables
+7. Paste `c:\users\username\flutter\bin`
+8. Press OK several times to save and exit
+   
+*note - changes may not take place until after a windows restart*
 
 ## building your first project
 
