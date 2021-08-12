@@ -1,19 +1,12 @@
 # Flutter
 
-## Author
-
-Philip Anderson 
-
-## Creation Date
-
-May 2020
-
+This is a respository for learning flutter from scratch
 ## Contents
 
 - [Flutter](#flutter)
-  - [Author](#author)
-  - [Creation Date](#creation-date)
   - [Contents](#contents)
+  - [Author](#author)
+  - [ChangeLog](#changelog)
   - [Introduction](#introduction)
   - [getting started](#getting-started)
   - [scaffolding simple projects](#scaffolding-simple-projects)
@@ -21,6 +14,17 @@ May 2020
   - [simple components](#simple-components)
   - [api](#api)
   - [Projects](#projects)
+
+
+## Author
+
+Philip Anderson 
+
+## ChangeLog
+
+May 2020 - Initial Build
+August 2021 - Refactor Notes
+
 
 ## Introduction
 
