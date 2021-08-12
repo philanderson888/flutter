@@ -7,6 +7,7 @@
   - [Contents](#contents)
   - [Introduction](#introduction-1)
   - [Why Flutter?](#why-flutter)
+  - [reference docs](#reference-docs)
 
 ## Introduction
 
@@ -23,3 +24,12 @@ Flutter is good for building cross-platform apps quickly.  It also is incredibly
 <p align="center"><em>Flutter Popularity Compared To React Native</em></p>
 
 <p align="center"><img src="https://www.mindinventory.com/blog/wp-content/uploads/2020/04/cross-platform-mobile-frameworks.png" /></p>
+
+## reference docs
+
+official documentation and website for flutter is to be found at https://flutter.dev/
+
+it's a framework for building mobile apps and uses a programming language called `dart`
+
+Google has invested heavily in `flutter` and it's good for building instant applications with one codebase which compiles natively to both `android` and `ios`, giving the user the native experience that they desire.  This is not just a web app running on top of the device, it's properly compiled down to native app code.
+
