@@ -5,6 +5,8 @@
   - [table of contents](#table-of-contents)
   - [getting started with an online ide](#getting-started-with-an-online-ide)
   - [installation](#installation)
+  - [Install Android Studio](#install-android-studio)
+  - [Add a device](#add-a-device)
   - [building your first project](#building-your-first-project)
     - [yaml](#yaml)
     - [default scaffolding](#default-scaffolding)
@@ -38,6 +40,74 @@ On Windows, to do this, complete the following steps
 8. Press OK several times to save and exit
    
 *note - changes may not take place until after a windows restart*
+
+to test this has worked, simply run these commands
+
+```bash
+flutter
+dart
+# show install locations on mac
+where flutter dart
+# show install locations on windows
+where.exe flutter dart
+```
+
+and if the install has worked, these commands will produce output with further options
+
+next run this command 
+
+```bash
+flutter doctor
+```
+
+This should identify which programs need to be installed for the full flutter experience to work properly.
+
+```
+PS C:\github> flutter doctor
+Running "flutter pub get" in flutter_tools...                      10.8s
+Doctor summary (to see all details, run flutter doctor -v):
+[√] Flutter (Channel stable, 2.2.3, on Microsoft Windows [Version 10.0.19043.1165], locale en-GB)
+[!] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+    X Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/docs/get-started/install/windows#android-setup for more details.
+[√] Chrome - develop for the web
+[!] Android Studio (not installed)
+[√] IntelliJ IDEA Community Edition (version 2020.2)
+[√] VS Code, 64-bit edition (version 1.58.2)
+[√] Connected device (2 available)
+```
+
+## Install Android Studio
+
+Android studio is required for building Android apps so please go ahead and install it.
+
+https://developer.android.com/studio
+
+check the install has worked by running once again
+
+```bash
+flutter doctor
+```
+
+and optionally run
+
+```
+flutter config --android-studio-dir <<path to android studio sdk folder>>
+```
+
+On your android device enable developer options by going `settings`, `about device`, and tapping on `build number` several times
+
+Next, run Android Studio, Tools, SDK Manager and tick `Google USB Driver`
+
+## Add a device
+
+Other commands to run are 
+
+```
+flutter devices
+```
+
 
 ## building your first project
 
