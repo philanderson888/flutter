@@ -126,7 +126,8 @@ then click on the `sdk tools` tab and tick `android sdk (command-line tools) and
 
 ### enabling developer tools on android device
 
-On your android device enable developer options by going `settings`, `about device`, and tapping on `build number` several times
+On your android device enable developer options by going `settings`, `developer options`, `on`.  
+On older devices, the sequence may be `settings`, `about device`, tap on `build number` several times.
 
 ### enable google usb driver in android studio
 
