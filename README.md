@@ -73,7 +73,7 @@ Next we progress into reading data from an api into our app, and displaying it
 A list of projects is below
 
 [all projects](projects)
-- [Hello World](projects/HelloWorld)
+- [Hello World](projects/HelloWorld01)
 - [Simple Button Click](projects/ButtonClick01)
 - [Simple List View](projects/ListView01)
 - [Display Rows And Columns](projects/RowsAndColumns01)
