@@ -4,8 +4,14 @@
 - [getting started](#getting-started)
   - [table of contents](#table-of-contents)
   - [getting started with an online ide](#getting-started-with-an-online-ide)
-  - [installation](#installation)
-  - [Install Android Studio](#install-android-studio)
+  - [install android studio](#install-android-studio)
+  - [install flutter](#install-flutter)
+  - [verify install](#verify-install)
+    - [configure android studio path](#configure-android-studio-path)
+    - [accept android licenses](#accept-android-licenses)
+    - [install android studio command line tools](#install-android-studio-command-line-tools)
+    - [enabling developer tools on android device](#enabling-developer-tools-on-android-device)
+    - [enable google usb driver in android studio](#enable-google-usb-driver-in-android-studio)
   - [Add a device](#add-a-device)
   - [building your first project](#building-your-first-project)
     - [yaml](#yaml)
@@ -19,7 +25,13 @@ flutter can be tried out instantly online using flutter's own website at https:/
 
 It can also be used at [Flutter Studio](https://flutterstudio.app)
 
-## installation
+## install android studio
+
+install android studio from https://developer.android.com/studio before installing `flutter`
+
+Android Studio by default will install at `C:\Program Files\Android\Android Studio\bin`
+
+## install flutter
 
 to install flutter download the zip file from https://flutter.dev/docs/get-started/install 
 
@@ -67,7 +79,10 @@ PS C:\github> flutter doctor
 Running "flutter pub get" in flutter_tools...                      10.8s
 Doctor summary (to see all details, run flutter doctor -v):
 [√] Flutter (Channel stable, 2.2.3, on Microsoft Windows [Version 10.0.19043.1165], locale en-GB)
-[!] Android toolchain - develop for Android devices (Android SDK version 29.0.3)
+[!] Android toolchain - develop for Android devices (Android SDK version 31.0.0)
+    X cmdline-tools component is missing
+      Run `path/to/sdkmanager --install "cmdline-tools;latest"`
+      See https://developer.android.com/studio/command-line for more details.
     X Android license status unknown.
       Run `flutter doctor --android-licenses` to accept the SDK licenses.
       See https://flutter.dev/docs/get-started/install/windows#android-setup for more details.
@@ -78,25 +93,42 @@ Doctor summary (to see all details, run flutter doctor -v):
 [√] Connected device (2 available)
 ```
 
-## Install Android Studio
+## verify install
 
-Android studio is required for building Android apps so please go ahead and install it.
-
-https://developer.android.com/studio
-
-check the install has worked by running once again
+check the install has worked by running
 
 ```bash
 flutter doctor
 ```
 
-and optionally run
+### configure android studio path
+
+if android studio is not installed or detected, please install it as above and optionally, if still not detected, specify the path using 
 
 ```
 flutter config --android-studio-dir <<path to android studio sdk folder>>
 ```
 
+### accept android licenses
+
+type
+
+```
+flutter doctor --android-licenses
+```
+
+and accept all licencses
+
+### install android studio command line tools
+
+to install the android studio command line tools open android studio => system settings => android sdk
+then click on the `sdk tools` tab and tick `android sdk (command-line tools) and run the install
+
+### enabling developer tools on android device
+
 On your android device enable developer options by going `settings`, `about device`, and tapping on `build number` several times
+
+### enable google usb driver in android studio
 
 Next, run Android Studio, Tools, SDK Manager and tick `Google USB Driver`
 
