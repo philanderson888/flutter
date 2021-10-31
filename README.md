@@ -41,7 +41,7 @@ Instructions on how to get started with flutter
 
 ## scaffolding an app
 
-[Projects](notes/scaffolding.md)
+[scaffolding an app](notes/scaffolding.md)
 
 ## Navigation
 
