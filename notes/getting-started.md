@@ -13,6 +13,7 @@
     - [enabling developer tools on android device](#enabling-developer-tools-on-android-device)
     - [enable google usb driver in android studio](#enable-google-usb-driver-in-android-studio)
   - [Add a device](#add-a-device)
+  - [hello world](#hello-world)
   - [building your first project](#building-your-first-project)
     - [yaml](#yaml)
     - [default scaffolding](#default-scaffolding)
@@ -140,6 +141,119 @@ Other commands to run are
 ```
 flutter devices
 ```
+
+##  hello world
+
+to build our first `hello world` project we should run the following
+
+```
+flutter create HelloWorld
+cd HelloWorld
+flutter run -d chrome
+```
+
+With chrome the response can be around 30 seconds so just be patient!  But eventually the app will launch and run in chrome web browser.
+
+we see that the critical code which has been created and executed is to be found at `lib\main.dart`
+
+if we strip out the existing code we can replace it with super-simple `hello world` code
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    const Center(
+      child: Text(
+        'Hello, world!',
+        textDirection: TextDirection.ltr,
+      ),
+    ),
+  );
+}
+```
+
+we can add the text into a class
+
+```java
+import 'package:flutter/material.dart';
+void main() {
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Text('hello world')
+    );
+  }
+}
+```
+
+we can improve this slightly using the `const` keyword
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Text('hello world from phil')
+    );
+  }
+}
+```
+
+and we can add a title to our web page
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Hello World',
+      home: Text('hello world from phil')
+    );
+  }
+}
+```
+
+and a theme, also this is not active yet 
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        title: 'Hello World',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Text('hello world from phil2'));
+  }
+}
+```
+
 
 
 ## building your first project

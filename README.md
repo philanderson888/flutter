@@ -9,9 +9,9 @@ This is a respository for learning flutter from scratch
   - [ChangeLog](#changelog)
   - [Introduction](#introduction)
   - [getting started](#getting-started)
-  - [scaffolding simple projects](#scaffolding-simple-projects)
+  - [scaffolding an app](#scaffolding-an-app)
   - [Navigation](#navigation)
-  - [simple components](#simple-components)
+  - [components](#components)
   - [api](#api)
   - [Projects](#projects)
 
@@ -39,11 +39,9 @@ Instructions on how to get started with flutter
 
 [Getting Started](notes/getting-started.md)
 
-## scaffolding simple projects
+## scaffolding an app
 
-Instructions on building very simple projects
-
-[Creating Simple Projects](notes/creating-simple-projects.md)
+[Projects](notes/scaffolding.md)
 
 ## Navigation
 
@@ -56,11 +54,11 @@ Stack - keeps track of navigation so far and how to go back
 see [MultiPage04](Projects/MultiPage04) for a demonstration of code which navigates 4 pages and back.
 
 
-## simple components 
+## components 
 
-Next we progress into building and using different types of components within an app
+Next we progress into building and using components
 
-[simple components](notes/components.md)
+[components](notes/components.md)
 
 ## api
 
