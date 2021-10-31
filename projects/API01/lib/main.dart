@@ -29,8 +29,9 @@ Future<List<Album>> fetchAlbums() async {
     print('yes we got jsonOutput');
     List<Album> list;
     list = (json.decode(response.body) as List)
-      .map( (album) => Album.fromJson(album)).toList();
-    print('yes we obtained a list');       
+        .map((album) => Album.fromJson(album))
+        .toList();
+    print('yes we obtained a list');
     // // List<Album>.from(jsonOutput)
     // //   .map((Map model) => Album.fromJson(model)).toList();
     // final List<Album> list = json.decode(response.body)['result']
@@ -38,7 +39,8 @@ Future<List<Album>> fetchAlbums() async {
     //   .toList();
     var listLength = list.length;
     print('list length is $listLength');
-    for(var item in list){
+    for (var item in list) {
+      print(' ');
       print('i am an item in a list');
       print(item.title);
     }
@@ -86,6 +88,7 @@ class _MyAppState extends State<MyApp> {
     futureAlbum = fetchAlbum();
     futureAlbums = fetchAlbums();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -114,23 +117,23 @@ class _MyAppState extends State<MyApp> {
                   return CircularProgressIndicator();
                 },
               ),
-              Text('Above is just one item; below are all items read from JSON API'),
+              Text(
+                  'Above is just one item; below are all items read from JSON API'),
               FutureBuilder<List<Album>>(
-                future:futureAlbums,
-                builder: (context, snapshot){
-                  if(snapshot.hasData){
-                    List<Album> dataList = snapshot.data;
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        for (int i = 0; i < 10; i++) Text(dataList[i].title)
-                      ],
-                    );
-                  } else {
-                    return CircularProgressIndicator();
-                  }
-                }
-              ),
+                  future: futureAlbums,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Album> dataList = snapshot.data;
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          for (int i = 0; i < 10; i++) Text(dataList[i].title)
+                        ],
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
+                  }),
             ],
           ),
         ),
