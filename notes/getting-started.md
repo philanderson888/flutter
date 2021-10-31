@@ -14,6 +14,8 @@
     - [enable google usb driver in android studio](#enable-google-usb-driver-in-android-studio)
   - [Add a device](#add-a-device)
   - [hello world](#hello-world)
+    - [build](#build)
+    - [run](#run)
   - [building your first project](#building-your-first-project)
     - [yaml](#yaml)
     - [default scaffolding](#default-scaffolding)
@@ -69,7 +71,7 @@ and if the install has worked, these commands will produce output with further o
 
 next run this command 
 
-```bash
+```java
 flutter doctor
 ```
 
@@ -144,13 +146,29 @@ flutter devices
 
 ##  hello world
 
+### build
+
 to build our first `hello world` project we should run the following
 
 ```
 flutter create HelloWorld
 cd HelloWorld
-flutter run -d chrome
 ```
+
+### run
+
+to run our app we can use
+
+```java
+// run on any browser
+flutter run
+// run on chrome
+flutter run -d chrome
+// run app and view network images over https:// from different domain
+flutter run -d Chrome --web-renderer html
+```
+
+
 
 With chrome the response can be around 30 seconds so just be patient!  But eventually the app will launch and run in chrome web browser.
 

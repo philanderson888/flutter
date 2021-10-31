@@ -49,7 +49,6 @@ Scaffold
 
 A drawer is like a menu drop-down item which can be opened and closed programatically
 
-See sample [Drawer](Projects/Drawer01) for an example
 
 
 

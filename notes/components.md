@@ -1,8 +1,40 @@
 # components
 
 ## contents 
+
 - [components](#components)
   - [contents](#contents)
+  - [introduction](#introduction)
+  - [Containers](#containers)
+    - [Body Is A Single Container](#body-is-a-single-container)
+    - [body: Center( child:Container()  )  will fill the screen](#body-center-childcontainer----will-fill-the-screen)
+    - [Container With Shadow](#container-with-shadow)
+  - [Rows](#rows)
+    - [Single Row With One Centred Item](#single-row-with-one-centred-item)
+    - [Single Row With Multiple Children In The Row](#single-row-with-multiple-children-in-the-row)
+    - [Single Row with Button Click](#single-row-with-button-click)
+  - [Row And Column Layout](#row-and-column-layout)
+  - [Text](#text)
+    - [Center Justify Text](#center-justify-text)
+    - [Text Styling](#text-styling)
+    - [Text Styling With Themes For The Whole App](#text-styling-with-themes-for-the-whole-app)
+    - [Text Styling With Theme](#text-styling-with-theme)
+    - [Text Styling using `Flutter Color` VSCode plugin](#text-styling-using-flutter-color-vscode-plugin)
+  - [Margins](#margins)
+    - [Margin All Round](#margin-all-round)
+    - [Margin Vertical](#margin-vertical)
+    - [Margin Right](#margin-right)
+  - [Padding](#padding)
+  - [Buttons](#buttons)
+    - [Generic Button](#generic-button)
+    - [Raised Button](#raised-button)
+    - [Rounded Button](#rounded-button)
+    - [Button With Shadow (have to add to a container and apply the shadow to the container so see Container With Shadow section)](#button-with-shadow-have-to-add-to-a-container-and-apply-the-shadow-to-the-container-so-see-container-with-shadow-section)
+    - [Button With Icon](#button-with-icon)
+    - [Button With Icon 2](#button-with-icon-2)
+    - [ButtonClick01](#buttonclick01)
+    - [Button Click 2](#button-click-2)
+  - [images](#images)
 
 ## introduction
 
@@ -739,3 +771,20 @@ class UpdateStatefulHome extends State{
 }
 ```
 
+## images
+
+to create an image from the web we can use 
+
+```java
+child: new CircleAvatar(
+  backgroundImage: new NetworkImage('https://i.ya-webdesign.com/images/avatar-png-1.png'),
+  backgroundColor: Colors.lightGreen,
+  radius: 24.0,
+),
+```
+
+and to run the app we use
+
+```java
+flutter run -d Chrome --web-renderer html
+```
