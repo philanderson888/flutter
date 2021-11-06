@@ -9,8 +9,9 @@ This is a respository for learning flutter from scratch
   - [ChangeLog](#changelog)
   - [Introduction](#introduction)
   - [getting started](#getting-started)
+  - [next steps](#next-steps)
   - [scaffolding an app](#scaffolding-an-app)
-  - [Navigation](#navigation)
+  - [navigation](#navigation)
   - [components](#components)
   - [api](#api)
   - [Projects](#projects)
@@ -39,11 +40,15 @@ Instructions on how to get started with flutter
 
 [Getting Started](notes/getting-started.md)
 
+## next steps
+
+[Next Steps](notes/next-steps.md)
+
 ## scaffolding an app
 
-[scaffolding an app](notes/scaffolding.md)
+[building an app with automatic scaffolding](notes/scaffolding.md)
 
-## Navigation
+## navigation
 
 Navigation uses tabs and drawers.
 

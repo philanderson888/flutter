@@ -35,6 +35,10 @@
     - [ButtonClick01](#buttonclick01)
     - [Button Click 2](#button-click-2)
   - [images](#images)
+    - [image example](#image-example)
+    - [images with margin](#images-with-margin)
+  - [list view](#list-view)
+    - [simple list view with 3 rows](#simple-list-view-with-3-rows)
 
 ## introduction
 
@@ -264,6 +268,8 @@ class UpdateStatefulHome extends State{
 This layout has a container holding firstly a central column as a child, and inside the column we have children:Widget[] with containers inside them, and children inside them!
 
 Not sure if this is the most efficient layout but it works!
+
+for a very simple way to lay out rows and columns which automatically will scroll beyond the bottom of the page if the content is too long vertically, use [list view](#list-view)
 
 ```java
 Widget build (BuildContext context) {
@@ -787,4 +793,326 @@ and to run the app we use
 
 ```java
 flutter run -d Chrome --web-renderer html
+```
+
+### image example
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hello World',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: Home(),
+    );
+  }
+}
+
+
+class Home extends StatelessWidget {
+  @override 
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('home screen')
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+              Text('page body'),
+              Text('second item'),
+              Image.network(
+                'https://picsum.photos/200/300?random=1',
+                height: 100, 
+                width: 100, 
+                fit: BoxFit.fill
+              ),
+              const Image(
+                image: NetworkImage('https://picsum.photos/200/300?random=1'),
+                width:100,
+                height:100,
+                fit: BoxFit.fill
+              ),
+              new CircleAvatar(
+                backgroundImage: new NetworkImage('https://i.ya-webdesign.com/images/avatar-png-1.png'),
+                backgroundColor: Colors.lightGreen,
+                radius: 24.0,
+              ),
+
+          ]
+        ),
+      )
+    );
+  }
+}
+```
+
+### images with margin
+
+we can use [containers](#containers) to add a margin around all of our images with both `padding` and `margin`
+
+to set our edge values we can do the same all round
+
+```java
+padding: const EdgeInsets.all(10),
+```
+
+or unique values per edge
+
+```java
+padding: const EdgeInsets.fromLTRB(10,10,10,10),
+```
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hello World',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: Home(),
+    );
+  }
+}
+
+
+class Home extends StatelessWidget {
+  @override 
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('home screen')
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+              Text('page body'),
+              Text('second item'),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Image.network(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                  height: 100, 
+                  width: 100, 
+                  fit: BoxFit.fill
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Image.network(
+                  'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                  height: 100, 
+                  width: 100, 
+                  fit: BoxFit.fill
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.fromLTRB(5,5,5,5),
+                margin: const EdgeInsets.fromLTRB(5,5,5,5,),
+                child: const Image(
+                  image: NetworkImage('https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+                  width:100,
+                  height:100,
+                  fit: BoxFit.fill
+                ),
+              ), 
+              new CircleAvatar(
+                backgroundImage: new NetworkImage('https://i.ya-webdesign.com/images/avatar-png-1.png'),
+                backgroundColor: Colors.lightGreen,
+                radius: 24.0,
+              ),
+          ]
+        ),
+      )
+    );
+  }
+}
+```
+
+## list view
+
+### simple list view with 3 rows
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hello World',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: Home(),
+    );
+  }
+}
+
+
+class Home extends StatelessWidget {
+  @override 
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('home screen')
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(100),
+        shrinkWrap: true,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                const Text('Row 1'),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Image.network(
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                    height: 100, 
+                    width: 100, 
+                    fit: BoxFit.fill
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.network(
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                    height: 100, 
+                    width: 100, 
+                    fit: BoxFit.fill
+                  ),
+                ),
+            ]
+          ), 
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+                Text('Row 2'),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Image.network(
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                    height: 100, 
+                    width: 100, 
+                    fit: BoxFit.fill
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.network(
+                    'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                    height: 100, 
+                    width: 100, 
+                    fit: BoxFit.fill
+                  ),
+                ),
+            ]
+          ), 
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('Row 3'),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Column 1'),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      height: 100, 
+                      width: 100, 
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      height: 100, 
+                      width: 100, 
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                ]
+              ), 
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Column 2'),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      height: 100, 
+                      width: 100, 
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      height: 100, 
+                      width: 100, 
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                ]
+              ), 
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text('Column 3'),
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      height: 100, 
+                      width: 100, 
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Image.network(
+                      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
+                      height: 100, 
+                      width: 100, 
+                      fit: BoxFit.fill
+                    ),
+                  ),
+                ]
+              ), 
+            ]
+          ), 
+
+
+        ]
+      ),
+    );
+  }
+}
 ```
