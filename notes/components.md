@@ -1108,8 +1108,6 @@ class Home extends StatelessWidget {
               ), 
             ]
           ), 
-
-
         ]
       ),
     );
