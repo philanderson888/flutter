@@ -21,6 +21,7 @@
     - [default scaffolding](#default-scaffolding)
     - [Default Clean Screen](#default-clean-screen)
     - [default clean screen with text in page body](#default-clean-screen-with-text-in-page-body)
+    - [center the page body text](#center-the-page-body-text)
     - [Default Layout For Two Basic Pages](#default-layout-for-two-basic-pages)
 
 ## getting started with an online ide
@@ -427,6 +428,41 @@ class Home extends StatelessWidget {
         title: Text('home screen')
       ),
       body: Text('page body')
+    );
+  }
+}
+```
+
+### center the page body text
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hello World',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: Home(),
+    );
+  }
+}
+
+
+class Home extends StatelessWidget {
+  @override 
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('home screen')
+      ),
+      body: Center(child: Text('page body')),
     );
   }
 }
