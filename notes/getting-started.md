@@ -69,6 +69,13 @@ where.exe flutter dart
 
 and if the install has worked, these commands will produce output with further options
 
+```
+c:\Users\phila\flutter\bin\flutter
+c:\Users\phila\flutter\bin\flutter.bat
+c:\Users\phila\flutter\bin\dart
+c:\Users\phila\flutter\bin\dart.bat
+```
+
 next run this command 
 
 ```java
