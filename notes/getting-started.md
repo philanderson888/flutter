@@ -20,6 +20,7 @@
     - [yaml](#yaml)
     - [default scaffolding](#default-scaffolding)
     - [Default Clean Screen](#default-clean-screen)
+    - [default clean screen with text in page body](#default-clean-screen-with-text-in-page-body)
     - [Default Layout For Two Basic Pages](#default-layout-for-two-basic-pages)
 
 ## getting started with an online ide
@@ -288,19 +289,20 @@ To get started with building your first project locally we will need a few files
 ### yaml
 
 ```yaml
-name: MultiPage01
+name: MyProject
 description: A new Flutter project.
 publish_to: 'none' 
 version: 1.0.0+1
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.3
+  cupertino_icons: ^1.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_lints: ^1.0.0
 flutter:
   uses-material-design: true
 ```
@@ -395,6 +397,40 @@ class Home extends StatelessWidget {
 }
 ```
 
+### default clean screen with text in page body
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Hello World',
+      theme: ThemeData(primarySwatch: Colors.blue,),
+      home: Home(),
+    );
+  }
+}
+
+
+class Home extends StatelessWidget {
+  @override 
+  Widget build (BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('home screen')
+      ),
+      body: Text('page body')
+    );
+  }
+}
+```
 
 ### Default Layout For Two Basic Pages
 
