@@ -40,11 +40,12 @@ class _CounterState extends State<Counter> {
     // rebuild anything that needs updating rather than
     // having to individually changes instances of widgets.
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,  
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ElevatedButton(
           onPressed: _increment,
-          child: const Text('Increment'),
+          child: const Text('Increment', textDirection: TextDirection.ltr),
         ),
         const SizedBox(width: 16),
         Text('Count: $_counter'),
