@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,25 +11,26 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hello World',
       theme: ThemeData(primarySwatch: Colors.blue,),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
   @override 
   Widget build (BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('home screen')
+        title: const Text('home screen')
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-              Text('page body'),
-              Text('second item'),
+              const Text('page body'),
+              const Text('second item'),
               Image.network(
                 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
                 height: 100, 
@@ -42,8 +43,8 @@ class Home extends StatelessWidget {
                 height:100,
                 fit: BoxFit.fill
               ),
-              new CircleAvatar(
-                backgroundImage: new NetworkImage('https://i.ya-webdesign.com/images/avatar-png-1.png'),
+              const CircleAvatar(
+                backgroundImage: NetworkImage('https://i.ya-webdesign.com/images/avatar-png-1.png'),
                 backgroundColor: Colors.lightGreen,
                 radius: 24.0,
               ),

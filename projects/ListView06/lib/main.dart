@@ -50,13 +50,13 @@ class BodyLayoutState extends State<BodyLayout> {
             },
           ),
         ),
-        RaisedButton(
+        ElevatedButton(
           child: Text('Insert item', style: TextStyle(fontSize: 20)),
           onPressed: () {
             _insertSingleItem();
           },
         ),
-        RaisedButton(
+        ElevatedButton(
           child: Text('Remove item', style: TextStyle(fontSize: 20)),
           onPressed: () {
             _removeSingleItem();

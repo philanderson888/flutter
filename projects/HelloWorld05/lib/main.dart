@@ -13,6 +13,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Text('hello world from phil2'));
+        home: const Text('hello world from phil2'));
   }
 }

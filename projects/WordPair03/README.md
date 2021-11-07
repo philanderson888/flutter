@@ -290,7 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 "Flat Button",
               ),
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () => _increment(2),
               child: const Text(
                 'Raised Button',
@@ -415,7 +415,7 @@ void _launchURL(String url) async {
         throw 'Could not launch $url';
     }
 }
-RaisedButton(
+ElevatedButton(
     onPressed: () => _launchURL('https://www.bbc.co.uk'),
     child: Text(
     'Click to go to BBC website',
@@ -507,13 +507,13 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () => _launchURL('https://www.bbc.co.uk'),
               child: Text(
                 'Click to go to BBC website',
               ),
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: () => _increment(2),
               child: const Text(
                 'Raised Button',

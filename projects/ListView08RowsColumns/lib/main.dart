@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,20 +9,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hello World',
+      title: 'ListView Demo - Row And Column',
       theme: ThemeData(primarySwatch: Colors.blue,),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
   @override 
   Widget build (BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('home screen')
+        title: const Text('ListView Row And Column Demo')
       ),
       body: ListView(
         padding: const EdgeInsets.all(100),
@@ -55,7 +56,7 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                Text('Row 2'),
+                const Text('Row 2'),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Image.network(
@@ -80,11 +81,11 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text('Row 3'),
+              const Text('Row 3'),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Column 1'),
+                  const Text('Column 1'),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Image.network(
@@ -108,7 +109,7 @@ class Home extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Column 2'),
+                  const Text('Column 2'),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Image.network(
@@ -132,7 +133,7 @@ class Home extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('Column 3'),
+                  const Text('Column 3'),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Image.network(

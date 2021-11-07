@@ -333,7 +333,7 @@ String dropdownValue = 'One';
               tooltip: 'Increase volume by 10',
               onPressed: _incrementCounter,
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: _incrementCounter,
               child: const Text(
                 'Raised Button',
@@ -459,7 +459,7 @@ String dropdownValue = 'One';
               tooltip: 'Increase volume by 10',
               onPressed: _incrementCounter,
             ),
-            RaisedButton(
+            ElevatedButton(
               onPressed: _incrementCounter,
               child: const Text(
                 'Raised Button',

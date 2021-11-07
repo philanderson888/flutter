@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 void main() => {
   runApp(MaterialApp(
       home:MyApp(),
-      theme:themeData,
+      theme:theme,
     )
   )
 };
 
 // create a colour 
-final ThemeData themeData = ThemeData(
+final ThemeData theme = ThemeData(
   canvasColor: Colors.lightGreenAccent,
-  accentColor: Colors.redAccent,
+  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.amberAccent),
 );
 
 class MyApp extends StatelessWidget {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext ctx){
     return Scaffold(
       body: Center(
-        child: FlatButton(
+        child: TextButton(
           onPressed: (){
             Navigator.push(ctx,PageTwo());
           },
@@ -43,7 +43,7 @@ class PageTwo extends MaterialPageRoute<Null>{
         elevation:1.0,
       ),
       body:Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           onPressed: (){
             Navigator.push(
               ctx,
@@ -65,7 +65,7 @@ class PageThree extends MaterialPageRoute<Null>{
     return Scaffold(
       appBar: AppBar(
         title: Text('last page'),
-        backgroundColor: Theme.of(ctx).accentColor,
+        backgroundColor: Theme.of(ctx).backgroundColor,
         elevation:2.0,
         actions: <Widget>[
            IconButton(

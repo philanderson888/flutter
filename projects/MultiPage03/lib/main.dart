@@ -28,10 +28,9 @@ class UpdateButtonState extends State{
         title: Text("Home Screen"),
       ),
       body: Center(
-        child: new RaisedButton(
+        child: new ElevatedButton(
           key:null, 
           onPressed: () => changeText(),
-          color: const Color(0xFFe0e0e0),
           child: Text('$textHolder')
         ),
       ),

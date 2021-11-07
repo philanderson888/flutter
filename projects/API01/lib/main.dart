@@ -27,8 +27,9 @@ Future<List<Album>> fetchAlbums() async {
     print('server returned response of 200 with fetchAlbums()');
     var jsonOutput = json.decode(response.body);
     print('yes we got jsonOutput');
+    
     List<Album> list;
-    list = (json.decode(response.body) as List)
+    list = (jsonOutput as List)
         .map((album) => Album.fromJson(album))
         .toList();
     print('yes we obtained a list');

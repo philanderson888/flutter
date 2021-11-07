@@ -16,7 +16,7 @@ class MyAppBar extends StatelessWidget {
       // Row is a horizontal, linear layout.
       child: Row(
         // <Widget> is the type of items in the list.
-        children: [
+        children: const [
           Text('Hello World   '),
           Text('   Hello World   '),
           Text('   Hello World   '),

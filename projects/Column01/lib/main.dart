@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,13 +11,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hello World',
       theme: ThemeData(primarySwatch: Colors.blue,),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
   @override 
   Widget build (BuildContext context) {
     return Scaffold(
@@ -27,7 +28,7 @@ class Home extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: const <Widget>[
               Text('page body'),
               Text('second item'),
               

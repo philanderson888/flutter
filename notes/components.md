@@ -122,7 +122,7 @@ Container(
       ),
     ],
   ),
-  child: RaisedButton(
+  child: ElevatedButton(
     autofocus: true,
     clipBehavior: Clip.none,
     onPressed: () => clickButton(),
@@ -242,7 +242,7 @@ class UpdateStatefulHome extends State{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('some text'),
-              RaisedButton(
+              ElevatedButton(
                 autofocus: true,
                 clipBehavior: Clip.none,
                 onPressed: () => clickButton(),
@@ -419,7 +419,7 @@ class MyApp extends StatelessWidget {
       home: StatefulHome(),
       theme: ThemeData(
         // applies to whole app if applied like this - fontFamily: 'Arial',
-        accentColor: Colors.cyan[600],
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
         textTheme: TextTheme(
           bodyText1: TextStyle(fontSize: 15),
         ),
@@ -488,7 +488,7 @@ class MyApp extends StatelessWidget {
       home: StatefulHome(),
       theme: ThemeData(
         // applies to whole app if applied like this - fontFamily: 'Arial',
-        accentColor: Colors.cyan[600],
+        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
         textTheme: TextTheme(
           bodyText1: TextStyle(
             fontSize: 15,
@@ -562,7 +562,7 @@ class Home extends StatelessWidget {
         title: Text("Home Screen"),
       ),
       body: Center(
-        child: RaisedButton(
+        child: ElevatedButton(
           key:null, 
           onPressed:buttonPressed,
           color: const Color(0xFFe0e0e0),
@@ -587,7 +587,7 @@ class Page1 extends StatelessWidget{
 ### Raised Button
 
 ```java
-body: RaisedButton(
+body: ElevatedButton(
   key:null, 
   onPressed:buttonPressed,
   color: const Color(0xFFe0e0e0),
@@ -608,7 +608,7 @@ void buttonPressed(){}
 ### Rounded Button
 
 ```java
-RaisedButton(
+ElevatedButton(
   autofocus: true,
   clipBehavior: Clip.none,
   onPressed: () => clickButton(),
@@ -633,7 +633,7 @@ RaisedButton(
 
 ```java
 Container(
-  child: RaisedButton.icon(
+  child: ElevatedButton.icon(
     onPressed: () => clickButton(),
     icon: Icon(Icons.arrow_forward), 
     label: Text('a button'),
@@ -646,7 +646,7 @@ Container(
 ```java
 Container(
   width:250,
-  child: RaisedButton(
+  child: ElevatedButton(
     onPressed: () => clickButton(),
     child: Row(
       children: <Widget>[
@@ -690,7 +690,7 @@ class UpdateButtonState extends State{
         title: Text("Home Screen"),
       ),
       body: Center(
-        child: new RaisedButton(
+        child: new ElevatedButton(
           key:null, 
           onPressed: () => changeText(),
           color: const Color(0xFFe0e0e0),
@@ -756,7 +756,7 @@ class UpdateStatefulHome extends State{
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text('some text'),
-              RaisedButton(
+              ElevatedButton(
                 autofocus: true,
                 clipBehavior: Clip.none,
                 onPressed: () => clickButton(),

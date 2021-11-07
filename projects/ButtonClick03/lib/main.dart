@@ -27,6 +27,7 @@ class _CounterState extends State<Counter> {
       // nothing would appear to happen.
       _counter++;
     });
+    // ignore: avoid_print
     print('button has been clicked ' + _counter.toString() + ' times');
   }
 

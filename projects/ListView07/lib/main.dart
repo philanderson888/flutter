@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,18 +11,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Hello World',
       theme: ThemeData(primarySwatch: Colors.blue,),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
   @override 
   Widget build (BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('home screen')
+        title: const Text('home screen')
       ),
       body: ListView(
         children: <Widget>[
@@ -30,7 +31,7 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                Text('Row 1'),
+                const Text('Row 1'),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Image.network(
@@ -54,7 +55,7 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                Text('Row 2'),
+                const Text('Row 2'),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Image.network(
@@ -79,7 +80,7 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-                Text('Row 3'),
+                const Text('Row 3'),
                 Padding(
                   padding: const EdgeInsets.all(10),
                   child: Image.network(

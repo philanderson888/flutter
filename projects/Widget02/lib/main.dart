@@ -16,7 +16,7 @@ class MyAppBar extends StatelessWidget {
       // Row is a horizontal, linear layout.
       child: Row(
         // <Widget> is the type of items in the list.
-        children: [
+        children: const [
           Text('Hello World   '),
           Text('   Hello World   '),
           Text('   Hello World   '),
@@ -80,7 +80,7 @@ class MyScaffold extends StatelessWidget {
             
             child: Center(
               child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: Image.network('https://picsum.photos/250' , 
                 fit: BoxFit.cover,
               )
