@@ -6,6 +6,7 @@
   - [contents](#contents)
   - [introduction](#introduction)
   - [simple example](#simple-example)
+  - [verbose output](#verbose-output)
 
 ## introduction
 
@@ -30,4 +31,12 @@ void main() {
     expect(find.text('1'), findsOneWidget);
   });
 }
+```
+
+## verbose output
+
+to run our unit tests with verbose output we write
+
+```java
+flutter test -r expanded test/widget_test.dart
 ```
