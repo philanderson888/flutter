@@ -82,9 +82,36 @@ class _HomeState extends State<Home> {
             Card(child: Text('Row 6 Card 1')),
             Column(mainAxisAlignment: MainAxisAlignment.center,children: const<Widget>[
               Text('Row 6 Column '),
-              Card(child: Text('Row 6 Column 1 Card 1')),
-              Card(child: Text('Row 6 Column 1 Card 1')),
-              Card(child: Text('Row 6 Column 1 Card 1')),
+              Card(
+                color: Colors.yellow,
+                child: Text('Row 6 Column 1 Card 1')),
+              Card(
+                color: Colors.blue,
+                child: Text('Row 6 Column 1 Card 2')),
+              Card(
+                child: Text(
+                  'Row 6 Column 1 Card 3', 
+                  style: TextStyle(color: Colors.green), 
+            
+                ), 
+                color: Colors.red,
+              ),
+              Card(
+                child: Text(
+                  'Row 6 Column 1 Card 4 with Hex colour', 
+                  style: TextStyle(color: Colors.green), 
+            
+                ), 
+                color: Color(0xffede49f),
+              ),
+              Card(
+                child: Text(
+                  'Row 6 Column 1 Card 5 with RGB colour', 
+                  style: TextStyle(color: Colors.green), 
+            
+                ), 
+                color: Color.fromRGBO(100,100,100,1.0)
+              ),
             ]),
           ]),
           const Card(child: ListTile(title: Text('List Tile 1'))),

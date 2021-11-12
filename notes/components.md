@@ -20,6 +20,8 @@
     - [Text Styling With Themes For The Whole App](#text-styling-with-themes-for-the-whole-app)
     - [Text Styling With Theme](#text-styling-with-theme)
     - [Text Styling using `Flutter Color` VSCode plugin](#text-styling-using-flutter-color-vscode-plugin)
+  - [style](#style)
+    - [color](#color)
   - [Margins](#margins)
     - [Margin All Round](#margin-all-round)
     - [Margin Vertical](#margin-vertical)
@@ -500,6 +502,18 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+```
+
+## style
+
+### color
+
+```java
+color: Colors.red,
+// from ARGB (Alpha Red Green Blue)
+color: Color(0xffaabbcc),
+// from RGBO (Red Green Blue Opacity)
+color: Color.fromRGBO(100,100,100,1.0)
 ```
 
 ## Margins
