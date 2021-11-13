@@ -7,7 +7,7 @@
   - [introduction](#introduction)
   - [simple example](#simple-example)
   - [verbose output](#verbose-output)
-  - [finding a clickable widget by text sample](#finding-a-clickable-widget-by-text-sample)
+  - [finding a clickable widget by text](#finding-a-clickable-widget-by-text)
 
 ## introduction
 
@@ -42,7 +42,9 @@ to run our unit tests with verbose output we write
 flutter test -r expanded test/widget_test.dart
 ```
 
-## finding a clickable widget by text [sample](projects/../../projects/UnitTest02FindByText/)
+## finding a clickable widget by text
+
+[finding a clickable widget by text](projects/../../projects/UnitTest02FindByText/)
 
 we can find a clickable item on the screen by searching for the text of that item
 

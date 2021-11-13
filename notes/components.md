@@ -20,6 +20,7 @@
     - [Text Styling With Themes For The Whole App](#text-styling-with-themes-for-the-whole-app)
     - [Text Styling With Theme](#text-styling-with-theme)
     - [Text Styling using `Flutter Color` VSCode plugin](#text-styling-using-flutter-color-vscode-plugin)
+    - [finding components by text](#finding-components-by-text)
   - [style](#style)
     - [color](#color)
   - [Margins](#margins)
@@ -503,7 +504,11 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+### finding components by text
 
+When unit testing it is important to be able to find and identify items on the screen.  we can do this most simply by text
+
+see [unit testing - finding a clickable widget by text](#finding-a-clickable-widget-by-text) in order to be able to undertand this.
 ## style
 
 ### color

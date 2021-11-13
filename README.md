@@ -11,6 +11,9 @@ This is a respository for learning flutter from scratch
   - [getting started](#getting-started)
   - [next steps](#next-steps)
   - [scaffolding an app](#scaffolding-an-app)
+  - [libraries](#libraries)
+  - [commands](#commands)
+  - [regions](#regions)
   - [navigation](#navigation)
   - [components](#components)
   - [unit tests](#unit-tests)
@@ -53,6 +56,22 @@ Instructions on how to get started with flutter
 ## scaffolding an app
 
 [building an app with automatic scaffolding](notes/scaffolding.md)
+
+## libraries
+
+[libraries](notes/libraries.md)
+
+## commands
+
+here is a list of basic flutter commands to help you get started with working with flutter
+
+[commands](notes/commands.md)
+
+## regions
+
+regions are very useful for tidying up code
+
+[regions](notes/regions.md)
 
 ## navigation
 
