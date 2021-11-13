@@ -254,7 +254,7 @@ class _HomeState extends State<Home> {
               transform: Matrix4.rotationZ(1 * math.pi / 180),
               child: GestureDetector(
                   child: Text(
-                      'This is a non-clickable container $_counter clicks',
+                      'This is a clickable container $_counter clicks',
                       style: Theme.of(context).textTheme.headline4),
                   onTap: () => {
                         print('you clicked $_counter times'),
