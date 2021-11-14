@@ -59,9 +59,7 @@ class _HomeState extends State<Home> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            const Text('You have pushed the button this many times:',),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -69,10 +67,26 @@ class _HomeState extends State<Home> {
             TextButton(
               style: TextButton.styleFrom(
                   padding: const EdgeInsets.all(16.0),
-                  primary: Colors.white,
+                  primary: Colors.orange,
                   textStyle: const TextStyle(fontSize:20)
                 ),
-              onPressed: null,
+              onPressed: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('This is an alert'),
+                  content: const Text('This is an alert description'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => Navigator.pop(context, 'OK'), 
+                      child: const Text('OK'),
+                    ),
+                  ],
+                ),
+              ),
               child: const Text('Show Dialog'),
             ),
           ],
