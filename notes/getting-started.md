@@ -297,9 +297,9 @@ To get started with building your first project locally we will need a few files
 ### yaml
 
 ```yaml
-name: MyProject
+name: project
 description: A new Flutter project.
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -313,6 +313,15 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 flutter:
   uses-material-design: true
+```
+
+analysis-options.yaml
+
+```yaml
+include: package:flutter_lints/flutter.yaml
+linter:
+  rules:
+    avoid_print: false  # Uncomment to disable the `avoid_print` rule
 ```
 
 ### default scaffolding
