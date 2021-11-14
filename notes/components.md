@@ -5,6 +5,8 @@
 - [components](#components)
   - [contents](#contents)
   - [introduction](#introduction)
+  - [widget samples](#widget-samples)
+  - [material ui design samples](#material-ui-design-samples)
   - [Containers](#containers)
     - [Body Is A Single Container](#body-is-a-single-container)
     - [body: Center( child:Container()  )  will fill the screen](#body-center-childcontainer----will-fill-the-screen)
@@ -46,6 +48,14 @@
 ## introduction
 
 next we have a look at some of the different types of components which can be built in a flutter app
+
+## widget samples
+
+to see example of all of the widget components available, see https://flutter.dev/docs/development/ui/widgets
+
+## material ui design samples
+
+to see examples of material ui design components please see https://material.io/develop/flutter
 
 ## Containers
 

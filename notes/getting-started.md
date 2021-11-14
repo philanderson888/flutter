@@ -4,6 +4,7 @@
 - [getting started](#getting-started)
   - [table of contents](#table-of-contents)
   - [getting started with an online ide](#getting-started-with-an-online-ide)
+  - [samples](#samples)
   - [install android studio](#install-android-studio)
   - [install flutter](#install-flutter)
   - [verify install](#verify-install)
@@ -28,6 +29,13 @@
 flutter can be tried out instantly online using flutter's own website at https://flutter.dev/
 
 It can also be used at [Flutter Studio](https://flutterstudio.app)
+
+## samples
+
+to see examples of samples available online please see
+
+- widgets https://flutter.dev/docs/development/ui/widgets
+- material design ui https://material.io/develop/flutter
 
 ## install android studio
 

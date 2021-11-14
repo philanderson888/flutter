@@ -5,6 +5,7 @@
 - [next-steps](#next-steps)
   - [contents](#contents)
   - [introduction](#introduction)
+  - [flutter samples](#flutter-samples)
     - [add a column with two entries on the page](#add-a-column-with-two-entries-on-the-page)
     - [default Layout For Two Basic Pages](#default-layout-for-two-basic-pages)
 
@@ -12,6 +13,14 @@
 ## introduction
 
 after our [getting started](getting-started.md) session we can now begin to build slightly more complex apps ...
+
+## flutter samples
+
+if you want to investigate flutter sample code you can do so by running the command below and then inspecting the output file
+
+```java
+flutter create --list-samples=flutter-samples.json
+```
 
 
 ### add a column with two entries on the page

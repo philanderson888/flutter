@@ -45,6 +45,12 @@ flutter clear
 flutter pub add ...library_name...
 // download packages named in `pubspec.yaml` file
 flutter packages get
+// or
+flutter pub get
+// see outdated packages
+flutter pub outdated
+// upgrade to latest (remove `pubspec.lock` first)
+flutter pub upgrade
 ```
 
 ## import math library

@@ -5,6 +5,7 @@
 - [regions](#regions)
   - [contents](#contents)
   - [introduction](#introduction)
+  - [sample](#sample)
   - [example](#example)
 
 ## introduction
@@ -18,6 +19,95 @@ regions are a very useful addition to VSCode because they
 - helps us to understand each block of code and what it is doing, as we name the corresponding region
 - helps us to maximise and minimise large blocks of code quickly, and to target only the code we are working on
 
+## sample
+
+Here is a blank sample master which includes regions
+
+```java
+// #region import
+import 'package:flutter/material.dart';
+// #endregion
+// #region main
+void main() {
+  runApp(const App());
+}
+// #endregion
+// #region App => MaterialApp => Home page
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+  static const String _title = 'Flutter';
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Home(title: _title),
+    );
+  }
+}
+// #endregion
+// #region Home state => _HomeState
+class Home extends StatefulWidget {
+  const Home({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  State<Home> createState() => _HomeState();
+}
+// #endregion
+// #region _HomeState extends state
+class _HomeState extends State<Home> {
+  // #region initialise variables
+  int _counter = 0;
+  // #endregion
+  // #region incrementCounter()
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+  // #endregion
+  // #region widget builder
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // #region app bar
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      // #endregion
+      // #region body
+      body: Center(
+        // #region column
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+          ],
+        ),
+        // #endregion
+      ),
+      // #endregion
+      // #region floating action button
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+      // #endregion
+    );
+  }
+  // #endregion
+}
+// #endregion
+```
 
 ## example
 
