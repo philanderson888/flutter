@@ -15,6 +15,7 @@ This is a respository for learning flutter from scratch
   - [commands](#commands)
   - [regions](#regions)
   - [navigation](#navigation)
+  - [visibility](#visibility)
   - [components](#components)
   - [unit tests](#unit-tests)
   - [api](#api)
@@ -83,6 +84,11 @@ Stack - keeps track of navigation so far and how to go back
 
 see [MultiPage04](Projects/MultiPage04) for a demonstration of code which navigates 4 pages and back.
 
+## visibility
+
+we can easily show and hide components
+
+[visibility](notes/components.md#visibility)
 
 ## components 
 

@@ -1,4 +1,5 @@
 // #region import
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 // #endregion
@@ -52,7 +53,6 @@ class _HomeState extends State<Home> {
     setState(() {
       _ok = true;
       _cancel = false;
-      _counter++;
     });
     print('ok set to $_ok');
   }
@@ -61,7 +61,6 @@ class _HomeState extends State<Home> {
     setState(() {
       _ok = false;
       _cancel = true;
-      _counter++;
     });
     print('_cancel set to $_cancel');
   }
@@ -94,34 +93,31 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.orange,
                   textStyle: const TextStyle(fontSize: 20)),
-              onPressed: () => { 
-                _incrementCounter(),
-                showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) => AlertDialog(
-                    title: const Text('This is an alert'),
-                    content: const Text('This is an alert description.'),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () => {
-                          print('You pressed "cancel"'),
-                          _registerAlertCancel(),
-                          Navigator.pop(context, 'Cancel')
-                        },
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () => {
-                          _registerAlertOK(),
-                          print('You pressed "OK"'),
-                          Navigator.pop(context, 'OK')
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  ),
+              onPressed: () => showDialog<String>(
+                context: context,
+                builder: (BuildContext context) => AlertDialog(
+                  title: const Text('This is an alert'),
+                  content: const Text('This is an alert description.'),
+                  actions: <Widget>[
+                    TextButton(
+                      onPressed: () => {
+                        print('You pressed "cancel"'),
+                        _registerAlertCancel(),
+                        Navigator.pop(context, 'Cancel')
+                      },
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () => {
+                        _registerAlertOK(),
+                        print('You pressed "OK"'),
+                        Navigator.pop(context, 'OK')
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
                 ),
-              },
+              ),
               child: const Text('Show Dialog'),
             ),
             Visibility(
