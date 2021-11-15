@@ -1,26 +1,89 @@
-# Projects
+# projects
 
-A list of projects built in Flutter
+## contents
 
-### [HelloWorld01](HelloWorld01)
+- [projects](#projects)
+  - [contents](#contents)
+  - [introduction](#introduction)
+  - [Alerts](#alerts)
+  - [API](#api)
+  - [HelloWorld](#helloworld)
+  - [ListView](#listview)
+  - [MultiPage](#multipage)
+  - [Row](#row)
+  - [RowAndColumn](#rowandcolumn)
+  - [UnitTest](#unittest)
+  - [Word Pair](#word-pair)
+  - [Visibility](#visibility)
 
-### [ListView01 - Installing and getting started with basic ListView](ListView01)
+## introduction
 
-### [ListView02 - many code snippets on ListView, most not live but easily swappable into the live code](ListView02)
+this lists all the projects built in this repository.
 
-### [ListView03 - Add icons at the end of each row](ListView03)
+the full list is shown above this README file, with projects listed alphabetically by project name
 
-### [ListView04 - Adding multiple columns in each row of a ListView, and make them clickable](ListView04)
+## Alerts
 
-### [ListView05 - Dynamically Add And Delete Rows In A ListView using press and long hold](ListView05)
+These apps aim to show how to build an alert dialog box
 
-### [ListView06 - Dynamically Add And Delete Rows In A ListView using buttons](ListView06)
+- [Alert01](Alert01)
+  - this is just a basic alert dialog box with 'OK' or 'cancel'
+- [Alert02](Alert02)
+  - this adds extra functionality with 
+    - counter increment on all button clicks
+    - showing or hiding a text box depending on the option 'ok' or 'cancel'
 
-### [API01](API01)
+## API
 
-This reads one single piece of API data and also a whole list of API data to the screen and console
+- [API01](API01)
+  - This reads one single piece of API data and also a whole list of API data to the screen and console
 
-### [RowsAndColumns01](RowsAndColumns01)
+
+## HelloWorld
+
+[HelloWorld01](HelloWorld01)
+
+## ListView
+
+[ListView01 - Installing and getting started with basic ListView](ListView01)
+[ListView02 - many code snippets on ListView, most not live but easily swappable into the live code](ListView02)
+[ListView03 - Add icons at the end of each row](ListView03)
+[ListView04 - Adding multiple columns in each row of a ListView, and make them clickable](ListView04)
+[ListView05 - Dynamically Add And Delete Rows In A ListView using press and long hold](ListView05)
+[ListView06 - Dynamically Add And Delete Rows In A ListView using buttons](ListView06)
+
+## MultiPage
+
+Shows how to build an app with multiple pages
+
+- [MultiPage01](MultiPage01)
+- [MultiPage02](MultiPage02)
+  - simple app with super basic two pages
+- [MultiPage03](MultiPage03)
+  - Rebuild from scratch of MultiPage02
+- [MultiPage04](MultiPage04)
+
+This app navigates 4 pages!
+
+## Row
+
+Builds basic rows
+
+- [Row01](Row01)
+
+## RowAndColumn
+
+Helps to show how to lay out data in rows and columns
+
+- [RowAndColumn01](RowAndColumn01)
+- [RowAndColumn02](RowAndColumn02)
+
+## UnitTest
+
+- [UnitTest01](UnitTest01)
+- [UnitTest02](UnitTest02FindByText)
+  - Find an item by the text content, and test against it
+
 
 ## Word Pair
 
@@ -28,20 +91,13 @@ This is a sequence of projects following [Traversy Media](https://www.youtube.co
 
 If you're following, have fun!
 
-### [WordPair01](WordPair01)
+- [WordPair01](WordPair01)
+- [WordPair02](WordPair02)
+- [WordPair03](WordPair03)
+- 
+## Visibility
 
-### [WordPair02](WordPair02)
+This aims to show how to toggle the visibility of a component using the `visible` boolean
 
-### [WordPair03](WordPair03)
-
-## MultiPage - Building an app with multiple pages
-
-### [MultiPage01](MultiPage01)
-
-### [MultiPage02 - Simple app with super basic two pages](MultiPage02)
-
-### [MultiPage03 - Rebuild from scratch of MultiPage02](MultiPage03)
-
-### [MultiPage04](MultiPage04)
-
-This app navigates 4 pages!
+- [Visibility01](Visibility01)
+  - Basic toggle of a text widget
