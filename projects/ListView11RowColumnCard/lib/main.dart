@@ -191,7 +191,7 @@ class _HomeState extends State<Home> {
                   child: Card(
                     child: Text(
                       'clickable card - $_counter clicks',
-                      style: const TextStyle(color: Color(0xff000000)),
+                      style: TextStyle(color: Color(0xff000000)),
                     ),
                     color: const Color(0xffbbbbbb),
                   ),
@@ -276,25 +276,6 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.all(10),
               alignment: Alignment.center,
-            ),
-            // #region image row
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () =>
-                    {print('you clicked $_counter times'), _incrementCounter()},
-                  child:
-                    Image.network('https://picsum.photos/100/100?random=4'),
-                ),
-                Image.network('https://picsum.photos/100/100?random=5'),
-                GestureDetector(
-                  onTap: () =>
-                    {print('you clicked $_counter times'), _incrementCounter()},
-                  child:
-                    Image.network('https://picsum.photos/100/100?random=6'),
-                ),
-              ]
             ),
             // #endregion
           ]),
