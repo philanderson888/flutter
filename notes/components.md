@@ -45,6 +45,8 @@
   - [visibility](#visibility)
   - [list view](#list-view)
     - [simple list view with 3 rows](#simple-list-view-with-3-rows)
+  - [dropdown button](#dropdown-button)
+  - [textfield](#textfield)
 
 ## introduction
 
@@ -1300,4 +1302,42 @@ class Home extends StatelessWidget {
     );
   }
 }
+```
+
+
+## dropdown button
+
+see [dropdownbutton01](../projects/DropdownButton01)
+
+```java
+String dropdownValue = 'One';
+DropdownButton<String>(
+  value: dropdownValue,
+  onTap: () => print('about to make a dropdown box selection'),
+  onChanged: (String? newValue) {
+    print('you chose item $newValue (was $dropdownValue)');
+    setState(() {
+      dropdownValue = newValue!;
+    });
+  },
+  items: <String>['One', 'Two', 'Three']
+    .map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value, child: Text(value));
+  }).toList(),
+),
+```
+
+## textfield
+
+see [allfeatures02](../projects/AllFeatures02)
+
+```java
+TextField(
+  decoration: const InputDecoration(
+    border: OutlineInputBorder(),
+    hintText: 'Enter some text here'
+  ),
+  onChanged: (text) => print('You entered text $text'),
+),
 ```
