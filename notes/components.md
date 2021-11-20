@@ -23,6 +23,7 @@
     - [Text Styling With Theme](#text-styling-with-theme)
     - [Text Styling using `Flutter Color` VSCode plugin](#text-styling-using-flutter-color-vscode-plugin)
     - [finding components by text](#finding-components-by-text)
+  - [tooltip](#tooltip)
   - [style](#style)
     - [color](#color)
   - [Margins](#margins)
@@ -30,6 +31,7 @@
     - [Margin Vertical](#margin-vertical)
     - [Margin Right](#margin-right)
   - [Padding](#padding)
+  - [Styling](#styling)
   - [Buttons](#buttons)
     - [Generic Button](#generic-button)
     - [Raised Button](#raised-button)
@@ -522,6 +524,27 @@ class MyApp extends StatelessWidget {
 When unit testing it is important to be able to find and identify items on the screen.  we can do this most simply by text
 
 see [unit testing - finding a clickable widget by text](#finding-a-clickable-widget-by-text) in order to be able to undertand this.
+
+## tooltip
+
+tooltip is hover text which appears above a component to explain to the user a little more about the component or what action to take
+
+```java
+Tooltip(
+  message: 'This is some help text to understand what to do ',
+  child: const Text('This is some text without much explanation'),
+  waitDuration: const Duration(seconds: 1),
+  showDuration: const Duration(seconds: 4),
+  height: 50,
+  textStyle: const TextStyle(fontSize:24),
+  padding: const EdgeInsets.all(8.0),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(15),
+    gradient: const LinearGradient(colors: <Color>[Colors.amber, Colors.red]),
+  ),
+),
+```
+
 ## style
 
 ### color
@@ -567,6 +590,36 @@ Container(
 padding: const EdgeInsets.all(30),
 ```
 
+## Styling
+
+we can style using a number of different effects.  Here is an example of styling a `ToolTip` component 
+
+- height
+- textStyle
+- fontSize
+- padding
+  - EdgeInsets.all()
+- decoration
+  - BoxDecoration
+    - borderRadius
+    - gradient
+      - LinearGradient[amber,red]
+
+```java
+Tooltip(
+  message: 'This is some help text to understand what to do ',
+  child: const Text('This is some text without much explanation'),
+  waitDuration: const Duration(seconds: 1),
+  showDuration: const Duration(seconds: 4),
+  height: 50,
+  textStyle: const TextStyle(fontSize:24),
+  padding: const EdgeInsets.all(8.0),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(15),
+    gradient: const LinearGradient(colors: <Color>[Colors.amber, Colors.red]),
+  ),
+),
+```
 
 ## Buttons
 
@@ -1340,4 +1393,35 @@ TextField(
   ),
   onChanged: (text) => print('You entered text $text'),
 ),
+```
+
+for a combination of a text input field which updates a label see [TextField02](../projects/TextField02)
+
+```java
+String _inputText = '';
+
+void _updateTextLabel(inputText) {
+  setState(() {
+    _inputText = inputText;
+  });
+  print('text field has been updated to $_inputText');
+}
+
+//#region textfield
+TextField(
+  decoration: const InputDecoration(
+        border: OutlineInputBorder(),
+        hintText: 'Enter some text here'),
+  onChanged: (inputText) => {
+    _updateTextLabel(inputText)
+  }
+),
+//#region textlabel
+const Text(
+  'This is a text field',
+),
+Text(
+  _inputText,
+),
+//#endregion
 ```

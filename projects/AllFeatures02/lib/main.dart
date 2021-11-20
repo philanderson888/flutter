@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
     });
     print('_cancel set to $_cancel');
   }
-  void _updateTextField(inputText) {
+  void _updateLabelText(inputText) {
     setState(() {
       _inputText = inputText;
     });
@@ -418,15 +418,30 @@ class _HomeState extends State<Home> {
                     border: OutlineInputBorder(),
                     hintText: 'Enter some text here'),
               onChanged: (inputText) => {
-                _updateTextField(inputText)
+                _updateLabelText(inputText)
               }
             ),
             //#region textlabel
             const Text(
-              'This is a text field',
+              'This is a fixed text field',
             ),
             Text(
               _inputText,
+            ),
+            //#endregion
+            //#region Tooltip
+            Tooltip(
+              message: 'This is some help text to understand what to do ',
+              child: const Text('This is some text without much explanation'),
+              waitDuration: const Duration(seconds: 1),
+              showDuration: const Duration(seconds: 4),
+              height: 50,
+              textStyle: const TextStyle(fontSize:24),
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                gradient: const LinearGradient(colors: <Color>[Colors.amber, Colors.red]),
+              ),
             ),
             //#endregion
             //#endregion
