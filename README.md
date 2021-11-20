@@ -19,7 +19,7 @@ This is a respository for learning flutter from scratch
   - [components](#components)
   - [unit tests](#unit-tests)
   - [api](#api)
-  - [projects1](#projects1)
+  - [projects](#projects)
     - [all projects](#all-projects)
     - [hello world](#hello-world)
     - [components](#components-1)
@@ -113,7 +113,7 @@ Next we progress into reading data from an api into our app, and displaying it
 
 [reading and displaying api data](notes/api.md)
 
-## projects1
+## projects
 
 A list of projects is below
 
