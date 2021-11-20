@@ -1,13 +1,13 @@
 # Flutter
 
 This is a respository for learning flutter from scratch
-## Contents
+## contents
 
 - [Flutter](#flutter)
-  - [Contents](#contents)
-  - [Author](#author)
-  - [ChangeLog](#changelog)
-  - [Introduction](#introduction)
+  - [contents](#contents)
+  - [author](#author)
+  - [changeLog](#changelog)
+  - [introduction](#introduction)
   - [getting started](#getting-started)
   - [next steps](#next-steps)
   - [scaffolding an app](#scaffolding-an-app)
@@ -19,7 +19,7 @@ This is a respository for learning flutter from scratch
   - [components](#components)
   - [unit tests](#unit-tests)
   - [api](#api)
-  - [Projects](#projects)
+  - [projects1](#projects1)
     - [all projects](#all-projects)
     - [hello world](#hello-world)
     - [components](#components-1)
@@ -27,21 +27,22 @@ This is a respository for learning flutter from scratch
     - [api](#api-1)
 
 
-## Author
+## author
 
 Philip Anderson 
+github@philanderson.co.uk
 
-## ChangeLog
+## changeLog
 
 May 2020 - Initial Build
 August 2021 - Refactor Notes
+November 2021 - adding much more detail - components, unit tests, api, styling, list view, text input fields, text labels, buttons, alert dialog boxes, and more
 
-
-## Introduction
+## introduction
 
 This is an introduction to the flutter language and ecosystem, and reasons to use flutter, and comparisons with similar technologies
 
-[Introduction](notes/introduction.md)
+[introduction](notes/introduction.md)
 
 
 ## getting started
@@ -112,7 +113,7 @@ Next we progress into reading data from an api into our app, and displaying it
 
 [reading and displaying api data](notes/api.md)
 
-## Projects
+## projects1
 
 A list of projects is below
 
