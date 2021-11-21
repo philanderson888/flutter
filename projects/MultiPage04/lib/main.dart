@@ -87,7 +87,7 @@ class UpdateStatefulHome extends State {
                   children: <Widget>[
                     Container(
                       margin: const EdgeInsets.all(20),
-                      child: Text('some text'),
+                      child: Text(buttonText),
                     ),
                     Container(
                       decoration: BoxDecoration(
@@ -100,23 +100,18 @@ class UpdateStatefulHome extends State {
                           ),
                         ],
                       ),
-                      child: ElevatedButton(
+                      child: ElevatedButton.icon(
                         autofocus: true,
                         clipBehavior: Clip.none,
                         onPressed: () => clickButton(),
+                        icon: Icon(Icons.access_alarm),
+                        label: Text(buttonText),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.blue,
                           padding: const EdgeInsets.all(30),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(18.0),
                             side: BorderSide(color: Colors.lightBlue),
-                          ),
-                        ),
-                        child: Text(
-                          buttonText,
-                          style: TextStyle(
-                            color: Colors.white,
-                            backgroundColor: Colors.blue,
                           ),
                         ),
                       ),
@@ -161,12 +156,41 @@ class UpdateStatefulHome extends State {
                 width: 250,
                 child: ElevatedButton(
                   onPressed: () => goToPage2(),
-                  child: Row(
-                    children: <Widget>[
-                      Text("Click To Go To Page 2"),
-                      Icon(Icons.arrow_forward),
-                    ],
+                  child: Text("Click To Go To Page 2"),
+                ),
+              ),
+              Tooltip(
+                message: 'This is some help text to understand what to do ',
+                child: const Text('This is some text without much explanation'),
+                waitDuration: const Duration(seconds: 1),
+                showDuration: const Duration(seconds: 4),
+                height: 50,
+                textStyle: const TextStyle(fontSize: 24),
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: const LinearGradient(
+                      colors: <Color>[Colors.amber, Colors.red]),
+                ),
+              ),
+              Tooltip(
+                message: 'Tooltip Help Text',
+                child: Container(
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => goToPage2(),
+                    child: Text("Click To Go To Page 2"),
                   ),
+                ),
+                waitDuration: const Duration(seconds: 1),
+                showDuration: const Duration(seconds: 4),
+                height: 50,
+                textStyle: const TextStyle(fontSize: 24),
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: const LinearGradient(
+                      colors: <Color>[Colors.amber, Colors.red]),
                 ),
               ),
             ],
