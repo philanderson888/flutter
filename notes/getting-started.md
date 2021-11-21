@@ -18,11 +18,11 @@
     - [build](#build)
     - [run](#run)
   - [building your first project](#building-your-first-project)
-    - [yaml](#yaml)
-    - [default scaffolding](#default-scaffolding)
-    - [Default Clean Screen](#default-clean-screen)
-    - [default clean screen with text in page body](#default-clean-screen-with-text-in-page-body)
-    - [center the page body text](#center-the-page-body-text)
+    - [pubspec.yaml](#pubspecyaml)
+    - [analysis-options.yaml](#analysis-optionsyaml)
+    - [hello world](#hello-world-1)
+  - [default scaffolding](#default-scaffolding)
+  - [next steps](#next-steps)
 
 ## getting started with an online ide
 
@@ -292,9 +292,20 @@ class MyApp extends StatelessWidget {
 
 ## building your first project
 
-To get started with building your first project locally we will need a few files
+to manually build our first project we only need 2 files
 
-### yaml
+- projectRootFolder
+  - pubspec.yaml
+  - lib
+    - main.dart
+
+and optionally we can add a third
+
+  - analysis-options.yaml
+
+see worked example at [StarterApp01](../projects/StarterApp01)
+
+### pubspec.yaml
 
 ```yaml
 name: project
@@ -315,7 +326,7 @@ flutter:
   uses-material-design: true
 ```
 
-analysis-options.yaml
+### analysis-options.yaml
 
 ```yaml
 include: package:flutter_lints/flutter.yaml
@@ -324,7 +335,61 @@ linter:
     avoid_print: false  # Uncomment to disable the `avoid_print` rule
 ```
 
-### default scaffolding
+
+### hello world
+
+```java
+//#region imports
+import 'package:flutter/material.dart';
+//#endregion imports
+//#region main
+void main() {
+  print('running main app');
+  runApp(App());
+}
+//#endregion main
+//#region app
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+  static const String _title = 'Hello World';
+  @override
+  //#region widget builder
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Home(title: _title),
+    );
+  }
+  //#endregion
+}
+//#endregion app
+//#region home widget
+class Home extends StatelessWidget {
+  const Home({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(title)),
+      body: Center(child: Text(title)),
+    );
+  }
+}
+//#endregion widget
+```
+
+## default scaffolding
+
+if we wish to build the app with a working button we can use the `flutter create myProject` command
+
+```java
+flutter create myProject
+```
+
+and we end up with this code (i have stripped out the extra comments)
 
 ```java
 import 'package:flutter/material.dart';
@@ -387,101 +452,8 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
-### Default Clean Screen
+## next steps
 
-```java
-import 'package:flutter/material.dart';
-void main() {
-  runApp(MyApp());
-}
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Home(),
-    );
-  }
-}
-class Home extends StatelessWidget {
-  @override
-  Widget build (BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Screen"),
-      ),
-    );
-  }
-}
-```
-
-### default clean screen with text in page body
-
-```java
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hello World',
-      theme: ThemeData(primarySwatch: Colors.blue,),
-      home: Home(),
-    );
-  }
-}
-
-
-class Home extends StatelessWidget {
-  @override 
-  Widget build (BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('home screen')
-      ),
-      body: Text('page body')
-    );
-  }
-}
-```
-
-### center the page body text
-
-```java
-import 'package:flutter/material.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Hello World',
-      theme: ThemeData(primarySwatch: Colors.blue,),
-      home: Home(),
-    );
-  }
-}
-
-
-class Home extends StatelessWidget {
-  @override 
-  Widget build (BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('home screen')
-      ),
-      body: Center(child: Text('page body')),
-    );
-  }
-}
-```
+to continue building on our app, follow the [next steps](next-steps.md) . . .  
 
 [Continue ... next steps](next-steps.md)

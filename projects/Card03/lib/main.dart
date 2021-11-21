@@ -78,8 +78,8 @@ class _HomeState extends State<Home> {
             Card(child: Text('Card 3')),
           ]),
           Row(mainAxisAlignment: MainAxisAlignment.center,children: <Widget>[
-            Text('Row 6 With Columns'),
-            Card(child: Text('Row 6 Card 1')),
+            const Text('Row 6 With Columns'),
+            const Card(child: Text('Row 6 Card 1')),
             Column(mainAxisAlignment: MainAxisAlignment.center,children: const<Widget>[
               Text('Row 6 Column '),
               Card(

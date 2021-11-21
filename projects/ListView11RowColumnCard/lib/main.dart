@@ -146,7 +146,7 @@ class _HomeState extends State<Home> {
                           child: Card(
                             child: Text(
                               'clickable card - $_counter clicks',
-                              style: TextStyle(color: Color(0xffede49f)),
+                              style: const TextStyle(color: Color(0xffede49f)),
                             ),
                             color: const Color(0xffb25adb),
                           ),
@@ -157,7 +157,7 @@ class _HomeState extends State<Home> {
                     ),
                   ]),
             ]),
-// #endregion
+            // #endregion
             // #region cards
             const Card(child: ListTile(title: Text('List Tile 1'))),
             const Card(child: ListTile(title: Text('List Tile 2'))),
@@ -191,7 +191,7 @@ class _HomeState extends State<Home> {
                   child: Card(
                     child: Text(
                       'clickable card - $_counter clicks',
-                      style: TextStyle(color: Color(0xff000000)),
+                      style: const TextStyle(color: Color(0xff000000)),
                     ),
                     color: const Color(0xffbbbbbb),
                   ),

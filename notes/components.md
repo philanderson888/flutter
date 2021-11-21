@@ -24,14 +24,17 @@
     - [Text Styling using `Flutter Color` VSCode plugin](#text-styling-using-flutter-color-vscode-plugin)
     - [finding components by text](#finding-components-by-text)
   - [tooltip](#tooltip)
-  - [style](#style)
+  - [styling](#styling)
     - [color](#color)
   - [Margins](#margins)
     - [Margin All Round](#margin-all-round)
     - [Margin Vertical](#margin-vertical)
     - [Margin Right](#margin-right)
   - [Padding](#padding)
-  - [Styling](#styling)
+  - [Styling](#styling-1)
+    - [styling a container](#styling-a-container)
+    - [styling a card](#styling-a-card)
+    - [styling a ListTile](#styling-a-listtile)
   - [Buttons](#buttons)
     - [Generic Button](#generic-button)
     - [Raised Button](#raised-button)
@@ -49,6 +52,7 @@
     - [simple list view with 3 rows](#simple-list-view-with-3-rows)
   - [dropdown button](#dropdown-button)
   - [textfield](#textfield)
+  - [snack bar](#snack-bar)
 
 ## introduction
 
@@ -545,8 +549,9 @@ Tooltip(
 ),
 ```
 
-## style
+## styling
 
+to see a styling example, see [Styling01](../projects/Styling01)
 ### color
 
 ```java
@@ -620,6 +625,49 @@ Tooltip(
   ),
 ),
 ```
+
+### styling a container
+
+to see the next three styling examples in a worked example, see [Styling01](../projects/Styling01)
+
+```java
+Container(
+  height: 50,
+  color: Colors.amber,
+  margin: const EdgeInsets.symmetric(vertical: 5.0),
+  child: const Center(child: Text('List View Container')),
+),
+```
+
+### styling a card
+
+```java
+const Card(
+  child: ListTile(title: Text('List View - Card + ListTile 1')),
+  margin: const EdgeInsets.symmetric(vertical: 5.0),
+  color: const Color(0xFF9adaed),
+),
+```
+
+### styling a ListTile
+
+```java
+Center(
+  child: Container(
+    decoration: BoxDecoration(color: const Color(0xFF9adaed)),
+    margin: const EdgeInsets.symmetric(vertical: 5.0),
+    child: ListTile(
+      title: const Center(
+        child: Text('List View - Card + ListTile 5'),
+      ),
+    ),
+  )
+),
+```
+
+
+
+
 
 ## Buttons
 
@@ -1425,3 +1473,26 @@ Text(
 ),
 //#endregion
 ```
+
+## snack bar
+
+a snack bar is an alert dialog box which appears at the bottom of the screen, and can have one or more action buttons for the user to click.  very similar to a dialog alert box, but just appearing at the bottom instead of overlaying the center of the main screen, which normal dialog boxes tend to do.  This can be useful to still give the user visibility of the main content.
+
+see [SnackBar01](../projects/SnackBar01) for a worked example of a SnackBar
+
+```java
+ElevatedButton(
+  onPressed: () {
+    final snackBar = SnackBar(
+        content: const Text('This is a snackbar'),
+        action: SnackBarAction(
+            label: 'Undo',
+            onPressed: () {
+              print('undo snack bar');
+            }));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  },
+  child: const Text('Show Snackbar'),
+)
+```
+

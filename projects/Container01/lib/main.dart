@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
                           child: 
                             Text(
                               'clickable card - $_counter clicks',
-                              style: TextStyle(color: Color(0xffede49f)),
+                              style: const TextStyle(color: Color(0xffede49f)),
                             ),
                             color: const Color(0xffb25adb),  
                         ), 
@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                   child: 
                     Text(
                       'clickable card - $_counter clicks',
-                      style: TextStyle(color: Color(0xff000000)),
+                      style: const TextStyle(color: Color(0xff000000)),
                     ),
                     color: const Color(0xffbbbbbb),  
                 ), 

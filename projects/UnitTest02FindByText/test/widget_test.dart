@@ -22,7 +22,7 @@ void main() {
     expect(find.text('Turn light on'), findsOneWidget);
   });
   testWidgets('light icon clickable find by text', (WidgetTester tester) async {
-    await tester.pumpWidget(App());
+    await tester.pumpWidget(const App());
     await tester.tap(find.text('Turn light on'));
     expect(find.text('Turn light on'), findsOneWidget);
     expect(find.text('Turn light off'), findsNothing);

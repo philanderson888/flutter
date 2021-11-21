@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      print('counter incremented to $_counter');
     });
   }
 

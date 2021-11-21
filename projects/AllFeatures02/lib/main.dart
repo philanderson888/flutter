@@ -444,6 +444,21 @@ class _HomeState extends State<Home> {
               ),
             ),
             //#endregion
+            //#region snack bar
+            ElevatedButton(
+              onPressed: () {
+                final snackBar = SnackBar(
+                    content: const Text('This is a snackbar'),
+                    action: SnackBarAction(
+                        label: 'Undo',
+                        onPressed: () {
+                          print('undo snack bar');
+                        }));
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              child: const Text('Show Snackbar'),
+            )
+            //#endregion
             //#endregion
             //#endregion
           ]),

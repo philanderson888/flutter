@@ -9,6 +9,7 @@ This is a respository for learning flutter from scratch
   - [changeLog](#changelog)
   - [introduction](#introduction)
   - [getting started](#getting-started)
+    - [hello world](#hello-world)
   - [next steps](#next-steps)
   - [scaffolding an app](#scaffolding-an-app)
   - [libraries](#libraries)
@@ -19,12 +20,7 @@ This is a respository for learning flutter from scratch
   - [components](#components)
   - [unit tests](#unit-tests)
   - [api](#api)
-  - [projects](#projects)
-    - [all projects](#all-projects)
-    - [hello world](#hello-world)
-    - [components](#components-1)
-    - [unit tests](#unit-tests-1)
-    - [api](#api-1)
+  - [all projects](#all-projects)
 
 
 ## author
@@ -34,9 +30,9 @@ github@philanderson.co.uk
 
 ## changeLog
 
-May 2020 - Initial Build
-August 2021 - Refactor Notes
-November 2021 - adding much more detail - components, unit tests, api, styling, list view, text input fields, text labels, buttons, alert dialog boxes, and more
+- May 2020 - Initial Build
+- August 2021 - Refactor Notes
+- November 2021 - adding much more detail - components, unit tests, api, styling, list view, text input fields, text labels, buttons, alert dialog boxes, and more
 
 ## introduction
 
@@ -49,7 +45,18 @@ This is an introduction to the flutter language and ecosystem, and reasons to us
 
 Instructions on how to get started with flutter
 
-[Getting Started](notes/getting-started.md)
+- [getting started notes](notes/getting-started.md)
+
+### hello world 
+
+- hello world projects
+
+  - [Hello World 01](projects/HelloWorld01)
+  - [Hello World 02](projects/HelloWorld02)
+  - [Hello World 03](projects/HelloWorld03)
+  - [Hello World 04](projects/HelloWorld04)
+  - [Hello World 05](projects/HelloWorld05)
+
 
 ## next steps
 
@@ -99,55 +106,36 @@ we can easily show and hide components
 
 Next we progress into building and using components
 
-[components](notes/components.md)
-
-## unit tests
-
-How to run unit tests
-
-[unit tests](notes/unit-testing.md)
-
-## api
-
-Next we progress into reading data from an api into our app, and displaying it
-
-[reading and displaying api data](notes/api.md)
-
-## projects
-
-A list of projects is below
-
-### all projects 
-
-- [all projects](projects)
-### hello world 
-
-- [getting started notes](notes/getting-started.md)
-- hello world projects
-  - [Hello World 01](projects/HelloWorld01)
-  - [Hello World 02](projects/HelloWorld02)
-  - [Hello World 03](projects/HelloWorld03)
-  - [Hello World 04](projects/HelloWorld04)
-  - [Hello World 05](projects/HelloWorld05)
-
-### components 
-
 - [components notes](notes/components.md)
+
 - components projects
+
   - [Simple Button Click](projects/ButtonClick01)
   - [Simple List View](projects/ListView01)
   - [Display Rows And Columns](projects/RowsAndColumns01)
   - [Display ListView Component](projects/ListView01)
   - [Display MultiPage Setup](projects/MultiPage01)
 
-### unit tests
+## unit tests
+
+How to run unit tests
 
 - [unit testing notes](notes/unit-testing.md)
 - [unit test projects](projects/UnitTest01)
 
-### api 
+## api
 
-- [api notes](notes/api.md)
+Next we progress into reading data from an api into our app, and displaying it
+
+- [api notes - reading and displaying api data](notes/api.md)
+
 - api projects
+  
   - [Obtain API data](projects/API01)
   - [sample app to display word pairs from an API](projects/WordPair01)
+
+## all projects
+
+A list of all projects is below
+
+- [all projects](projects)
