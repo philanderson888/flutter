@@ -12,12 +12,16 @@ This is a respository for learning flutter from scratch
     - [hello world](#hello-world)
   - [next steps](#next-steps)
   - [scaffolding an app](#scaffolding-an-app)
+  - [syntax](#syntax)
   - [libraries](#libraries)
   - [commands](#commands)
   - [regions](#regions)
   - [navigation](#navigation)
   - [visibility](#visibility)
   - [components](#components)
+  - [styling](#styling)
+  - [gestures](#gestures)
+  - [oop](#oop)
   - [unit tests](#unit-tests)
   - [api](#api)
   - [all projects](#all-projects)
@@ -66,6 +70,11 @@ Instructions on how to get started with flutter
 
 [building an app with automatic scaffolding](notes/scaffolding.md)
 
+## syntax
+
+an introduction to flutter syntax
+
+[syntax](notes/syntax.md)
 ## libraries
 
 [libraries](notes/libraries.md)
@@ -116,6 +125,18 @@ Next we progress into building and using components
   - [Display ListView Component](projects/ListView01)
   - [Display MultiPage Setup](projects/MultiPage01)
 
+## styling
+
+- [styling](notes/styling.md)
+  - [constraints (max/min width)](notes/styling.md#constraints)
+## gestures
+
+[gestures](notes/gestures.md)
+
+## oop
+
+- [oop](notes/oop.md)
+
 ## unit tests
 
 How to run unit tests
@@ -131,7 +152,8 @@ Next we progress into reading data from an api into our app, and displaying it
 
 - api projects
   
-  - [Obtain API data](projects/API01)
+  - [Obtain API data](projects/APIGet01)
+  - [APIGet04](projects/APIGet04) - display 100 cards with API data
   - [sample app to display word pairs from an API](projects/WordPair01)
 
 ## all projects

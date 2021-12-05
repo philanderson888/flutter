@@ -9,6 +9,7 @@
   - [flutter pub upgrade](#flutter-pub-upgrade)
   - [flutter create - samples](#flutter-create---samples)
   - [analyze](#analyze)
+  - [vscode shortcuts](#vscode-shortcuts)
 
 
 ## flutter doctor
@@ -47,5 +48,16 @@ analyze your app for problems
 
 ```java
 flutter analyze
+```
+
+## vscode shortcuts
+
+```java
+// type
+st
+/* brings up options
+- stateful widget 
+- stateless widget
+*/
 ```
 

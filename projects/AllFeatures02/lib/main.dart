@@ -38,6 +38,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   // #region initialise variables
   int _counter = 0;
+  double sideLength = 50.0;
   bool _ok = false;
   bool _cancel = false;
   String dropdownValue = 'One';
@@ -428,7 +429,7 @@ class _HomeState extends State<Home> {
             Text(
               _inputText,
             ),
-            //#endregion
+            //#endregion textLabel
             //#region Tooltip
             Tooltip(
               message: 'This is some help text to understand what to do ',
@@ -445,21 +446,55 @@ class _HomeState extends State<Home> {
             ),
             //#endregion
             //#region snack bar
-            ElevatedButton(
-              onPressed: () {
-                final snackBar = SnackBar(
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  final snackBar = SnackBar(
+                    padding: const EdgeInsets.all(8.0),
                     content: const Text('This is a snackbar'),
                     action: SnackBarAction(
-                        label: 'Undo',
-                        onPressed: () {
-                          print('undo snack bar');
-                        }));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-              child: const Text('Show Snackbar'),
-            )
-            //#endregion
-            //#endregion
+                      label: 'Undo',
+                      onPressed: () {
+                        print('undo snack bar');
+                      }
+                    )
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                child: const Text('Show Snackbar'),
+              ),
+            ),
+            //#endregion snackbar
+            //#endregion textfield
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10.0),
+              child: AnimatedContainer(
+                height: sideLength,
+                width: sideLength,
+                duration: const Duration(seconds: 2),
+                curve: Curves.easeIn,
+                child: Material(
+                  color: Colors.yellow,
+                  child: InkWell(
+                    onTap: () {
+                      setState(() {
+                        sideLength == 50 ? sideLength = 100 : sideLength = 50;
+                      });
+                    },
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Animated Container', 
+                          style: TextStyle(fontSize:22),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
             //#endregion
           ]),
       // #endregion

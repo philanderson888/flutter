@@ -5,15 +5,24 @@
 - [unit testing](#unit-testing)
   - [contents](#contents)
   - [introduction](#introduction)
+  - [reference](#reference)
   - [simple example](#simple-example)
   - [naming convention](#naming-convention)
   - [running unit tests](#running-unit-tests)
+  - [running all unit tests in all projects](#running-all-unit-tests-in-all-projects)
   - [finding by text](#finding-by-text)
   - [finding by icon](#finding-by-icon)
 
 ## introduction
 
 it's important to be able to run unit tests for our components so this introduction will help you get started
+
+## reference
+
+please see the reference guide on flutter for further reading on this topic
+
+- https://docs.flutter.dev/cookbook/testing
+- https://docs.flutter.dev/cookbook/testing/unit/introduction
 
 ## simple example
 
@@ -71,6 +80,34 @@ flutter test test/my_test.dart
 flutter test -r expanded test/widget_test.dart
 ```
 
+## running all unit tests in all projects
+
+to run all unit tests in all projects we can write a script and generate the output
+
+*note - on Windows run this file using `GitBash`*
+
+```bash
+echo "this script prints out all the folders in a directory"
+for file in */ ; do
+ echo "$file"
+done
+
+
+echo "this script prints all folders in a directory"
+echo "this script prints all folders in a directory" > flutter_test_output.md
+echo "and also runs unit tests in each folder"
+echo "and also runs unit tests in each folder" >> flutter_test_output.md
+for file in */ ; do
+ echo " " >> flutter_test_output.md 
+ echo " " >> flutter_test_output.md
+ echo "$file" >> flutter_test_output.md
+ echo "$file" 
+ cd $file 
+ pwd >> ../flutter_test_output.md
+ flutter test >> ../flutter_test_output.md
+ cd ..
+done
+```
 
 ## finding by text
 

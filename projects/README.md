@@ -35,7 +35,7 @@ These apps aim to show how to build an alert dialog box
 
 ## API
 
-- [API01](API01)
+- [APIGet01](APIGet01)
   - This reads one single piece of API data and also a whole list of API data to the screen and console
 
 
