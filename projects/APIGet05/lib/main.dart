@@ -1,3 +1,4 @@
+
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -65,7 +66,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool _isHover = false;
-  Color cardColor = Colors.blue;
+  List<Color> cardColors = [];
   String cardColorString = "blue";
   // holds one album
   Future<Album> futureAlbum;
@@ -78,14 +79,14 @@ class _MyAppState extends State<MyApp> {
     futureAlbums = fetchAlbums();
   }
 
-  void _toggleColor(){
+  void _toggleCardColor(index){
     setState(() {
-      if (cardColor == Colors.blue){
+      if (cardColors[index] == Colors.blue){
         print('toggling blue card to yellow');
-        cardColor = Colors.yellow;
+        cardColors[index] = Colors.yellow;
       } else {
         print('toggle yellow card to blue');
-        cardColor = Colors.blue;
+        cardColors[index] = Colors.blue;
       }
     });    
   }
@@ -153,6 +154,9 @@ class _MyAppState extends State<MyApp> {
                   assert(debugCheckHasMaterial(context));
                   if (snapshot.hasData) {
                     List<Album> dataList = snapshot.data;
+                    for (var i = 0; i< dataList.length - 1; i++){
+                      cardColors.add(Colors.blue);
+                    }
                     return ListView.builder(
                       itemCount: dataList.length,
                       scrollDirection: Axis.vertical,
@@ -173,11 +177,11 @@ class _MyAppState extends State<MyApp> {
                                     padding: EdgeInsets.all(5.0),
                                     child: Text(output),
                                   ),
-                                  color: cardColor,                                
+                                  color: cardColors[index],                                
                                 ),
                               ),
                               onTap: (){ 
-                                _toggleColor();
+                                _toggleCardColor(index);
                                 print('you clicked on this card with content $output');
                               }
                             ),

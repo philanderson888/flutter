@@ -115,7 +115,8 @@ we can easily show and hide components
 
 Next we progress into building and using components
 
-- [components notes](notes/components.md)
+- [components](notes/components.md)
+- [containers](notes/containers.md)
 
 - components projects
 
@@ -153,7 +154,8 @@ Next we progress into reading data from an api into our app, and displaying it
 - api projects
   
   - [Obtain API data](projects/APIGet01)
-  - [APIGet04](projects/APIGet04) - display 100 cards with API data
+  - [APIGet04](projects/APIGet04) - display 100 cards with API data and toggle list colour from blue to yellow
+  - [APIGet05](projects/APIGet05) - toggle individual cards and print individual data
   - [sample app to display word pairs from an API](projects/WordPair01)
 
 ## all projects

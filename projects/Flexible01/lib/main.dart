@@ -80,11 +80,12 @@ class _MyAppState extends State<MyApp> {
 
   void _toggleColor(){
     setState(() {
+      print('setting color state');
       if (cardColor == Colors.blue){
-        print('toggling blue card to yellow');
+        print('card is blue');
         cardColor = Colors.yellow;
       } else {
-        print('toggle yellow card to blue');
+        print('card is yellow - toggling to blue');
         cardColor = Colors.blue;
       }
     });    
@@ -160,6 +161,7 @@ class _MyAppState extends State<MyApp> {
                       itemBuilder: (context, index){
                         var album = dataList[index];
                         String output = album.id.toString() + ' ' + album.userId.toString() + ' ' + album.title;
+                        print(output);
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -178,7 +180,6 @@ class _MyAppState extends State<MyApp> {
                               ),
                               onTap: (){ 
                                 _toggleColor();
-                                print('you clicked on this card with content $output');
                               }
                             ),
                           ],
