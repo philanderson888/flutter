@@ -88,11 +88,12 @@ class _MyAppState extends State<MyApp> {
         print('toggle yellow card to blue');
         cardColors[index] = Colors.blue;
       }
-    });    
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Fetch Data Example',
       theme: ThemeData(
@@ -199,5 +200,35 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
     );
+  }
+}
+
+
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Page 2'),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    children: <Widget>[
+                      Text("Click To Go To Page 3"),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }

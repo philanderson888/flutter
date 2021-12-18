@@ -62,6 +62,9 @@ Shows how to build an app with multiple pages
 - [MultiPage03](MultiPage03)
   - Rebuild from scratch of MultiPage02
 - [MultiPage04](MultiPage04)
+  - Extends capability to 4 pages - click from main page to pages 2, 3 and 4, all stateless pages
+- [MultiPage05](MultiPage05)
+  - Adds a 5th page as a stateful widget page so now we have main page (stateful) then pages 2, 3, 4 as stateless and page 5 as stateful
 
 This app navigates 4 pages!
 

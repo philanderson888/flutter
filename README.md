@@ -99,12 +99,14 @@ Route - tells us where to go from now
 
 Stack - keeps track of navigation so far and how to go back
 
+- [navigation notes](notes/navigation.md)
 - navigation projects
   - [MultiPage01](Projects/MultiPage01)
   - [MultiPage02](Projects/MultiPage02)
   - [MultiPage03](Projects/MultiPage03)
   - [MultiPage04](Projects/MultiPage04) for a demonstration of code which navigates 4 pages and back.
-
+  - [MultiPage05](Projects/MultiPage05) 
+    - send data between pages eg page 5 card data sent to page 6
 ## visibility
 
 we can easily show and hide components
@@ -162,4 +164,4 @@ Next we progress into reading data from an api into our app, and displaying it
 
 A list of all projects is below
 
-- [all projects](projects)
+- [all projects](projects/README.md)
