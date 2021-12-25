@@ -37,7 +37,8 @@ These apps aim to show how to build an alert dialog box
 
 - [APIGet01](APIGet01)
   - This reads one single piece of API data and also a whole list of API data to the screen and console
-
+- [APICRUD02](APICRUD02)
+  - This is a clone of [MultiPage05](MultiPage05) and shows the full CRUD operations on a given list of items drawn from an API
 
 ## HelloWorld
 
@@ -64,9 +65,7 @@ Shows how to build an app with multiple pages
 - [MultiPage04](MultiPage04)
   - Extends capability to 4 pages - click from main page to pages 2, 3 and 4, all stateless pages
 - [MultiPage05](MultiPage05)
-  - Adds a 5th page as a stateful widget page so now we have main page (stateful) then pages 2, 3, 4 as stateless and page 5 as stateful
-
-This app navigates 4 pages!
+  - Adds a 5th page as a stateful widget page so now we have main page (stateful) then pages 2, 3, 4 as stateless and page 5 as stateful.  This project clicks through to `Page5` where an item may be clicked on.  After a 2-second delay the user is taken either to `Page6` or `Page7` depending on which index is clicked.  Clicking on items index 0 or 1 takes to `Page6` which is `stateless` and clicking on any other index takes to `Page7` which is `stateful`
 
 ## Row
 

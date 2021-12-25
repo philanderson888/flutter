@@ -340,13 +340,30 @@ class Album {
 
   Album({this.userId, this.id, this.title});
 
-  factory Album.fromJson(Map<String, dynamic> json) {
-    return Album(
-      userId: json['userId'],
-      id: json['id'],
-      title: json['title'],
-    );
+  Album.createPostObject(userId, title)
+      : id = 0,
+        userId = userId,
+        title = title;
+        
+  Map<String, dynamic> toJson() => {
+      'id': id,
+      'userId': userId,
+      'title': title,
+    };
+
+  Album.fromJson(Map<String, dynamic> json)
+    : id = json['id'], 
+      userId = json['userId'],
+      title = json['title'];
+
+  void set setAlbumTitle(String title){
+    title = title;
   }
+
+  set albumId(int id){
+    id = id;
+  }
+
 }
 
 Future<Album> fetchAlbum() async {
@@ -409,10 +426,25 @@ class UpdatePage5State extends State {
     setState((){
       _data = 'index ${index.toString()} content "${album.title}"';
     });
-    print('going to page 6 - printing "context"');
-    print(context);
+    print('going to page 6');
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => Page6(data: _data, album: album)),
+      MaterialPageRoute(builder: (context) => Page6(index: index, album: album)),
+    );
+  }
+
+  goToPage7WithFixedDetails() {
+    int index = 5;
+    var album = Album(userId: 10, id: 1, title: 'a title');
+    print('going to page 7');
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => Page7(index: index, album: album)),
+    );
+  }
+
+  goToPage7(index, album) {
+    print('going to page 7');
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => Page7(index: index, album: album)),
     );
   }
   
@@ -426,12 +458,15 @@ class UpdatePage5State extends State {
         cardColors[index] = Colors.blue;
       }
     });
-    const duration = 4;
+    const duration = 2;
     print('sleeping for $duration seconds');
     await Future.delayed(Duration(seconds: duration));
-    print('sleep over');
-    print('going to page 6 now');
-    goToPage6(index, album);
+    print('sleep duration has completed');
+    if (index <= 1){
+      goToPage6(index, album);
+    } else {
+      goToPage7(index, album);
+    }
   }
 
   clickButton() {
@@ -452,7 +487,6 @@ class UpdatePage5State extends State {
         }
       }
     );
-
   }
 
   @override
@@ -473,16 +507,23 @@ class UpdatePage5State extends State {
             ),
             Container(
               child: ElevatedButton.icon(
-                onPressed: () => goToPage6(0,null),
+                onPressed: () => goToPage6(1,Album(userId: 10, id: 2, title: 'this is a title')),
                 icon: Icon(Icons.arrow_forward),
                 label: Text('go to page 6'),
               ),
             ),
             Container(
               child: ElevatedButton.icon(
+                onPressed: () => goToPage7WithFixedDetails(),
+                icon: Icon(Icons.arrow_forward),
+                label: Text('go to page 7'),
+              ),
+            ),
+            Container(
+              child: ElevatedButton.icon(
                 onPressed: () => clickButton(),
                 icon: Icon(Icons.arrow_forward),
-                label: Text('a button'),
+                label: Text('a button to count with'),
               ),
             ),
             Container(
@@ -573,9 +614,21 @@ class UpdatePage5State extends State {
 }
 
 class Page6 extends StatelessWidget {
-  String data = "";
+  int index = 0;
   Album album = null;
-  Page6({Key key, this.data, this.album}) : super(key: key);
+  final textController = TextEditingController();
+  String _inputText = '';
+  Page6({Key key, this.index, this.album}) : super(key: key);
+  
+  void _updateTextField(inputText){
+    _inputText = inputText;
+    print('text field has been updated to $_inputText');
+    print('album.title ${album.title}');
+  }
+
+  void _submitForm(){
+    print('form is being submitted');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -587,25 +640,62 @@ class Page6 extends StatelessWidget {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page 6 $data = ${album.title}'),
+        title: Text('Page 6 - Stateless Page So Cannot Update Details'),
       ),
       body: Container(
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
             Container(
-              width: 250,
+              width: 500,
               child: ElevatedButton(
                 onPressed: null,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text('pass data from previous screen'),
+                    Text('card index ${index.toString()}'),
                   ],
                 ),
               ),
             ),
             Container(
-              width: 250,
+              width:500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('album title - ${album.title}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('album id - ${album.id.toString()}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('album userId - ${album.userId.toString()}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
               child: ElevatedButton(
                 onPressed: () => goToPage2(),
                 child: Row(
@@ -616,9 +706,398 @@ class Page6 extends StatelessWidget {
                 ),
               ),
             ),
+            Container(
+              width: 500,
+              child: TextFormField(
+                initialValue: album.id.toString(),
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'album id'),
+                onChanged: (inputText) => {
+                  _updateTextField(inputText)
+                },
+              ),
+            ),
+            Container(
+              width: 500,
+              child: TextFormField(
+                initialValue: album.userId.toString(),
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'album userid'),
+                onChanged: (inputText) => {
+                  _updateTextField(inputText)
+                },
+              ),
+            ),
+            Container(
+              width: 500,
+              child: TextFormField(
+                initialValue: album.title,
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'album title'),
+                onChanged: (inputText) => {
+                  _updateTextField(inputText)
+                },
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: () => _submitForm(),
+                child: Row(
+                  children: <Widget>[
+                    Text("Submit"),
+                    Icon(Icons.arrow_forward),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       )
+    );
+  }
+}
+
+class Page7 extends StatefulWidget {
+  int index;
+  Album album;
+  Page7({Key key, this.index, this.album}) : super(key: key);
+  Page7State createState() => Page7State(key, this.index, this.album);
+}
+
+
+class Page7State extends State {
+  
+  Key key;
+  int index;
+  Album album;
+  Album _postObject;
+  final textController = TextEditingController();
+  final url = "https://jsonplaceholder.typicode.com/albums";
+
+  Page7State(Key key, this.index, this.album);
+
+  void _updateUserId(userId){
+    setState(() => {
+      album = Album(userId: int.parse(userId), id: album.id, title: album.title)
+    });
+    print('user id has been updated to ${album.userId}');
+  }
+  
+  void _updateTitle(title){
+    setState(() => {
+      album = Album(userId: album.userId, id: album.id, title: title)
+    });
+    print('title has been updated to ${album.title}');
+  }
+  
+  void _submitFormAsPost() async {
+    print('form is being submitted');
+    try{
+      final response = 
+        await http.post(Uri.parse(url), body: jsonEncode(album));
+      Map<String, dynamic> apiResponse = jsonDecode(response.body);
+      print('post data - response is $apiResponse');
+      setState(() => {
+        _postObject = Album(id: apiResponse['id'], userId: album.userId, title: album.title)
+      });
+      print('post object is ' + jsonEncode(_postObject));
+      final snackBarPostSuccessful = SnackBar(
+        padding: const EdgeInsets.all(8.0),
+        content: Text('Record Has Been Successfully Added - ${jsonEncode(_postObject)}'),
+        action: SnackBarAction(
+          label: 'X',
+          onPressed: () {
+            print('undo snack bar');
+          }
+        )
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBarPostSuccessful);
+      final snackBarReturnToList = SnackBar(
+        padding: const EdgeInsets.all(8.0),
+        content: Text('Returning to list of items'),
+        action: SnackBarAction(
+          label: 'X',
+          onPressed: () {
+            print('undo snack bar');
+          }
+        )
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBarReturnToList);
+    } catch (error) {
+      print('error ' + error.toString());
+    }
+  }
+
+  void   _submitFormAsPut() async {
+    print('form is being submitted as a PUT request');
+    try{
+      final response = 
+        await http.put(Uri.parse(url + '/' + album.id.toString()), body: jsonEncode(album));
+      Map<String, dynamic> apiResponse = jsonDecode(response.body);
+      print('put data - request object is ' + jsonEncode(album));
+      print('put data - response is $apiResponse');
+      final snackBar = SnackBar(
+        padding: const EdgeInsets.all(8.0),
+        content: Text('Record Has Been Successfully Updated - ${jsonEncode(album)} with api response $apiResponse'),
+        action: SnackBarAction(
+          label: 'X',
+          onPressed: () {
+            print('undo snack bar');
+          }
+        )
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (error) {
+      print('error ' + error.toString());
+    }
+  }
+
+  void _submitFormAsDelete() async {
+    print('form is being submitted as a DELETE request');
+    try{
+      final response = 
+        await http.delete(Uri.parse(url + '/' + album.id.toString()));
+      Map<String, dynamic> apiResponse = jsonDecode(response.body);
+      print('delete request - record index ${album.id.toString()} - response is $apiResponse');
+      final snackBar = SnackBar(
+        padding: const EdgeInsets.all(8.0),
+        content: Text('Record Has Been Successfully Deleted With id ${album.id.toString()}'),
+        action: SnackBarAction(
+          label: 'X',
+          onPressed: () {
+            print('undo snack bar');
+          }
+        )
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } catch (error) {
+      print('error ' + error.toString());
+    }
+  }
+
+  goToPage2() {
+    Navigator.push(
+      (context),
+      MaterialPageRoute(builder: (context) => Page2()),
+    );
+  }
+
+  goToPage5() async {
+    const duration = 6;
+    print('sleeping for $duration seconds');
+    await Future.delayed(Duration(seconds: duration));
+    print('sleep duration has completed - now going to page 5 ...');
+    Navigator.pop(context);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text("Stateful Page 7 - Form Which Can Be Updated")),
+      ),
+      body: Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: <Widget>[
+            Container(
+              child: Text(
+                'here is stateful page 7',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            Container(
+              child: Text(
+                'index: $index',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            Container(
+              child: Text(
+                'id: ${album.id}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            Container(
+              child: Text(
+                'userId: ${album.userId}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            Container(
+              child: Text(
+                'title: ${album.title}',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('card index ${index.toString()}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('album id - ${album.id.toString()}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('album userId - ${album.userId.toString()}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width:500,
+              child: ElevatedButton(
+                onPressed: null,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('album title - ${album.title}'),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: () => goToPage2(),
+                child: Row(
+                  children: <Widget>[
+                    Text("Click To Go To Page 2"),
+                    Icon(Icons.arrow_forward),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: TextFormField(
+                enabled: false,
+                initialValue: album.id.toString(),
+                decoration: const InputDecoration(
+                  fillColor: Color(0xffb5e6e1),
+                  filled: true,
+                  border: OutlineInputBorder(),
+                  hintText: 'album id'
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: TextFormField(
+                initialValue: album.userId.toString(),
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'album userid'),
+                onChanged: (userId) => {
+                  _updateUserId(userId)
+                },
+              ),
+            ),
+            Container(
+              width: 500,
+              child: TextFormField(
+                initialValue: album.title,
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'album title'),
+                onChanged: (title) => {
+                  _updateTitle(title)
+                },
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: () {
+                  _submitFormAsPost();
+                },
+                child: const Text('Submit Form As Post ie Add New Record'),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: () => _submitFormAsPut(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Submit Form As Put ie Update Existing Record"),
+                    Icon(Icons.arrow_forward),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: () => _submitFormAsDelete(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text("Submit Form As Delete ie Delete Existing Record"),
+                    Icon(Icons.arrow_forward),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 500,
+              child: ElevatedButton(
+                onPressed: () {
+                  _submitFormAsPost();
+                  goToPage5();
+                },
+                child: const Text('Submit Form As Post ie Add New Record - Then Go To Previous Page'),
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 10.0),
+              child: ElevatedButton(
+                onPressed: () {
+                  final snackBar = SnackBar(
+                    padding: const EdgeInsets.all(8.0),
+                    content: const Text('This is a snackbar'),
+                    action: SnackBarAction(
+                      label: 'Undo',
+                      onPressed: () {
+                        print('undo snack bar');
+                      }
+                    )
+                  );
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                },
+                child: const Text('Show Snackbar'),
+              ),
+            ),
+          ],
+        )
+      ),
     );
   }
 }

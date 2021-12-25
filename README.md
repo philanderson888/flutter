@@ -19,6 +19,7 @@ This is a respository for learning flutter from scratch
   - [navigation](#navigation)
   - [visibility](#visibility)
   - [components](#components)
+  - [state](#state)
   - [styling](#styling)
   - [gestures](#gestures)
   - [oop](#oop)
@@ -105,8 +106,9 @@ Stack - keeps track of navigation so far and how to go back
   - [MultiPage02](Projects/MultiPage02)
   - [MultiPage03](Projects/MultiPage03)
   - [MultiPage04](Projects/MultiPage04) for a demonstration of code which navigates 4 pages and back.
-  - [MultiPage05](Projects/MultiPage05) 
-    - send data between pages eg page 5 card data sent to page 6
+  - [MultiPage05](Projects/MultiPage05) This project clicks through to `Page5` where an item may be clicked on.  After a 2-second delay the user is taken either to `Page6` or `Page7` depending on which index is clicked.  Clicking on items index 0 or 1 takes to `Page6` which is `stateless` and clicking on any other index takes to `Page7` which is `stateful`
+
+
 ## visibility
 
 we can easily show and hide components
@@ -127,6 +129,10 @@ Next we progress into building and using components
   - [Display Rows And Columns](projects/RowsAndColumns01)
   - [Display ListView Component](projects/ListView01)
   - [Display MultiPage Setup](projects/MultiPage01)
+
+## state
+
+- [state](#notes/state.md)
 
 ## styling
 
@@ -158,7 +164,10 @@ Next we progress into reading data from an api into our app, and displaying it
   - [Obtain API data](projects/APIGet01)
   - [APIGet04](projects/APIGet04) - display 100 cards with API data and toggle list colour from blue to yellow
   - [APIGet05](projects/APIGet05) - toggle individual cards and print individual data
-  - [sample app to display word pairs from an API](projects/WordPair01)
+  - [APICRUD02](APICRUD02)
+    - This is a clone of [MultiPage05](MultiPage05) and shows the full CRUD operations on a given list of items drawn from an API
+  - [WordPair01](projects/WordPair01)
+    - sample app to display word pairs from an API
 
 ## all projects
 
