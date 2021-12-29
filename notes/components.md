@@ -29,8 +29,6 @@
     - [simple list view with 3 rows](#simple-list-view-with-3-rows)
   - [dropdown button](#dropdown-button)
   - [forms](#forms)
-    - [textfield](#textfield)
-      - [textformfield - index field, with background](#textformfield---index-field-with-background)
   - [snack bar](#snack-bar)
 
 ## introduction
@@ -832,70 +830,7 @@ DropdownButton<String>(
 
 ## forms
 
-### textfield
-
-see [TextField01](../projects/TextField01)
-
-```java
-TextField(
-  decoration: const InputDecoration(
-    border: OutlineInputBorder(),
-    hintText: 'Enter some text here'
-  ),
-  onChanged: (text) => print('You entered text $text'),
-),
-```
-
-for a combination of a text input field which updates a label see [TextField02](../projects/TextField02)
-
-```java
-String _inputText = '';
-
-void _updateTextLabel(inputText) {
-  setState(() {
-    _inputText = inputText;
-  });
-  print('text field has been updated to $_inputText');
-}
-
-//#region textfield
-TextField(
-  decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        hintText: 'Enter some text here'),
-  onChanged: (inputText) => {
-    _updateTextLabel(inputText)
-  }
-),
-//#region textlabel
-const Text(
-  'This is a text field',
-),
-Text(
-  _inputText,
-),
-//#endregion
-```
-
-#### textformfield - index field, with background
-
-When we display the form, sometimes we wish to display the index field as well as a read-only field but also colour it slightly to indicate clearly to the user that it's a different kind of field so if they do click on it to change it, they can understand clearly that it's a read only field
-
-```java
-Container(
-  width: 500,
-  child: TextFormField(
-    enabled: false,
-    initialValue: album.id.toString(),
-    decoration: const InputDecoration(
-      fillColor: Color(0xffb5e6e1),
-      filled: true,
-      border: OutlineInputBorder(),
-      hintText: 'album id'
-    ),
-  ),
-),
-```
+[forms](forms.md)
 
 ## snack bar
 

@@ -35,6 +35,7 @@ class StatefulHome extends StatefulWidget {
 }
 
 class UpdateStatefulHome extends State {
+  const UpdateStatefulWidget({Key? key}) : super(key: key);
   String buttonText = 'some text';
   int counter = 0;
   clickButton() {

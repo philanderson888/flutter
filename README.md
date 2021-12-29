@@ -22,6 +22,7 @@ This is a respository for learning flutter from scratch
   - [state](#state)
   - [styling](#styling)
   - [gestures](#gestures)
+  - [documentation](#documentation)
   - [oop](#oop)
   - [unit tests](#unit-tests)
   - [api](#api)
@@ -132,7 +133,7 @@ Next we progress into building and using components
 
 ## state
 
-- [state](#notes/state.md)
+- [state](notes/state.md)
 
 ## styling
 
@@ -141,6 +142,10 @@ Next we progress into building and using components
 ## gestures
 
 [gestures](notes/gestures.md)
+
+## documentation
+
+[documentation](notes/documentation.md)
 
 ## oop
 

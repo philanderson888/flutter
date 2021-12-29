@@ -1,8 +1,8 @@
-# containers
+# containers and layout
 
 ## contents
 
-- [containers](#containers)
+- [containers and layout](#containers-and-layout)
   - [contents](#contents)
   - [introduction](#introduction)
     - [Body Is A Single Container](#body-is-a-single-container)
@@ -10,6 +10,7 @@
     - [Container With Shadow](#container-with-shadow)
     - [animated container](#animated-container)
   - [flexible](#flexible)
+  - [sizedbox](#sizedbox)
 
 ## introduction
 
@@ -351,4 +352,48 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+```
+
+## sizedbox
+
+here is an example of laying out a row with a fixed size given to one of the items using a `sizedbox` component
+
+```java
+Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: <Widget>[
+    SizedBox(
+      width: 200,
+      child: TextFormField(
+        controller: _controller02,
+        keyboardType: TextInputType.numberWithOptions(decimal: true,signed: false),
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+        ],
+        decoration: const InputDecoration(
+          hintText: 'number',
+          labelText: 'number',
+        ),
+      ),
+    ),
+    Flexible(
+      child: IconButton(
+        icon: Icon(
+          Icons.add,
+        ),
+        iconSize: 16.0,
+        onPressed: incrementCounter02,
+      ),
+    ),
+    Flexible(
+      child: IconButton(
+        icon: Icon(
+          Icons.remove,
+        ),
+        iconSize: 16.0,
+        onPressed: decrementCounter02,
+      ),  
+    ),
+  ]
+),
 ```

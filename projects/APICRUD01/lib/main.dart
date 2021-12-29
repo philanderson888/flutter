@@ -9,6 +9,7 @@ void main() {
   runApp(const App());
 }
 
+/// Stateful [App] overrides [createState()] to create its own state
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
@@ -37,6 +38,7 @@ class Post {
       };
 }
 
+/// [_AppState] holds the actual state so extends [State<App>] and also has an overridden [build()] method
 class _AppState extends State<App> {
   final url = "https://jsonplaceholder.typicode.com/posts";
   final _postObject = {

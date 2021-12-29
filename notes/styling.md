@@ -5,25 +5,29 @@
 - [styling](#styling)
   - [contents](#contents)
   - [introduction](#introduction)
-    - [Center Justify Text](#center-justify-text)
-    - [Text Styling](#text-styling)
-    - [text styling in a container](#text-styling-in-a-container)
-    - [Text Styling With Themes For The Whole App](#text-styling-with-themes-for-the-whole-app)
-    - [Text Styling With Theme](#text-styling-with-theme)
-    - [Text Styling using `Flutter Color` VSCode plugin](#text-styling-using-flutter-color-vscode-plugin)
-    - [finding components by text](#finding-components-by-text)
-  - [tooltip](#tooltip)
-  - [styling](#styling-1)
-    - [color](#color)
-  - [Margins](#margins)
-    - [Margin All Round](#margin-all-round)
-    - [Margin Vertical](#margin-vertical)
-    - [Margin Right](#margin-right)
-  - [Padding](#padding)
-  - [Styling](#styling-2)
+  - [finding components](#finding-components)
+  - [justifying](#justifying)
+    - [center justify](#center-justify)
+  - [margin](#margin)
+    - [margin all](#margin-all)
+    - [margin vertical](#margin-vertical)
+    - [margin horizontal](#margin-horizontal)
+  - [padding](#padding)
+  - [color](#color)
+  - [height](#height)
+  - [font](#font)
     - [styling a container](#styling-a-container)
     - [styling a card](#styling-a-card)
     - [styling a ListTile](#styling-a-listtile)
+  - [styling](#styling-1)
+    - [Text Styling](#text-styling)
+    - [text styling in a container](#text-styling-in-a-container)
+    - [Text Styling With Themes For The Whole App](#text-styling-with-themes-for-the-whole-app)
+  - [decoration](#decoration)
+  - [theme](#theme)
+    - [textTheme](#texttheme)
+    - [color foreground and background](#color-foreground-and-background)
+  - [tooltip](#tooltip)
   - [constraints](#constraints)
 
 
@@ -39,7 +43,16 @@ this section involves basic styling of basic widgets including
 - padding
 - theme
 
-### Center Justify Text
+
+## finding components
+
+When unit testing it is important to be able to find and identify items on the screen.  we can do this most simply by text
+
+see [unit testing - finding a clickable widget by text](#finding-a-clickable-widget-by-text) in order to be able to undertand this.
+
+## justifying
+
+### center justify
 
 ```java
 class Home extends StatelessWidget {
@@ -55,6 +68,113 @@ class Home extends StatelessWidget {
   }
 }
 ```
+
+
+
+
+
+
+## margin
+
+### margin all 
+
+```java
+Container(
+  margin: const EdgeInsets.all(20),
+  child: Text('some text'),
+),
+```
+
+### margin vertical
+
+```java
+margin: EdgeInsets.symmetric(vertical:10.0),
+```
+
+### margin horizontal
+
+```java
+Container(
+  margin: const EdgeInsets.only(right:10.0),
+  child: Text('some text'),
+),
+```
+
+
+## padding
+
+```java
+padding: const EdgeInsets.all(30),
+```
+
+## color
+
+```java
+color: Colors.red,
+// from ARGB (Alpha Red Green Blue)
+color: Color(0xffaabbcc),
+// from RGBO (Red Green Blue Opacity)
+color: Color.fromRGBO(100,100,100,1.0)
+```
+
+## height
+
+```java
+height: 50,
+```
+
+## font 
+
+```java
+textStyle: const TextStyle(fontSize:24),
+```
+
+
+
+### styling a container
+
+to see the next three styling examples in a worked example, see [Styling01](../projects/Styling01)
+
+```java
+Container(
+  height: 50,
+  color: Colors.amber,
+  margin: const EdgeInsets.symmetric(vertical: 5.0),
+  child: const Center(child: Text('List View Container')),
+),
+```
+
+### styling a card
+
+```java
+const Card(
+  child: ListTile(title: Text('List View - Card + ListTile 1')),
+  margin: const EdgeInsets.symmetric(vertical: 5.0),
+  color: const Color(0xFF9adaed),
+),
+```
+
+### styling a ListTile
+
+```java
+Center(
+  child: Container(
+    decoration: BoxDecoration(color: const Color(0xFF9adaed)),
+    margin: const EdgeInsets.symmetric(vertical: 5.0),
+    child: ListTile(
+      title: const Center(
+        child: Text('List View - Card + ListTile 5'),
+      ),
+    ),
+  )
+),
+```
+
+
+## styling
+
+to see a styling example, see [Styling01](../projects/Styling01)
+
 ### Text Styling
 
 ```java
@@ -98,8 +218,41 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+## decoration
 
-### Text Styling With Theme
+decoration can add effects to components such as
+
+- borderRadius
+- gradient
+  - linear
+
+
+different decorations exist such as
+
+- BoxDecoration
+
+
+```java
+Tooltip(
+  message: 'This is some help text to understand what to do ',
+  child: const Text('This is some text without much explanation'),
+  waitDuration: const Duration(seconds: 1),
+  showDuration: const Duration(seconds: 4),
+  height: 50,
+  textStyle: const TextStyle(fontSize:24),
+  padding: const EdgeInsets.all(8.0),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(15),
+    gradient: const LinearGradient(colors: <Color>[Colors.amber, Colors.red]),
+  ),
+),
+```
+
+## theme
+
+themes apply global styling across the app, so are very useful to provide a coherency of styling 
+
+### textTheme
 
 Text is applied to a theme which applies to the whole app.
 
@@ -175,7 +328,7 @@ class UpdateStatefulHome extends State{
 }
 ```
 
-### Text Styling using `Flutter Color` VSCode plugin
+### color foreground and background 
 
 ```java
 class MyApp extends StatelessWidget {
@@ -199,11 +352,7 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
-### finding components by text
 
-When unit testing it is important to be able to find and identify items on the screen.  we can do this most simply by text
-
-see [unit testing - finding a clickable widget by text](#finding-a-clickable-widget-by-text) in order to be able to undertand this.
 
 ## tooltip
 
@@ -225,121 +374,6 @@ Tooltip(
 ),
 ```
 
-## styling
-
-to see a styling example, see [Styling01](../projects/Styling01)
-### color
-
-```java
-color: Colors.red,
-// from ARGB (Alpha Red Green Blue)
-color: Color(0xffaabbcc),
-// from RGBO (Red Green Blue Opacity)
-color: Color.fromRGBO(100,100,100,1.0)
-```
-
-## Margins
-
-### Margin All Round
-
-```java
-Container(
-  margin: const EdgeInsets.all(20),
-  child: Text('some text'),
-),
-```
-
-### Margin Vertical
-
-```java
-margin: EdgeInsets.symmetric(vertical:10.0),
-```
-
-### Margin Right
-
-```java
-Container(
-  margin: const EdgeInsets.only(right:10.0),
-  child: Text('some text'),
-),
-```
-
-
-## Padding
-
-```java
-padding: const EdgeInsets.all(30),
-```
-
-## Styling
-
-we can style using a number of different effects.  Here is an example of styling a `ToolTip` component 
-
-- height
-- textStyle
-- fontSize
-- padding
-  - EdgeInsets.all()
-- decoration
-  - BoxDecoration
-    - borderRadius
-    - gradient
-      - LinearGradient[amber,red]
-
-```java
-Tooltip(
-  message: 'This is some help text to understand what to do ',
-  child: const Text('This is some text without much explanation'),
-  waitDuration: const Duration(seconds: 1),
-  showDuration: const Duration(seconds: 4),
-  height: 50,
-  textStyle: const TextStyle(fontSize:24),
-  padding: const EdgeInsets.all(8.0),
-  decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular(15),
-    gradient: const LinearGradient(colors: <Color>[Colors.amber, Colors.red]),
-  ),
-),
-```
-
-### styling a container
-
-to see the next three styling examples in a worked example, see [Styling01](../projects/Styling01)
-
-```java
-Container(
-  height: 50,
-  color: Colors.amber,
-  margin: const EdgeInsets.symmetric(vertical: 5.0),
-  child: const Center(child: Text('List View Container')),
-),
-```
-
-### styling a card
-
-```java
-const Card(
-  child: ListTile(title: Text('List View - Card + ListTile 1')),
-  margin: const EdgeInsets.symmetric(vertical: 5.0),
-  color: const Color(0xFF9adaed),
-),
-```
-
-### styling a ListTile
-
-```java
-Center(
-  child: Container(
-    decoration: BoxDecoration(color: const Color(0xFF9adaed)),
-    margin: const EdgeInsets.symmetric(vertical: 5.0),
-    child: ListTile(
-      title: const Center(
-        child: Text('List View - Card + ListTile 5'),
-      ),
-    ),
-  )
-),
-```
 
 ## constraints
 
