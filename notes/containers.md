@@ -195,7 +195,7 @@ this demo has 3 containers expanding to fill a column
 
 this demo has 7 containers equally expanding to fill a column
 
-![expanded 02 - 7 equal containers](../images/315a91f47ec1f5e38f5fc0d1d0d6e95cdbda98e6c869493e8e654446d775d7eb.png)  
+[<img src="../images/315a91f47ec1f5e38f5fc0d1d0d6e95cdbda98e6c869493e8e654446d775d7eb.png" height="400" />](../projects/expanded02)
 
 [expanded02](../projects/expanded02)
 
@@ -205,9 +205,7 @@ flex allows use of space with ratios : 1:2:3:4 as in this example below
 
 ### flex01
 
-![flex01](../images/281bc9b0132e89975942da8fbaaf0ef3aba03f6feb8d42ac1abcff3030495804.png)  
-
-[![flex01](../images/281bc9b0132e89975942da8fbaaf0ef3aba03f6feb8d42ac1abcff3030495804.png)](../projects/Flex01)
+[<img src="../images/281bc9b0132e89975942da8fbaaf0ef3aba03f6feb8d42ac1abcff3030495804.png" height="400" />](../projects/Flex01)
 
 [flex01](../projects/Flex01)
 
@@ -939,7 +937,7 @@ we can display items as a list which is often very convenient for many items suc
 
 ### list01
 
-![list01](../images/6a2bd2585481574f7818a8c163d455381df1e1a912b9992298cd2bafb6e34835.png)  
+<img src="../images/6a2bd2585481574f7818a8c163d455381df1e1a912b9992298cd2bafb6e34835.png" width="400" height="400" />
 
 [list01](../projects/List01)
 
