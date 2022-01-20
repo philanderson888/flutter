@@ -91,6 +91,7 @@ class _MyHomePageState extends State<MyHomePage> {
           key: _oFormKey,
           child: Column(
             children: <Widget>[
+              Text('Use Various Methods To Select A Date And A Time'),
               DateTimePicker(
                 type: DateTimePickerType.dateTimeSeparate,
                 dateMask: 'd MMM, yyyy',

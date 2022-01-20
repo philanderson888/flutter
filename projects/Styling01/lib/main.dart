@@ -99,6 +99,60 @@ class Home extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 5.0),
             color: const Color(0xFF9adaed),
           ),
+          Text(
+            'Paint() fill',
+            style: TextStyle(
+              fontSize: 100,
+              foreground: Paint()
+              ..style = PaintingStyle.fill
+              ..color = Colors.blue[700]!,
+            ),
+          ),
+          Stack(
+            children: <Widget>[
+              Text(
+                'Paint() stroke outline - not working as expected',
+                style: TextStyle(
+                  fontSize: 50,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 6
+                  ..color = Colors.black,
+                ),
+              ),
+              Text(
+                'Paint() stroke outline - not working as expected',
+                style: TextStyle(
+                  fontSize: 50,
+                  color: Colors.grey[300],
+                ),
+              ),
+            ],
+          ),
+          Stack(
+            children: <Widget>[
+              Text(
+                'hello artistic text',
+                style: TextStyle(
+                  fontSize: 100,
+                  foreground: Paint()
+                  ..style = PaintingStyle.stroke
+                  ..strokeWidth = 25
+                  ..color = Colors.blue[700]!,
+                  background: Paint()
+                  ..style = PaintingStyle.fill
+                  ..color = Colors.red[100]!,
+                ),
+              ),
+              Text(
+                'hello artistic text',
+                style: TextStyle(
+                  fontSize: 100,
+                  color: Colors.grey[300],
+                ),
+              ),
+            ],
+          ),
         ]
       ),
     );

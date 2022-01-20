@@ -27,10 +27,13 @@ class HomeState extends State<Home>{
   TextEditingController _controller01 = TextEditingController();
   TextEditingController _controller02 = TextEditingController();
   TextEditingController _textFieldController = TextEditingController();
-  TextEditingController _dateTimeController = TextEditingController();
+  TextEditingController _dateTimeController01 = TextEditingController();
+  TextEditingController _dateTimeController02 = TextEditingController();
 
   int _counter01 = 3;
   int _counter02 = 3;
+  String _date01 = '2021-09-20 14:30';
+  String _date02 = '2021-09-20 14:30';
 
   @override
   void initState(){
@@ -38,7 +41,8 @@ class HomeState extends State<Home>{
     _controller01.text = _counter01.toString();
     _controller02.text = _counter02.toString();
     _textFieldController.text = 'some text';
-    _dateTimeController.text = '2000-09-20 14:30';
+    _dateTimeController01.text = _date01;
+    _dateTimeController02.text = _date02;
   }
 
   void incrementCounter01(){
@@ -100,11 +104,33 @@ class HomeState extends State<Home>{
       return null;
   }
 
+  dateChanged01(val){
+    setState(() => {
+      _date01 = val
+    });
+    print('date01 changed to $_date01');
+  }
+
+  dateChanged02(val){
+    setState(() => {
+      _date02 = val ?? ''
+    });
+    print('date02 changed to $_date02');
+  }
+
+  String? validateDate01(String? value){
+    return null;
+  }
+
+  String? validateDate02(String? value){
+    return null;
+  }
+
   validateForSubmission(){
     if(_key.currentState!.validate()){
       print('submit ${(_counter01 + _counter02).toString()}');
-    } else {
-      print('dont submit');
+      print('date 1 $_date01');
+      print('date 2 $_date02');
     }
   }
 
@@ -234,13 +260,35 @@ class HomeState extends State<Home>{
                   ),
                 ]
               ),
-              DateTimePicker(
-                type: DateTimePickerType.dateTimeSeparate,
-                firstDate: DateTime(2021),
-                lastDate: DateTime(2021),
-                controller: _dateTimeController,
-                dateLabelText: 'Date',
-                timeLabelText: 'Time',
+              SizedBox(
+                width: 400,
+                child: DateTimePicker(
+                  type: DateTimePickerType.dateTimeSeparate,
+                  icon: Icon(Icons.event),
+                  dateMask: 'd MMM, yyyy',
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2022),
+                  controller: _dateTimeController01,
+                  dateLabelText: 'Date',
+                  timeLabelText: 'Time',
+                  onChanged: dateChanged01,
+                  validator: validateDate01,
+                ),
+              ),
+              SizedBox(
+                width: 400,
+                child: DateTimePicker(
+                  type: DateTimePickerType.date,
+                  icon: Icon(Icons.event),
+                  dateMask: 'd MMM, yyyy',
+                  firstDate: DateTime(2020),
+                  lastDate: DateTime(2022),
+                  controller: _dateTimeController02,
+                  dateLabelText: 'Date',
+                  timeLabelText: 'Time',
+                  onChanged: dateChanged02,
+                  validator: validateDate02,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),

@@ -8,6 +8,7 @@ This is a respository for learning flutter from scratch
   - [author](#author)
   - [changeLog](#changelog)
   - [introduction](#introduction)
+  - [samples](#samples)
   - [getting started](#getting-started)
     - [hello world](#hello-world)
   - [next steps](#next-steps)
@@ -22,11 +23,14 @@ This is a respository for learning flutter from scratch
   - [state](#state)
   - [styling](#styling)
   - [gestures](#gestures)
+  - [painting shapes](#painting-shapes)
   - [documentation](#documentation)
   - [oop](#oop)
   - [unit tests](#unit-tests)
   - [api](#api)
+  - [sqlite](#sqlite)
   - [all projects](#all-projects)
+  - [performance](#performance)
 
 
 ## author
@@ -46,6 +50,9 @@ This is an introduction to the flutter language and ecosystem, and reasons to us
 
 [introduction](notes/introduction.md)
 
+## samples
+
+a few examples of sample demos and code can be found [here](notes/components.md#samples) 
 
 ## getting started
 
@@ -143,6 +150,10 @@ Next we progress into building and using components
 
 [gestures](notes/gestures.md)
 
+## painting shapes
+
+[painting](notes/painiting.md)
+
 ## documentation
 
 [documentation](notes/documentation.md)
@@ -174,8 +185,15 @@ Next we progress into reading data from an api into our app, and displaying it
   - [WordPair01](projects/WordPair01)
     - sample app to display word pairs from an API
 
+## sqlite
+
+[sqlite](notes/sqlite.md)
 ## all projects
 
 A list of all projects is below
 
 - [all projects](projects/README.md)
+
+## performance
+
+[performance](notes/performance.md)

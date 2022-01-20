@@ -8,6 +8,7 @@
   - [creating a stateful widget](#creating-a-stateful-widget)
   - [worked example](#worked-example)
   - [template - stateless and stateful multipage](#template---stateless-and-stateful-multipage)
+  - [`getx` state management](#getx-state-management)
 
 ## introduction
 
@@ -615,3 +616,7 @@ class Page5State extends State {
   }
 }
 ```
+
+## `getx` state management
+
+see this example for using the `getx` library to manage complex state https://www.kindacode.com/article/using-getx-get-for-state-management-in-flutter/

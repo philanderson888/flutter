@@ -6,11 +6,30 @@
   - [contents](#contents)
   - [introduction](#introduction)
     - [Body Is A Single Container](#body-is-a-single-container)
-    - [body: Center( child:Container()  )  will fill the screen](#body-center-childcontainer----will-fill-the-screen)
+    - [Center](#center)
     - [Container With Shadow](#container-with-shadow)
     - [animated container](#animated-container)
+  - [rows](#rows)
+  - [columns](#columns)
+  - [expanded](#expanded)
+    - [expanded01](#expanded01)
+    - [expanded02](#expanded02)
+  - [flex](#flex)
+    - [flex01](#flex01)
   - [flexible](#flexible)
   - [sizedbox](#sizedbox)
+  - [constrained box](#constrained-box)
+  - [grid](#grid)
+    - [gridtile01](#gridtile01)
+    - [gridview01](#gridview01)
+    - [gridview02](#gridview02)
+    - [gridview03](#gridview03)
+    - [gridview04](#gridview04)
+  - [list](#list)
+    - [list01](#list01)
+    - [list02](#list02)
+  - [stack](#stack)
+    - [stack01](#stack01)
 
 ## introduction
 
@@ -53,7 +72,7 @@ class Home extends StatelessWidget {
 }
 ```
 
-### body: Center( child:Container()  )  will fill the screen
+### Center
 
 *Note: container with a parent of Center by default will fill the screen*
 
@@ -72,6 +91,14 @@ Widget build (BuildContext context) {
     );
   }
 ```
+
+to center an item we can use several methods
+
+- Center widget
+- Container with alignment: Alignment.center
+- Column with nainAxisAlignment: MainAxisAlignment.center
+- Align with alignment: Alignment.center
+
 
 ### Container With Shadow
 
@@ -143,6 +170,98 @@ Container(
     ),
   ),
 ),
+```
+
+## rows
+
+[rows](rows.md)
+
+## columns
+
+[columns](columns.md)
+## expanded 
+
+expanded allows us to expand our container to fill all of the available space
+
+### expanded01
+
+this demo has 3 containers expanding to fill a column
+
+![expanded container](../images/6829535f54e2afd2c8d5b09aae43395cd02914a4e7b1209947ba1d01d5c4b799.png)  
+
+[expanded01](../projects/Expanded01)
+
+### expanded02
+
+this demo has 7 containers equally expanding to fill a column
+
+![expanded 02 - 7 equal containers](../images/315a91f47ec1f5e38f5fc0d1d0d6e95cdbda98e6c869493e8e654446d775d7eb.png)  
+
+[expanded02](../projects/expanded02)
+
+## flex
+
+flex allows use of space with ratios : 1:2:3:4 as in this example below
+
+### flex01
+
+![flex01](../images/281bc9b0132e89975942da8fbaaf0ef3aba03f6feb8d42ac1abcff3030495804.png)  
+
+[![flex01](../images/281bc9b0132e89975942da8fbaaf0ef3aba03f6feb8d42ac1abcff3030495804.png)](../projects/Flex01)
+
+[flex01](../projects/Flex01)
+
+```java
+/// Flex01 illustrates flexible use of space using ratios 1:2:3:4 for example
+import 'package:flutter/material.dart';
+void main() => runApp(const App());
+class App extends StatelessWidget {
+  const App({Key? key}): super(key:key);
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title:'An App',
+      home: Home()
+    );
+  }
+}
+
+class Home extends StatelessWidget{
+
+  @override
+  Widget build(BuildContext context){
+
+    log(output){
+      double width = MediaQuery.of(context).size.width;
+      print('$output printed with width $width');
+    }
+
+    return Scaffold(
+      appBar:AppBar(title: const Text('Flex Ratios - use "flex" container with ratios eg 1:2:3:4 as here'),
+      body: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(color: Colors.orange),
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(color: Colors.green),
+
+          ),
+          Expanded(
+            flex: 3,
+            child: Container(color: Colors.purple),
+          ),
+          Expanded(
+            flex: 4,
+            child: Container(color: Colors.yellow),
+          ),
+        ]
+      ),
+    );
+  }
+}
 ```
 
 ## flexible
@@ -356,6 +475,23 @@ class _MyAppState extends State<MyApp> {
 
 ## sizedbox
 
+a sized box can be used as a standalone component to use a fixed size
+
+```java
+SizedBox(
+  width: 400,
+  child: DateTimePicker(
+    type: DateTimePickerType.dateTimeSeparate,
+    dateMask: 'd MMM, yyyy',
+    firstDate: DateTime(2020),
+    lastDate: DateTime(2022),
+    controller: _dateTimeController01,
+    dateLabelText: 'Date',
+    timeLabelText: 'Time',
+  ),
+),
+```
+
 here is an example of laying out a row with a fixed size given to one of the items using a `sizedbox` component
 
 ```java
@@ -396,4 +532,612 @@ Row(
     ),
   ]
 ),
+```
+
+## constrained box
+
+we can apply constraints to set maximum or minimum sizes
+
+see [APIGet04](../projects/APIGet04) for an example of setting minimum card width
+
+```java
+child: ConstrainedBox(
+  constraints: BoxConstraints(
+    minWidth: 300.0
+  ),
+  child: Card(
+    child: Padding(
+      padding: EdgeInsets.all(5.0),
+      child: Text(output),
+    ),
+    color: cardColor,                                
+  ),
+),
+```
+
+another example
+
+```java
+ConstrainedBox(
+  constraints: BoxConstraints(
+    maxWidth: MediaQuery.of(context).size.width / 3,
+  ),
+)
+```
+
+## grid 
+
+see [GridView01](../projects/GridView01), [GridView02](../projects/GridView02), [GridView03](../projects/GridView03), [GridView04](../projects/GridView04) for `GridView` examples and also [GridView04](../projects/GridView04) for an example of using a `GridTile` in a `GridView` layout which can have a floating title and a floating footer above an image
+
+```java
+/// generates a grid of images of fixed size and adds in margin spacing between items.  This also adds in a [GridTile] to the [GridView]
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+/// [myApp] is Stateless and renders a [GridView] with an auto-generateed [List] - 
+/// each item in the [GridView] comes from the [List] [index] and also a random [Image]
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const title = 'Grid List (GridView04 - adding GridTiles to the GridView)';
+
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: Container(
+          margin: EdgeInsets.all(10),
+          child: GridView.count(
+            crossAxisCount: 10,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+            children: List.generate(20, (index) {
+              return Center(
+                  child: GridTile(
+                  header: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text('a header'),
+                        const Text('extra description'),
+                      ],
+                    ),
+                  ),
+                  child: Image(
+                    image: NetworkImage('https://picsum.photos/120?random=$index'),
+                    fit: BoxFit.cover,
+                  ),
+                  footer: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Text('a footer'),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### gridtile01
+
+this displays tiles in a grid
+
+![gridtile01](../images/79e0081c2c74da5b0ccdb1023f44cc537947467439a287555c570b96498ba633.png)  
+
+[gridtile01](../projects/GridTile01)
+
+```java
+/// generates a grid of images of fixed size and adds in margin spacing between items.  This also adds in a [GridTile] to the [GridView]
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+/// [myApp] is Stateless and renders a [GridView] with an auto-generateed [List] - 
+/// each item in the [GridView] comes from the [List] [index] and also a random [Image]
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const title = 'GridTile01 with tiles in a grid';
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: Container(
+          margin: EdgeInsets.all(10),
+          child: GridView.count(
+            crossAxisCount: 10,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+            children: List.generate(20, (index) {
+              return Center(
+                  child: GridTile(
+                  header: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        const Text('a header'),
+                        const Text('extra description'),
+                      ],
+                    ),
+                  ),
+                  child: Image(
+                    image: NetworkImage('https://picsum.photos/120?random=$index'),
+                    fit: BoxFit.cover,
+                  ),
+                  footer: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Text('a footer'),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### gridview01
+
+a simple list displayed in a grid layout
+
+![picture 8](../images/b2fadcd21e2d4b6fa87a4be58a2f95afaefe5a68ab7b3f2b07a55c9bf4b913f3.png)  
+
+[gridview01](../projects/GridView01)
+
+```java
+/// This generates a list of items on the screen automatically and displays the items using the list index number, in a grid on the screen
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    const title = 'Grid List - auto-generated list, displayed as a grid';
+
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: GridView.count(
+          crossAxisCount: 10,
+          children: List.generate(20, (index) {
+            return Center(
+              child: Text(
+                'Item $index',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### gridview02
+
+this displays a list of images, displayed in a grid layout
+
+![gridview02](../images/27e6a47bb21218ab2c411313a1212530ebe015227f3646690463c08a325f70ab.png)  
+
+[gridview02](../projects/GridView02)
+
+```java
+/// [GridView02] generates a grid of images of fixed size
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+/// [myApp] is Stateless and renders a [GridView] with an auto-generateed [List] - 
+/// each item in the [GridView] comes from the [List] [index] and also a random [Image]
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const title = 'GridView02 - a list of images displayed in a grid layout';
+
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: GridView.count(
+          crossAxisCount: 10,
+          children: List.generate(20, (index) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Item $index',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Image(
+                    image: NetworkImage('https://picsum.photos/120?random=$index'),
+                  ),
+                ]
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### gridview03
+
+this displays a list of 20 images in a grid layout, with margins added
+
+![gridview03](../images/e330c99bdcfa1bbedd9257b5b9ea3003b542896a7e4d322abaac321e77b8dfde.png)  
+
+[gridview03](../projects/gridview03)
+
+```java
+/// [GridView03] generates a grid of images of fixed size and adds in margin spacing between items
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+/// [myApp] is Stateless and renders a [GridView] with an auto-generateed [List] - 
+/// each item in the [GridView] comes from the [List] [index] and also a random [Image]
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const title = 'GridView03 - a list of images displayed as a grid with margins';
+
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: GridView.count(
+          crossAxisCount: 10,
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
+          children: List.generate(20, (index) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Item $index',
+                    style: Theme.of(context).textTheme.bodyText1,
+                  ),
+                  Image(
+                    image: NetworkImage('https://picsum.photos/120?random=$index'),
+                  ),
+                ]
+              ),
+            );
+          }),
+        ),
+      ),
+    );
+  }
+}
+```
+
+### gridview04
+
+![gridview04](../images/bfa5d6439b6bb209b216c023e7b81f3c76f89bce84c7be9973cd85c05fd34dc7.png)  
+
+
+[gridview04](../projects/GridView04)
+
+```java
+/// gridview04 - list of 20 tiles [GridTile] with image, heading, description and footer displayed in a [GridView]
+import 'package:flutter/material.dart';
+void main() {
+  runApp(const MyApp());
+}
+/// [myApp] is Stateless and renders a [GridView] with an auto-generateed [List] - 
+/// each item in the [GridView] comes from the [List] [index] and also a random [Image]
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    const title = 'GridView04 - list of 20 tiles with image, heading, description and footer displayed in a gridview';
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text(title),
+        ),
+        body: Container(
+          margin: EdgeInsets.all(10),
+          child: GridView.count(
+            crossAxisCount: 10,
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+            children: List.generate(20, (index) {
+              return Center(
+                  child: GridTile(
+                  header: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'header $index',
+                        ),
+                        const Text(
+                          'description', 
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  child: Image(
+                    image: NetworkImage('https://picsum.photos/120?random=$index'),
+                    fit: BoxFit.cover,
+                  ),
+                  footer: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: Text(
+                      'footer in bold', 
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              );
+            }),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
+
+## list
+
+we can display items as a list which is often very convenient for many items such as a list of contacts
+
+### list01
+
+![list01](../images/6a2bd2585481574f7818a8c163d455381df1e1a912b9992298cd2bafb6e34835.png)  
+
+[list01](../projects/List01)
+
+this displays a simple list of items which are tappable
+
+```java
+import 'package:flutter/material.dart';
+void main() => runApp(const App());
+class App extends StatelessWidget {
+  const App({Key? key}): super(key:key);
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title:'An App',
+      home: Scaffold(
+        appBar:AppBar(title: const Text('A List containing tappable ListItems')),
+        body: ListView(
+          children: <Widget>[
+            ListTile(  
+              leading: Icon(Icons.map),  
+              title: Text('Map'),  
+              onTap: () => print('map'),
+            ),  
+            ListTile(  
+              leading: Icon(Icons.photo_album),  
+              title: Text('Album'),  
+              onTap: () => print('Album'),
+            ),  
+            ListTile(  
+              leading: Icon(Icons.phone),  
+              title: Text('Phone'),  
+              onTap: () => print('Phone'),
+            ),  
+            ListTile(  
+              leading: Icon(Icons.contacts),  
+              title: Text('Contact'),  
+              onTap: () => print('Contact'),
+            ),  
+            ListTile(  
+              leading: Icon(Icons.settings),  
+              title: Text('Setting'),  
+              onTap: () => print('Setting'), 
+            ),  
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+### list02
+
+![list02](../images/4bd74ae15a0d59e9e8e1bb7ec8b083316360c76cb55acf125729fc5fe250f7ad.png)  
+
+[list02](../projects/List02)
+
+```java
+/// List02 - expanded list of tappable items, bounded by flex containers
+import 'package:flutter/material.dart';
+void main() => runApp(const App());
+class App extends StatelessWidget {
+  const App({Key? key}): super(key:key);
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title:'An App',
+      home: Home()
+    );
+  }
+}
+class Home extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    log(output){
+      int width = (MediaQuery.of(context).size.width).round();
+      int height = (MediaQuery.of(context).size.height).round();
+      print('$output printed with width $width height $height');
+    }
+    return Scaffold(
+      appBar:AppBar(title: const Text('List02 - expanded list of tappable items, bounded by flex containers')),
+      body: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              itemExtent: ((MediaQuery.of(context).size.height).round())/7,
+              children: <Widget>[                
+                ListTile(  
+                  leading: Icon(Icons.map),  
+                  title: Text('Map'),  
+                  onTap: () => log('map'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                ListTile(  
+                  leading: Icon(Icons.photo_album),  
+                  title: Text('Album'),  
+                  onTap: () => log('Album'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                ListTile(  
+                  leading: Icon(Icons.phone),  
+                  title: Text('Phone'),  
+                  subtitle: Text('subtitle'),
+                  onTap: () => log('Phone'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                ListTile(  
+                  leading: Icon(Icons.contacts),  
+                  title: Text('Contact'),  
+                  subtitle: Text('A sufficiently long subtitle warrants three lines yes yes yes yes yes yes'),
+                  onTap: () => log('Contact'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                SizedBox(
+                  height: ((MediaQuery.of(context).size.height).round())/15,
+                  child: ListTile( 
+                    leading: Icon(Icons.contacts),  
+                    title: Text('Contact'),  
+                    subtitle: Text('A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes'),
+                    onTap: () => log('Contact'),
+                    tileColor: Color(0xFFb7dced),
+                    dense: true,
+                  ),                 
+                ),
+                SizedBox(
+                  height: ((MediaQuery.of(context).size.height).round())/15,
+                  child: ListTile(  
+                    leading: Icon(Icons.settings),  
+                    title: Text('Setting'),  
+                    onTap: () => log('Setting'), 
+                    tileColor: Color(0xFFb7dced),
+                    dense: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+        ]
+      ),
+    );
+  }
+}
+```
+
+## stack
+
+stack can be used to stack items vertically on top of each other
+
+### stack01
+
+![stack01](../images/7cc4145e39f41488fda7fe2714275e5d302bdf55a4c66e84e1d73a97d62c710e.png)  
+
+[stack01](../projects/Stack01)
+
+```java
+import 'package:flutter/material.dart';
+void main() => runApp(const App());
+class App extends StatelessWidget {
+  const App({Key? key}): super(key:key);
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title:'This stacks 3 containers on top of each other',
+      home: Center(
+        child: Stack(
+          children: <Widget>[
+            Container(
+              width: 200,
+              height: 200,
+              color: Colors.red,
+            ),
+            Container(
+              width: 180,
+              height: 180,
+              color: Colors.green,
+            ),
+            Container(
+              width: 160,
+              height: 160,
+              color: Colors.blue,
+            ),
+          ],
+        )
+      ),
+    );
+  }
+}
 ```

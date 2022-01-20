@@ -5,6 +5,7 @@
   - [table of contents](#table-of-contents)
   - [getting started with an online ide](#getting-started-with-an-online-ide)
   - [samples](#samples)
+  - [references](#references)
   - [install android studio](#install-android-studio)
   - [install flutter](#install-flutter)
   - [verify install](#verify-install)
@@ -36,6 +37,12 @@ to see examples of samples available online please see
 
 - widgets https://flutter.dev/docs/development/ui/widgets
 - material design ui https://material.io/develop/flutter
+
+## references
+
+please see the following references for further help with regards to installing and getting started with using flutter
+
+- https://www.javatpoint.com/flutter-installation
 
 ## install android studio
 

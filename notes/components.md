@@ -5,10 +5,10 @@
 - [components](#components)
   - [contents](#contents)
   - [introduction](#introduction)
-  - [widget samples](#widget-samples)
-  - [material ui design samples](#material-ui-design-samples)
+  - [samples](#samples)
   - [Containers](#containers)
   - [Rows](#rows)
+  - [Columns](#columns)
   - [Text](#text)
   - [strings](#strings)
   - [styling](#styling)
@@ -27,6 +27,7 @@
   - [visibility](#visibility)
   - [list view](#list-view)
     - [simple list view with 3 rows](#simple-list-view-with-3-rows)
+    - [listView with listTile](#listview-with-listtile)
   - [dropdown button](#dropdown-button)
   - [forms](#forms)
   - [snack bar](#snack-bar)
@@ -35,13 +36,13 @@
 
 next we have a look at some of the different types of components which can be built in a flutter app
 
-## widget samples
+## samples
 
-to see example of all of the widget components available, see https://flutter.dev/docs/development/ui/widgets
-
-## material ui design samples
-
-to see examples of material ui design components please see https://material.io/develop/flutter
+- demos https://gallery.flutter.dev/ 
+- widgets https://flutter.dev/docs/development/ui/widgets
+- material design examples https://material.io/develop/flutter
+- javatpoint.com flutter tutorials https://www.javatpoint.com/flutter
+- [all-in-one-app-demo](all-in-one-app-demo.md)
 
 ## Containers
 
@@ -50,6 +51,10 @@ to see examples of material ui design components please see https://material.io/
 ## Rows
 
 [rows](rows.md)
+
+## Columns
+
+[columns](columns.md)
 
 ## Text
 
@@ -804,6 +809,110 @@ class Home extends StatelessWidget {
 }
 ```
 
+
+### listView with listTile
+
+This demo shows a list of tiles each of fixed height in relation to the screen height - see [List02](../projects/List02)
+
+```java
+/// This illustrates the use of flex layout to lay out an item on the screen
+import 'package:flutter/material.dart';
+void main() => runApp(const App());
+class App extends StatelessWidget {
+  const App({Key? key}): super(key:key);
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      title:'An App',
+      home: Home()
+    );
+  }
+}
+class Home extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    log(output){
+      int width = (MediaQuery.of(context).size.width).round();
+      int height = (MediaQuery.of(context).size.height).round();
+      print('$output printed with width $width height $height');
+    }
+    return Scaffold(
+      appBar:AppBar(title: const Text('A List containing tappable ListItems')),
+      body: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 2,
+            child: ListView(
+              itemExtent: ((MediaQuery.of(context).size.height).round())/7,
+              children: <Widget>[                
+                ListTile(  
+                  leading: Icon(Icons.map),  
+                  title: Text('Map'),  
+                  onTap: () => log('map'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                ListTile(  
+                  leading: Icon(Icons.photo_album),  
+                  title: Text('Album'),  
+                  onTap: () => log('Album'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                ListTile(  
+                  leading: Icon(Icons.phone),  
+                  title: Text('Phone'),  
+                  subtitle: Text('subtitle'),
+                  onTap: () => log('Phone'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                ListTile(  
+                  leading: Icon(Icons.contacts),  
+                  title: Text('Contact'),  
+                  subtitle: Text('A sufficiently long subtitle warrants three lines yes yes yes yes yes yes'),
+                  onTap: () => log('Contact'),
+                  tileColor: Color(0xFFb7dced),
+                  dense: true,
+                ),  
+                SizedBox(
+                  height: ((MediaQuery.of(context).size.height).round())/15,
+                  child: ListTile( 
+                    leading: Icon(Icons.contacts),  
+                    title: Text('Contact'),  
+                    subtitle: Text('A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes A sufficiently long subtitle warrants three lines yes yes yes yes yes yes'),
+                    onTap: () => log('Contact'),
+                    tileColor: Color(0xFFb7dced),
+                    dense: true,
+                  ),                 
+                ),
+                SizedBox(
+                  height: ((MediaQuery.of(context).size.height).round())/15,
+                  child: ListTile(  
+                    leading: Icon(Icons.settings),  
+                    title: Text('Setting'),  
+                    onTap: () => log('Setting'), 
+                    tileColor: Color(0xFFb7dced),
+                    dense: true,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+        ]
+      ),
+    );
+  }
+}
+```
 
 ## dropdown button
 
