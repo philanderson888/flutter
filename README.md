@@ -19,6 +19,7 @@ This is a respository for learning flutter from scratch
   - [regions](#regions)
   - [navigation](#navigation)
   - [visibility](#visibility)
+  - [containers](#containers)
   - [components](#components)
   - [state](#state)
   - [styling](#styling)
@@ -122,6 +123,12 @@ Stack - keeps track of navigation so far and how to go back
 we can easily show and hide components
 
 [visibility](notes/components.md#visibility)
+
+## containers
+
+containers allow us to lay out our components properly using rows, columns and grids on the screen
+
+[containers](notes/containers.md)
 
 ## components 
 
