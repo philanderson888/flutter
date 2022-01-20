@@ -187,7 +187,9 @@ expanded allows us to expand our container to fill all of the available space
 
 this demo has 3 containers expanding to fill a column
 
-![expanded container](../images/6829535f54e2afd2c8d5b09aae43395cd02914a4e7b1209947ba1d01d5c4b799.png)  
+![expanded container]()  
+
+[<img src="../images/6829535f54e2afd2c8d5b09aae43395cd02914a4e7b1209947ba1d01d5c4b799.png" height="400" />](../projects/expanded01)
 
 [expanded01](../projects/Expanded01)
 
