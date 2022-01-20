@@ -993,7 +993,9 @@ class App extends StatelessWidget {
 
 ### list02
 
-![list02](../images/4bd74ae15a0d59e9e8e1bb7ec8b083316360c76cb55acf125729fc5fe250f7ad.png)  
+![list02](../images/4bd74ae15a0d59e9e8e1bb7ec8b083316360c76cb55acf125729fc5fe250f7ad.png)
+
+<img src="../images/4bd74ae15a0d59e9e8e1bb7ec8b083316360c76cb55acf125729fc5fe250f7ad.png" width="200" height="200" />
 
 [list02](../projects/List02)
 
