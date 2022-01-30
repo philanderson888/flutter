@@ -6,6 +6,7 @@
   - [getting started with an online ide](#getting-started-with-an-online-ide)
   - [samples](#samples)
   - [references](#references)
+  - [install java](#install-java)
   - [install android studio](#install-android-studio)
   - [install flutter](#install-flutter)
   - [verify install](#verify-install)
@@ -44,11 +45,40 @@ please see the following references for further help with regards to installing 
 
 - https://www.javatpoint.com/flutter-installation
 
+## install java
+
+following steps in this youtube video https://www.youtube.com/watch?v=0zx_eFyHRU0
+
+first we must install java and set the environment variables for java.  Note obviously the java version mentioned will have changed, but all other details should be correct, ie replace 17.0.2 with the current version you are downloading
+
+- go to environment variables and remove any PATH items for java or android studio
+- install java at c:\program files\java\jdk-17.0.2\   https://www.oracle.com/java/technologies/downloads/#jdk17-windows
+- set environment variable in PATH for c:\program files\java\jdk-17.0.2\bin
+- set environment variable for JAVA_HOME as C:\Program Files\Java\jdk-17.0.2
+- close all terminal windows and open a fresh terminal window
+- type 'java -version' to view the installed java version to confirm success 
+- type 'javac -version' to view java compiler version
+
+```java
+java -version
+/*
+java version "17.0.2" 2022-01-18 LTS
+Java(TM) SE Runtime Environment (build 17.0.2+8-LTS-86)
+Java HotSpot(TM) 64-Bit Server VM (build 17.0.2+8-LTS-86, mixed mode, sharing)
+*/
+javac -version
+/*
+javac 17.0.2
+*/
+```
+
 ## install android studio
 
 install android studio from https://developer.android.com/studio before installing `flutter`
 
-Android Studio by default will install at `C:\Program Files\Android\Android Studio\bin`
+Android Studio will install at `C:\Program Files\Android\Android Studio` and the binary at`C:\Program Files\Android\Android Studio\bin`
+
+
 
 ## install flutter
 
