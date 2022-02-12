@@ -10,6 +10,10 @@
   - [flutter create - samples](#flutter-create---samples)
   - [analyze](#analyze)
   - [vscode shortcuts](#vscode-shortcuts)
+  - [clean](#clean)
+  - [build](#build)
+  - [install](#install)
+  - [run](#run)
 
 
 ## flutter doctor
@@ -59,5 +63,34 @@ st
 - stateful widget 
 - stateless widget
 */
+```
+
+## clean
+
+remove any builds
+
+```java
+flutter clean
+```
+
+## build
+
+build apk at `build/apps/output/apk/`
+
+```java
+flutter build apk
+```
+
+## install
+
+```java
+flutter install
+```
+
+
+## run
+
+```java
+flutter run --release
 ```
 

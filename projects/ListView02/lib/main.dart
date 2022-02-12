@@ -1,53 +1,53 @@
 import 'package:flutter/material.dart';
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'ListViews',
+      title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.teal,
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Scaffold(
-        appBar: AppBar(title: Text('ListViews')),
-        body: BodyLayout(),
-      ),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
-class BodyLayout extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  MyHomePage({Key key, this.title}) : super(key: key);
+  final String title;
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return _myListView(context);
-  }
-}
-
-Widget _myListView(BuildContext context) {
-  // the Expanded widget lets the columns share the space
-  Widget column = Expanded(
-    child: Column(
-      // align the text to the left instead of centered
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text('Title', style: TextStyle(fontSize: 16),),
-        Text('subtitle'),
-      ],
-    ),
-  );
-  return ListView.builder(
-    itemBuilder: (context, index) {
-      return Card(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              column,
-              column,
-            ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Container(
+            height: 50,
+            color: Colors.amber[600],
+            child: const Center(child: Text('Entry A')),
           ),
-        ),
-      );
-    },
-  );
+          Container(
+            height: 50,
+            color: Colors.amber[500],
+            child: const Center(child: Text('Entry B')),
+          ),
+          Container(
+            height: 50,
+            color: Colors.amber[100],
+            child: const Center(child: Text('Entry C')),
+          ),
+        ],
+      )
+    );
+  }
 }

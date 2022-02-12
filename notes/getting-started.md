@@ -8,6 +8,7 @@
   - [references](#references)
   - [install java](#install-java)
   - [install android studio](#install-android-studio)
+  - [using docker image with android studio](#using-docker-image-with-android-studio)
   - [install flutter](#install-flutter)
   - [verify install](#verify-install)
     - [configure android studio path](#configure-android-studio-path)
@@ -49,12 +50,35 @@ please see the following references for further help with regards to installing 
 
 following steps in this youtube video https://www.youtube.com/watch?v=0zx_eFyHRU0
 
+```powershell
+# download and install jdk 17
+Invoke-WebRequest -Uri https://download.oracle.com/java/17/latest/jdk-17_windows-x64_bin.msi -OutFile .\JavaJDK.msi; Start-Process msiexec.exe -Wait -ArgumentList '/I JavaJDK.msi /quiet'; rm .\JavaJDK.msi
+cd env:
+# set environment variable in PATH for c:\program files\java\jdk-17.0.2\bin
+$env:PATH = $env:PATH + "C:\Program Files\Java\jdk-17.0.2\bin;"
+# set environment variable for JAVA_HOME as C:\Program Files\Java\jdk-17.0.2
+ $env:JAVA_HOME = "C:\Program Files\Java\jdk-17.0.2;"
+ # open new powershell window
+ start-process powershell
+ # test install
+ javac -version
+# java version "17.0.2" 2022-01-18 LTS
+# Java(TM) SE Runtime Environment (build 17.0.2+8-LTS-86)
+# Java HotSpot(TM) 64-Bit Server VM (build 17.0.2+8-LTS-86, mixed mode, sharing)
+javac -version
+# javac 17.0.2
+# install android studio 
+Invoke-WebRequest -Uri https://redirector.gvt1.com/edgedl/android/studio/install/2021.1.1.21/android-studio-2021.1.1.21-windows.exe -OutFile .\AndroidStudio.exe; .\AndroidStudio.exe /S; rm .\AndroidStudio.exe
+```
+
 first we must install java and set the environment variables for java.  Note obviously the java version mentioned will have changed, but all other details should be correct, ie replace 17.0.2 with the current version you are downloading
 
 - go to environment variables and remove any PATH items for java or android studio
 - install java at c:\program files\java\jdk-17.0.2\   https://www.oracle.com/java/technologies/downloads/#jdk17-windows
 - set environment variable in PATH for c:\program files\java\jdk-17.0.2\bin
 - set environment variable for JAVA_HOME as C:\Program Files\Java\jdk-17.0.2
+
+```powershell
 - close all terminal windows and open a fresh terminal window
 - type 'java -version' to view the installed java version to confirm success 
 - type 'javac -version' to view java compiler version
@@ -78,7 +102,25 @@ install android studio from https://developer.android.com/studio before installi
 
 Android Studio will install at `C:\Program Files\Android\Android Studio` and the binary at`C:\Program Files\Android\Android Studio\bin`
 
+run Android studio and install any dependencies
 
+## using docker image with android studio
+
+instead of installing android studio we can use a docker image with android studio already on it.
+
+on azure, use this image `Standard D2s v3 (2 vcpus, 8 GiB memory)` which is a little bit slow - get faster next time
+
+try this windows docker image
+
+```powershell
+docker pull kelvinlawson/android-studio
+```
+
+or this linux one (will have to install docker desktop and from the system tray switch to using linux containers)
+
+```powershell
+docker pull deadolus/android-studio
+```
 
 ## install flutter
 
@@ -115,7 +157,7 @@ where.exe flutter dart
 
 and if the install has worked, these commands will produce output with further options
 
-```
+```js
 c:\Users\phila\flutter\bin\flutter
 c:\Users\phila\flutter\bin\flutter.bat
 c:\Users\phila\flutter\bin\dart
@@ -124,7 +166,7 @@ c:\Users\phila\flutter\bin\dart.bat
 
 next run this command 
 
-```java
+```js
 flutter doctor
 ```
 

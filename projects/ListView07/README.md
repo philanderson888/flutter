@@ -1,16 +1,74 @@
-# deleteme01
+# ListView04
 
-A new Flutter project.
+## Introduction
 
-## Getting Started
+Builds on ListView01, 02 and 03
 
-This project is a starting point for a Flutter application.
+## Contents
 
-A few resources to get you started if this is your first Flutter project:
+- [ListView04](#listview04)
+  - [Introduction](#introduction)
+  - [Contents](#contents)
+  - [Adding clickable columns in a ListView](#adding-clickable-columns-in-a-listview)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Adding clickable columns in a ListView
+
+```java
+import 'package:flutter/material.dart';
+void main() => runApp(MyApp());
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'ListViews',
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
+      ),
+      home: Scaffold(
+        appBar: AppBar(title: Text('ListViews')),
+        body: BodyLayout(),
+      ),
+    );
+  }
+}
+class BodyLayout extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return _myListView(context);
+  }
+}
+Widget _myListView(BuildContext context) {
+  Widget column = Expanded(
+    child: Column(
+      // align the text to the left instead of centered
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text('Title', style: TextStyle(fontSize: 16),),
+        Text('subtitle'),
+      ],
+    ),
+  );
+  return ListView.builder(
+    itemBuilder: (context, index) {
+      return Card(
+        child: InkWell(
+          onTap: () {
+            print('tapped');
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: <Widget>[
+                column,
+                column,
+              ],
+            ),
+          ),
+        ),
+      );
+    },
+  );
+}
+```
