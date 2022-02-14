@@ -7,8 +7,15 @@
   - [samples](#samples)
   - [references](#references)
   - [install java](#install-java)
+  - [android sdk](#android-sdk)
+    - [updating sdk](#updating-sdk)
+  - [emulator](#emulator)
   - [install android studio](#install-android-studio)
+  - [run a new project to test Android Studio](#run-a-new-project-to-test-android-studio)
+  - [run device manager](#run-device-manager)
+  - [device manager](#device-manager)
   - [using docker image with android studio](#using-docker-image-with-android-studio)
+  - [device manager](#device-manager-1)
   - [install flutter](#install-flutter)
   - [verify install](#verify-install)
     - [configure android studio path](#configure-android-studio-path)
@@ -17,6 +24,7 @@
     - [enabling developer tools on android device](#enabling-developer-tools-on-android-device)
     - [enable google usb driver in android studio](#enable-google-usb-driver-in-android-studio)
   - [Add a device](#add-a-device)
+  - [configure android studio for flutter](#configure-android-studio-for-flutter)
   - [hello world](#hello-world)
     - [build](#build)
     - [run](#run)
@@ -96,6 +104,46 @@ javac 17.0.2
 */
 ```
 
+
+## android sdk
+
+can separately download this and put it wherever you want and perhaps add it to path
+
+default is `~\AppData\Local\Android\Sdk`
+
+notice that we need this whenever we create a new project ie
+
+file=>new=>flutter project
+
+the path to the SDK is present.
+
+### updating sdk
+
+may have to remove the
+
+```
+/.temp/
+/emulator/emulator.installer/ folders
+```
+
+before the update can continue, particularly to the emulator.  and also just make sure the emulator is not running.
+
+
+## emulator
+
+```js
+C:\Users\phila\AppData\Local\Android\Sdk\emulator> 
+./emulator.exe -list-avds
+/*
+4_WVGA_Nexus_S_API_22
+Pixel_3_API_27
+Pixel_3_API_27_2
+*/
+./emulator.exe -avd 4_WVGA_Nexus_S_API_22
+```
+
+ 
+
 ## install android studio
 
 install android studio from https://developer.android.com/studio before installing `flutter`
@@ -103,6 +151,31 @@ install android studio from https://developer.android.com/studio before installi
 Android Studio will install at `C:\Program Files\Android\Android Studio` and the binary at`C:\Program Files\Android\Android Studio\bin`
 
 run Android studio and install any dependencies
+
+## run a new project to test Android Studio
+
+```
+New Project
+Language - Java
+API 16 - Android 4.1
+```
+
+## run device manager
+
+```
+Pixel 3
+Android 8.1 (API 27)
+```
+
+## device manager
+
+this setting works on physical but not azure vm
+
+```
+4 WVGA Nexus S API 22
+Lollipop Android 5.1
+```
+
 
 ## using docker image with android studio
 
@@ -121,6 +194,12 @@ or this linux one (will have to install docker desktop and from the system tray 
 ```powershell
 docker pull deadolus/android-studio
 ```
+
+## device manager
+
+if we are getting the message that the emulator is not running we can go to `C:\Users\YourUserName\AppData\Local\Google\AndroidStudio2020.3\log\idea.log` to view the error
+
+
 
 ## install flutter
 
@@ -146,13 +225,19 @@ On Windows, to do this, complete the following steps
 
 to test this has worked, simply run these commands
 
-```bash
+```js
 flutter
 dart
-# show install locations on mac
+//show install locations on mac
 where flutter dart
-# show install locations on windows
+// show install locations on windows
 where.exe flutter dart
+/*
+c:\Users\phila\flutter\bin\flutter
+c:\Users\phila\flutter\bin\flutter.bat
+c:\Users\phila\flutter\bin\dart
+c:\Users\phila\flutter\bin\dart.bat
+*/
 ```
 
 and if the install has worked, these commands will produce output with further options
@@ -238,6 +323,16 @@ Other commands to run are
 ```
 flutter devices
 ```
+
+## configure android studio for flutter
+
+```
+Android Studio, file, settings, plugins
+Search for flutter and install (with dart)
+Restart Android Studio
+```
+
+now can select File, New, Flutter Project
 
 ##  hello world
 
