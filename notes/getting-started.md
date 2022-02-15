@@ -7,6 +7,7 @@
   - [samples](#samples)
   - [references](#references)
   - [install java](#install-java)
+  - [dart sdk](#dart-sdk)
   - [android sdk](#android-sdk)
     - [updating sdk](#updating-sdk)
   - [emulator](#emulator)
@@ -16,7 +17,7 @@
   - [device manager](#device-manager)
   - [using docker image with android studio](#using-docker-image-with-android-studio)
   - [device manager](#device-manager-1)
-  - [install flutter](#install-flutter)
+  - [install flutter sdk](#install-flutter-sdk)
   - [verify install](#verify-install)
     - [configure android studio path](#configure-android-studio-path)
     - [accept android licenses](#accept-android-licenses)
@@ -104,7 +105,9 @@ javac 17.0.2
 */
 ```
 
+## dart sdk
 
+unzip to c:\dart and add to path
 ## android sdk
 
 can separately download this and put it wherever you want and perhaps add it to path
@@ -201,15 +204,22 @@ if we are getting the message that the emulator is not running we can go to `C:\
 
 
 
-## install flutter
+## install flutter sdk
 
-to install flutter download the zip file from https://flutter.dev/docs/get-started/install 
+download the flutter sdk from https://flutter.dev/docs/get-started/install and extract to a folder such as c:\flutter 
 
-Choose a location such as c:\users\username\ and unzip the zip file so the path to flutter becomes
+add `c:\flutter\bin` to `path` and restart the computer
 
-c:\users\username\flutter 
-
-add the `flutter\bin` path to your environment variables, for example in the example above the path would be `c:\users\username\flutter\bin` which would be added to your `path` system variable 
+```powershell
+# does this work? maybe not, try it but then do it manual way
+cd $env:
+ls
+echo $env:PATH
+$env:PATH = $env:PATH + "c:\flutter\bin;"
+restart-computer
+# after restart
+flutter
+```
 
 On Windows, to do this, complete the following steps
 1. Hit the Windows key
