@@ -29,6 +29,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        backgroundColor: const Color(0xffaabbcc),
       ),
       body: Center(
         child: ElevatedButton(
@@ -122,7 +123,7 @@ class Page3 extends StatelessWidget {
                     ),
                     Image(
                       image: NetworkImage(
-                          'https://picsum.photos/50?random=$index'),
+                          'https://picsum.photos/60?random=$index'),
                     ),
                   ]),
             );
@@ -185,9 +186,7 @@ class Page5State extends State {
 
     return Scaffold(
       appBar: AppBar(
-        title: Center(
-            child: Text(
-                'Stateful Page 5 - State Held In Counter - Value $counter')),
+        title: Center(child: Text('Stateful Page 5 - Counter $counter')),
       ),
       body: Center(
         child: Column(
