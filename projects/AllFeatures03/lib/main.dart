@@ -1,7 +1,7 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -11,31 +11,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goToPage2() {
       print('you clicked');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page2()),
+        MaterialPageRoute(builder: (context) => const Page2()),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text('Home'),
         backgroundColor: const Color(0xffaabbcc),
       ),
       body: Center(
         child: ElevatedButton(
           key: null,
           onPressed: goToPage2,
-          child: Text('P2'),
+          child: const Text('P2'),
         ),
       ),
     );
@@ -43,12 +45,14 @@ class Home extends StatelessWidget {
 }
 
 class Page2 extends StatelessWidget {
+  const Page2({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goToPage3() {
       print('p3');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page3()),
+        MaterialPageRoute(builder: (context) => const Page3()),
       );
     }
 
@@ -59,17 +63,17 @@ class Page2 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page 2 - GridView'),
+        title: const Text('Page 2 - GridView'),
       ),
       body: GridView.count(
         crossAxisCount: 5,
         children: List.generate(20, (index) {
           if (index == 0) {
             return ElevatedButton(
-                key: null, onPressed: goToPage3, child: Text("P3"));
+                key: null, onPressed: goToPage3, child: const Text('P3'));
           } else if (index == 1) {
             return ElevatedButton(
-                key: null, onPressed: goBack, child: Text("P2"));
+                key: null, onPressed: goBack, child: const Text('P2'));
           } else {
             return Center(
               child: Text(
@@ -85,12 +89,14 @@ class Page2 extends StatelessWidget {
 }
 
 class Page3 extends StatelessWidget {
+  const Page3({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goToPage4() {
       print('going to page 4');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page4()),
+        MaterialPageRoute(builder: (context) => const Page4()),
       );
     }
 
@@ -101,17 +107,17 @@ class Page3 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('P3 GridView'),
+        title: const Text('P3 GridView'),
       ),
       body: GridView.count(
         crossAxisCount: 5,
         children: List.generate(20, (index) {
           if (index == 0) {
             return ElevatedButton(
-                key: null, onPressed: goToPage4, child: Text("P4"));
+                key: null, onPressed: goToPage4, child: const Text('P4'));
           } else if (index == 1) {
             return ElevatedButton(
-                key: null, onPressed: goBack, child: Text("P2"));
+                key: null, onPressed: goBack, child: const Text('P2'));
           } else {
             return Center(
               child: Column(
@@ -135,12 +141,14 @@ class Page3 extends StatelessWidget {
 }
 
 class Page4 extends StatelessWidget {
+  const Page4({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goToPage5() {
       print('going to stateful page 5');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Page5()));
+          .push(MaterialPageRoute(builder: (context) => const Page5()));
     }
 
     goBack() {
@@ -150,14 +158,16 @@ class Page4 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page4'),
+        title: const Text('Page4'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(key: null, onPressed: goToPage5, child: Text("P5")),
-            ElevatedButton(key: null, onPressed: goBack, child: Text("Back")),
+            ElevatedButton(
+                key: null, onPressed: goToPage5, child: const Text('P5')),
+            ElevatedButton(
+                key: null, onPressed: goBack, child: const Text('Back')),
           ],
         ),
       ),
@@ -166,6 +176,9 @@ class Page4 extends StatelessWidget {
 }
 
 class Page5 extends StatefulWidget {
+  const Page5({Key? key}) : super(key: key);
+
+  @override
   Page5State createState() => Page5State();
 }
 
@@ -195,8 +208,9 @@ class Page5State extends State {
             ElevatedButton(
                 key: null,
                 onPressed: incrementCounter,
-                child: Text("Increment Counter $counter")),
-            ElevatedButton(key: null, onPressed: goBack, child: Text("Back")),
+                child: Text('Increment Counter $counter')),
+            ElevatedButton(
+                key: null, onPressed: goBack, child: const Text('Back')),
           ],
         ),
       ),
