@@ -30,7 +30,7 @@ class Home extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Home By Phil'),
         backgroundColor: const Color(0xffaabbcc),
       ),
       body: Center(
