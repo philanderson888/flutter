@@ -29,6 +29,7 @@
   - [hello world](#hello-world)
     - [build](#build)
     - [run](#run)
+  - [remove debug mode](#remove-debug-mode)
   - [building your first project](#building-your-first-project)
     - [pubspec.yaml](#pubspecyaml)
     - [analysis-options.yaml](#analysis-optionsyaml)
@@ -472,7 +473,13 @@ class MyApp extends StatelessWidget {
 }
 ```
 
+## remove debug mode
 
+```java
+MaterialApp(
+  debugShowCheckedModeBanner: false,
+),
+```
 
 ## building your first project
 

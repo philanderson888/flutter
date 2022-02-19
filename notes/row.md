@@ -4,9 +4,14 @@
 
 - [rows](#rows)
   - [contents](#contents)
+  - [Single Row With One Centred Item](#single-row-with-one-centred-item)
+  - [Single Row With Centred Column](#single-row-with-centred-column)
+  - [Single Row With Multiple Children In The Row](#single-row-with-multiple-children-in-the-row)
+    - [Single Row with Button Click](#single-row-with-button-click)
+  - [Row And Column Layout](#row-and-column-layout)
 
 
-### Single Row With One Centred Item
+## Single Row With One Centred Item
 
 ```java
 class Home extends StatelessWidget {
@@ -31,7 +36,54 @@ class Home extends StatelessWidget {
 }
 ```
 
-### Single Row With Multiple Children In The Row
+## Single Row With Centred Column
+
+this has a column of items, but centered neatly on the screen by virtue of the `row` component, in which the column is centred horizontally
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        backgroundColor: Colors.blueGrey,
+        appBar: AppBar(
+          title: const Text('this is an app'),
+          backgroundColor: Colors.lightBlueAccent[200],
+        ),
+        body: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Column(
+              children: const <Widget>[
+                Text('body11'),
+                Text('body22'),
+                Text('body33'),
+                Image(
+                  image: NetworkImage(
+                      'https://www.w3schools.com/w3css/img_lights.jpg'),
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.fill,
+                ),
+                Image(
+                  image: AssetImage('images/diamond.png'),
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.fill,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+```
+## Single Row With Multiple Children In The Row
 
 ```java
 
@@ -207,3 +259,5 @@ class UpdateStatefulHome extends State{
   }
 }
 ```
+
+

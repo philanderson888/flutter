@@ -6,6 +6,7 @@
   - [contents](#contents)
   - [introduction](#introduction)
   - [finding components](#finding-components)
+  - [material design](#material-design)
   - [justifying](#justifying)
     - [center justify](#center-justify)
   - [margin](#margin)
@@ -36,6 +37,8 @@
     - [underline](#underline)
     - [rich text with text span](#rich-text-with-text-span)
     - [painting text](#painting-text)
+  - [shadow](#shadow)
+    - [button with shadow](#button-with-shadow)
   - [default text style](#default-text-style)
   - [theme](#theme)
     - [textTheme](#texttheme)
@@ -61,6 +64,7 @@ this section involves basic styling of basic widgets including
 - margin
 - padding
 - theme
+- [animation](animation.md)
 
 
 ## finding components
@@ -68,6 +72,36 @@ this section involves basic styling of basic widgets including
 When unit testing it is important to be able to find and identify items on the screen.  we can do this most simply by text
 
 see [unit testing - finding a clickable widget by text](#finding-a-clickable-widget-by-text) in order to be able to undertand this.
+
+## material design
+
+flutter apps can be styled with [material design](https://material.io) or without.
+
+with 
+
+```java
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp());
+}
+```
+
+without
+
+```java
+import 'package:flutter/material.dart';
+void main() {
+  runApp(
+    const Center(
+      child: Text(
+        'Hello, world!',
+        textDirection: TextDirection.ltr,
+      ),
+    ),
+  );
+}
+```
 
 ## justifying
 
@@ -133,8 +167,12 @@ padding: const EdgeInsets.symmetric(horizontal: 8.0),
 
 ## color
 
+material design colors https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+
 ```java
 color: Colors.red,
+// material design https://material.io/design/color/the-color-system.html#tools-for-picking-colors
+color: Colors.cyan[600]),
 // ARGB (Alpha Red Green Blue)
 color: Color(0xffaabbcc),
 // RGBO (Red Green Blue Opacity)
@@ -469,6 +507,45 @@ Stack(
   ],
 ),
 ```
+
+## shadow
+
+### button with shadow
+
+*Note : a button cannot have a shadow but must be put in a container which has a shadow*
+
+```java
+Container(
+  decoration: BoxDecoration(
+    boxShadow:[
+      BoxShadow(
+        color: Colors.grey.withOpacity(0.5),
+        spreadRadius: 5,
+        blurRadius: 7,
+        offset: Offset(0, 3), // changes position of shadow
+      ),
+    ],
+  ),
+  child: ElevatedButton(
+    autofocus: true,
+    clipBehavior: Clip.none,
+    onPressed: () => clickButton(),
+    color: Colors.blue,
+    padding: const EdgeInsets.all(30),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(18.0),
+      side: BorderSide(color: Colors.lightBlue),
+    ),
+    child: Text(buttonText, 
+        style: TextStyle(
+          color: Colors.white,
+          backgroundColor: Colors.blue,
+        ),
+      ),
+  ),
+),
+```
+
 
 ## default text style
 
