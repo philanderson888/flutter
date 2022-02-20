@@ -22,11 +22,25 @@ flutter:
     - images/diamond.png
 ```
 
+or all images
+
+```yaml
+flutter:
+  uses-material-design: true
+  assets:
+    - images/
+```
+
 run this command
 
 ```java
 flutter packages get
 ```
 
+## flutter app icon
+
+we can change the icon for our app from the default icon to one of our choosing
+
+download our icon image and if it's too big go to https://appicon.co and upload our image to this website, which will turn our image into an icon image for us!
 
 

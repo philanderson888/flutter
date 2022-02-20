@@ -6,9 +6,10 @@
   - [contents](#contents)
   - [flutter doctor](#flutter-doctor)
   - [flutter upgrade](#flutter-upgrade)
-  - [flutter pub upgrade](#flutter-pub-upgrade)
   - [flutter create - samples](#flutter-create---samples)
   - [analyze](#analyze)
+  - [flutter pub get](#flutter-pub-get)
+  - [flutter pub upgrade](#flutter-pub-upgrade)
   - [vscode shortcuts](#vscode-shortcuts)
   - [clean](#clean)
   - [build](#build)
@@ -30,13 +31,7 @@ flutter doctor
 flutter upgrade
 ```
 
-## flutter pub upgrade
 
-upgrade to latest version of all libraries in use
-
-```java
-flutter pub upgrade
-```
 
 ## flutter create - samples
 
@@ -52,6 +47,25 @@ analyze your app for problems
 
 ```java
 flutter analyze
+```
+
+
+## flutter pub get
+
+```java
+// get all packages mentioned in pubspec.yaml but not downloaded yet
+flutter pub get
+```
+
+## flutter pub upgrade
+
+upgrade to latest version of all libraries in use
+
+```java
+// upgrade all packages to latest
+flutter pub upgrade
+// show outdated packages
+flutter pub outdated
 ```
 
 ## vscode shortcuts
