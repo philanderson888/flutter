@@ -31,6 +31,22 @@ flutter:
     - images/
 ```
 
+here is an example using both network and asset images
+
+```java
+Image(
+  image: NetworkImage(
+      'https://www.planete-energies.com/sites/default/files/styles/media_full_width_940px/public/thumbnails/image/452001095-lignite.jpg'),
+  width: 400,
+  height: 400,
+),
+Image(
+  image: AssetImage('images/coal.jpg'),
+  width: 200,
+  height: 200,
+)
+```
+
 run this command
 
 ```java

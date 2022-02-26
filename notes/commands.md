@@ -55,6 +55,8 @@ flutter analyze
 ```java
 // get all packages mentioned in pubspec.yaml but not downloaded yet
 flutter pub get
+// this is the same as
+flutter packages get
 ```
 
 ## flutter pub upgrade

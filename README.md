@@ -29,6 +29,7 @@ This is a respository for learning flutter from scratch
   - [oop](#oop)
   - [unit tests](#unit-tests)
   - [api](#api)
+  - [android studio](#android-studio)
   - [sqlite](#sqlite)
   - [all projects](#all-projects)
   - [performance](#performance)
@@ -191,6 +192,11 @@ Next we progress into reading data from an api into our app, and displaying it
     - This is a clone of [MultiPage05](MultiPage05) and shows the full CRUD operations on a given list of items drawn from an API
   - [WordPair01](projects/WordPair01)
     - sample app to display word pairs from an API
+
+
+## android studio
+
+[getting started with android studio](notes/getting-started-with-android-studio.md)
 
 ## sqlite
 

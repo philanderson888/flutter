@@ -35,6 +35,9 @@
     - [analysis-options.yaml](#analysis-optionsyaml)
     - [hello world](#hello-world-1)
   - [default scaffolding](#default-scaffolding)
+  - [app name](#app-name)
+  - [app icon](#app-icon)
+  - [app images](#app-images)
   - [next steps](#next-steps)
 
 ## getting started with an online ide
@@ -642,6 +645,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 ```
+
+## app name
+
+we can modify the app name in the `pubspec.yaml` file
+
+## app icon
+
+we can modify the app icon by choosing a new app icon image, generating the relevant app icon images for it by uploading it to https://appicon.co and then overwriting the default app icons at, for example, the path `android\app\src\main\res\`
+
+## app images
+
+we can use `network` images or `asset` images - network images are a url from the internet (better) or asset images are held locally - create an `images` folder in the root of your flutter project then link to it by referring it in the `pubspec.yaml` file as 
+
+```yaml
+flutter:
+  uses-material-design: true
+  assets:
+   - images/
+```
+
+and then doing the `flutter packages get` command to install this folder as a default folder for images
 
 ## next steps
 

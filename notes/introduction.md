@@ -31,6 +31,7 @@ Flutter is good for building cross-platform apps quickly.  It also is incredibly
 - flutterhttps://flutter.dev/
   - docs https://docs.flutter.dev/
   - searching for components https://api.flutter.dev/flutter/material/AppBar-class.html
+  - widget index https://docs.flutter.dev/reference/widgets
 
 ## about
 
