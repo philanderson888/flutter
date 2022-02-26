@@ -15,6 +15,7 @@
   - [build](#build)
   - [install](#install)
   - [run](#run)
+  - [shortcut commands](#shortcut-commands)
 
 
 ## flutter doctor
@@ -110,3 +111,9 @@ flutter install
 flutter run --release
 ```
 
+## shortcut commands
+
+```java
+stless new stateless widget
+stful new stateful widget
+```

@@ -49,4 +49,4 @@ flutter has
 
 - codemagic which helps with deployment
 - flutter inspector
-- 
+
