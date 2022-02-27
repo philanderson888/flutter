@@ -114,6 +114,10 @@ flutter run --release
 ## shortcut commands
 
 ```java
-stless new stateless widget
-stful new stateful widget
+- stless
+  - new stateless widget
+- stful 
+  - new stateful widget
+- control-q
+  - quick docs
 ```

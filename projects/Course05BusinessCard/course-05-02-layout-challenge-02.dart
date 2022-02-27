@@ -46,7 +46,7 @@ class myApp extends StatelessWidget {
                     color: Colors.lightBlue,
                     width: 100,
                     height: double.infinity),
-              ]),
+              ],),
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal.shade800,

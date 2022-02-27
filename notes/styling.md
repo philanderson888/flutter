@@ -31,6 +31,7 @@
     - [font weight eg bold](#font-weight-eg-bold)
     - [italic](#italic)
     - [font family](#font-family)
+    - [fonts downloadable](#fonts-downloadable)
     - [opacity](#opacity)
     - [container text styling](#container-text-styling)
   - [decoration](#decoration)
@@ -367,6 +368,35 @@ Text("BUTTON 2",
   ),
 )
 ```
+
+### fonts downloadable
+
+download the font eg `fonts\Pacifico-Regular.ttf`
+
+add to `pubspec.yaml`
+
+```yaml
+flutter:
+  uses-material-design: true
+  fonts:
+  - family: Pacifico
+    fonts:
+      - asset: fonts/Pacifico-Regular.ttf
+```
+
+and use as
+
+```java
+Text(
+  'Phil Anderson',
+  style: TextStyle(
+    fontSize: 40,
+    fontWeight: FontWeight.bold,
+    fontFamily: "Pacifico",
+  ),
+```
+
+
 
 ### opacity
 
