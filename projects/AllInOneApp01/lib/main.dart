@@ -197,6 +197,13 @@ class Page5State extends State {
       Navigator.pop(context);
     }
 
+    goToPage6(){
+      print('going to stateful page 5');
+      Navigator.of(context).push(
+        MaterialPageRoute(builder:(context)=>Page5())
+      );
+   }
+
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text('Stateful Page 5 - State Held In Counter - Value $counter')),
@@ -209,6 +216,45 @@ class Page5State extends State {
               key:null, 
               onPressed: incrementCounter,
               child: Text("Increment Counter $counter")
+            ),
+            ElevatedButton(
+              key:null, 
+              onPressed: goToPage6,
+              child: Text("Page 6")
+            ),
+            ElevatedButton(
+              key:null, 
+              onPressed: goBack,
+              child: Text("Back")
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class Page6 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+
+   goBack(){
+    print('going back');
+    Navigator.pop(context);
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Page4'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget> [
+            ElevatedButton(
+              key:null, 
+              onPressed: goToPage5,
+              child: Text("Page 5")
             ),
             ElevatedButton(
               key:null, 

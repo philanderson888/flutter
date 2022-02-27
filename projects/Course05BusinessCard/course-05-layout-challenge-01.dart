@@ -21,27 +21,13 @@ class myApp extends StatelessWidget {
           child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: <Widget>[
                 Container(
                   color: Colors.red,
                   width: 100,
                   height: double.infinity,
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      color: Colors.yellow,
-                      height: 100,
-                      width: 100,
-                    ),
-                    Container(
-                      color: Colors.green.shade300,
-                      height: 100,
-                      width: 100,
-                    ),
-                  ],
-                ),
+                Container(color: Colors.yellow, height: 100, width: 100),
                 Container(
                     color: Colors.lightBlue,
                     width: 100,

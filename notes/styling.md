@@ -17,6 +17,7 @@
   - [color](#color)
   - [height](#height)
   - [font](#font)
+  - [background color](#background-color)
     - [container styling](#container-styling)
     - [container color](#container-color)
     - [card styling](#card-styling)
@@ -191,7 +192,15 @@ height: 50,
 textStyle: const TextStyle(fontSize:24),
 ```
 
+## background color
 
+```java
+child: Text('an app',
+  style: TextStyle(
+    backgroundColor: Colors.white,
+  )
+),
+```
 
 ### container styling
 
