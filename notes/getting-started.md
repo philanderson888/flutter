@@ -52,7 +52,12 @@ to see examples of samples available online please see
 
 - widgets https://flutter.dev/docs/development/ui/widgets
 - material design ui https://material.io/develop/flutter
-
+  - material design colours 
+    - https://www.materialpalette.com
+    - https://www.materialpalette.com/colors
+  - material design icons 
+    - https://fonts.google.com/icons
+    - https://www.materialpalette.com/icons
 ## references
 
 please see the following references for further help with regards to installing and getting started with using flutter

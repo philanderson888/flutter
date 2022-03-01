@@ -44,10 +44,10 @@ class Home extends StatelessWidget {
 class Page2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    goToPage3() {
-      print('going to page 3');
+    gotoGridViewOfClickableImages() {
+      print('going to grid view of clickable images');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page3()),
+        MaterialPageRoute(builder: (context) => GridViewOfClickableImages()),
       );
     }
 
@@ -55,6 +55,12 @@ class Page2 extends StatelessWidget {
       print('going to blank page template');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => BlankPageTemplate()));
+    }
+
+    goToBlankStatefulWidget() {
+      print('going to blank stateful widget template');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => BlankStatefulWidget()));
     }
 
     goToCourseLayoutExercise() {
@@ -69,63 +75,112 @@ class Page2 extends StatelessWidget {
           MaterialPageRoute(builder: (context) => CourseBusinessCard01()));
     }
 
+    goToFontSize() {
+      print('going to font size');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => FontSize()));
+    }
+
+    goToFontSizeWholePage() {
+      print('going to font size whole page');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => FontSizeWholePage()));
+    }
+
+    goToIcons() {
+      print('going to icons');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => DisplayIcons()));
+    }
+
     goBack() {
       print('going back');
       Navigator.pop(context);
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Main Index Gridview'),
-      ),
-      body: GridView.count(
-        crossAxisCount: 10,
-        children: List.generate(20, (index) {
-          if (index == 0) {
-            return ElevatedButton(
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 2),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Main Index Gridview'),
+        ),
+        body: GridView.count(
+          crossAxisCount: 7,
+          children: List.generate(28, (index) {
+            if (index == 0) {
+              return ElevatedButton(
                 key: null,
-                onPressed: goToPage3,
-                child: Text("Page 3 - Grid With Images"));
-          } else if (index == 1) {
-            return ElevatedButton(
-                key: null, onPressed: goBack, child: Text("Back"));
-          } else if (index == 6) {
-            return ElevatedButton(
+                onPressed: gotoGridViewOfClickableImages,
+                child: Text("Grid View Of Clickable Images"),
+              );
+            } else if (index == 1) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goBack,
+                child: Text("Back"),
+              );
+            } else if (index == 3) {
+              return ElevatedButton(
                 key: null,
                 onPressed: goToBlankPageTemplate,
-                child: Text("Blank Page Template"));
-          } else if (index == 7) {
-            return ElevatedButton(
+                child: Text("Blank Page Template"),
+              );
+            } else if (index == 4) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToBlankStatefulWidget,
+                child: Text("Blank Stateful Widget"),
+              );
+            } else if (index == 7) {
+              return ElevatedButton(
                 key: null,
                 onPressed: goToCourseLayoutExercise,
-                child: Text("Course Layout Exercise"));
-          } else if (index == 8) {
-            return ElevatedButton(
+                child: Text("Course Layout Exercise"),
+              );
+            } else if (index == 8) {
+              return ElevatedButton(
                 key: null,
                 onPressed: goToCourseBusinessCard01,
-                child: Text("Course Business Card"));
-          } else {
-            return Center(
-              child: Text(
-                'Item $index',
-                style: Theme.of(context).textTheme.bodyText1,
-              ),
-            );
-          }
-        }),
+                child: Text("Course Business Card"),
+              );
+            } else if (index == 9) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToFontSize,
+                child: Text("Font Size"),
+              );
+            } else if (index == 10) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToFontSizeWholePage,
+                child: Text("Font Size Whole Page"),
+              );
+            } else if (index == 11) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToIcons,
+                child: Text("Icons"),
+              );
+            } else {
+              return Center(
+                child: Text(
+                  'Item $index',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              );
+            }
+          }),
+        ),
       ),
     );
   }
 }
 
-class Page3 extends StatelessWidget {
+class GridViewOfClickableImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    goToPage4() {
-      print('going to page 4');
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page4()),
-      );
+    printYouTapped(index) {
+      print('you tapped picture ' + index.toString());
     }
 
     goBack() {
@@ -135,34 +190,34 @@ class Page3 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page 3 - renders a GridView component with images'),
+        title: Text('GridView with clickable images'),
       ),
       body: GridView.count(
-        crossAxisCount: 10,
-        children: List.generate(20, (index) {
-          if (index == 0) {
-            return ElevatedButton(
-                key: null, onPressed: goToPage4, child: Text("Page 4"));
-          } else if (index == 1) {
-            return ElevatedButton(
-                key: null, onPressed: goBack, child: Text("Back"));
-          } else {
-            return Center(
+        crossAxisCount: 7,
+        children: List.generate(28, (index) {
+          return Center(
+            child: GestureDetector(
+              onTap: () => printYouTapped(index),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      'Item $index',
+                      'Image $index',
                       style: Theme.of(context).textTheme.bodyText1,
                     ),
                     Image(
                       image: NetworkImage(
-                          'https://picsum.photos/120?random=$index'),
+                          'https://picsum.photos/130?random=$index'),
                     ),
                   ]),
-            );
-          }
+            ),
+          );
         }),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal.shade800,
+        child: Text("Back"),
+        onPressed: goBack,
       ),
     );
   }
@@ -274,6 +329,46 @@ class BlankPageTemplate extends StatelessWidget {
   }
 }
 
+class BlankStatefulWidget extends StatefulWidget {
+  BlankStatefulWidgetState createState() => BlankStatefulWidgetState();
+}
+
+class BlankStatefulWidgetState extends State {
+  int counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    incrementCounter() {
+      setState(() => {counter++});
+      print('incrementing counter to $counter');
+    }
+
+    goBack() {
+      print('going back');
+      Navigator.pop(context);
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text('Blank Stateful Widget - counter $counter'),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal.shade800,
+        child: Text("Back"),
+        onPressed: goBack,
+      ),
+    );
+  }
+}
+
 class CourseLayoutExercise extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -367,6 +462,413 @@ class CourseBusinessCard01 extends StatelessWidget {
                 fontFamily: "SourceSansPro",
                 color: Colors.teal.shade100,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'here is some text',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal.shade800,
+        child: Text("Back"),
+        onPressed: goBack,
+      ),
+    );
+  }
+}
+
+class FontSize extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    goBack() {
+      print('going back');
+      Navigator.pop(context);
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Font Size'),
+      ),
+      backgroundColor: Colors.teal.shade600,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 0,
+            ),
+            CircleAvatar(
+              radius: 75,
+              backgroundColor: Colors.black12,
+              backgroundImage: NetworkImage(
+                  'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
+            ),
+            Text(
+              'Phil Anderson',
+              style: TextStyle(
+                fontSize: 55,
+                fontWeight: FontWeight.w400,
+                fontFamily: "Pacifico",
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              'FLUTTER DEVELOPER',
+              style: TextStyle(
+                fontSize: 35,
+                fontFamily: "SourceSansPro",
+                color: Colors.teal.shade100,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'this text is size 10',
+                    style: TextStyle(
+                      fontSize: 10,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'this text is size 20',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'this text is size 30',
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'this text is size 40',
+                    style: TextStyle(
+                      fontSize: 40,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'this text is size 50',
+                    style: TextStyle(
+                      fontSize: 50,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'this text is size 60',
+                    style: TextStyle(
+                      fontSize: 60,
+                    ),
+                  ),
+                  Container(
+                    width: 10,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.teal.shade800,
+        child: Text("Back"),
+        onPressed: goBack,
+      ),
+    );
+  }
+}
+
+class FontSizeWholePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    gotoGridViewOfClickableImages() {
+      print('going to grid view of clickable images');
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => GridViewOfClickableImages()),
+      );
+    }
+
+    goToBlankPageTemplate() {
+      print('going to blank page template');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => BlankPageTemplate()));
+    }
+
+    goToBlankStatefulWidget() {
+      print('going to blank stateful widget template');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => BlankStatefulWidget()));
+    }
+
+    goToCourseLayoutExercise() {
+      print('going to course layout exercise');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => CourseLayoutExercise()));
+    }
+
+    goToCourseBusinessCard01() {
+      print('going to course layout exercise');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => CourseBusinessCard01()));
+    }
+
+    goToFontSize() {
+      print('going to font size');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => FontSize()));
+    }
+
+    goToIcons() {
+      print('going to icons');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => DisplayIcons()));
+    }
+
+    goBack() {
+      print('going back');
+      Navigator.pop(context);
+    }
+
+    return MediaQuery(
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 2),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Set Font Size For Whole Page'),
+        ),
+        body: GridView.count(
+          crossAxisCount: 7,
+          children: List.generate(28, (index) {
+            if (index == 0) {
+              return ElevatedButton(
+                key: null,
+                onPressed: gotoGridViewOfClickableImages,
+                child: Text("Page 3 - Grid With Images"),
+              );
+            } else if (index == 1) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goBack,
+                child: Text("Back"),
+              );
+            } else if (index == 3) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToBlankPageTemplate,
+                child: Text("Blank Page Template"),
+              );
+            } else if (index == 4) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToBlankStatefulWidget,
+                child: Text("Blank Stateful Widget"),
+              );
+            } else if (index == 7) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToCourseLayoutExercise,
+                child: Text("Course Layout Exercise"),
+              );
+            } else if (index == 8) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToCourseBusinessCard01,
+                child: Text("Course Business Card"),
+              );
+            } else if (index == 9) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToFontSize,
+                child: Text("Font Size"),
+              );
+            } else if (index == 10) {
+              return ElevatedButton(
+                key: null,
+                onPressed: goToIcons,
+                child: Text("Icons"),
+              );
+            } else {
+              return Center(
+                child: Text(
+                  'Item $index',
+                  style: Theme.of(context).textTheme.bodyText1,
+                ),
+              );
+            }
+          }),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.teal.shade800,
+          child: Text(
+            'back',
+            style: TextStyle(fontSize: 8),
+          ),
+          onPressed: goBack,
+        ),
+      ),
+    );
+  }
+}
+
+class DisplayIcons extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    goBack() {
+      print('going back');
+      Navigator.pop(context);
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Icons'),
+      ),
+      backgroundColor: Colors.teal.shade600,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              height: 0,
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'add',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Color(0xFFFFC107),
+                    ),
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: Color(0xFFFFC107),
+                    size: 80,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'back',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Color(0xFFFFC107),
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_back,
+                    color: Color(0xFFFFC107),
+                    size: 80,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'pool',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Color(0xFFFFC107),
+                    ),
+                  ),
+                  Icon(
+                    Icons.pool,
+                    color: Color(0xFFFFC107),
+                    size: 80,
+                  ),
+                ],
+              ),
+            ),
+            Container(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'shopping',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Color(0xFFFFC107),
+                    ),
+                  ),
+                  Icon(
+                    Icons.add_shopping_cart,
+                    color: Color(0xFFFFC107),
+                    size: 80,
+                  ),
+                ],
               ),
             ),
           ],

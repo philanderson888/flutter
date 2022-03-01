@@ -79,6 +79,8 @@ see [unit testing - finding a clickable widget by text](#finding-a-clickable-wid
 
 flutter apps can be styled with [material design](https://material.io) or without.
 
+see https://www.materialpalette.com for an indication of how this styling can look in your app
+
 with 
 
 ```java
