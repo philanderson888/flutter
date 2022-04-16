@@ -1,7 +1,7 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -11,30 +11,33 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Home(),
+      home: const Home(),
     );
   }
 }
 
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goToPage2() {
       print('you clicked');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page2()),
+        MaterialPageRoute(builder: (context) => const Page2()),
       );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: const Text(
+            "Flutter All In One Learning App (AKA Course 05 Business Card 2)"),
       ),
       body: Center(
         child: ElevatedButton(
           key: null,
           onPressed: goToPage2,
-          child: Text('Page 2 With A GridView'),
+          child: const Text('Page 2 With A GridView....'),
         ),
       ),
     );
@@ -42,55 +45,58 @@ class Home extends StatelessWidget {
 }
 
 class Page2 extends StatelessWidget {
+  const Page2({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     gotoGridViewOfClickableImages() {
       print('going to grid view of clickable images');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => GridViewOfClickableImages()),
+        MaterialPageRoute(
+            builder: (context) => const GridViewOfClickableImages()),
       );
     }
 
     goToBlankPageTemplate() {
       print('going to blank page template');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => BlankPageTemplate()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
     }
 
     goToBlankStatefulWidget() {
       print('going to blank stateful widget template');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => BlankStatefulWidget()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BlankStatefulWidget()));
     }
 
     goToCourseLayoutExercise() {
       print('going to course layout exercise');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CourseLayoutExercise()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const CourseLayoutExercise()));
     }
 
     goToCourseBusinessCard01() {
       print('going to course layout exercise');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CourseBusinessCard01()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const CourseBusinessCard01()));
     }
 
     goToFontSize() {
       print('going to font size');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => FontSize()));
+          .push(MaterialPageRoute(builder: (context) => const FontSize()));
     }
 
     goToFontSizeWholePage() {
       print('going to font size whole page');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => FontSizeWholePage()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const FontSizeWholePage()));
     }
 
     goToIcons() {
       print('going to icons');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => DisplayIcons()));
+          .push(MaterialPageRoute(builder: (context) => const DisplayIcons()));
     }
 
     goBack() {
@@ -102,7 +108,7 @@ class Page2 extends StatelessWidget {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 2),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Main Index Gridview'),
+          title: const Text('Main Index Gridview'),
         ),
         body: GridView.count(
           crossAxisCount: 7,
@@ -111,55 +117,55 @@ class Page2 extends StatelessWidget {
               return ElevatedButton(
                 key: null,
                 onPressed: gotoGridViewOfClickableImages,
-                child: Text("Grid View Of Clickable Images"),
+                child: const Text("Grid View Of Clickable Images"),
               );
             } else if (index == 1) {
               return ElevatedButton(
                 key: null,
                 onPressed: goBack,
-                child: Text("Back"),
+                child: const Text("Back"),
               );
             } else if (index == 3) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToBlankPageTemplate,
-                child: Text("Blank Page Template"),
+                child: const Text("Blank Page Template"),
               );
             } else if (index == 4) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToBlankStatefulWidget,
-                child: Text("Blank Stateful Widget"),
+                child: const Text("Blank Stateful Widget"),
               );
             } else if (index == 7) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToCourseLayoutExercise,
-                child: Text("Course Layout Exercise"),
+                child: const Text("Course Layout Exercise"),
               );
             } else if (index == 8) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToCourseBusinessCard01,
-                child: Text("Course Business Card"),
+                child: const Text("Course Business Card"),
               );
             } else if (index == 9) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToFontSize,
-                child: Text("Font Size"),
+                child: const Text("Font Size"),
               );
             } else if (index == 10) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToFontSizeWholePage,
-                child: Text("Font Size Whole Page"),
+                child: const Text("Font Size Whole Page"),
               );
             } else if (index == 11) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToIcons,
-                child: Text("Icons"),
+                child: const Text("Icons"),
               );
             } else {
               return Center(
@@ -177,6 +183,8 @@ class Page2 extends StatelessWidget {
 }
 
 class GridViewOfClickableImages extends StatelessWidget {
+  const GridViewOfClickableImages({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     printYouTapped(index) {
@@ -190,7 +198,7 @@ class GridViewOfClickableImages extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('GridView with clickable images'),
+        title: const Text('GridView with clickable images'),
       ),
       body: GridView.count(
         crossAxisCount: 7,
@@ -216,7 +224,7 @@ class GridViewOfClickableImages extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
@@ -224,12 +232,14 @@ class GridViewOfClickableImages extends StatelessWidget {
 }
 
 class Page4 extends StatelessWidget {
+  const Page4({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goToPage5() {
       print('going to stateful page 5');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => Page5()));
+          .push(MaterialPageRoute(builder: (context) => const Page5()));
     }
 
     goBack() {
@@ -239,15 +249,16 @@ class Page4 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Page4'),
+        title: const Text('Page4'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-                key: null, onPressed: goToPage5, child: Text("Page 5")),
-            ElevatedButton(key: null, onPressed: goBack, child: Text("Back")),
+                key: null, onPressed: goToPage5, child: const Text("Page 5")),
+            ElevatedButton(
+                key: null, onPressed: goBack, child: const Text("Back")),
           ],
         ),
       ),
@@ -256,6 +267,9 @@ class Page4 extends StatelessWidget {
 }
 
 class Page5 extends StatefulWidget {
+  const Page5({Key? key}) : super(key: key);
+
+  @override
   Page5State createState() => Page5State();
 }
 
@@ -293,7 +307,7 @@ class Page5State extends State {
             ElevatedButton(
               key: null,
               onPressed: goBack,
-              child: Text("Back"),
+              child: const Text("Back"),
             ),
           ],
         ),
@@ -303,6 +317,8 @@ class Page5State extends State {
 }
 
 class BlankPageTemplate extends StatelessWidget {
+  const BlankPageTemplate({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goBack() {
@@ -312,17 +328,17 @@ class BlankPageTemplate extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Blank Page Template'),
+        title: const Text('Blank Page Template'),
       ),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [],
+          children: const [],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
@@ -330,6 +346,9 @@ class BlankPageTemplate extends StatelessWidget {
 }
 
 class BlankStatefulWidget extends StatefulWidget {
+  const BlankStatefulWidget({Key? key}) : super(key: key);
+
+  @override
   BlankStatefulWidgetState createState() => BlankStatefulWidgetState();
 }
 
@@ -338,11 +357,6 @@ class BlankStatefulWidgetState extends State {
 
   @override
   Widget build(BuildContext context) {
-    incrementCounter() {
-      setState(() => {counter++});
-      print('incrementing counter to $counter');
-    }
-
     goBack() {
       print('going back');
       Navigator.pop(context);
@@ -357,12 +371,12 @@ class BlankStatefulWidgetState extends State {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[],
+          children: const <Widget>[],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
@@ -370,6 +384,8 @@ class BlankStatefulWidgetState extends State {
 }
 
 class CourseLayoutExercise extends StatelessWidget {
+  const CourseLayoutExercise({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goBack() {
@@ -379,7 +395,7 @@ class CourseLayoutExercise extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Course Layout Exercise - Column / Row Layout'),
+        title: const Text('Course Layout Exercise - Column / Row Layout'),
       ),
       body: SafeArea(
         child: Row(
@@ -413,7 +429,7 @@ class CourseLayoutExercise extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
@@ -421,6 +437,8 @@ class CourseLayoutExercise extends StatelessWidget {
 }
 
 class CourseBusinessCard01 extends StatelessWidget {
+  const CourseBusinessCard01({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goBack() {
@@ -430,7 +448,7 @@ class CourseBusinessCard01 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Course Business Card'),
+        title: const Text('Course Business Card'),
       ),
       backgroundColor: Colors.teal.shade600,
       body: SafeArea(
@@ -440,13 +458,13 @@ class CourseBusinessCard01 extends StatelessWidget {
             Container(
               height: 0,
             ),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 75,
               backgroundColor: Colors.black12,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
-            Text(
+            const Text(
               'Phil Anderson',
               style: TextStyle(
                 fontSize: 55,
@@ -464,28 +482,26 @@ class CourseBusinessCard01 extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'here is some text',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'here is some text',
+                  style: TextStyle(
+                    fontSize: 30,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
@@ -493,6 +509,8 @@ class CourseBusinessCard01 extends StatelessWidget {
 }
 
 class FontSize extends StatelessWidget {
+  const FontSize({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goBack() {
@@ -502,7 +520,7 @@ class FontSize extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Font Size'),
+        title: const Text('Font Size'),
       ),
       backgroundColor: Colors.teal.shade600,
       body: SafeArea(
@@ -512,13 +530,13 @@ class FontSize extends StatelessWidget {
             Container(
               height: 0,
             ),
-            CircleAvatar(
+            const CircleAvatar(
               radius: 75,
               backgroundColor: Colors.black12,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
-            Text(
+            const Text(
               'Phil Anderson',
               style: TextStyle(
                 fontSize: 55,
@@ -536,108 +554,96 @@ class FontSize extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'this text is size 10',
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'this text is size 10',
+                  style: TextStyle(
+                    fontSize: 10,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'this text is size 20',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'this text is size 20',
+                  style: TextStyle(
+                    fontSize: 20,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'this text is size 30',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'this text is size 30',
+                  style: TextStyle(
+                    fontSize: 30,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'this text is size 40',
-                    style: TextStyle(
-                      fontSize: 40,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'this text is size 40',
+                  style: TextStyle(
+                    fontSize: 40,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'this text is size 50',
-                    style: TextStyle(
-                      fontSize: 50,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'this text is size 50',
+                  style: TextStyle(
+                    fontSize: 50,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'this text is size 60',
-                    style: TextStyle(
-                      fontSize: 60,
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'this text is size 60',
+                  style: TextStyle(
+                    fontSize: 60,
                   ),
-                  Container(
-                    width: 10,
-                  ),
-                ],
-              ),
+                ),
+                Container(
+                  width: 10,
+                ),
+              ],
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
@@ -645,49 +651,52 @@ class FontSize extends StatelessWidget {
 }
 
 class FontSizeWholePage extends StatelessWidget {
+  const FontSizeWholePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     gotoGridViewOfClickableImages() {
       print('going to grid view of clickable images');
       Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => GridViewOfClickableImages()),
+        MaterialPageRoute(
+            builder: (context) => const GridViewOfClickableImages()),
       );
     }
 
     goToBlankPageTemplate() {
       print('going to blank page template');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => BlankPageTemplate()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
     }
 
     goToBlankStatefulWidget() {
       print('going to blank stateful widget template');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => BlankStatefulWidget()));
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BlankStatefulWidget()));
     }
 
     goToCourseLayoutExercise() {
       print('going to course layout exercise');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CourseLayoutExercise()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const CourseLayoutExercise()));
     }
 
     goToCourseBusinessCard01() {
       print('going to course layout exercise');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => CourseBusinessCard01()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const CourseBusinessCard01()));
     }
 
     goToFontSize() {
       print('going to font size');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => FontSize()));
+          .push(MaterialPageRoute(builder: (context) => const FontSize()));
     }
 
     goToIcons() {
       print('going to icons');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => DisplayIcons()));
+          .push(MaterialPageRoute(builder: (context) => const DisplayIcons()));
     }
 
     goBack() {
@@ -699,7 +708,7 @@ class FontSizeWholePage extends StatelessWidget {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 2),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Set Font Size For Whole Page'),
+          title: const Text('Set Font Size For Whole Page'),
         ),
         body: GridView.count(
           crossAxisCount: 7,
@@ -708,49 +717,49 @@ class FontSizeWholePage extends StatelessWidget {
               return ElevatedButton(
                 key: null,
                 onPressed: gotoGridViewOfClickableImages,
-                child: Text("Page 3 - Grid With Images"),
+                child: const Text("Page 3 - Grid With Images"),
               );
             } else if (index == 1) {
               return ElevatedButton(
                 key: null,
                 onPressed: goBack,
-                child: Text("Back"),
+                child: const Text("Back"),
               );
             } else if (index == 3) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToBlankPageTemplate,
-                child: Text("Blank Page Template"),
+                child: const Text("Blank Page Template"),
               );
             } else if (index == 4) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToBlankStatefulWidget,
-                child: Text("Blank Stateful Widget"),
+                child: const Text("Blank Stateful Widget"),
               );
             } else if (index == 7) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToCourseLayoutExercise,
-                child: Text("Course Layout Exercise"),
+                child: const Text("Course Layout Exercise"),
               );
             } else if (index == 8) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToCourseBusinessCard01,
-                child: Text("Course Business Card"),
+                child: const Text("Course Business Card"),
               );
             } else if (index == 9) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToFontSize,
-                child: Text("Font Size"),
+                child: const Text("Font Size"),
               );
             } else if (index == 10) {
               return ElevatedButton(
                 key: null,
                 onPressed: goToIcons,
-                child: Text("Icons"),
+                child: const Text("Icons"),
               );
             } else {
               return Center(
@@ -764,7 +773,7 @@ class FontSizeWholePage extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.teal.shade800,
-          child: Text(
+          child: const Text(
             'back',
             style: TextStyle(fontSize: 8),
           ),
@@ -776,6 +785,8 @@ class FontSizeWholePage extends StatelessWidget {
 }
 
 class DisplayIcons extends StatelessWidget {
+  const DisplayIcons({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     goBack() {
@@ -785,7 +796,7 @@ class DisplayIcons extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Icons'),
+        title: const Text('Icons'),
       ),
       backgroundColor: Colors.teal.shade600,
       body: SafeArea(
@@ -795,88 +806,80 @@ class DisplayIcons extends StatelessWidget {
             Container(
               height: 0,
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'add',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color(0xFFFFC107),
-                    ),
-                  ),
-                  Icon(
-                    Icons.add,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'add',
+                  style: TextStyle(
+                    fontSize: 40,
                     color: Color(0xFFFFC107),
-                    size: 80,
                   ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.add,
+                  color: Color(0xFFFFC107),
+                  size: 80,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'back',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color(0xFFFFC107),
-                    ),
-                  ),
-                  Icon(
-                    Icons.arrow_back,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'back',
+                  style: TextStyle(
+                    fontSize: 40,
                     color: Color(0xFFFFC107),
-                    size: 80,
                   ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.arrow_back,
+                  color: Color(0xFFFFC107),
+                  size: 80,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'pool',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color(0xFFFFC107),
-                    ),
-                  ),
-                  Icon(
-                    Icons.pool,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'pool',
+                  style: TextStyle(
+                    fontSize: 40,
                     color: Color(0xFFFFC107),
-                    size: 80,
                   ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.pool,
+                  color: Color(0xFFFFC107),
+                  size: 80,
+                ),
+              ],
             ),
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'shopping',
-                    style: TextStyle(
-                      fontSize: 40,
-                      color: Color(0xFFFFC107),
-                    ),
-                  ),
-                  Icon(
-                    Icons.add_shopping_cart,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text(
+                  'shopping',
+                  style: TextStyle(
+                    fontSize: 40,
                     color: Color(0xFFFFC107),
-                    size: 80,
                   ),
-                ],
-              ),
+                ),
+                Icon(
+                  Icons.add_shopping_cart,
+                  color: Color(0xFFFFC107),
+                  size: 80,
+                ),
+              ],
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.teal.shade800,
-        child: Text("Back"),
+        child: const Text("Back"),
         onPressed: goBack,
       ),
     );
