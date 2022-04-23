@@ -26,6 +26,7 @@
     - [font size pixels](#font-size-pixels)
     - [font size em](#font-size-em)
     - [font size to fit into given space](#font-size-to-fit-into-given-space)
+    - [font size for a whole page](#font-size-for-a-whole-page)
     - [max lines with ellipsis overflow](#max-lines-with-ellipsis-overflow)
     - [font colour](#font-colour)
     - [font weight eg bold](#font-weight-eg-bold)
@@ -294,6 +295,31 @@ AutoSizeText(
   style: TextStyle(fontSize: 20),
   maxLines: 2,
 )
+```
+
+### font size for a whole page
+
+we can scale the font size for our entire page
+
+```java
+return MediaQuery(
+  data: MediaQuery.of(context).copyWith(textScaleFactor: 2),
+  child: Scaffold(
+    appBar: AppBar(
+      title: const Text('Scale Text For Page'),
+    ),
+    body: GridView.count(
+      crossAxisCount: 8,
+      children: List.generate(8, (index) {
+        return ElevatedButton(
+            key: null,
+            onPressed: goBack,
+            child: const Text("Back"),
+        );
+      }),
+    ),
+  ),
+);
 ```
 
 ### max lines with ellipsis overflow

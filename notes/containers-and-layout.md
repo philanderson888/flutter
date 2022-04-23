@@ -930,7 +930,7 @@ ConstrainedBox(
 
 ## expanded 
 
-expanded allows us to expand our container to fill all of the available space
+expanded fills the available space, and allocates space to each item in proportion automatically 
 
 ### expanded01
 
