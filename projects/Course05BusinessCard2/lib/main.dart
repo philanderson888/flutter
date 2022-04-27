@@ -187,7 +187,7 @@ class GridAToZ extends StatelessWidget {
       ),
       PageItem(
         functionName: () {
-          print('going to dice page 01 - basic page with container flex set');
+          print('going to Dice01');
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const Dice01()));
         },
@@ -195,9 +195,17 @@ class GridAToZ extends StatelessWidget {
       ),
       PageItem(
         functionName: () {
-          print('going to dice page');
+          print('going to Dice02');
           Navigator.of(context)
               .push(MaterialPageRoute(builder: (context) => const Dice02()));
+        },
+        buttonText: "Dice 02 ",
+      ),
+      PageItem(
+        functionName: () {
+          print('going to Dice03');
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const Dice03()));
         },
         buttonText: "Dice 02 ",
       ),
@@ -725,7 +733,7 @@ class Dice01 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Course "Dicee" App'),
+        title: const Text('Roll The Dice'),
         backgroundColor: Colors.red,
       ),
       body: const DicePage01(),
@@ -775,19 +783,29 @@ class Dice02 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Course "Dicee" App'),
+        title: const Text('Roll The Dice'),
         backgroundColor: Colors.red,
       ),
-      body: const DicePage01(),
+      body: DicePage02(),
     );
   }
 }
 
 class DicePage02 extends StatelessWidget {
-  const DicePage02({Key? key}) : super(key: key);
+  DicePage02({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    int leftDiceNumber = 4;
+    int rightDiceNumber = 5;
+
+    onDiceRoll() {
+      print('you rolled the dice');
+      leftDiceNumber++;
+      rightDiceNumber++;
+      print('dice numbers $leftDiceNumber and $rightDiceNumber');
+    }
+
     return Container(
       color: Colors.red,
       child: Row(
@@ -798,7 +816,10 @@ class DicePage02 extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: Image.asset('images/dice1.png'),
+            child: TextButton(
+              onPressed: onDiceRoll,
+              child: Image.asset('images/dice$leftDiceNumber.png'),
+            ),
           ),
           Expanded(
             flex: 1,
@@ -806,7 +827,68 @@ class DicePage02 extends StatelessWidget {
           ),
           Expanded(
             flex: 4,
-            child: Image.asset('images/dice2.png'),
+            child: TextButton(
+              onPressed: onDiceRoll,
+              child: Image.asset('images/dice$rightDiceNumber.png'),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Dice03 extends StatefulWidget {
+  const Dice03({Key? key}) : super(key: key);
+
+  @override
+  Dice03State createState() => Dice03State();
+}
+
+class Dice03State extends State {
+  int counter = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    int leftDiceNumber = 4;
+    int rightDiceNumber = 5;
+
+    onDiceRoll() {
+      print('you rolled the dice');
+      leftDiceNumber++;
+      rightDiceNumber++;
+      print('dice numbers $leftDiceNumber and $rightDiceNumber');
+    }
+
+    return Container(
+      color: Colors.red,
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 4,
+            child: TextButton(
+              onPressed: onDiceRoll,
+              child: Image.asset('images/dice$leftDiceNumber.png'),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 4,
+            child: TextButton(
+              onPressed: onDiceRoll,
+              child: Image.asset('images/dice$rightDiceNumber.png'),
+            ),
           ),
           Expanded(
             flex: 1,
