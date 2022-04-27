@@ -46,6 +46,8 @@ flutter can be tried out instantly online using flutter's own website at https:/
 
 It can also be used at [Flutter Studio](https://flutterstudio.app)
 
+also `dart` can be run at https://dartpad.dev
+
 ## samples
 
 to see examples of samples available online please see

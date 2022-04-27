@@ -45,6 +45,7 @@ github@philanderson.co.uk
 - May 2020 - Initial Build
 - August 2021 - Refactor Notes
 - November 2021 - adding much more detail - components, unit tests, api, styling, list view, text input fields, text labels, buttons, alert dialog boxes, and more
+- - April 2022 - adding an ongoing 'live' project where latest features are added to this live project demo which holds examples of many teaching features at once, all inside the one app.  Currently using the Course05BusinessCard2 app but hopefully will rename this at a future date; at the moment just running with this name.
 
 ## introduction
 
