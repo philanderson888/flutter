@@ -1,5 +1,5 @@
-name: business_card
-description: Flutter Business Card
+name: flutter_teaching_app
+description: Flutter Teaching App
 publish_to: 'none'
 environment:
   sdk: ">=2.16.1 <3.0.0"
