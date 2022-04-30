@@ -24,4 +24,5 @@ flutter:
       - asset: fonts/SourceSansPro-Regular.ttf
   assets:
     - images/
+    - assets/
 
