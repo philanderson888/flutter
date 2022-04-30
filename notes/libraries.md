@@ -7,19 +7,31 @@
   - [introduction](#introduction)
   - [built-in libraries](#built-in-libraries)
   - [flutter commands](#flutter-commands)
-  - [import math library](#import-math-library)
+  - [flutter and dart](#flutter-and-dart)
 
 ## introduction
 
-it is possible to import libraries in 2 ways into your application
+libraries in use in our project are shown in the
 
-- via flutter
-- via dart
+- `pubspec.yaml` file
 
-the equivalent file of `package.json` which hopefully you are familiar with from `javascript` is the file `pubspec.yaml` which is the list of all `public` libraries included in your project.  These libraries are available from the `https://pub.dev/` site.
+and dependencies are locked in the 
 
-- pubspec.yaml library dependency file
-- pubspec.lock can lock versions to a fixed version so that incompatibility issues do not form
+- `pubspec.lock` file
+
+to add a new library, search at `https://pub.dev`
+
+then add the library as a dependency in our code as an `import` statement
+
+```java
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+```
+
+then run
+
+`pub.get` command to install the packages.  this places them in the `pubspec.yaml` file and the dependency relationships are locked in the `pubspec.lock` file
+
 
 ## built-in libraries
 
@@ -53,7 +65,11 @@ flutter pub outdated
 flutter pub upgrade
 ```
 
-## import math library
 
-as an example import the `math` library using
 
+## flutter and dart
+
+it is possible to import libraries in 2 ways into your application
+
+- via flutter
+- via dart
