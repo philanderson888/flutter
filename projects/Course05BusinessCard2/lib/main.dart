@@ -67,7 +67,7 @@ class GridAToZ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const gridSize = 54;
-    const initialListLength = 4;
+    const initialListLength = 0;
 
     goBack() {
       print('going back');
@@ -139,10 +139,10 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const Dice03()));
     }
 
-    goToDisplayFonts() {
+    goToFonts() {
       print('going to font');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const DisplayFonts()));
+          .push(MaterialPageRoute(builder: (context) => const Fonts01()));
     }
 
     goToDivider() {
@@ -300,8 +300,8 @@ class GridAToZ extends StatelessWidget {
 
     List<PageItem> pageItems = [
       PageItem(
-        functionName: null,
-        buttonText: " . ",
+        functionName: goBack,
+        buttonText: " Back ",
       ),
       PageItem(
         functionName: doNothing,
@@ -318,6 +318,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToCourseLayoutExercise,
         buttonText: "Course Layout Exercise",
+      ),
+      PageItem(
+        functionName: goToClass,
+        buttonText: "Class / Constructor",
       ),
       PageItem(
         functionName: goToDivider,
@@ -358,6 +362,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToFontAwesomeIcons,
         buttonText: "Icon Font Awesome",
+      ),
+      PageItem(
+        functionName: goToFonts,
+        buttonText: "Fonts",
       ),
       PageItem(
         functionName: goToFontSize,
@@ -476,38 +484,7 @@ class GridAToZ extends StatelessWidget {
         body: GridView.count(
           crossAxisCount: 9,
           children: List.generate(gridSize, (index) {
-            if (index == 0) {
-              return ElevatedButton(
-                key: null,
-                onPressed: goBack,
-                child: const Text("Back"),
-              );
-            } else if (index == 1) {
-              return ElevatedButton(
-                key: null,
-                onPressed: goToClass,
-                child: const Text("Class / Constructor"),
-              );
-            } else if (index == 2) {
-              return ElevatedButton(
-                key: null,
-                onPressed: goToDisplayFonts,
-                child: const Text("Fonts"),
-              );
-            } else if (index == 3) {
-              return ElevatedButton(
-                key: null,
-                onPressed: goToImageCircularAvatar,
-                child: const Text("Image - Circular Avatar"),
-              );
-            } else if (index == initialListLength) {
-              return ElevatedButton(
-                key: null,
-                onPressed: gotoPadding01,
-                child: const Text("Padding"),
-              );
-            } else if ((index >= initialListLength) &&
-                (index < initialListLength + pageItems.length)) {
+            if (index < pageItems.length) {
               return ElevatedButton(
                 key: null,
                 onPressed: pageItems[index - initialListLength].functionName,
@@ -1042,8 +1019,8 @@ class Dice03State extends State {
   }
 }
 
-class DisplayFonts extends StatelessWidget {
-  const DisplayFonts({Key? key}) : super(key: key);
+class Fonts01 extends StatelessWidget {
+  const Fonts01({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
