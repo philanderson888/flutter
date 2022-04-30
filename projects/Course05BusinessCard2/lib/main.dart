@@ -1,6 +1,7 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'dart:math';
 
 void main() => runApp(const MyApp());
 
@@ -119,6 +120,24 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
     }
 
+    goToDice01() {
+      print('going to Dice01');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Dice01()));
+    }
+
+    goToDice02() {
+      print('going to Dice02');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Dice02()));
+    }
+
+    goToDice03() {
+      print('going to Dice03');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Dice03()));
+    }
+
     goToDisplayFonts() {
       print('going to font');
       Navigator.of(context)
@@ -137,10 +156,22 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const Empty()));
     }
 
-    goToListTile() {
-      print('going to list tile');
+    goToExpanded01() {
+      print('going to expanded 01');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const ListTile01()));
+          .push(MaterialPageRoute(builder: (context) => const Expanded01()));
+    }
+
+    goToExpanded02() {
+      print('going to expanded 02');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Expanded02()));
+    }
+
+    goToExpanded03() {
+      print('going to expanded 03');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Expanded03()));
     }
 
     goToFontSize() {
@@ -155,13 +186,22 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const FontSizeWholePage()));
     }
 
-    printListOfStrings() {
-      print(" ");
-      print(" ");
-      print("printing contents of a list<string>");
-      for (var buttonText in buttonTexts) {
-        print(buttonText);
-      }
+    goToFontAwesomeIcons() {
+      print('going to font awesome icons');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
+    }
+
+    goToIcons() {
+      print('going to icons');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const DisplayIcons()));
+    }
+
+    goToListTile() {
+      print('going to list tile');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const ListTile01()));
     }
 
     goToMaterialDesignColor() {
@@ -176,38 +216,51 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const MediaQuery01()));
     }
 
+    gotoPadding01() {
+      print('going to icons');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Padding01()));
+    }
+
+    goToSizedBox() {
+      print("TODO: sized box - fixed container sizes");
+    }
+
+    goToTextScaleFactor() {
+      print('going to text scale factor');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const TextScaleFactor01()));
+    }
+
+    goToTypeDef() {
+      print("TODO: type def");
+    }
+
+    printListOfStrings() {
+      print(" ");
+      print(" ");
+      print("printing contents of a list<string>");
+      for (var buttonText in buttonTexts) {
+        print(buttonText);
+      }
+    }
+
     List<PageItem> pageItems = [
       PageItem(
         functionName: doNothing,
         buttonText: "do nothing",
       ),
       PageItem(
-        functionName: goToListTile,
-        buttonText: "List Tile",
+        functionName: goToDice01,
+        buttonText: "Dice 01 ",
       ),
       PageItem(
-        functionName: () {
-          print('going to Dice01');
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const Dice01()));
-        },
-        buttonText: "Dice 01",
-      ),
-      PageItem(
-        functionName: () {
-          print('going to Dice02');
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const Dice02()));
-        },
+        functionName: goToDice02,
         buttonText: "Dice 02 ",
       ),
       PageItem(
-        functionName: () {
-          print('going to Dice03');
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => const Dice03()));
-        },
-        buttonText: "Dice 02 ",
+        functionName: goToDice03,
+        buttonText: "Dice 03 ",
       ),
       PageItem(
         functionName: goToBusinessCard,
@@ -218,44 +271,28 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Empty Page",
       ),
       PageItem(
-        functionName: () {
-          print('going to expanded 01');
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const Expanded01()));
-        },
+        functionName: goToExpanded01,
         buttonText: "Expand 01",
       ),
       PageItem(
-        functionName: () {
-          print('going to expanded 02');
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const Expanded02()));
-        },
-        buttonText: "Expand 02 Fixed Margins",
+        functionName: goToExpanded02,
+        buttonText: "Expand 02",
       ),
       PageItem(
-        functionName: () {
-          print('going to expanded 03');
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const Expanded03()));
-        },
-        buttonText: "Expand 03 Flex Ratios",
+        functionName: goToExpanded03,
+        buttonText: "Expand 03",
       ),
       PageItem(
-        functionName: () {
-          print('going to icons');
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const DisplayIcons()));
-        },
+        functionName: goToIcons,
         buttonText: "Icons",
       ),
       PageItem(
-        functionName: () {
-          print('going to font awesome icons');
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const BusinessCard()));
-        },
+        functionName: goToFontAwesomeIcons,
         buttonText: "Icon Font Awesome",
+      ),
+      PageItem(
+        functionName: goToListTile,
+        buttonText: "List Tile",
       ),
       PageItem(
         functionName: goToMaterialDesignColor,
@@ -266,25 +303,17 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Media Query",
       ),
       PageItem(
-        functionName: () {
-          print("TODO: sized box - fixed container sizes");
-        },
+        functionName: goToSizedBox,
         buttonText: "ToDo - Sized Box",
       ),
       PageItem(
-        functionName: () {
-          print('going to text scale factor');
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const TextScaleFactor01()));
-        },
+        functionName: goToTextScaleFactor,
         buttonText: "text Scale Factor",
       ),
       PageItem(
-          functionName: () {
-            print("TODO: typedef can be used to declare a custom type");
-            print("typedef myListOfItems = List<SomeClass>");
-          },
-          buttonText: "typedef"),
+        functionName: goToTypeDef,
+        buttonText: "typedef",
+      ),
     ];
 
     printListOfInstances() {
@@ -298,12 +327,6 @@ class GridAToZ extends StatelessWidget {
             pageItem.buttonText +
             '" }');
       }
-    }
-
-    gotoPadding01() {
-      print('going to icons');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Padding01()));
     }
 
     return MediaQuery(
@@ -803,7 +826,7 @@ class DicePage02 extends StatelessWidget {
       print('you rolled the dice');
       leftDiceNumber++;
       rightDiceNumber++;
-      print('dice numbers $leftDiceNumber and $rightDiceNumber');
+      print('dice numberrrrs $leftDiceNumber and $rightDiceNumber');
     }
 
     return Container(
@@ -850,18 +873,21 @@ class Dice03 extends StatefulWidget {
 }
 
 class Dice03State extends State {
-  int counter = 0;
+  static var _random = Random();
+  int leftDiceNumber = _random.nextInt(6) + 1;
+  int rightDiceNumber = _random.nextInt(6) + 1;
 
   @override
   Widget build(BuildContext context) {
-    int leftDiceNumber = 4;
-    int rightDiceNumber = 5;
-
     onDiceRoll() {
-      print('you rolled the dice');
-      leftDiceNumber++;
-      rightDiceNumber++;
-      print('dice numbers $leftDiceNumber and $rightDiceNumber');
+      setState(
+        () => {
+          leftDiceNumber = _random.nextInt(6) + 1,
+          rightDiceNumber = _random.nextInt(6) + 1,
+          print(
+              'you rolled the dice - new numbers are $leftDiceNumber and $rightDiceNumber'),
+        },
+      );
     }
 
     return Container(
