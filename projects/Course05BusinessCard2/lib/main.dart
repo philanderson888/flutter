@@ -1,7 +1,9 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:english_words/english_words.dart';
 import 'dart:math';
+import 'dart:io';
 
 void main() => runApp(const MyApp());
 
@@ -276,6 +278,24 @@ class GridAToZ extends StatelessWidget {
       ),
     ];
 
+    printEnglishWords() {
+      int numberOfWords = 2;
+      String wordString = "";
+      nouns.take(numberOfWords).forEach((item) => wordString += ' ' + item);
+      print(numberOfWords.toString() + ' top nouns - ' + wordString);
+      wordString = "";
+      adjectives
+          .take(numberOfWords)
+          .forEach((item) => wordString += ' ' + item);
+      print(numberOfWords.toString() + ' top adjectives - ' + wordString);
+      print('syllables - beautiful has ' + syllables('beautiful').toString());
+      String wordPairs = "";
+      generateWordPairs()
+          .take(numberOfWords)
+          .forEach((item) => wordPairs += ' ' + item.toString());
+      print(numberOfWords.toString() + ' word pairs - ' + wordPairs);
+    }
+
     printListOfInstances() {
       print(" ");
       print(" ");
@@ -462,6 +482,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: doNothing,
         buttonText: " . ",
+      ),
+      PageItem(
+        functionName: printEnglishWords,
+        buttonText: "English Words",
       ),
       PageItem(
         functionName: printListOfInstances,

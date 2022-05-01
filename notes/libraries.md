@@ -30,8 +30,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 then run
 
-`pub.get` command to install the packages.  this places them in the `pubspec.yaml` file and the dependency relationships are locked in the `pubspec.lock` file
+`pub.get` or `flutter packages get` command to install the packages.  this places them in the `pubspec.yaml` file and the dependency relationships are locked in the `pubspec.lock` file
 
+we can also add the file directly to our `pubspec.yaml` file and run the same command `pub get` or `flutter packages get` to install them and make them available in our app.
 
 ## built-in libraries
 
