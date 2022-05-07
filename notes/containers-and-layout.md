@@ -36,6 +36,8 @@
   - [single child layout widgets](#single-child-layout-widgets)
   - [multi child layout widgets](#multi-child-layout-widgets)
   - [safe area](#safe-area)
+  - [clickable containers](#clickable-containers)
+    - [inkwell](#inkwell)
 
 ## introduction
 
@@ -1259,5 +1261,20 @@ when we build more complex apps we become concerned with the layout and how to e
 ```java
 body: SafeArea(
   child: Container(),
+),
+```
+
+## clickable containers
+
+to make a container clickable we can either use `inkwell` or `gesture detector`
+
+### inkwell
+
+```java
+child: InkWell(
+  onTap: playNote1,
+  child: Container(
+    color: Color(0xFFCA1E51),
+  ),
 ),
 ```
