@@ -10,6 +10,7 @@ dependencies:
   english_words: ^4.0.0
   flutter_icons: ^1.1.0
   font_awesome_flutter: ^10.1.0
+  audioplayers: ^0.20.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

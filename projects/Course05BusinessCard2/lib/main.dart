@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:english_words/english_words.dart';
 import 'dart:math';
 import 'dart:io';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(const MyApp());
 
@@ -71,6 +72,10 @@ class GridAToZ extends StatelessWidget {
     const gridSize = 54;
     const initialListLength = 0;
 
+    doNothing() {
+      print('doing nothing');
+    }
+
     goBack() {
       print('going back');
       Navigator.pop(context);
@@ -82,14 +87,10 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const AskAnyQuestion()));
     }
 
-    doNothing() {
-      print('doing nothing');
-    }
-
-    goToImageCircularAvatar() {
-      print('going to avatar circular image');
+    goToAudioPlayer() {
+      print('going to audio player');
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const ImageCircularAvatar()));
+          MaterialPageRoute(builder: (context) => const AudioPlayerWidget()));
     }
 
     goToBlankPageTemplate() {
@@ -98,10 +99,16 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
     }
 
-    goToStatefulWidget() {
-      print('going to blank stateful widget template');
+    goToBorderRadius() {
+      print('going to border radius');
       Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const BlankStatefulWidget()));
+          MaterialPageRoute(builder: (context) => const AudioPlayerWidget()));
+    }
+
+    goToBusinessCard() {
+      print('going to business card');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
     }
 
     goToClass() {
@@ -112,15 +119,10 @@ class GridAToZ extends StatelessWidget {
     }
 
     goToCourseLayoutExercise() {
+      print('TODO: fix this name as it is vague');
       print('going to course layout exercise');
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const CourseLayoutExercise()));
-    }
-
-    goToBusinessCard() {
-      print('going to business card');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
     }
 
     goToDice01() {
@@ -209,6 +211,18 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const DisplayIcons()));
     }
 
+    goToImageCircularAvatar() {
+      print('going to avatar circular image');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const ImageCircularAvatar()));
+    }
+
+    goToInkwell() {
+      print('going to inkwell example inside Xylophone');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Xylophone()));
+    }
+
     goToListTile() {
       print('going to list tile');
       Navigator.of(context)
@@ -249,6 +263,19 @@ class GridAToZ extends StatelessWidget {
 
     goToSizedBox() {
       print("TODO: sized box - fixed container sizes");
+    }
+
+    goToStatefulWidget() {
+      print('going to blank stateful widget template');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BlankStatefulWidget()));
+    }
+
+    goToStringInterpolationInVariable() {
+      print(
+          'going to string interpolation in variable - see note numbers as variable in string');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Xylophone()));
     }
 
     goToTextScaleFactor() {
@@ -328,8 +355,16 @@ class GridAToZ extends StatelessWidget {
         buttonText: "do nothing",
       ),
       PageItem(
+        functionName: goToAudioPlayer,
+        buttonText: "Audio Player",
+      ),
+      PageItem(
         functionName: goToBlankPageTemplate,
         buttonText: "Blank Page Template",
+      ),
+      PageItem(
+        functionName: goToBorderRadius,
+        buttonText: "Border Radius",
       ),
       PageItem(
         functionName: goToBusinessCard,
@@ -374,6 +409,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToImageCircularAvatar,
         buttonText: "Image Avatar",
+      ),
+      PageItem(
+        functionName: goToInkwell,
+        buttonText: "Inkwell",
       ),
       PageItem(
         functionName: gotoGridViewOfClickableImages,
@@ -426,6 +465,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToStatefulWidget,
         buttonText: "Stateful Widget",
+      ),
+      PageItem(
+        functionName: goToStringInterpolationInVariable,
+        buttonText: "String Interpolation In Variable",
       ),
       PageItem(
         functionName: goToTextScaleFactor,
@@ -576,6 +619,294 @@ class _AskAnyQuestionState extends State<AskAnyQuestion> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class AudioPlayerWidget extends StatefulWidget {
+  const AudioPlayerWidget({Key? key}) : super(key: key);
+
+  @override
+  State<AudioPlayerWidget> createState() => _AudioPlayerWidgetState();
+}
+
+class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
+  final player = AudioCache();
+  @override
+  Widget build(BuildContext context) {
+    var audioPlayer = AudioPlayer(
+      mode: PlayerMode.LOW_LATENCY,
+    );
+
+    var audioFileUrl =
+        'https://file-examples.com/storage/fe66818077626db7798c5e8/2017/11/file_example_MP3_700KB.mp3';
+    var localFileUrl = 'note2.wav';
+
+    playAudio() async {
+      audioPlayer = await player.play(
+        localFileUrl,
+      );
+    }
+
+    playRemoteAudio() async {
+      audioPlayer = await player.play(audioFileUrl);
+    }
+
+    loopAudio() async {
+      audioPlayer = await player.loop(localFileUrl);
+    }
+
+    pauseAudio() {
+      print(audioPlayer.state);
+      if (audioPlayer.state == PlayerState.PLAYING) {
+        audioPlayer.pause();
+      } else if (audioPlayer.state == PlayerState.PAUSED) {
+        audioPlayer.resume();
+      }
+    }
+
+    fastForwardAudio() {
+      if ((audioPlayer.state == PlayerState.PLAYING) |
+          (audioPlayer.state == PlayerState.PAUSED)) {
+        audioPlayer.seek(const Duration(milliseconds: 1200));
+      }
+    }
+
+    rewindAudio() {
+      if ((audioPlayer.state == PlayerState.PLAYING) |
+          (audioPlayer.state == PlayerState.PAUSED)) {
+        audioPlayer.seek(const Duration(milliseconds: -1200));
+      }
+    }
+
+    stopLoopAudio() {
+      audioPlayer.stop();
+    }
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Audio Player')),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Text(
+                  "Audio Player",
+                  style: TextStyle(
+                    fontSize: 55,
+                    fontFamily: "SourceSansPro",
+                    color: Color(0xFF5395d4),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFF85cfe6),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(40),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: playAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2013/07/13/11/42/audio-158489_1280.png'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: loopAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://c8.alamy.com/comp/K95095/flat-loop-icon-repeat-sign-reload-interface-button-multimedia-audio-K95095.jpg'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: pauseAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://cdn-icons-png.flaticon.com/512/189/189639.png'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: rewindAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://icons.iconarchive.com/icons/hopstarter/button/256/Button-Rewind-icon.png'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: fastForwardAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/256/Fast-forward-icon.png'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: TextButton(
+                              onPressed: stopLoopAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2013/07/12/12/22/stop-145678_960_720.png'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Text(
+                  "Remote Audio",
+                  style: TextStyle(
+                    fontSize: 55,
+                    fontFamily: "SourceSansPro",
+                    color: Color(0xFF5395d4),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            Expanded(
+              flex: 2,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
+                  Expanded(
+                    flex: 8,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color(0xFF85cfe6),
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(40),
+                        ),
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 10,
+                            child: Container(),
+                          ),
+                          Expanded(
+                            flex: 3,
+                            child: TextButton(
+                              onPressed: playRemoteAudio,
+                              child: Image(
+                                image: NetworkImage(
+                                    'https://cdn.pixabay.com/photo/2013/07/13/11/42/audio-158489_1280.png'),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 10,
+                            child: Container(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(),
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(),
+            ),
+          ],
         ),
       ),
     );
@@ -2012,8 +2343,20 @@ class Xylophone extends StatefulWidget {
 }
 
 class _XylophoneState extends State<Xylophone> {
+  final player = AudioCache();
+
   @override
   Widget build(BuildContext context) {
+    var audioPlayer = AudioPlayer(
+      mode: PlayerMode.LOW_LATENCY,
+    );
+
+    playNote(int noteNumber) async {
+      audioPlayer = await player.play(
+        'note$noteNumber.wav',
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Xylophone'),
@@ -2022,14 +2365,139 @@ class _XylophoneState extends State<Xylophone> {
       body: SafeArea(
         child: Container(
           color: Colors.amberAccent,
-          child: Column(children: <Widget>[
+          child: Row(children: <Widget>[
             Expanded(
               flex: 1,
               child: Container(),
             ),
             Expanded(
-              flex: 1,
-              child: Container(),
+              flex: 3,
+              child: Column(children: <Widget>[
+                Expanded(
+                  flex: 7,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(1);
+                    },
+                    child: Container(
+                      color: Color(0xFFCA1E51),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(2);
+                    },
+                    child: Container(
+                      color: Color(0xFFd62b20),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(3);
+                    },
+                    child: Container(
+                      color: Color(0xFFda791f),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(4);
+                    },
+                    child: Container(
+                      color: Color(0xFFc29020),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(5);
+                    },
+                    child: Container(
+                      color: Color(0xFF6b974f),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(6);
+                    },
+                    child: Container(
+                      color: Color(0xFF83c196),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(7);
+                    },
+                    child: Container(
+                      color: Color(0xFF77b7bb),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Container(),
+                ),
+                Expanded(
+                  flex: 10,
+                  child: InkWell(
+                    onTap: () {
+                      playNote(1);
+                    },
+                    child: Container(
+                      color: Color(0xFFa99aab),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 7,
+                  child: Container(),
+                ),
+              ]),
             ),
             Expanded(
               flex: 1,
