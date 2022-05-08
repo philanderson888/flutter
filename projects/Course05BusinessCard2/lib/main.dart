@@ -5,6 +5,7 @@ import 'package:english_words/english_words.dart';
 import 'dart:math';
 import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:meta/meta.dart';
 
 void main() => runApp(const MyApp());
 
@@ -147,6 +148,13 @@ class GridAToZ extends StatelessWidget {
       print('going to font');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Fonts01()));
+    }
+
+    goToFunctionReturnsComponent() {
+      print(
+          'viewing a function which returns a component - in this case, the Expanded component.  See the Xylophone example for its use here .. ');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Xylophone()));
     }
 
     goToDivider() {
@@ -397,6 +405,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToExpanded03,
         buttonText: "Expand 03",
+      ),
+      PageItem(
+        functionName: goToFunctionReturnsComponent,
+        buttonText: "Function returns a component",
       ),
       PageItem(
         functionName: gotoGridViewOfClickableImages,
@@ -2357,6 +2369,21 @@ class _XylophoneState extends State<Xylophone> {
       );
     }
 
+    Expanded buildXylophoneNote({
+      int note = 0,
+      Color color = Colors.white,
+    }) {
+      return Expanded(
+        flex: 10,
+        child: InkWell(
+          onTap: () => playNote(note),
+          child: Container(
+            color: color,
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Xylophone'),
@@ -2380,9 +2407,7 @@ class _XylophoneState extends State<Xylophone> {
                 Expanded(
                   flex: 10,
                   child: InkWell(
-                    onTap: () {
-                      playNote(1);
-                    },
+                    onTap: () => playNote(1),
                     child: Container(
                       color: Color(0xFFCA1E51),
                     ),
@@ -2392,46 +2417,25 @@ class _XylophoneState extends State<Xylophone> {
                   flex: 1,
                   child: Container(),
                 ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(2);
-                    },
-                    child: Container(
-                      color: Color(0xFFd62b20),
-                    ),
-                  ),
+                buildXylophoneNote(
+                  note: 2,
+                  color: Color(0xFFd62b20),
                 ),
                 Expanded(
                   flex: 1,
                   child: Container(),
                 ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(3);
-                    },
-                    child: Container(
-                      color: Color(0xFFda791f),
-                    ),
-                  ),
+                buildXylophoneNote(
+                  note: 3,
+                  color: Color(0xFFda791f),
                 ),
                 Expanded(
                   flex: 1,
                   child: Container(),
                 ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(4);
-                    },
-                    child: Container(
-                      color: Color(0xFFc29020),
-                    ),
-                  ),
+                buildXylophoneNote(
+                  note: 4,
+                  color: Color(0xFFc29020),
                 ),
                 Expanded(
                   flex: 1,
