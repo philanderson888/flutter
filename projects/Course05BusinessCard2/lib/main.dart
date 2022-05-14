@@ -580,10 +580,6 @@ class GridAToZ extends StatelessWidget {
       ),
       PageItem(
         functionName: doNothing,
-        buttonText: " . ",
-      ),
-      PageItem(
-        functionName: doNothing,
         buttonText: " Print ",
         buttonColor: categoryButtonColor,
       ),
@@ -616,12 +612,20 @@ class GridAToZ extends StatelessWidget {
               return ElevatedButton(
                 key: null,
                 onPressed: pageItems[index - initialListLength].functionName,
-                child: Center(
-                    child:
-                        Text(pageItems[index - initialListLength].buttonText)),
+                child: Padding(
+                  padding: const EdgeInsets.all(7.0),
+                  child: Center(
+                      child: Text(
+                          pageItems[index - initialListLength].buttonText)),
+                ),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
                       pageItems[index - initialListLength].buttonColor),
+                  shape: MaterialStateProperty.all<OutlinedBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
                 ),
               );
             } else {
