@@ -70,8 +70,10 @@ class GridAToZ extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const gridSize = 54;
+    const gridSize = 70;
+    const columnCount = 10;
     const initialListLength = 0;
+    const categoryButtonColor = Color(0xFFF2B64B);
 
     doNothing() {
       print('doing nothing');
@@ -148,6 +150,12 @@ class GridAToZ extends StatelessWidget {
       print('going to font');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Fonts01()));
+    }
+
+    goToFullScreen() {
+      print('going to full screen app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Quiz01()));
     }
 
     goToFunctionReturnsComponent() {
@@ -237,6 +245,12 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const ListTile01()));
     }
 
+    goToLayout01() {
+      print('going to row/column layout example');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Quiz02()));
+    }
+
     goToMaterialDesignColor() {
       print('going to material design color');
       Navigator.of(context).push(
@@ -253,6 +267,18 @@ class GridAToZ extends StatelessWidget {
       print('going to icons');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Padding01()));
+    }
+
+    goToQuiz01() {
+      print('going to quiz app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Quiz01()));
+    }
+
+    goToQuiz02() {
+      print('going to quiz02 app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Quiz02()));
     }
 
     goToRandom() {
@@ -284,6 +310,12 @@ class GridAToZ extends StatelessWidget {
           'going to string interpolation in variable - see note numbers as variable in string');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Xylophone()));
+    }
+
+    goToTextStyle() {
+      print('going to text style example');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Quiz01()));
     }
 
     goToTextScaleFactor() {
@@ -355,20 +387,26 @@ class GridAToZ extends StatelessWidget {
 
     List<PageItem> pageItems = [
       PageItem(
-        functionName: goBack,
-        buttonText: " Back ",
-      ),
-      PageItem(
         functionName: doNothing,
-        buttonText: "do nothing",
-      ),
-      PageItem(
-        functionName: goToAudioPlayer,
-        buttonText: "Audio Player",
+        buttonText: "Temp- lates ",
+        buttonColor: categoryButtonColor,
       ),
       PageItem(
         functionName: goToBlankPageTemplate,
         buttonText: "Blank Page Template",
+      ),
+      PageItem(
+        functionName: goToEmpty,
+        buttonText: "Empty Page",
+      ),
+      PageItem(
+        functionName: doNothing,
+        buttonText: "Comp onents ",
+        buttonColor: categoryButtonColor,
+      ),
+      PageItem(
+        functionName: goToAudioPlayer,
+        buttonText: "Audio Player",
       ),
       PageItem(
         functionName: goToBorderRadius,
@@ -391,10 +429,6 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Class / Constructor",
       ),
       PageItem(
-        functionName: goToEmpty,
-        buttonText: "Empty Page",
-      ),
-      PageItem(
         functionName: goToExpanded01,
         buttonText: "Expand 01",
       ),
@@ -405,6 +439,22 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToExpanded03,
         buttonText: "Expand 03",
+      ),
+      PageItem(
+        functionName: goToFonts,
+        buttonText: "Fonts",
+      ),
+      PageItem(
+        functionName: goToFontSize,
+        buttonText: "Font Size",
+      ),
+      PageItem(
+        functionName: goToFontSizeWholePage,
+        buttonText: "Font Size Whole Page",
+      ),
+      PageItem(
+        functionName: goToFullScreen,
+        buttonText: "Full Screen App",
       ),
       PageItem(
         functionName: goToFunctionReturnsComponent,
@@ -433,18 +483,6 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToFontAwesomeIcons,
         buttonText: "Icon Font Awesome",
-      ),
-      PageItem(
-        functionName: goToFonts,
-        buttonText: "Fonts",
-      ),
-      PageItem(
-        functionName: goToFontSize,
-        buttonText: "Font Size",
-      ),
-      PageItem(
-        functionName: goToFontSizeWholePage,
-        buttonText: "Font Size Whole Page",
       ),
       PageItem(
         functionName: goToListTile,
@@ -487,20 +525,26 @@ class GridAToZ extends StatelessWidget {
         buttonText: "text Scale Factor",
       ),
       PageItem(
+        functionName: goToTextStyle,
+        buttonText: "text style",
+      ),
+      PageItem(
         functionName: goToTypeDef,
         buttonText: "typedef",
       ),
       PageItem(
         functionName: doNothing,
-        buttonText: " . ",
+        buttonText: " Layout ",
+        buttonColor: categoryButtonColor,
+      ),
+      PageItem(
+        functionName: goToLayout01,
+        buttonText: "Layout Row/Column",
       ),
       PageItem(
         functionName: doNothing,
         buttonText: " Apps ",
-      ),
-      PageItem(
-        functionName: doNothing,
-        buttonText: " . ",
+        buttonColor: categoryButtonColor,
       ),
       PageItem(
         functionName: goToAskAnyQuestion,
@@ -523,6 +567,14 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Dice 03 ",
       ),
       PageItem(
+        functionName: goToQuiz01,
+        buttonText: "Quiz01 App",
+      ),
+      PageItem(
+        functionName: goToQuiz02,
+        buttonText: "Quiz02 App",
+      ),
+      PageItem(
         functionName: goToXylophone,
         buttonText: "Xylophone",
       ),
@@ -533,10 +585,7 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: doNothing,
         buttonText: " Print ",
-      ),
-      PageItem(
-        functionName: doNothing,
-        buttonText: " . ",
+        buttonColor: categoryButtonColor,
       ),
       PageItem(
         functionName: printEnglishWords,
@@ -561,13 +610,19 @@ class GridAToZ extends StatelessWidget {
           title: const Text('Main Index Gridview'),
         ),
         body: GridView.count(
-          crossAxisCount: 9,
+          crossAxisCount: columnCount,
           children: List.generate(gridSize, (index) {
             if (index < pageItems.length) {
               return ElevatedButton(
                 key: null,
                 onPressed: pageItems[index - initialListLength].functionName,
-                child: Text(pageItems[index - initialListLength].buttonText),
+                child: Center(
+                    child:
+                        Text(pageItems[index - initialListLength].buttonText)),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                      pageItems[index - initialListLength].buttonColor),
+                ),
               );
             } else {
               return Center(
@@ -2347,6 +2402,251 @@ class MediaQuery01 extends StatelessWidget {
   }
 }
 
+class Quiz01 extends StatelessWidget {
+  const Quiz01({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade900,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: Quiz01Page(),
+        ),
+      ),
+    );
+  }
+}
+
+class Quiz01Page extends StatefulWidget {
+  const Quiz01Page({Key? key}) : super(key: key);
+
+  @override
+  State<Quiz01Page> createState() => _Quiz01PageState();
+}
+
+class _Quiz01PageState extends State<Quiz01Page> {
+  doNothing() {
+    print('doing nothing');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: Text(
+                'This is a question - true or false?',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+              ),
+              onPressed: () {
+                print('you chose true');
+              },
+              child: Text(
+                'True',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+              ),
+              onPressed: () {
+                print('you chose false');
+              },
+              child: Text(
+                'False',
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class Quiz02 extends StatefulWidget {
+  const Quiz02({Key? key}) : super(key: key);
+
+  @override
+  State<Quiz02> createState() => _Quiz02State();
+}
+
+class _Quiz02State extends State<Quiz02> {
+  doNothing() {
+    print('doing nothing');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF46016E),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 1,
+                child: Container(),
+              ),
+              Expanded(
+                flex: 10,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Center(
+                          child: Text(
+                            'this is a question - true or false',
+                            style: TextStyle(
+                              fontSize: 50,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFF10FA91),
+                            ),
+                          ),
+                          onPressed: () {
+                            print('you chose true');
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    'True',
+                                    style: TextStyle(
+                                      fontSize: 50,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: TextButton(
+                          style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                              Color(0xFFC7024F),
+                            ),
+                          ),
+                          onPressed: () {
+                            print('you chose true');
+                          },
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    'True',
+                                    style: TextStyle(
+                                      fontSize: 50,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(),
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Container(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class Xylophone extends StatefulWidget {
   const Xylophone({Key? key}) : super(key: key);
 
@@ -2523,10 +2823,12 @@ List<String> buttonTexts = [
 class PageItem {
   dynamic functionName = () {};
   String buttonText = "";
+  Color buttonColor = Colors.transparent;
   // special constructor forces named parameters to be passed
   PageItem({
     this.functionName,
     this.buttonText = "",
+    this.buttonColor = const Color(0xFF417EFF),
   }) {
     // ensure parameters are not null
     assert(functionName != "", "A function name is required");
