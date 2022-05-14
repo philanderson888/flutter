@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:english_words/english_words.dart';
 import 'dart:math';
-import 'dart:io';
 import 'package:audioplayers/audioplayers.dart';
+import 'dart:io';
 import 'package:meta/meta.dart';
 
 void main() => runApp(const MyApp());
@@ -79,11 +79,6 @@ class GridAToZ extends StatelessWidget {
       print('doing nothing');
     }
 
-    goBack() {
-      print('going back');
-      Navigator.pop(context);
-    }
-
     goToAskAnyQuestion() {
       print('going to "ask any question"');
       Navigator.of(context).push(
@@ -112,6 +107,12 @@ class GridAToZ extends StatelessWidget {
       print('going to business card');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
+    }
+
+    goToButtonTypes() {
+      print('going to button types');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const ButtonTypes()));
     }
 
     goToClass() {
@@ -334,6 +335,44 @@ class GridAToZ extends StatelessWidget {
       print("TODO: type def");
     }
 
+    fileOperationsSynchronous() {
+      // write access only is granted so I have to learn to ask for permissions to make this a write version
+      // https://pub.dev/packages/permission/example
+
+      Directory('myfolder').createSync();
+
+      if (Directory('myfolder').existsSync()) {
+        print('myfolder directory exists, deleting it now');
+        Directory('myfolder').deleteSync();
+      }
+
+      if (File('testFile.txt').existsSync()) {
+        File('testFile.txt').deleteSync();
+      }
+
+      if (File('testFileRenamed.txt').existsSync()) {
+        File('testFileRenamed.txt').deleteSync();
+      }
+
+      File('testFile.txt').createSync();
+      File('testFile.txt').renameSync('testFileRenamed.txt');
+
+      File('testFileRenamed.txt').deleteSync();
+
+      if (File('testFileRenamed.txt').existsSync()) {
+        print('file still exists');
+      } else {
+        print('file renamed then deleted');
+      }
+
+      // asynchronous equivalent
+      // var thisFileExists = await io.File('testFileRenamed.txt').exists();
+      // if (thisFileExists) {}
+      // var thisFileRenamedExists = await io.File('testFileRenamed.txt').exists();
+
+      //stdout.writeln('this is a test output from dart.io library');
+    }
+
     List<PageItem> pageItems2 = [
       PageItem(
         functionName: doNothing,
@@ -388,7 +427,7 @@ class GridAToZ extends StatelessWidget {
     List<PageItem> pageItems = [
       PageItem(
         functionName: doNothing,
-        buttonText: "Temp- lates ",
+        buttonText: "Templates",
         buttonColor: categoryButtonColor,
       ),
       PageItem(
@@ -401,7 +440,7 @@ class GridAToZ extends StatelessWidget {
       ),
       PageItem(
         functionName: doNothing,
-        buttonText: "Comp onents ",
+        buttonText: "Components ",
         buttonColor: categoryButtonColor,
       ),
       PageItem(
@@ -415,6 +454,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToBusinessCard,
         buttonText: "Divider",
+      ),
+      PageItem(
+        functionName: goToButtonTypes,
+        buttonText: "Button Types",
       ),
       PageItem(
         functionName: goToCourseLayoutExercise,
@@ -584,6 +627,10 @@ class GridAToZ extends StatelessWidget {
         buttonColor: categoryButtonColor,
       ),
       PageItem(
+        functionName: fileOperationsSynchronous,
+        buttonText: "file operations synchronous",
+      ),
+      PageItem(
         functionName: printEnglishWords,
         buttonText: "English Words",
       ),
@@ -651,7 +698,7 @@ class AskAnyQuestion extends StatefulWidget {
 }
 
 class _AskAnyQuestionState extends State<AskAnyQuestion> {
-  static final _random = new Random();
+  static final _random = Random();
   int answer = _random.nextInt(5) + 1;
 
   getAnswer() {
@@ -765,7 +812,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               flex: 1,
               child: Container(),
             ),
-            Expanded(
+            const Expanded(
               flex: 1,
               child: Center(
                 child: Text(
@@ -794,7 +841,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   Expanded(
                     flex: 8,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color(0xFF85cfe6),
                         borderRadius: BorderRadius.all(
                           Radius.circular(40),
@@ -811,7 +858,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 1,
                             child: TextButton(
                               onPressed: playAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://cdn.pixabay.com/photo/2013/07/13/11/42/audio-158489_1280.png'),
                               ),
@@ -825,7 +872,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 1,
                             child: TextButton(
                               onPressed: loopAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://c8.alamy.com/comp/K95095/flat-loop-icon-repeat-sign-reload-interface-button-multimedia-audio-K95095.jpg'),
                               ),
@@ -839,7 +886,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 1,
                             child: TextButton(
                               onPressed: pauseAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://cdn-icons-png.flaticon.com/512/189/189639.png'),
                               ),
@@ -853,7 +900,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 1,
                             child: TextButton(
                               onPressed: rewindAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://icons.iconarchive.com/icons/hopstarter/button/256/Button-Rewind-icon.png'),
                               ),
@@ -867,7 +914,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 1,
                             child: TextButton(
                               onPressed: fastForwardAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://icons.iconarchive.com/icons/custom-icon-design/pretty-office-8/256/Fast-forward-icon.png'),
                               ),
@@ -881,7 +928,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 1,
                             child: TextButton(
                               onPressed: stopLoopAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://cdn.pixabay.com/photo/2013/07/12/12/22/stop-145678_960_720.png'),
                               ),
@@ -906,7 +953,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
               flex: 1,
               child: Container(),
             ),
-            Expanded(
+            const Expanded(
               flex: 1,
               child: Center(
                 child: Text(
@@ -935,7 +982,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                   Expanded(
                     flex: 8,
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color(0xFF85cfe6),
                         borderRadius: BorderRadius.all(
                           Radius.circular(40),
@@ -952,7 +999,7 @@ class _AudioPlayerWidgetState extends State<AudioPlayerWidget> {
                             flex: 3,
                             child: TextButton(
                               onPressed: playRemoteAudio,
-                              child: Image(
+                              child: const Image(
                                 image: NetworkImage(
                                     'https://cdn.pixabay.com/photo/2013/07/13/11/42/audio-158489_1280.png'),
                               ),
@@ -1204,6 +1251,15 @@ class BusinessCard extends StatelessWidget {
         onPressed: goBack,
       ),
     );
+  }
+}
+
+class ButtonTypes extends StatelessWidget {
+  const ButtonTypes({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
 
@@ -2413,7 +2469,7 @@ class Quiz01 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade900,
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: Quiz01Page(),
@@ -2441,10 +2497,10 @@ class _Quiz01PageState extends State<Quiz01Page> {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
-        Expanded(
+        const Expanded(
           flex: 1,
           child: Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: Center(
               child: Text(
                 'This is a question - true or false?',
@@ -2468,7 +2524,7 @@ class _Quiz01PageState extends State<Quiz01Page> {
               onPressed: () {
                 print('you chose true');
               },
-              child: Text(
+              child: const Text(
                 'True',
                 style: TextStyle(
                   fontSize: 25,
@@ -2489,7 +2545,7 @@ class _Quiz01PageState extends State<Quiz01Page> {
               onPressed: () {
                 print('you chose false');
               },
-              child: Text(
+              child: const Text(
                 'False',
                 style: TextStyle(
                   fontSize: 25,
@@ -2519,10 +2575,10 @@ class _Quiz02State extends State<Quiz02> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF46016E),
+      backgroundColor: const Color(0xFF46016E),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -2537,10 +2593,10 @@ class _Quiz02State extends State<Quiz02> {
                       flex: 1,
                       child: Container(),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: EdgeInsets.all(10.0),
                         child: Center(
                           child: Text(
                             'this is a question - true or false',
@@ -2559,7 +2615,7 @@ class _Quiz02State extends State<Quiz02> {
                         child: TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFF10FA91),
+                              const Color(0xFF10FA91),
                             ),
                           ),
                           onPressed: () {
@@ -2571,7 +2627,7 @@ class _Quiz02State extends State<Quiz02> {
                                 flex: 1,
                                 child: Container(),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Center(
                                   child: Text(
@@ -2599,7 +2655,7 @@ class _Quiz02State extends State<Quiz02> {
                         child: TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              Color(0xFFC7024F),
+                              const Color(0xFFC7024F),
                             ),
                           ),
                           onPressed: () {
@@ -2611,7 +2667,7 @@ class _Quiz02State extends State<Quiz02> {
                                 flex: 1,
                                 child: Container(),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Center(
                                   child: Text(
@@ -2661,12 +2717,12 @@ class Xylophone extends StatefulWidget {
 class _XylophoneState extends State<Xylophone> {
   final player = AudioCache();
 
+  var audioPlayer = AudioPlayer(
+    mode: PlayerMode.LOW_LATENCY,
+  );
+
   @override
   Widget build(BuildContext context) {
-    var audioPlayer = AudioPlayer(
-      mode: PlayerMode.LOW_LATENCY,
-    );
-
     playNote(int noteNumber) async {
       audioPlayer = await player.play(
         'note$noteNumber.wav',
@@ -2713,7 +2769,7 @@ class _XylophoneState extends State<Xylophone> {
                   child: InkWell(
                     onTap: () => playNote(1),
                     child: Container(
-                      color: Color(0xFFCA1E51),
+                      color: const Color(0xFFCA1E51),
                     ),
                   ),
                 ),
@@ -2723,7 +2779,7 @@ class _XylophoneState extends State<Xylophone> {
                 ),
                 buildXylophoneNote(
                   note: 2,
-                  color: Color(0xFFd62b20),
+                  color: const Color(0xFFd62b20),
                 ),
                 Expanded(
                   flex: 1,
@@ -2731,7 +2787,7 @@ class _XylophoneState extends State<Xylophone> {
                 ),
                 buildXylophoneNote(
                   note: 3,
-                  color: Color(0xFFda791f),
+                  color: const Color(0xFFda791f),
                 ),
                 Expanded(
                   flex: 1,
@@ -2739,7 +2795,7 @@ class _XylophoneState extends State<Xylophone> {
                 ),
                 buildXylophoneNote(
                   note: 4,
-                  color: Color(0xFFc29020),
+                  color: const Color(0xFFc29020),
                 ),
                 Expanded(
                   flex: 1,
@@ -2752,7 +2808,7 @@ class _XylophoneState extends State<Xylophone> {
                       playNote(5);
                     },
                     child: Container(
-                      color: Color(0xFF6b974f),
+                      color: const Color(0xFF6b974f),
                     ),
                   ),
                 ),
@@ -2767,7 +2823,7 @@ class _XylophoneState extends State<Xylophone> {
                       playNote(6);
                     },
                     child: Container(
-                      color: Color(0xFF83c196),
+                      color: const Color(0xFF83c196),
                     ),
                   ),
                 ),
@@ -2782,7 +2838,7 @@ class _XylophoneState extends State<Xylophone> {
                       playNote(7);
                     },
                     child: Container(
-                      color: Color(0xFF77b7bb),
+                      color: const Color(0xFF77b7bb),
                     ),
                   ),
                 ),
@@ -2797,7 +2853,7 @@ class _XylophoneState extends State<Xylophone> {
                       playNote(1);
                     },
                     child: Container(
-                      color: Color(0xFFa99aab),
+                      color: const Color(0xFFa99aab),
                     ),
                   ),
                 ),
@@ -2823,9 +2879,11 @@ List<String> buttonTexts = [
   "this is some more button text"
 ];
 
+doNothing() {}
+
 // Page Item
 class PageItem {
-  dynamic functionName = () {};
+  dynamic functionName = doNothing;
   String buttonText = "";
   Color buttonColor = Colors.transparent;
   // special constructor forces named parameters to be passed
@@ -2839,5 +2897,3 @@ class PageItem {
     assert(buttonText != "", "Button Text is required");
   }
 }
-
-nullFunction() {}
