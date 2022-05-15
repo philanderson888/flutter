@@ -2568,8 +2568,82 @@ class Quiz02 extends StatefulWidget {
 }
 
 class _Quiz02State extends State<Quiz02> {
+  int scoreCorrect = 0;
+  List<Widget> scoreKeeper = [
+    Expanded(
+      flex: 1,
+      child: Container(),
+    ),
+    Expanded(
+      flex: 1,
+      child: Icon(
+        Icons.close,
+        color: Colors.white,
+        size: 50,
+      ),
+    ),
+    Expanded(
+      flex: 1,
+      child: Icon(
+        Icons.close,
+        color: Colors.white,
+        size: 50,
+      ),
+    ),
+    Expanded(
+      flex: 1,
+      child: Icon(
+        Icons.close,
+        color: Colors.white,
+        size: 50,
+      ),
+    ),
+    Expanded(
+      flex: 1,
+      child: Container(),
+    ),
+  ];
+
   doNothing() {
     print('doing nothing');
+  }
+
+  var expandedCorrect = Expanded(
+    flex: 1,
+    child: Icon(
+      Icons.check,
+      color: Colors.white,
+      size: 50,
+    ),
+  );
+
+  var expandedIncorrect = Expanded(
+    flex: 1,
+    child: Icon(
+      Icons.close,
+      color: Colors.white,
+      size: 50,
+    ),
+  );
+
+  addToListCorrectAnswer() {
+    print('adding correct answer to list of scores');
+    setState(
+      () {
+        scoreKeeper.insert(scoreKeeper.length - 1, expandedCorrect);
+        scoreCorrect++;
+      },
+    );
+  }
+
+  addToListIncorrectAnswer() {
+    print('adding incorrect answer to list of scores');
+    setState(
+      () {
+        scoreKeeper.insert(scoreKeeper.length - 1, expandedIncorrect);
+        scoreCorrect--;
+      },
+    );
   }
 
   @override
@@ -2593,13 +2667,13 @@ class _Quiz02State extends State<Quiz02> {
                       flex: 1,
                       child: Container(),
                     ),
-                    const Expanded(
+                    Expanded(
                       flex: 10,
                       child: Padding(
                         padding: EdgeInsets.all(10.0),
                         child: Center(
                           child: Text(
-                            'this is a question - true or false',
+                            'this is a question - true or false...',
                             style: TextStyle(
                               fontSize: 50,
                               color: Colors.white,
@@ -2620,6 +2694,7 @@ class _Quiz02State extends State<Quiz02> {
                           ),
                           onPressed: () {
                             print('you chose true');
+                            addToListCorrectAnswer();
                           },
                           child: Row(
                             children: [
@@ -2659,7 +2734,8 @@ class _Quiz02State extends State<Quiz02> {
                             ),
                           ),
                           onPressed: () {
-                            print('you chose true');
+                            print('you chose false');
+                            addToListIncorrectAnswer();
                           },
                           child: Row(
                             children: [
@@ -2671,12 +2747,219 @@ class _Quiz02State extends State<Quiz02> {
                                 flex: 1,
                                 child: Center(
                                   child: Text(
-                                    'True',
+                                    'False',
                                     style: TextStyle(
                                       fontSize: 50,
                                       color: Colors.white,
                                     ),
                                   ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          color: Color(0xFF637DE6),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  'correct',
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          color: Color(0xFF637DE6),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  'incorrect',
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          color: Color(0xFF10FA91),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  'correct',
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          color: Color(0xFFC7024F),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  'incorrect',
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          color: Color(0xFF637DE6),
+                          child: Row(
+                            children: scoreKeeper,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Container(
+                          color: Color(0xFF637DE6),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
+                                flex: 1,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  scoreCorrect.toString(),
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Icon(
+                                  Icons.close,
+                                  color: Colors.white,
+                                  size: 50,
                                 ),
                               ),
                               Expanded(
