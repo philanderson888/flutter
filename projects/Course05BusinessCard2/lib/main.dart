@@ -2569,7 +2569,10 @@ class Quiz02 extends StatefulWidget {
 
 class _Quiz02State extends State<Quiz02> {
   int scoreCorrect = 0;
-  List<Widget> scoreKeeper = [
+  int scoreIncorrect = 0;
+  double quizPadding = 8.0;
+
+  List<Expanded> scoreKeeper = [
     Expanded(
       flex: 1,
       child: Container(),
@@ -2641,7 +2644,7 @@ class _Quiz02State extends State<Quiz02> {
     setState(
       () {
         scoreKeeper.insert(scoreKeeper.length - 1, expandedIncorrect);
-        scoreCorrect--;
+        scoreIncorrect++;
       },
     );
   }
@@ -2685,7 +2688,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
@@ -2726,7 +2729,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: TextButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
@@ -2767,7 +2770,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: Container(
                           color: Color(0xFF637DE6),
                           child: Row(
@@ -2806,7 +2809,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: Container(
                           color: Color(0xFF637DE6),
                           child: Row(
@@ -2845,7 +2848,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: Container(
                           color: Color(0xFF10FA91),
                           child: Row(
@@ -2884,7 +2887,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: Container(
                           color: Color(0xFFC7024F),
                           child: Row(
@@ -2923,7 +2926,7 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: Container(
                           color: Color(0xFF637DE6),
                           child: Row(
@@ -2935,13 +2938,13 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: EdgeInsets.all(quizPadding),
                         child: Container(
                           color: Color(0xFF637DE6),
                           child: Row(
                             children: <Widget>[
                               Expanded(
-                                flex: 1,
+                                flex: 4,
                                 child: Container(),
                               ),
                               Expanded(
@@ -2957,13 +2960,35 @@ class _Quiz02State extends State<Quiz02> {
                               Expanded(
                                 flex: 1,
                                 child: Icon(
+                                  Icons.check,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 4,
+                                child: Container(),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Text(
+                                  scoreIncorrect.toString(),
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Icon(
                                   Icons.close,
                                   color: Colors.white,
                                   size: 50,
                                 ),
                               ),
                               Expanded(
-                                flex: 1,
+                                flex: 4,
                                 child: Container(),
                               ),
                             ],
