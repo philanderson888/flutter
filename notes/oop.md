@@ -8,6 +8,7 @@
   - [class](#class)
   - [constructor](#constructor)
   - [instantiate](#instantiate)
+    - [other examples](#other-examples)
   - [getters and setters](#getters-and-setters)
 
 
@@ -62,6 +63,21 @@ then we instantiate using
 
 ```java
 var album = Album(userId: 10, id: 1, title: 'a title');
+```
+
+### other examples
+
+```java
+class TestClass {
+  int a = 0;
+  String b = "";
+  bool c = false;
+  TestClass({int a = 0, String b = "", bool c = false}) {
+    a = a;
+    b = b;
+    c = c;
+  }
+}
 ```
 
 ## getters and setters
