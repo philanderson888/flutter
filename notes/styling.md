@@ -44,6 +44,10 @@
     - [button with shadow](#button-with-shadow)
   - [default text style](#default-text-style)
   - [theme](#theme)
+    - [theme across entire app](#theme-across-entire-app)
+    - [theme across part of the app](#theme-across-part-of-the-app)
+    - [override default theme](#override-default-theme)
+    - [Using a Theme](#using-a-theme)
     - [textTheme](#texttheme)
     - [color foreground and background](#color-foreground-and-background)
     - [theme font family](#theme-font-family)
@@ -675,6 +679,64 @@ return new MaterialApp(
 ## theme
 
 themes apply global styling across the app, so are very useful to provide a coherency of styling 
+
+- https://docs.flutter.dev/cookbook/design/themes
+
+### theme across entire app
+
+the `theme` is supplied as a `ThemeData` object which is passed into the `MaterialApp` constructor 
+
+```java
+MaterialApp(
+  theme: ThemeData(
+    brightness: Brightness.dark
+    primaryColor: ...
+    fontFamily: 'Georgia',
+    textTheme: TextTheme(
+      headline1: TextStyle(fontSize:72.0, fontWeight: FontWeight.bold),
+    )
+  ),
+),
+```
+
+### theme across part of the app
+
+we override the default theme using the `Theme()` component which holds `data: ThemeData` object as before
+
+```java
+Theme(
+  // Create a unique theme with `ThemeData`
+  data: ThemeData(
+    splashColor: Colors.yellow,
+  ),
+  child: FloatingActionButton(
+    onPressed: () {},
+    child: const Icon(Icons.add),
+  ),
+);
+```
+
+### override default theme
+
+to override part of the default theme
+
+```java
+Theme(
+  data: Theme.of(context).copyWith(splashColor: ...),
+  child: Container(),
+),
+```
+
+### Using a Theme
+
+to use a theme we call
+
+```java
+Container(
+  color: Theme.of(context).colorScheme.secondary,
+  child: Text(style: Theme.of(context).textTheme.headline6),
+)
+```
 
 ### textTheme
 
