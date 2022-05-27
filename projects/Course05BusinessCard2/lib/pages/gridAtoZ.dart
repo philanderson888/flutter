@@ -12,6 +12,8 @@ import 'quiz02.dart';
 import 'padding.dart';
 import 'destini01.dart';
 import 'destini02.dart';
+import 'destini03.dart';
+import 'bmiCalculator01.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -60,6 +62,12 @@ class GridAToZ extends StatelessWidget {
       print('going to blank page template');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
+    }
+
+    goToBmiCalculator01() {
+      print('going to BMI Calculator');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BmiCalculator01()));
     }
 
     goToBorderRadius() {
@@ -125,9 +133,15 @@ class GridAToZ extends StatelessWidget {
     }
 
     goToDestini02() {
-      print('going to destini app');
+      print('going to destini app - containers linking into choices');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Destini02()));
+    }
+
+    goToDestini03() {
+      print('going to destini app - responding to choices');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Destini03()));
     }
 
     goToDivider() {
@@ -334,11 +348,11 @@ class GridAToZ extends StatelessWidget {
       // write access only is granted so I have to learn to ask for permissions to make this a write version
       // https://pub.dev/packages/permission/example
 
-      Directory('myfolder').createSync();
+      Directory('myFolder').createSync();
 
-      if (Directory('myfolder').existsSync()) {
-        print('myfolder directory exists, deleting it now');
-        Directory('myfolder').deleteSync();
+      if (Directory('myFolder').existsSync()) {
+        print('myFolder directory exists, deleting it now');
+        Directory('myFolder').deleteSync();
       }
 
       if (File('testFile.txt').existsSync()) {
@@ -601,6 +615,10 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Ask Any Question",
       ),
       PageItem(
+        functionName: goToBmiCalculator01,
+        buttonText: "BMI Calculator 01",
+      ),
+      PageItem(
         functionName: goToBusinessCard,
         buttonText: "Business Card",
       ),
@@ -611,6 +629,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToDestini02,
         buttonText: " Destini 02",
+      ),
+      PageItem(
+        functionName: goToDestini03,
+        buttonText: " Destini 03",
       ),
       PageItem(
         functionName: goToDice01,

@@ -11,4 +11,12 @@ class DestiniStory {
     this.choice1 = choice1;
     this.choice2 = choice2;
   }
+
+  getChoice1() {
+    return this.choice1;
+  }
+
+  getChoice2() {
+    return this.choice2;
+  }
 }

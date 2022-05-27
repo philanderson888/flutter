@@ -8,13 +8,13 @@ class Destini02 extends StatefulWidget {
   State<Destini02> createState() => _Destini02State();
 }
 
-var storyBrain = DestiniStoryBrain();
-var story = storyBrain.getStory();
-
 class _Destini02State extends State<Destini02> {
+  static var storyBrain = DestiniStoryBrain();
+
   @override
   Widget build(BuildContext context) {
     print('hello');
+    var story = storyBrain.getStory(0);
     print('${story.storyTitle}');
     return Scaffold(
       body: Container(
@@ -49,7 +49,7 @@ class _Destini02State extends State<Destini02> {
                         color: Colors.green,
                         child: Center(
                           child: Text(
-                            'a container',
+                            story.storyTitle,
                             style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                         ),
@@ -61,7 +61,7 @@ class _Destini02State extends State<Destini02> {
                         color: Colors.blue,
                         child: Center(
                           child: Text(
-                            'a container',
+                            story.getChoice1(),
                             style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                         ),
@@ -73,7 +73,7 @@ class _Destini02State extends State<Destini02> {
                         color: Colors.red,
                         child: Center(
                           child: Text(
-                            'a container',
+                            story.getChoice2(),
                             style: TextStyle(fontSize: 50, color: Colors.white),
                           ),
                         ),
