@@ -7,16 +7,16 @@ class DestiniStory {
     required choice1,
     required choice2,
   }) {
-    this.storyTitle = storyTitle;
-    this.choice1 = choice1;
-    this.choice2 = choice2;
+    storyTitle = storyTitle;
+    choice1 = choice1;
+    choice2 = choice2;
   }
 
   getChoice1() {
-    return this.choice1;
+    return choice1;
   }
 
   getChoice2() {
-    return this.choice2;
+    return choice2;
   }
 }

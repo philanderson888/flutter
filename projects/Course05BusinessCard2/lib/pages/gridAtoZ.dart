@@ -14,6 +14,10 @@ import 'destini01.dart';
 import 'destini02.dart';
 import 'destini03.dart';
 import 'bmiCalculator01.dart';
+import 'bmiCalculator02.dart';
+import 'themeDark.dart';
+import 'themeLight.dart';
+import 'themeCustom.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -68,6 +72,12 @@ class GridAToZ extends StatelessWidget {
       print('going to BMI Calculator');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BmiCalculator01()));
+    }
+
+    goToBmiCalculator02() {
+      print('going to BMI Calculator');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BmiCalculator02()));
     }
 
     goToBorderRadius() {
@@ -322,14 +332,32 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const TextScaleFactor01()));
     }
 
-    goToXylophone() {
-      print('going to app xylophone');
+    goToThemeCustom() {
+      print('going to theme - custom');
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Xylophone()));
+          .push(MaterialPageRoute(builder: (context) => const ThemeCustom()));
+    }
+
+    goToThemeDark() {
+      print('going to theme - dark');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const ThemeDark()));
+    }
+
+    goToThemeLight() {
+      print('going to theme - light');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const ThemeLight()));
     }
 
     goToTypeDef() {
       print("TODO: type def");
+    }
+
+    goToXylophone() {
+      print('going to app xylophone');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Xylophone()));
     }
 
     instantiateTestClass() {
@@ -593,6 +621,18 @@ class GridAToZ extends StatelessWidget {
         buttonText: "text style",
       ),
       PageItem(
+        functionName: goToThemeCustom,
+        buttonText: "theme custom",
+      ),
+      PageItem(
+        functionName: goToThemeLight,
+        buttonText: "theme light",
+      ),
+      PageItem(
+        functionName: goToThemeDark,
+        buttonText: "theme dark",
+      ),
+      PageItem(
         functionName: goToTypeDef,
         buttonText: "typedef",
       ),
@@ -617,6 +657,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToBmiCalculator01,
         buttonText: "BMI Calculator 01",
+      ),
+      PageItem(
+        functionName: goToBmiCalculator02,
+        buttonText: "BMI Calculator 02",
       ),
       PageItem(
         functionName: goToBusinessCard,

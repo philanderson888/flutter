@@ -32,7 +32,7 @@ class _Destini03State extends State<Destini03> {
     print('${story.storyTitle}');
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
                   'https://seekingtruth.co.uk/wp-content/uploads/2021/07/banner-galaxy.jpg'),
@@ -64,7 +64,8 @@ class _Destini03State extends State<Destini03> {
                         child: Center(
                           child: Text(
                             story.storyTitle,
-                            style: TextStyle(fontSize: 50, color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 50, color: Colors.white),
                           ),
                         ),
                       ),
@@ -80,8 +81,8 @@ class _Destini03State extends State<Destini03> {
                           child: Center(
                             child: Text(
                               story.getChoice1(),
-                              style:
-                                  TextStyle(fontSize: 50, color: Colors.white),
+                              style: const TextStyle(
+                                  fontSize: 50, color: Colors.white),
                             ),
                           ),
                         ),
@@ -100,7 +101,7 @@ class _Destini03State extends State<Destini03> {
                             child: Center(
                               child: Text(
                                 story.getChoice2(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 50, color: Colors.white),
                               ),
                             ),

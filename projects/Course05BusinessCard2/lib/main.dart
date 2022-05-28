@@ -96,7 +96,7 @@ class _BackgroundImageState extends State<BackgroundImage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
                   'https://seekingtruth.co.uk/wp-content/uploads/2021/07/banner-galaxy.jpg'),

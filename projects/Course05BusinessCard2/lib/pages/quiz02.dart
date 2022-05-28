@@ -41,7 +41,7 @@ class _Quiz02State extends State<Quiz02> {
       flex: 1,
       child: Container(),
     ),
-    Expanded(
+    const Expanded(
       flex: 1,
       child: Icon(
         Icons.close,
@@ -49,7 +49,7 @@ class _Quiz02State extends State<Quiz02> {
         size: 50,
       ),
     ),
-    Expanded(
+    const Expanded(
       flex: 1,
       child: Icon(
         Icons.close,
@@ -57,7 +57,7 @@ class _Quiz02State extends State<Quiz02> {
         size: 50,
       ),
     ),
-    Expanded(
+    const Expanded(
       flex: 1,
       child: Icon(
         Icons.close,
@@ -75,7 +75,7 @@ class _Quiz02State extends State<Quiz02> {
     print('doing nothing');
   }
 
-  var expandedCorrect = Expanded(
+  var expandedCorrect = const Expanded(
     flex: 1,
     child: Icon(
       Icons.check,
@@ -84,7 +84,7 @@ class _Quiz02State extends State<Quiz02> {
     ),
   );
 
-  var expandedIncorrect = Expanded(
+  var expandedIncorrect = const Expanded(
     flex: 1,
     child: Icon(
       Icons.close,
@@ -124,7 +124,7 @@ class _Quiz02State extends State<Quiz02> {
           }
           questionNumber++;
           print(
-              'question ${questionNumber} of ${quizItems.length} was $correctOrIncorrectString - score is $scoreCorrect out of $scoreTotal');
+              'question $questionNumber of ${quizItems.length} was $correctOrIncorrectString - score is $scoreCorrect out of $scoreTotal');
           if (questionNumber == quizItems.length) {
             print('quiz has finished');
             Alert(
@@ -132,8 +132,9 @@ class _Quiz02State extends State<Quiz02> {
                     title: "Quiz Over",
                     desc: "Well done - you scored $scoreCorrect / $scoreTotal")
                 .show();
-          } else
+          } else {
             quizItem = quizItems[questionNumber];
+          }
         }
       },
     );
@@ -163,11 +164,11 @@ class _Quiz02State extends State<Quiz02> {
                     Expanded(
                       flex: 10,
                       child: Padding(
-                        padding: EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(10.0),
                         child: Center(
                           child: Text(
                             quizItem.question,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 50,
                               color: Colors.white,
                             ),
@@ -260,14 +261,14 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: Color(0xFF637DE6),
+                          color: const Color(0xFF637DE6),
                           child: Row(
                             children: <Widget>[
                               Expanded(
                                 flex: 1,
                                 child: Container(),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Icon(
                                   Icons.check,
@@ -275,7 +276,7 @@ class _Quiz02State extends State<Quiz02> {
                                   size: 50,
                                 ),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Text(
                                   'correct',
@@ -299,14 +300,14 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: Color(0xFF637DE6),
+                          color: const Color(0xFF637DE6),
                           child: Row(
                             children: <Widget>[
                               Expanded(
                                 flex: 1,
                                 child: Container(),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Icon(
                                   Icons.close,
@@ -314,7 +315,7 @@ class _Quiz02State extends State<Quiz02> {
                                   size: 50,
                                 ),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Text(
                                   'incorrect',
@@ -338,14 +339,14 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: Color(0xFF10FA91),
+                          color: const Color(0xFF10FA91),
                           child: Row(
                             children: <Widget>[
                               Expanded(
                                 flex: 1,
                                 child: Container(),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Icon(
                                   Icons.check,
@@ -353,7 +354,7 @@ class _Quiz02State extends State<Quiz02> {
                                   size: 50,
                                 ),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Text(
                                   'correct',
@@ -377,14 +378,14 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: Color(0xFFC7024F),
+                          color: const Color(0xFFC7024F),
                           child: Row(
                             children: <Widget>[
                               Expanded(
                                 flex: 1,
                                 child: Container(),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Icon(
                                   Icons.close,
@@ -392,7 +393,7 @@ class _Quiz02State extends State<Quiz02> {
                                   size: 50,
                                 ),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Text(
                                   'incorrect',
@@ -416,7 +417,7 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: Color(0xFF637DE6),
+                          color: const Color(0xFF637DE6),
                           child: Row(
                             children: scoreKeeper,
                           ),
@@ -428,7 +429,7 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: Color(0xFF637DE6),
+                          color: const Color(0xFF637DE6),
                           child: Row(
                             children: <Widget>[
                               Expanded(
@@ -439,13 +440,13 @@ class _Quiz02State extends State<Quiz02> {
                                 flex: 1,
                                 child: Text(
                                   scoreCorrect.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 50,
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              Expanded(
+                              const Expanded(
                                 flex: 1,
                                 child: Text(
                                   '/',
@@ -459,7 +460,7 @@ class _Quiz02State extends State<Quiz02> {
                                 flex: 1,
                                 child: Text(
                                   scoreTotal.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 50,
                                     color: Colors.white,
                                   ),

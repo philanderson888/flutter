@@ -686,6 +686,10 @@ themes apply global styling across the app, so are very useful to provide a cohe
 
 the `theme` is supplied as a `ThemeData` object which is passed into the `MaterialApp` constructor 
 
+the theme data has many theme properties which can be altered
+
+- https://api.flutter.dev/flutter/material/ThemeData-class.html
+
 ```java
 MaterialApp(
   theme: ThemeData(

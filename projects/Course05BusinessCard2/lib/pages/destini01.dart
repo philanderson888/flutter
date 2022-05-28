@@ -12,7 +12,7 @@ class _Destini01State extends State<Destini01> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
                   'https://seekingtruth.co.uk/wp-content/uploads/2021/07/banner-galaxy.jpg'),
@@ -41,7 +41,7 @@ class _Destini01State extends State<Destini01> {
                       flex: 7,
                       child: Container(
                         color: Colors.green,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'a container',
                             style: TextStyle(fontSize: 50, color: Colors.white),
@@ -53,7 +53,7 @@ class _Destini01State extends State<Destini01> {
                       flex: 7,
                       child: Container(
                         color: Colors.blue,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'a container',
                             style: TextStyle(fontSize: 50, color: Colors.white),
@@ -65,7 +65,7 @@ class _Destini01State extends State<Destini01> {
                       flex: 7,
                       child: Container(
                         color: Colors.red,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'a container',
                             style: TextStyle(fontSize: 50, color: Colors.white),
