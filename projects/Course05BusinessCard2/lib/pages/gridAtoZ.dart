@@ -15,6 +15,7 @@ import 'destini02.dart';
 import 'destini03.dart';
 import 'bmiCalculator01.dart';
 import 'bmiCalculator02.dart';
+import 'bmiCalculator03.dart';
 import 'themeDark.dart';
 import 'themeLight.dart';
 import 'themeCustom.dart';
@@ -78,6 +79,12 @@ class GridAToZ extends StatelessWidget {
       print('going to BMI Calculator');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BmiCalculator02()));
+    }
+
+    goToBmiCalculator03() {
+      print('going to BMI Calculator');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BmiCalculator03()));
     }
 
     goToBorderRadius() {
@@ -661,6 +668,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToBmiCalculator02,
         buttonText: "BMI Calculator 02",
+      ),
+      PageItem(
+        functionName: goToBmiCalculator03,
+        buttonText: "BMI Calculator 03",
       ),
       PageItem(
         functionName: goToBusinessCard,

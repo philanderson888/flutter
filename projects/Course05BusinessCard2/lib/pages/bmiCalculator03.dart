@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
 // two colour from this app are background #090C21 container #1D1E33
 
-class BmiCalculator02 extends StatefulWidget {
-  const BmiCalculator02({Key? key}) : super(key: key);
+class BmiCalculator03 extends StatefulWidget {
+  const BmiCalculator03({Key? key}) : super(key: key);
 
   @override
-  State<BmiCalculator02> createState() => _BmiCalculator02State();
+  State<BmiCalculator03> createState() => _BmiCalculator03State();
 }
 
-class _BmiCalculator02State extends State<BmiCalculator02> {
+class _BmiCalculator03State extends State<BmiCalculator03> {
   @override
   Widget build(BuildContext context) {
     doNothing() {
@@ -21,14 +21,22 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
     int headingHeight = 3;
     int bodyHeight = 30;
     int footerHeight = 3;
-    // color: Color(0xff05060C),
+
+    var backgroundColor = Color(0xff05060C);
+    var scaffoldBackgroundColor = Color(0xFF0a0d22);
+    scaffoldBackgroundColor = Color(0xff05060C);
+    scaffoldBackgroundColor = Color(0xFF0a0d22);
+    scaffoldBackgroundColor = Color(0xFF29083B);
+    scaffoldBackgroundColor = Color(0xFF29083B);
+    var appColor = Color(0xff4C2973);
     var headerAndFooterColor = Color(0xff0D5411);
-    var colorPadding = Colors.orange;
-    var bodyPaddingColor = Colors.pink;
+    var colorPadding = Color(0xFF29083B);
+
+    var cardColor = Colors.yellow;
 
     // body row
-    int containerBorder = 1;
-    int bodyWidth = 30;
+    int bodyRowBorder = 0;
+    int bodyWidth = 1;
 
     // body column
     int bodyOuterPaddingHeight = 1;
@@ -41,8 +49,6 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
     int containerWidth = 20;
     var containerBorderRadius = 18.0;
 
-    var cardColor = Colors.yellow;
-
     String textMale = "MALE";
     String textFemale = "FEMALE";
     String textHeight = "HEIGHT";
@@ -52,13 +58,13 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         appBarTheme: AppBarTheme(
-          backgroundColor: const Color(0xff4C2973),
+          backgroundColor: appColor,
           titleTextStyle: TextStyle(
             fontSize: 30,
             color: Colors.purple.shade400,
           ),
         ),
-        scaffoldBackgroundColor: const Color(0xFF0a0d22),
+        scaffoldBackgroundColor: scaffoldBackgroundColor,
         textTheme: const TextTheme(
           headline1: TextStyle(color: Colors.yellow),
           headline3: TextStyle(color: Colors.yellow),
@@ -79,13 +85,12 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
                 headerAndFooterColor: headerAndFooterColor),
             Body(
                 bodyHeight: bodyHeight,
-                containerBorder: containerBorder,
+                bodyRowBorder: bodyRowBorder,
                 bodyWidth: bodyWidth,
                 bodyOuterPaddingHeight: bodyOuterPaddingHeight,
                 bodyContainerHeight: bodyContainerHeight,
                 containerOuterPadding: containerOuterPadding,
                 colorPadding: colorPadding,
-                bodyPaddingColor: bodyPaddingColor,
                 containerWidth: containerWidth,
                 containerBorderRadius: containerBorderRadius,
                 textMale: textMale,
@@ -166,13 +171,12 @@ class Body extends StatelessWidget {
   const Body({
     Key? key,
     required this.bodyHeight,
-    required this.containerBorder,
+    required this.bodyRowBorder,
     required this.bodyWidth,
     required this.bodyOuterPaddingHeight,
     required this.bodyContainerHeight,
     required this.containerOuterPadding,
     required this.colorPadding,
-    required this.bodyPaddingColor,
     required this.containerWidth,
     required this.containerBorderRadius,
     required this.textMale,
@@ -186,13 +190,13 @@ class Body extends StatelessWidget {
   }) : super(key: key);
 
   final int bodyHeight;
-  final int containerBorder;
+  final int bodyRowBorder;
   final int bodyWidth;
   final int bodyOuterPaddingHeight;
   final int bodyContainerHeight;
   final int containerOuterPadding;
-  final MaterialColor colorPadding;
-  final MaterialColor bodyPaddingColor;
+  final Color colorPadding;
+
   final int containerWidth;
   final double containerBorderRadius;
   final String textMale;
@@ -210,14 +214,13 @@ class Body extends StatelessWidget {
       flex: bodyHeight,
       child: Row(
         children: [
-          BodyRowBorder(containerBorder: containerBorder),
+          BodyRowBorder(bodyRowBorder: bodyRowBorder),
           BodyColumn(
               bodyWidth: bodyWidth,
               bodyOuterPaddingHeight: bodyOuterPaddingHeight,
               bodyContainerHeight: bodyContainerHeight,
               containerOuterPadding: containerOuterPadding,
               colorPadding: colorPadding,
-              bodyPaddingColor: bodyPaddingColor,
               containerWidth: containerWidth,
               containerBorderRadius: containerBorderRadius,
               textMale: textMale,
@@ -228,7 +231,7 @@ class Body extends StatelessWidget {
               textHeight: textHeight,
               textWeight: textWeight,
               textAge: textAge),
-          BodyRowBorder(containerBorder: containerBorder),
+          BodyRowBorder(bodyRowBorder: bodyRowBorder),
         ],
       ),
     );
@@ -240,7 +243,6 @@ class BodyColumn extends StatelessWidget {
     Key? key,
     required this.bodyWidth,
     required this.bodyOuterPaddingHeight,
-    required this.bodyPaddingColor,
     required this.bodyContainerHeight,
     required this.containerOuterPadding,
     required this.colorPadding,
@@ -258,10 +260,10 @@ class BodyColumn extends StatelessWidget {
 
   final int bodyWidth;
   final int bodyOuterPaddingHeight;
-  final MaterialColor bodyPaddingColor;
+
   final int bodyContainerHeight;
   final int containerOuterPadding;
-  final MaterialColor colorPadding;
+  final Color colorPadding;
   final int containerWidth;
   final double containerBorderRadius;
   final String textMale;
@@ -281,12 +283,11 @@ class BodyColumn extends StatelessWidget {
         children: [
           BodyOuterPadding(
               bodyOuterPaddingHeight: bodyOuterPaddingHeight,
-              bodyPaddingColor: bodyPaddingColor),
+              colorPadding: colorPadding),
           BodyDoubleRow(
               bodyContainerHeight: bodyContainerHeight,
               containerOuterPadding: containerOuterPadding,
               colorPadding: colorPadding,
-              bodyPaddingColor: bodyPaddingColor,
               containerWidth: containerWidth,
               containerBorderRadius: containerBorderRadius,
               textLeft: textMale,
@@ -295,7 +296,7 @@ class BodyColumn extends StatelessWidget {
               cardColor: cardColor),
           BodyInnerPadding(
               bodyInnerPaddingHeight: bodyInnerPaddingHeight,
-              bodyPaddingColor: bodyPaddingColor),
+              colorPadding: colorPadding),
           BodySingleRow(
             bodyContainerHeight: bodyContainerHeight,
             containerOuterPadding: containerOuterPadding,
@@ -307,12 +308,11 @@ class BodyColumn extends StatelessWidget {
           ),
           BodyInnerPadding(
               bodyInnerPaddingHeight: bodyInnerPaddingHeight,
-              bodyPaddingColor: bodyPaddingColor),
+              colorPadding: colorPadding),
           BodyDoubleRow(
               bodyContainerHeight: bodyContainerHeight,
               containerOuterPadding: containerOuterPadding,
               colorPadding: colorPadding,
-              bodyPaddingColor: bodyPaddingColor,
               containerWidth: containerWidth,
               containerBorderRadius: containerBorderRadius,
               textLeft: textWeight,
@@ -321,7 +321,7 @@ class BodyColumn extends StatelessWidget {
               cardColor: cardColor),
           BodyOuterPadding(
               bodyOuterPaddingHeight: bodyOuterPaddingHeight,
-              bodyPaddingColor: bodyPaddingColor),
+              colorPadding: colorPadding),
         ],
       ),
     );
@@ -362,15 +362,15 @@ class Footer extends StatelessWidget {
 class BodyRowBorder extends StatelessWidget {
   const BodyRowBorder({
     Key? key,
-    required this.containerBorder,
+    required this.bodyRowBorder,
   }) : super(key: key);
 
-  final int containerBorder;
+  final int bodyRowBorder;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      flex: containerBorder,
+      flex: bodyRowBorder,
       child: Container(),
     );
   }
@@ -390,7 +390,7 @@ class BodySingleRow extends StatelessWidget {
 
   final int bodyContainerHeight;
   final int containerOuterPadding;
-  final MaterialColor colorPadding;
+  final Color colorPadding;
   final int containerWidth;
   final double containerBorderRadius;
   final String textHeight;
@@ -428,7 +428,6 @@ class BodyDoubleRow extends StatelessWidget {
     required this.bodyContainerHeight,
     required this.containerOuterPadding,
     required this.colorPadding,
-    required this.bodyPaddingColor,
     required this.containerWidth,
     required this.containerBorderRadius,
     required this.textLeft,
@@ -439,8 +438,8 @@ class BodyDoubleRow extends StatelessWidget {
 
   final int bodyContainerHeight;
   final int containerOuterPadding;
-  final MaterialColor colorPadding;
-  final MaterialColor bodyPaddingColor;
+  final Color colorPadding;
+
   final int containerWidth;
   final double containerBorderRadius;
   final String textLeft;
@@ -465,7 +464,7 @@ class BodyDoubleRow extends StatelessWidget {
               cardColor: cardColor),
           Expanded(
             flex: containerInnerPadding,
-            child: Container(color: bodyPaddingColor),
+            child: Container(color: colorPadding),
           ),
           ExpandingContainer(
             containerWidth: containerWidth,
@@ -487,17 +486,17 @@ class BodyInnerPadding extends StatelessWidget {
   const BodyInnerPadding({
     Key? key,
     required this.bodyInnerPaddingHeight,
-    required this.bodyPaddingColor,
+    required this.colorPadding,
   }) : super(key: key);
 
   final int bodyInnerPaddingHeight;
-  final MaterialColor bodyPaddingColor;
+  final Color colorPadding;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: bodyInnerPaddingHeight,
-      child: Container(color: bodyPaddingColor),
+      child: Container(color: colorPadding),
     );
   }
 }
@@ -506,17 +505,17 @@ class BodyOuterPadding extends StatelessWidget {
   const BodyOuterPadding({
     Key? key,
     required this.bodyOuterPaddingHeight,
-    required this.bodyPaddingColor,
+    required this.colorPadding,
   }) : super(key: key);
 
   final int bodyOuterPaddingHeight;
-  final MaterialColor bodyPaddingColor;
+  final Color colorPadding;
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       flex: bodyOuterPaddingHeight,
-      child: Container(color: bodyPaddingColor),
+      child: Container(color: colorPadding),
     );
   }
 }

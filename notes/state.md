@@ -5,6 +5,7 @@
 - [state](#state)
   - [contents](#contents)
   - [introduction](#introduction)
+  - [reference](#reference)
   - [creating a stateful widget](#creating-a-stateful-widget)
   - [worked example](#worked-example)
   - [template - stateless and stateful multipage](#template---stateless-and-stateful-multipage)
@@ -15,6 +16,10 @@
 stateless widgets cannot be altered
 
 stateful widgets can have their values altered.
+
+## reference
+
+- Stateful - When To Use Keys https://www.youtube.com/watch?v=kn0EOS-ZiIc
 
 ## creating a stateful widget
 

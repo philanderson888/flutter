@@ -7,6 +7,7 @@
   - [introduction](#introduction)
   - [keywords](#keywords)
     - [static](#static)
+    - [const](#const)
     - [final](#final)
   - [strings](#strings)
     - [String Interpolation](#string-interpolation)
@@ -25,9 +26,19 @@ here is an introduction to flutter variables and syntax
 
 ### static
 
+### const
+
+the value of the variable must be known at compile time and will never change
+
+fields inside a `const` complex object are also `const` ie cannot be reassigned (unlike Javascript)
+
 ### final
 
-final modifies variables and must be initialised
+once final has been instantiated once, it cannot be changed again afterwards.  So we have one chance to initialise it, then that's it.  It can't be changed later.
+
+unlike `const` variables, `final` variables can be computed `once` at runtime.
+
+fields in a `final` complex object can be reassigned
 
 ```java
 final url = "https://...";
