@@ -13,7 +13,7 @@
 
 ## introduction
 
-stateless widgets cannot be altered
+stateless widgets cannot be altered - they are `immutable` so a new instance has to be created from scratch, we cannot alter an existing instance.
 
 stateful widgets can have their values altered.
 
