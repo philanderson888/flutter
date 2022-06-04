@@ -17,6 +17,8 @@
   - [sleep](#sleep)
   - [collections](#collections)
     - [list](#list)
+  - [enums](#enums)
+  - [ternary](#ternary)
 
 ## introduction
 
@@ -140,4 +142,21 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+```
+
+## enums
+
+```java
+enum Gender { male, female }
+
+Gender.male
+Gender.female
+```
+
+## ternary
+
+```java
+var marVariable = 11;
+var max = 10;
+myVariable > max ? print('overloaded') : print('within bounds');
 ```
