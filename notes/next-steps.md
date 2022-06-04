@@ -8,6 +8,8 @@
   - [flutter samples](#flutter-samples)
     - [add a column with two entries on the page](#add-a-column-with-two-entries-on-the-page)
     - [default Layout For Two Basic Pages](#default-layout-for-two-basic-pages)
+  - [adding multiple files](#adding-multiple-files)
+  - [file naming](#file-naming)
 
 
 ## introduction
@@ -115,3 +117,15 @@ class SecondScreen extends StatelessWidget {
   }
 }
 ```
+
+## adding multiple files
+
+we can add multiple files to our project - just we have to add them as library imports to any files which use them.
+
+```java
+import '../folder/file.dart';
+```
+
+## file naming
+
+prefer `lower_case_with_underscore.dart` file names
