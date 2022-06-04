@@ -22,7 +22,7 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
     int bodyHeight = 30;
     int footerHeight = 3;
     // color: Color(0xff05060C),
-    var headerAndFooterColor = Color(0xff0D5411);
+    var headerAndFooterColor = const Color(0xff0D5411);
     var colorPadding = Colors.orange;
     var bodyPaddingColor = Colors.pink;
 
@@ -139,7 +139,7 @@ class Header extends StatelessWidget {
               color: headerAndFooterColor,
             ),
           ),
-          Expanded(
+          const Expanded(
             flex: 7,
             child: Center(
               child: Text(
@@ -344,7 +344,7 @@ class Footer extends StatelessWidget {
       flex: footerHeight,
       child: Container(
         color: headerAndFooterColor,
-        child: Center(
+        child: const Center(
           child: Text(
             'CALCULATE YOUR BMI',
             style: TextStyle(

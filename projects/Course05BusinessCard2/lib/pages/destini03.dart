@@ -59,14 +59,11 @@ class _Destini03State extends State<Destini03> {
                     ),
                     Expanded(
                       flex: 7,
-                      child: Container(
-                        //color: Colors.green,
-                        child: Center(
-                          child: Text(
-                            story.storyTitle,
-                            style: const TextStyle(
-                                fontSize: 50, color: Colors.white),
-                          ),
+                      child: Center(
+                        child: Text(
+                          story.storyTitle,
+                          style: const TextStyle(
+                              fontSize: 50, color: Colors.white),
                         ),
                       ),
                     ),

@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
-// two colour from this app are background #090C21 container #1D1E33
+// colours
+//        app  #090C21
+//        card #1D1E33
+//        text #8D8E98
 
 class BmiCalculator03 extends StatefulWidget {
   const BmiCalculator03({Key? key}) : super(key: key);
@@ -17,45 +22,82 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
       print('doing nothing');
     }
 
-    // header, footer and main body (column)
-    int headingHeight = 3;
-    int bodyHeight = 30;
-    int footerHeight = 3;
+    // header, footer and body flex ratios
+    const headingHeight = 3;
+    const bodyHeight = 30;
+    const footerHeight = 3;
 
-    var backgroundColor = Color(0xff05060C);
-    var scaffoldBackgroundColor = Color(0xFF0a0d22);
-    scaffoldBackgroundColor = Color(0xff05060C);
-    scaffoldBackgroundColor = Color(0xFF0a0d22);
-    scaffoldBackgroundColor = Color(0xFF29083B);
-    scaffoldBackgroundColor = Color(0xFF29083B);
-    var appColor = Color(0xff4C2973);
-    var headerAndFooterColor = Color(0xff0D5411);
-    var colorPadding = Color(0xFF29083B);
+    // body row flex ratios
+    const int bodyRowBorder = 0;
+    const int bodyWidth = 1;
 
-    var cardColor = Colors.yellow;
+    // body column flex ratios
+    const bodyOuterPaddingHeight = 1;
+    const bodyInnerPaddingHeight = 1;
+    const bodyContainerHeight = 7;
 
-    // body row
-    int bodyRowBorder = 0;
-    int bodyWidth = 1;
+    // card row flex ratios and sizes
+    const cardOuterPadding = 1;
+    const cardInnerPadding = 1;
+    const cardWidth = 20;
+    const cardBorderRadius = 18.0;
 
-    // body column
-    int bodyOuterPaddingHeight = 1;
-    int bodyInnerPaddingHeight = 1;
-    int bodyContainerHeight = 7;
+    // app colors
+    const backgroundColor = Color(0xFF29083B);
+    const appColor = Color(0xff4C2973);
+    const colorPadding = Color(0xFF29083B);
+    const cardBackground = Color(0xFF1D1E33);
+    const cardForeground = Color(0xFF8D8E98);
 
-    // container row
-    int containerOuterPadding = 1;
-    int containerInnerPadding = 1;
-    int containerWidth = 20;
-    var containerBorderRadius = 18.0;
+    // header colors
+    var headerColor = backgroundColor;
 
-    String textMale = "MALE";
-    String textFemale = "FEMALE";
-    String textHeight = "HEIGHT";
-    String textWeight = "WEIGHT";
+    // footer colors
+    var footerColor = const Color(0xFFE31D6B);
+    footerColor = const Color(0xFFE31D6B);
+    const footerTextColor = Colors.white;
+    const footerFontWeight = FontWeight.w600;
+
+    // text
+    const containerTextSize = 30.0;
+    const footerTextSize = 21.0;
+    String appHeader = 'BMI Calculator';
+    String headerText = 'BMI CALCULATOR';
+    String footerText = 'CALCULATE YOUR BMI';
+    String textMale = 'MALE';
+    String textFemale = 'FEMALE';
+    String textHeight = 'HEIGHT';
+    String textWeight = 'WEIGHT';
     String textAge = "AGE";
 
+    // icons
+    const iconDataInstagram = FontAwesomeIcons.instagram;
+    const iconMale = FontAwesomeIcons.mars;
+    const iconFemale = FontAwesomeIcons.venus;
+    const iconAge = FontAwesomeIcons.venus;
+    const iconWeight = FontAwesomeIcons.venus;
+    const iconSize = 80.0;
+
+    // cards
+
+    const cardMale = CardMaleFemale(
+      iconVisible: true,
+      iconData: iconMale,
+      iconSize: iconSize,
+      cardText: 'MALE',
+      cardForeground: cardForeground,
+    );
+
+    const cardFemale = CardMaleFemale(
+      iconVisible: true,
+      iconData: iconFemale,
+      iconSize: iconSize,
+      cardText: 'FEMALE',
+      cardForeground: cardForeground,
+    );
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         appBarTheme: AppBarTheme(
           backgroundColor: appColor,
@@ -64,11 +106,12 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
             color: Colors.purple.shade400,
           ),
         ),
-        scaffoldBackgroundColor: scaffoldBackgroundColor,
+        scaffoldBackgroundColor: backgroundColor,
         textTheme: const TextTheme(
           headline1: TextStyle(color: Colors.yellow),
           headline3: TextStyle(color: Colors.yellow),
-          bodyText2: TextStyle(color: Colors.purple),
+          bodyText2:
+              TextStyle(color: cardForeground, fontSize: containerTextSize),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: const Color(0xff4C2973),
@@ -76,34 +119,47 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
       ),
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('BMI Calculator'),
+          title: Text(appHeader),
         ),
         body: Column(
           children: [
             Header(
                 headingHeight: headingHeight,
-                headerAndFooterColor: headerAndFooterColor),
+                headerColor: headerColor,
+                headerText: headerText),
             Body(
-                bodyHeight: bodyHeight,
-                bodyRowBorder: bodyRowBorder,
-                bodyWidth: bodyWidth,
-                bodyOuterPaddingHeight: bodyOuterPaddingHeight,
-                bodyContainerHeight: bodyContainerHeight,
-                containerOuterPadding: containerOuterPadding,
-                colorPadding: colorPadding,
-                containerWidth: containerWidth,
-                containerBorderRadius: containerBorderRadius,
-                textMale: textMale,
-                containerInnerPadding: containerInnerPadding,
-                textFemale: textFemale,
-                cardColor: cardColor,
-                bodyInnerPaddingHeight: bodyInnerPaddingHeight,
-                textHeight: textHeight,
-                textWeight: textWeight,
-                textAge: textAge),
+              bodyHeight: bodyHeight,
+              bodyRowBorder: bodyRowBorder,
+              bodyWidth: bodyWidth,
+              bodyOuterPaddingHeight: bodyOuterPaddingHeight,
+              bodyContainerHeight: bodyContainerHeight,
+              cardOuterPadding: cardOuterPadding,
+              colorPadding: colorPadding,
+              cardWidth: cardWidth,
+              cardBorderRadius: cardBorderRadius,
+              textMale: textMale,
+              cardInnerPadding: cardInnerPadding,
+              textFemale: textFemale,
+              cardBackground: cardBackground,
+              cardForeground: cardForeground,
+              bodyInnerPaddingHeight: bodyInnerPaddingHeight,
+              textHeight: textHeight,
+              textWeight: textWeight,
+              textAge: textAge,
+              iconMale: iconMale,
+              iconFemale: iconFemale,
+              iconWeight: iconWeight,
+              iconAge: iconAge,
+              iconSize: iconSize,
+            ),
             Footer(
-                footerHeight: footerHeight,
-                headerAndFooterColor: headerAndFooterColor),
+              footerHeight: footerHeight,
+              footerTextSize: footerTextSize,
+              footerColor: footerColor,
+              footerTextColor: footerTextColor,
+              footerFontWeight: footerFontWeight,
+              footerText: footerText,
+            ),
           ],
         ),
         floatingActionButton: IconTheme(
@@ -125,11 +181,13 @@ class Header extends StatelessWidget {
   const Header({
     Key? key,
     required this.headingHeight,
-    required this.headerAndFooterColor,
+    required this.headerColor,
+    required this.headerText,
   }) : super(key: key);
 
   final int headingHeight;
-  final Color headerAndFooterColor;
+  final Color headerColor;
+  final String headerText;
 
   @override
   Widget build(BuildContext context) {
@@ -141,15 +199,15 @@ class Header extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
-              color: headerAndFooterColor,
+              color: headerColor,
             ),
           ),
           Expanded(
             flex: 7,
             child: Center(
               child: Text(
-                'BMI CALCULATOR',
-                style: TextStyle(
+                headerText,
+                style: const TextStyle(
                   fontSize: 30,
                 ),
               ),
@@ -158,10 +216,49 @@ class Header extends StatelessWidget {
           Expanded(
             flex: 2,
             child: Container(
-              color: headerAndFooterColor,
+              color: headerColor,
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Footer extends StatelessWidget {
+  const Footer({
+    Key? key,
+    required this.footerHeight,
+    required this.footerTextSize,
+    required this.footerColor,
+    required this.footerFontWeight,
+    required this.footerTextColor,
+    required this.footerText,
+  }) : super(key: key);
+
+  final int footerHeight;
+  final double footerTextSize;
+  final FontWeight footerFontWeight;
+  final Color footerColor;
+  final Color footerTextColor;
+  final String footerText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: footerHeight,
+      child: Container(
+        color: footerColor,
+        child: Center(
+          child: Text(
+            footerText,
+            style: TextStyle(
+              fontSize: footerTextSize,
+              fontWeight: footerFontWeight,
+              color: footerTextColor,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -175,18 +272,24 @@ class Body extends StatelessWidget {
     required this.bodyWidth,
     required this.bodyOuterPaddingHeight,
     required this.bodyContainerHeight,
-    required this.containerOuterPadding,
+    required this.cardOuterPadding,
     required this.colorPadding,
-    required this.containerWidth,
-    required this.containerBorderRadius,
+    required this.cardWidth,
+    required this.cardBorderRadius,
     required this.textMale,
-    required this.containerInnerPadding,
+    required this.cardInnerPadding,
     required this.textFemale,
-    required this.cardColor,
+    required this.cardBackground,
+    required this.cardForeground,
     required this.bodyInnerPaddingHeight,
     required this.textHeight,
     required this.textWeight,
     required this.textAge,
+    required this.iconMale,
+    required this.iconFemale,
+    required this.iconWeight,
+    required this.iconAge,
+    required this.iconSize,
   }) : super(key: key);
 
   final int bodyHeight;
@@ -194,19 +297,25 @@ class Body extends StatelessWidget {
   final int bodyWidth;
   final int bodyOuterPaddingHeight;
   final int bodyContainerHeight;
-  final int containerOuterPadding;
+  final int cardOuterPadding;
   final Color colorPadding;
 
-  final int containerWidth;
-  final double containerBorderRadius;
+  final int cardWidth;
+  final double cardBorderRadius;
   final String textMale;
-  final int containerInnerPadding;
+  final int cardInnerPadding;
   final String textFemale;
-  final MaterialColor cardColor;
+  final Color cardBackground;
+  final Color cardForeground;
   final int bodyInnerPaddingHeight;
   final String textHeight;
   final String textWeight;
   final String textAge;
+  final IconData iconMale;
+  final IconData iconFemale;
+  final IconData iconWeight;
+  final IconData iconAge;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -216,21 +325,28 @@ class Body extends StatelessWidget {
         children: [
           BodyRowBorder(bodyRowBorder: bodyRowBorder),
           BodyColumn(
-              bodyWidth: bodyWidth,
-              bodyOuterPaddingHeight: bodyOuterPaddingHeight,
-              bodyContainerHeight: bodyContainerHeight,
-              containerOuterPadding: containerOuterPadding,
-              colorPadding: colorPadding,
-              containerWidth: containerWidth,
-              containerBorderRadius: containerBorderRadius,
-              textMale: textMale,
-              containerInnerPadding: containerInnerPadding,
-              textFemale: textFemale,
-              cardColor: cardColor,
-              bodyInnerPaddingHeight: bodyInnerPaddingHeight,
-              textHeight: textHeight,
-              textWeight: textWeight,
-              textAge: textAge),
+            bodyWidth: bodyWidth,
+            bodyOuterPaddingHeight: bodyOuterPaddingHeight,
+            bodyContainerHeight: bodyContainerHeight,
+            cardOuterPadding: cardOuterPadding,
+            colorPadding: colorPadding,
+            cardWidth: cardWidth,
+            cardBorderRadius: cardBorderRadius,
+            textMale: textMale,
+            cardInnerPadding: cardInnerPadding,
+            textFemale: textFemale,
+            cardBackground: cardBackground,
+            cardForeground: cardForeground,
+            bodyInnerPaddingHeight: bodyInnerPaddingHeight,
+            textHeight: textHeight,
+            textWeight: textWeight,
+            textAge: textAge,
+            iconMale: iconMale,
+            iconFemale: iconFemale,
+            iconWeight: iconWeight,
+            iconAge: iconAge,
+            iconSize: iconSize,
+          ),
           BodyRowBorder(bodyRowBorder: bodyRowBorder),
         ],
       ),
@@ -244,36 +360,48 @@ class BodyColumn extends StatelessWidget {
     required this.bodyWidth,
     required this.bodyOuterPaddingHeight,
     required this.bodyContainerHeight,
-    required this.containerOuterPadding,
+    required this.cardOuterPadding,
     required this.colorPadding,
-    required this.containerWidth,
-    required this.containerBorderRadius,
+    required this.cardWidth,
+    required this.cardBorderRadius,
     required this.textMale,
-    required this.containerInnerPadding,
+    required this.cardInnerPadding,
     required this.textFemale,
-    required this.cardColor,
+    required this.cardBackground,
     required this.bodyInnerPaddingHeight,
     required this.textHeight,
     required this.textWeight,
     required this.textAge,
+    required this.iconMale,
+    required this.iconFemale,
+    required this.iconWeight,
+    required this.iconAge,
+    required this.iconSize,
+    required this.cardForeground,
   }) : super(key: key);
 
   final int bodyWidth;
   final int bodyOuterPaddingHeight;
 
   final int bodyContainerHeight;
-  final int containerOuterPadding;
+  final int cardOuterPadding;
   final Color colorPadding;
-  final int containerWidth;
-  final double containerBorderRadius;
+  final int cardWidth;
+  final double cardBorderRadius;
   final String textMale;
-  final int containerInnerPadding;
+  final int cardInnerPadding;
   final String textFemale;
-  final MaterialColor cardColor;
+  final Color cardBackground;
   final int bodyInnerPaddingHeight;
   final String textHeight;
   final String textWeight;
   final String textAge;
+  final IconData iconMale;
+  final IconData iconFemale;
+  final IconData iconWeight;
+  final IconData iconAge;
+  final double iconSize;
+  final Color cardForeground;
 
   @override
   Widget build(BuildContext context) {
@@ -284,41 +412,213 @@ class BodyColumn extends StatelessWidget {
           BodyOuterPadding(
               bodyOuterPaddingHeight: bodyOuterPaddingHeight,
               colorPadding: colorPadding),
-          BodyDoubleRow(
-              bodyContainerHeight: bodyContainerHeight,
-              containerOuterPadding: containerOuterPadding,
-              colorPadding: colorPadding,
-              containerWidth: containerWidth,
-              containerBorderRadius: containerBorderRadius,
-              textLeft: textMale,
-              containerInnerPadding: containerInnerPadding,
-              textRight: textFemale,
-              cardColor: cardColor),
-          BodyInnerPadding(
-              bodyInnerPaddingHeight: bodyInnerPaddingHeight,
-              colorPadding: colorPadding),
-          BodySingleRow(
-            bodyContainerHeight: bodyContainerHeight,
-            containerOuterPadding: containerOuterPadding,
-            colorPadding: colorPadding,
-            containerWidth: containerWidth,
-            containerBorderRadius: containerBorderRadius,
-            textHeight: textHeight,
-            cardColor: cardColor,
+
+          //
+          // left right row
+          //
+          Expanded(
+            flex: bodyContainerHeight,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: cardOuterPadding,
+                  child: Container(color: colorPadding),
+                ),
+                ExpandingCard(
+                  cardWidth: cardWidth,
+                  cardBorderRadius: cardBorderRadius,
+                  cardBackground: cardBackground,
+                  cardForeground: cardForeground,
+                  cardText: 'LEFT',
+                  iconData: FontAwesomeIcons.mars,
+                  iconSize: iconSize,
+                ),
+                Expanded(
+                  flex: cardInnerPadding,
+                  child: Container(color: colorPadding),
+                ),
+                ExpandingCard(
+                  cardWidth: cardWidth,
+                  cardBorderRadius: cardBorderRadius,
+                  cardText: 'RIGHT',
+                  cardBackground: cardBackground,
+                  cardForeground: cardForeground,
+                  iconData: FontAwesomeIcons.venus,
+                  iconSize: iconSize,
+                ),
+                Expanded(
+                  flex: cardOuterPadding,
+                  child: Container(color: colorPadding),
+                ),
+              ],
+            ),
           ),
           BodyInnerPadding(
               bodyInnerPaddingHeight: bodyInnerPaddingHeight,
               colorPadding: colorPadding),
-          BodyDoubleRow(
-              bodyContainerHeight: bodyContainerHeight,
-              containerOuterPadding: containerOuterPadding,
-              colorPadding: colorPadding,
-              containerWidth: containerWidth,
-              containerBorderRadius: containerBorderRadius,
-              textLeft: textWeight,
-              containerInnerPadding: containerInnerPadding,
-              textRight: textAge,
-              cardColor: cardColor),
+
+          //
+          // height central row
+          //
+          Expanded(
+            flex: bodyContainerHeight,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: cardOuterPadding,
+                  child: Container(color: colorPadding),
+                ),
+                Expanded(
+                  flex: cardWidth * 2 + cardInnerPadding,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: cardBackground,
+                      borderRadius: BorderRadius.circular(cardBorderRadius),
+                    ),
+                    child: Center(
+                      child: Column(children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 16,
+                          child: Center(child: Text('HEIGHT')),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: cardOuterPadding,
+                  child: Container(color: colorPadding),
+                ),
+              ],
+            ),
+          ),
+          BodyInnerPadding(
+              bodyInnerPaddingHeight: bodyInnerPaddingHeight,
+              colorPadding: colorPadding),
+          //
+          // weight and age row
+          //
+          Expanded(
+            flex: bodyContainerHeight,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: cardOuterPadding,
+                  child: Container(color: colorPadding),
+                ),
+                Expanded(
+                  flex: cardWidth,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: cardBackground,
+                      borderRadius: BorderRadius.circular(cardBorderRadius),
+                    ),
+                    child: Center(
+                      child: Column(children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 24,
+                          child: Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.venus,
+                              color: cardForeground,
+                              size: iconSize,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 16,
+                          child: Center(child: Text('WEIGHT')),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: cardInnerPadding,
+                  child: Container(color: colorPadding),
+                ),
+                Expanded(
+                  flex: cardWidth,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: cardBackground,
+                      borderRadius: BorderRadius.circular(cardBorderRadius),
+                    ),
+                    child: Center(
+                      child: Column(children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 24,
+                          child: Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.venus,
+                              color: cardForeground,
+                              size: iconSize,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 16,
+                          child: Center(child: Text('AGE')),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ]),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: cardOuterPadding,
+                  child: Container(color: colorPadding),
+                ),
+              ],
+            ),
+          ),
           BodyOuterPadding(
               bodyOuterPaddingHeight: bodyOuterPaddingHeight,
               colorPadding: colorPadding),
@@ -328,36 +628,7 @@ class BodyColumn extends StatelessWidget {
   }
 }
 
-class Footer extends StatelessWidget {
-  const Footer({
-    Key? key,
-    required this.footerHeight,
-    required this.headerAndFooterColor,
-  }) : super(key: key);
-
-  final int footerHeight;
-  final Color headerAndFooterColor;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: footerHeight,
-      child: Container(
-        color: headerAndFooterColor,
-        child: Center(
-          child: Text(
-            'CALCULATE YOUR BMI',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.w600,
-              color: Colors.white70,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+// ignore from here on down for now
 
 class BodyRowBorder extends StatelessWidget {
   const BodyRowBorder({
@@ -377,24 +648,28 @@ class BodyRowBorder extends StatelessWidget {
 }
 
 class BodySingleRow extends StatelessWidget {
-  const BodySingleRow(
-      {Key? key,
-      required this.bodyContainerHeight,
-      required this.containerOuterPadding,
-      required this.colorPadding,
-      required this.containerWidth,
-      required this.containerBorderRadius,
-      required this.textHeight,
-      required this.cardColor})
-      : super(key: key);
+  const BodySingleRow({
+    Key? key,
+    required this.bodyContainerHeight,
+    required this.cardOuterPadding,
+    required this.colorPadding,
+    required this.cardWidth,
+    required this.cardBorderRadius,
+    required this.textHeight,
+    required this.cardBackground,
+    required this.cardForeground,
+    required this.iconSize,
+  }) : super(key: key);
 
   final int bodyContainerHeight;
-  final int containerOuterPadding;
+  final int cardOuterPadding;
   final Color colorPadding;
-  final int containerWidth;
-  final double containerBorderRadius;
+  final int cardWidth;
+  final double cardBorderRadius;
   final String textHeight;
-  final Color cardColor;
+  final Color cardBackground;
+  final Color cardForeground;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -403,17 +678,19 @@ class BodySingleRow extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: containerOuterPadding,
+            flex: cardOuterPadding,
             child: Container(color: colorPadding),
           ),
-          ExpandingContainer(
-            containerWidth: 2 * containerWidth,
-            containerBorderRadius: containerBorderRadius,
+          ExpandingCard(
+            cardWidth: 2 * cardWidth,
+            cardBorderRadius: cardBorderRadius,
             cardText: textHeight,
-            cardColor: cardColor,
+            cardBackground: cardBackground,
+            cardForeground: cardForeground,
+            iconSize: iconSize,
           ),
           Expanded(
-            flex: containerOuterPadding,
+            flex: cardOuterPadding,
             child: Container(color: colorPadding),
           ),
         ],
@@ -426,26 +703,34 @@ class BodyDoubleRow extends StatelessWidget {
   const BodyDoubleRow({
     Key? key,
     required this.bodyContainerHeight,
-    required this.containerOuterPadding,
+    required this.cardOuterPadding,
     required this.colorPadding,
-    required this.containerWidth,
-    required this.containerBorderRadius,
+    required this.cardWidth,
+    required this.cardBorderRadius,
     required this.textLeft,
-    required this.containerInnerPadding,
+    required this.cardInnerPadding,
     required this.textRight,
-    required this.cardColor,
+    required this.cardBackground,
+    required this.cardForeground,
+    required this.iconLeft,
+    required this.iconRight,
+    required this.iconSize,
   }) : super(key: key);
 
   final int bodyContainerHeight;
-  final int containerOuterPadding;
+  final int cardOuterPadding;
   final Color colorPadding;
 
-  final int containerWidth;
-  final double containerBorderRadius;
+  final int cardWidth;
+  final double cardBorderRadius;
   final String textLeft;
-  final int containerInnerPadding;
+  final int cardInnerPadding;
   final String textRight;
-  final Color cardColor;
+  final Color cardBackground;
+  final Color cardForeground;
+  final IconData iconLeft;
+  final IconData iconRight;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
@@ -454,26 +739,33 @@ class BodyDoubleRow extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: containerOuterPadding,
+            flex: cardOuterPadding,
             child: Container(color: colorPadding),
           ),
-          ExpandingContainer(
-              containerWidth: containerWidth,
-              containerBorderRadius: containerBorderRadius,
-              cardText: textLeft,
-              cardColor: cardColor),
+          ExpandingCard(
+            cardWidth: cardWidth,
+            cardBorderRadius: cardBorderRadius,
+            cardText: textLeft,
+            cardBackground: cardBackground,
+            cardForeground: cardForeground,
+            iconData: iconLeft,
+            iconSize: iconSize,
+          ),
           Expanded(
-            flex: containerInnerPadding,
+            flex: cardInnerPadding,
             child: Container(color: colorPadding),
           ),
-          ExpandingContainer(
-            containerWidth: containerWidth,
-            containerBorderRadius: containerBorderRadius,
+          ExpandingCard(
+            cardWidth: cardWidth,
+            cardBorderRadius: cardBorderRadius,
             cardText: textRight,
-            cardColor: cardColor,
+            cardBackground: cardBackground,
+            cardForeground: cardForeground,
+            iconData: iconRight,
+            iconSize: iconSize,
           ),
           Expanded(
-            flex: containerOuterPadding,
+            flex: cardOuterPadding,
             child: Container(color: colorPadding),
           ),
         ],
@@ -520,30 +812,139 @@ class BodyOuterPadding extends StatelessWidget {
   }
 }
 
-class ExpandingContainer extends StatelessWidget {
-  const ExpandingContainer({
+class ExpandingCard extends StatelessWidget {
+  ExpandingCard({
     Key? key,
-    required this.containerWidth,
-    required this.containerBorderRadius,
+    required this.cardWidth,
+    required this.cardBorderRadius,
     required this.cardText,
-    required this.cardColor,
+    required this.cardBackground,
+    required this.cardForeground,
+    this.iconData = FontAwesomeIcons.instagram,
+    required this.iconSize,
   }) : super(key: key);
 
-  final int containerWidth;
-  final double containerBorderRadius;
+  final int cardWidth;
+  final double cardBorderRadius;
   final String cardText;
-  final Color cardColor;
+  final Color cardBackground;
+  final Color cardForeground;
+  final IconData iconData;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
+    var iconVisible = true;
+    if (iconData == FontAwesomeIcons.instagram) {
+      iconVisible = false;
+    }
     return Expanded(
-      flex: containerWidth,
+      flex: cardWidth,
       child: Container(
-          decoration: BoxDecoration(
-            color: cardColor,
-            borderRadius: BorderRadius.circular(containerBorderRadius),
+        decoration: BoxDecoration(
+          color: cardBackground,
+          borderRadius: BorderRadius.circular(cardBorderRadius),
+        ),
+        child: Center(
+          child: Column(children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.green,
+              ),
+            ),
+            Visibility(
+              visible: iconVisible,
+              child: Expanded(
+                flex: 24,
+                child: Center(
+                  child: FaIcon(
+                    iconData,
+                    color: cardForeground,
+                    size: iconSize,
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.green,
+              ),
+            ),
+            Expanded(
+              flex: 16,
+              child: Center(child: Text(cardText)),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: Colors.green,
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
+  }
+}
+
+class CardMaleFemale extends StatelessWidget {
+  const CardMaleFemale({
+    Key? key,
+    required this.iconVisible,
+    required this.iconData,
+    required this.iconSize,
+    required this.cardText,
+    required this.cardForeground,
+  }) : super(key: key);
+
+  final bool iconVisible;
+  final IconData iconData;
+  final double iconSize;
+  final String cardText;
+  final Color cardForeground;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(children: [
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.green,
           ),
-          child: Center(child: Text(cardText))),
+        ),
+        Visibility(
+          visible: iconVisible,
+          child: Expanded(
+            flex: 24,
+            child: Center(
+              child: FaIcon(
+                iconData,
+                color: cardForeground,
+                size: iconSize,
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+        Expanded(
+          flex: 16,
+          child: Center(child: Text(cardText)),
+        ),
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: Colors.green,
+          ),
+        ),
+      ]),
     );
   }
 }

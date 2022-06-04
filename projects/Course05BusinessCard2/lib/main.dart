@@ -2,18 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
-import 'package:audioplayers/audioplayers.dart';
-import 'models/quizItem.dart';
 import 'pages/home.dart';
-import 'pages/quiz01.dart';
-import 'pages/quiz02.dart';
-
-// not used
-import 'dart:io';
-import 'package:meta/meta.dart';
-import 'models/pageItem.dart';
-import 'pages/gridAtoZ.dart';
-import 'package:english_words/english_words.dart';
 
 void main() => runApp(const MyApp());
 
