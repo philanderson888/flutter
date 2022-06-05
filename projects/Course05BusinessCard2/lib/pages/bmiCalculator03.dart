@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../constants.dart';
 
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
 // colours
@@ -18,10 +19,14 @@ class BmiCalculator03 extends StatefulWidget {
 enum Gender { male, female }
 
 class _BmiCalculator03State extends State<BmiCalculator03> {
-  var cardBackgroundInactive = Color(0xFF111328);
-  var cardBackgroundActive = Color(0xFF1D1E33);
+  final kCardBackgroundInactive = Color(0xFF111328);
+  final kCardBackgroundActive = Color(0xFF1D1E33);
+
   var cardMaleBackground = Color(0xFF111328);
   var cardFemaleBackground = Color(0xFF111328);
+
+  // slider
+  int height = 160;
 
   doNothing() {
     print('doing nothing');
@@ -29,15 +34,22 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
 
   setCardMaleBackgroundColor() {
     setState(() {
-      cardMaleBackground = cardBackgroundActive;
-      cardFemaleBackground = cardBackgroundInactive;
+      cardMaleBackground = kCardBackgroundActive;
+      cardFemaleBackground = kCardBackgroundInactive;
     });
   }
 
   setCardFemaleBackgroundColor() {
     setState(() {
-      cardFemaleBackground = cardBackgroundActive;
-      cardMaleBackground = cardBackgroundInactive;
+      cardFemaleBackground = kCardBackgroundActive;
+      cardMaleBackground = kCardBackgroundInactive;
+    });
+  }
+
+  setSliderState(double newValue) {
+    setState(() {
+      height = newValue.round();
+      print('slider new value ${height.toString()}');
     });
   }
 
@@ -297,7 +309,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                 flex: cardWidth * 2 + cardInnerPadding,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: cardBackgroundInactive,
+                                    color: kCardBackgroundInactive,
                                     borderRadius:
                                         BorderRadius.circular(cardBorderRadius),
                                   ),
@@ -311,7 +323,97 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                       ),
                                       Expanded(
                                         flex: 16,
-                                        child: Center(child: Text(textHeight)),
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                              flex: 3,
+                                              child: Container(),
+                                            ),
+                                            Expanded(
+                                              flex: 6,
+                                              child: Center(
+                                                child: Text(textHeight),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Container(),
+                                            ),
+                                            Expanded(
+                                              flex: 10,
+                                              child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment
+                                                          .baseline,
+                                                  textBaseline:
+                                                      TextBaseline.alphabetic,
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 80,
+                                                      child: Container(),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 20,
+                                                      child: Text(
+                                                        height.toString(),
+                                                        style:
+                                                            kBmiHugeTextStyle,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 15,
+                                                      child: Text('cm',
+                                                          style:
+                                                              kBmiLargeTextStyle),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 80,
+                                                      child: Container(),
+                                                    ),
+                                                  ]),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Container(),
+                                            ),
+                                            Expanded(
+                                              flex: 5,
+                                              child: SliderTheme(
+                                                data: SliderTheme.of(context)
+                                                    .copyWith(
+                                                  activeTrackColor:
+                                                      kBmiSliderColor,
+                                                  inactiveTrackColor:
+                                                      kBmiSliderColor,
+                                                  thumbColor: Color(0xFFEB1555),
+                                                  overlayColor:
+                                                      Color(0xCCEB1555),
+                                                  thumbShape:
+                                                      RoundSliderThumbShape(
+                                                          enabledThumbRadius:
+                                                              15.0),
+                                                  overlayShape:
+                                                      RoundSliderOverlayShape(
+                                                          overlayRadius: 50.0),
+                                                ),
+                                                child: Slider(
+                                                  value: height.toDouble(),
+                                                  min: kBmiSliderMin,
+                                                  max: kBmiSliderMax,
+                                                  divisions: 1,
+                                                  label: height.toString(),
+                                                  onChanged: (double newValue) {
+                                                    setSliderState(newValue);
+                                                  },
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 3,
+                                              child: Container(),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       Expanded(
                                         flex: 1,
@@ -349,7 +451,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                 flex: cardWidth,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: cardBackgroundInactive,
+                                    color: kCardBackgroundInactive,
                                     borderRadius:
                                         BorderRadius.circular(cardBorderRadius),
                                   ),
@@ -399,7 +501,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                 flex: cardWidth,
                                 child: Container(
                                   decoration: BoxDecoration(
-                                    color: cardBackgroundInactive,
+                                    color: kCardBackgroundInactive,
                                     borderRadius:
                                         BorderRadius.circular(cardBorderRadius),
                                   ),

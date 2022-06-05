@@ -32,6 +32,7 @@ This is a respository for learning flutter from scratch
   - [android studio](#android-studio)
   - [sqlite](#sqlite)
   - [all projects](#all-projects)
+  - [architecture](#architecture)
   - [performance](#performance)
 
 
@@ -207,6 +208,11 @@ Next we progress into reading data from an api into our app, and displaying it
 A list of all projects is below
 
 - [all projects](projects/README.md)
+
+
+## architecture
+
+[architecture](notes/architecture.md)
 
 ## performance
 

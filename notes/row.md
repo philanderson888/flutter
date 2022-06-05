@@ -9,6 +9,8 @@
   - [Single Row With Multiple Children In The Row](#single-row-with-multiple-children-in-the-row)
     - [Single Row with Button Click](#single-row-with-button-click)
   - [Row And Column Layout](#row-and-column-layout)
+  - [alignment](#alignment)
+    - [aligning text of different heights](#aligning-text-of-different-heights)
 
 
 ## Single Row With One Centred Item
@@ -258,6 +260,22 @@ class UpdateStatefulHome extends State{
     );
   }
 }
+```
+
+## alignment
+
+for a `row` we can align
+
+- horizontally - mainAxisAlignment
+- vertically - crossAxisAlignment
+
+### aligning text of different heights
+
+to align text of different heights we align to a `baseline`
+
+```java
+crossAxisAlignment: CrossAxisAlignment.baseline,
+textBaseline: TextBaseline.alphabetic,
 ```
 
 
