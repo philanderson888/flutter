@@ -35,6 +35,7 @@ This is a respository for learning flutter from scratch
   - [all projects](#all-projects)
   - [architecture](#architecture)
   - [performance](#performance)
+  - [geolocation](#geolocation)
 
 
 ## author
@@ -222,3 +223,7 @@ A list of all projects is below
 ## performance
 
 [performance](notes/performance.md)
+
+## geolocation
+
+[geolocation](notes/geolocation.md)

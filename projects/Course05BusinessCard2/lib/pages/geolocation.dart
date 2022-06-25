@@ -17,7 +17,31 @@ class _GeolocationState extends State<Geolocation> {
     bool serviceEnabled;
     LocationPermission permission;
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    return await Geolocator.getCurrentPosition();
+
+    print('is geolocation service enabled? $serviceEnabled');
+
+    if (!serviceEnabled) {
+      return Future.error('Location Services Are Disabled');
+    }
+
+    permission = await Geolocator.checkPermission();
+
+    print('geolocation permission is $permission');
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location Permissions Are Denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location Permissions Are Permanently Denied, We Canno Request Permissions');
+    }
+
+    var position = await Geolocator.getCurrentPosition();
+    return position;
   }
 
   @override
