@@ -28,7 +28,7 @@ class _ThemeCustomState extends State<ThemeCustom> {
         textTheme: const TextTheme(
           bodyText2: TextStyle(color: Colors.purple),
         ),
-        accentColor: const Color(0xff4C2973),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff4C2973)),
       ),
       home: Scaffold(
         appBar: AppBar(

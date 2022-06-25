@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_teaching_app/models/destiniStoryBrain.dart';
+import 'package:flutter_teaching_app/models/destini_story_brain.dart';
+import '../models/destini_story.dart';
 
 class Destini03 extends StatefulWidget {
   const Destini03({Key? key}) : super(key: key);
@@ -15,9 +16,12 @@ class _Destini03State extends State<Destini03> {
   @override
   Widget build(BuildContext context) {
     setNextStory(int choice) {
+      print('setNextStory for choice $choice');
       var storyNumber = storyBrain.nextStory(choice);
+      print('.. nextNumber = $storyNumber');
       setState(() {
         story = storyBrain.getStory(storyNumber);
+        print('.. next story = ${story.storyTitle}');
         if (storyNumber == 0) {
           button2Visible = true;
         }

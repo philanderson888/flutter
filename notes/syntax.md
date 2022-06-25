@@ -17,6 +17,7 @@
   - [sleep](#sleep)
   - [collections](#collections)
     - [list](#list)
+    - [maps](#maps)
   - [enums](#enums)
   - [ternary](#ternary)
 
@@ -144,6 +145,25 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+```
+
+### maps
+
+Maps are 1-1 mappings between a key and a value.  All the keys should have the same data type, as should all the values.
+
+```java
+// define the map
+Map<KeyType, ValueType> mapName {
+  key:value
+  key2:value2
+}
+
+// read data
+mapName[key]
+mapName[key2]
+mapName.length // 2
+mapName.keys // (key, key2)
+mapName.values // (value, value2)
 ```
 
 ## enums

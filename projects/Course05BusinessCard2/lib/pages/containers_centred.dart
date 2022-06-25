@@ -5,18 +5,18 @@ const bodyFlexWidth = 20;
 const bodyFlexMarginTopBottom = 1;
 const bodyFlexHeight = 20;
 
-class Geolocation extends StatefulWidget {
-  const Geolocation({Key? key}) : super(key: key);
+class ContainersCentered extends StatefulWidget {
+  const ContainersCentered({Key? key}) : super(key: key);
   @override
-  State<Geolocation> createState() => _GeolocationState();
+  State<ContainersCentered> createState() => _ContainersCenteredState();
 }
 
-class _GeolocationState extends State<Geolocation> {
+class _ContainersCenteredState extends State<ContainersCentered> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Geolocation'),
+        title: const Text('ContainersCentered'),
         backgroundColor: Colors.amberAccent,
       ),
       body: SafeArea(

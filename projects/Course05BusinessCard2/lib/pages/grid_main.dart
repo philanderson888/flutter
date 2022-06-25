@@ -5,30 +5,28 @@ import '../models/page_item.dart';
 import '../models/test_class.dart';
 import 'dart:io';
 import '../main.dart';
-import 'audio_player.dart';
 import 'xylophone.dart';
 import 'quiz01.dart';
 import 'quiz02.dart';
-import 'padding.dart';
 import 'destini01.dart';
 import 'destini02.dart';
 import 'destini03.dart';
-import 'bmiCalculator01.dart';
-import 'bmiCalculator02.dart';
-import 'bmiCalculator03.dart';
-import 'themeDark.dart';
-import 'themeLight.dart';
-import 'themeCustom.dart';
+import 'bmi_calculator_01.dart';
+import 'bmi_calculator_02.dart';
+import 'bmi_calculator_03.dart';
+import 'bmi_calculator_04.dart';
+import 'weather_01.dart';
 
 class Grid2 extends StatelessWidget {
   const Grid2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const gridSize = 70;
-    const columnCount = 10;
+    const gridSize = 56;
+    const columnCount = 8;
     const initialListLength = 0;
     const categoryButtonColor = Color(0xFFF2B64B);
+    const textScaleFactor = 1.4;
 
     List<String> buttonTexts = [
       "this is some button text",
@@ -51,22 +49,28 @@ class Grid2 extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
     }
 
-    goToBmiCalculator01() {
-      print('going to BMI Calculator');
+    goToBmi01() {
+      print('going to BMI Calculator 01');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BmiCalculator01()));
     }
 
-    goToBmiCalculator02() {
-      print('going to BMI Calculator');
+    goToBmi02() {
+      print('going to BMI Calculator 02');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BmiCalculator02()));
     }
 
-    goToBmiCalculator03() {
-      print('going to BMI Calculator');
+    goToBmi03() {
+      print('going to BMI Calculator 03');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BmiCalculator03()));
+    }
+
+    goToBmi04() {
+      print('going to BMI Calculator 04');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BmiCalculator04()));
     }
 
     goToBusinessCard() {
@@ -133,6 +137,12 @@ class Grid2 extends StatelessWidget {
       print('going to quiz02 app');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Quiz02()));
+    }
+
+    goToWeather01() {
+      print('going to weather_01 app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Weather01()));
     }
 
     goToXylophone() {
@@ -242,6 +252,28 @@ class Grid2 extends StatelessWidget {
       }
     }
 
+    printNumberToStringWithPrecisionSignificantDigits() {
+      print(" ");
+      print(" ");
+      print(
+          'printing a number to a given degree of precision ie significant digits');
+      double number = 1.234567;
+      print("number $number precision 2 ${number.toStringAsPrecision(2)}");
+      print("number $number precision 3 ${number.toStringAsPrecision(3)}");
+      print("number $number precision 4 ${number.toStringAsPrecision(4)}");
+    }
+
+    printNumberToStringWithFixedNumberOfDecimalPlaces() {
+      print(" ");
+      print(" ");
+      print(
+          'printing a number as a truncated string to a fixed number of decimal places ** note - this is no good as it is only truncating and we must have the number rounded properly before printing to string ...');
+      double number = 1.234567;
+      print("number $number to 2 decimal places ${number.toStringAsFixed(2)}");
+      print("number $number to 3 decimal places ${number.toStringAsFixed(3)}");
+      print("number $number to 4 decimal places ${number.toStringAsFixed(4)}");
+    }
+
     List<PageItem> pageItems = [
       PageItem(
         functionName: doNothing,
@@ -275,16 +307,20 @@ class Grid2 extends StatelessWidget {
         buttonText: "Ask Any Question",
       ),
       PageItem(
-        functionName: goToBmiCalculator01,
-        buttonText: "BMI Calculator 01",
+        functionName: goToBmi01,
+        buttonText: "BMI 01",
       ),
       PageItem(
-        functionName: goToBmiCalculator02,
-        buttonText: "BMI Calculator 02",
+        functionName: goToBmi02,
+        buttonText: "BMI 02",
       ),
       PageItem(
-        functionName: goToBmiCalculator03,
-        buttonText: "BMI Calculator 03",
+        functionName: goToBmi03,
+        buttonText: "BMI 03",
+      ),
+      PageItem(
+        functionName: goToBmi04,
+        buttonText: "BMI 04",
       ),
       PageItem(
         functionName: goToBusinessCard,
@@ -316,11 +352,15 @@ class Grid2 extends StatelessWidget {
       ),
       PageItem(
         functionName: goToQuiz01,
-        buttonText: "Quiz01 App",
+        buttonText: "Quiz 01",
       ),
       PageItem(
         functionName: goToQuiz02,
-        buttonText: "Quiz02 App",
+        buttonText: "Quiz 02",
+      ),
+      PageItem(
+        functionName: goToWeather01,
+        buttonText: "Weather 01",
       ),
       PageItem(
         functionName: goToXylophone,
@@ -348,6 +388,14 @@ class Grid2 extends StatelessWidget {
         buttonText: "print list of strings",
       ),
       PageItem(
+        functionName: printNumberToStringWithPrecisionSignificantDigits,
+        buttonText: "significant digits",
+      ),
+      PageItem(
+        functionName: printNumberToStringWithFixedNumberOfDecimalPlaces,
+        buttonText: "fixed decimal place",
+      ),
+      PageItem(
         functionName: doNothing,
         buttonText: " OOP ",
         buttonColor: categoryButtonColor,
@@ -361,7 +409,7 @@ class Grid2 extends StatelessWidget {
     print("Page items count " + pageItems.length.toString());
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.3),
+      data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Layouts, Templates, Apps, Print Operations, OOP'),
@@ -374,7 +422,7 @@ class Grid2 extends StatelessWidget {
                 key: null,
                 onPressed: pageItems[index - initialListLength].functionName,
                 child: Padding(
-                  padding: const EdgeInsets.all(7.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Center(
                       child: Text(
                           pageItems[index - initialListLength].buttonText)),

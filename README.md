@@ -30,6 +30,7 @@ This is a respository for learning flutter from scratch
   - [unit tests](#unit-tests)
   - [api](#api)
   - [android studio](#android-studio)
+  - [ongoing maintenance of sdk and package versions](#ongoing-maintenance-of-sdk-and-package-versions)
   - [sqlite](#sqlite)
   - [all projects](#all-projects)
   - [architecture](#architecture)
@@ -199,6 +200,10 @@ Next we progress into reading data from an api into our app, and displaying it
 ## android studio
 
 [getting started with android studio](notes/getting-started-with-android-studio.md)
+
+## ongoing maintenance of sdk and package versions
+
+[ongoing maintenance](notes/maintaining-flutter.md)
 
 ## sqlite
 

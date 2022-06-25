@@ -4,7 +4,7 @@ class QuizItem {
 
   QuizItem({
     this.question = "",
-    this.answer = null,
+    this.answer = false,
   }) {
     assert(question != "", "question must be present");
     assert(answer != null, "answer must be present");

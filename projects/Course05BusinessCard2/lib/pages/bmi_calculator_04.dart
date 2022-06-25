@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants.dart';
+import './bmi_calculator_04_results_page.dart';
+import './bmi_calculator_brain.dart';
 
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
 // colours
@@ -8,21 +10,20 @@ import '../constants.dart';
 //        card #1D1E33
 //        text #8D8E98
 
-class BmiCalculator03 extends StatefulWidget {
-  const BmiCalculator03({Key? key}) : super(key: key);
+class BmiCalculator04 extends StatefulWidget {
+  const BmiCalculator04({Key? key}) : super(key: key);
 
   @override
-  State<BmiCalculator03> createState() => _BmiCalculator03State();
+  State<BmiCalculator04> createState() => _BmiCalculator04State();
 }
 
 enum Gender { male, female }
 
 enum Counters { weight, age }
 
-class _BmiCalculator03State extends State<BmiCalculator03> {
+class _BmiCalculator04State extends State<BmiCalculator04> {
   final kCardBackgroundInactive = const Color(0xFF111328);
   final kCardBackgroundActive = const Color(0xFF1D1E33);
-
   var cardMaleBackground = const Color(0xFF111328);
   var cardFemaleBackground = const Color(0xFF111328);
 
@@ -35,6 +36,11 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
 
   doNothing() {
     print('doing nothing');
+  }
+
+  goBack() {
+    print('going back');
+    Navigator.pop(context);
   }
 
   setCardMaleBackgroundColor() {
@@ -97,7 +103,6 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
     const backgroundColor = Color(0xFF29083B);
     var appColor = const Color(0xff4C2973);
     const colorPadding = Color(0xFF29083B);
-
     const cardForeground = Color(0xFF8D8E98);
 
     // header colors
@@ -131,11 +136,9 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
       theme: ThemeData.dark().copyWith(
         appBarTheme: AppBarTheme(
           backgroundColor: appColor,
-          titleTextStyle: TextStyle(
-            fontSize: 30,
-            color: Colors.purple.shade400,
-          ),
+          titleTextStyle: kBmiAppBarTextStyle,
         ),
+        primaryColor: kBmiPrimaryColor,
         scaffoldBackgroundColor: backgroundColor,
         textTheme: const TextTheme(
           headline1: TextStyle(color: Colors.yellow),
@@ -341,7 +344,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                         child: Column(
                                           children: [
                                             Expanded(
-                                              flex: 3,
+                                              flex: 2,
                                               child: Container(),
                                             ),
                                             Expanded(
@@ -425,7 +428,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                               ),
                                             ),
                                             Expanded(
-                                              flex: 3,
+                                              flex: 4,
                                               child: Container(),
                                             ),
                                           ],
@@ -686,21 +689,46 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
             ),
             //
             //
-            Footer(
-              footerHeight: footerHeight,
-              footerTextSize: footerTextSize,
-              footerColor: footerColor,
-              footerTextColor: footerTextColor,
-              footerFontWeight: footerFontWeight,
-              footerText: footerText,
+            Expanded(
+              flex: footerHeight,
+              child: GestureDetector(
+                onTap: () {
+                  print('calculating BMI');
+
+                  var bmiCalculator =
+                      BmiCalculatorBrain(height: height, weight: weight);
+                  var bmi = bmiCalculator.calculateBmi();
+                  var bmiResult = bmiCalculator.getResult();
+                  var bmiInterpretation = bmiCalculator.getInterpretation();
+
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => BmiResultsPage04(
+                          bmi: bmi,
+                          bmiResult: bmiResult,
+                          bmiInterpretation: bmiInterpretation)));
+                },
+                child: Container(
+                  color: footerColor,
+                  child: Center(
+                    child: Text(
+                      footerText,
+                      style: TextStyle(
+                        fontSize: footerTextSize,
+                        fontWeight: footerFontWeight,
+                        color: footerTextColor,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         floatingActionButton: IconTheme(
           child: FloatingActionButton(
-            onPressed: doNothing,
+            onPressed: goBack,
             child: const Icon(
-              Icons.add,
+              Icons.clear,
               color: Color(0xffab47bc),
             ),
           ),
@@ -754,45 +782,6 @@ class Header extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class Footer extends StatelessWidget {
-  const Footer({
-    Key? key,
-    required this.footerHeight,
-    required this.footerTextSize,
-    required this.footerColor,
-    required this.footerFontWeight,
-    required this.footerTextColor,
-    required this.footerText,
-  }) : super(key: key);
-
-  final int footerHeight;
-  final double footerTextSize;
-  final FontWeight footerFontWeight;
-  final Color footerColor;
-  final Color footerTextColor;
-  final String footerText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: footerHeight,
-      child: Container(
-        color: footerColor,
-        child: Center(
-          child: Text(
-            footerText,
-            style: TextStyle(
-              fontSize: footerTextSize,
-              fontWeight: footerFontWeight,
-              color: footerTextColor,
-            ),
-          ),
-        ),
       ),
     );
   }

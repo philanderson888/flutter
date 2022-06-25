@@ -2,17 +2,17 @@ class TestClass {
   int? a = 0;
   String b = "";
   bool c = false;
-  var _privateProperty = 0.0;
+  final _privateProperty = 5.0;
   TestClass({
     required int a,
     required String b,
     required bool c,
     double privateProperty = 0.0,
   }) {
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this._privateProperty = privateProperty;
+    a = a;
+    b = b;
+    c = c;
+    privateProperty = _privateProperty;
   }
 }
 

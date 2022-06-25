@@ -1,45 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
-class Xylophone extends StatefulWidget {
-  const Xylophone({Key? key}) : super(key: key);
+const bodyFlexMarginLeftRight = 1;
+const bodyFlexWidth = 20;
+const bodyFlexMarginTopBottom = 1;
+const bodyFlexHeight = 20;
 
+class Geolocation extends StatefulWidget {
+  const Geolocation({Key? key}) : super(key: key);
   @override
-  State<Xylophone> createState() => _XylophoneState();
+  State<Geolocation> createState() => _GeolocationState();
 }
 
-class _XylophoneState extends State<Xylophone> {
-  final player = AudioCache();
-
-  var audioPlayer = AudioPlayer(
-    mode: PlayerMode.LOW_LATENCY,
-  );
+class _GeolocationState extends State<Geolocation> {
+  Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    return await Geolocator.getCurrentPosition();
+  }
 
   @override
   Widget build(BuildContext context) {
-    playNote(int noteNumber) async {
-      audioPlayer = await player.play(
-        'note$noteNumber.wav',
-      );
-    }
+    var position = _determinePosition();
 
-    Expanded buildXylophoneNote({
-      int note = 0,
-      Color color = Colors.white,
-    }) {
-      return Expanded(
-        flex: 10,
-        child: InkWell(
-          onTap: () => playNote(note),
-          child: Container(
-            color: color,
-          ),
-        ),
-      );
-    }
+    print('the current position is $position');
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Xylophone'),
+        title: const Text('Geolocation'),
         backgroundColor: Colors.amberAccent,
       ),
       body: SafeArea(
@@ -47,118 +36,43 @@ class _XylophoneState extends State<Xylophone> {
           color: Colors.amberAccent,
           child: Row(children: <Widget>[
             Expanded(
-              flex: 1,
-              child: Container(),
+              flex: bodyFlexMarginLeftRight,
+              child: Container(
+                color: Colors.pink,
+              ),
             ),
             Expanded(
-              flex: 3,
+              flex: bodyFlexWidth,
               child: Column(children: <Widget>[
                 Expanded(
-                  flex: 7,
-                  child: Container(),
+                  flex: bodyFlexMarginTopBottom,
+                  child: Container(
+                    color: Colors.red,
+                  ),
                 ),
                 Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () => playNote(1),
-                    child: Container(
-                      color: const Color(0xFFCA1E51),
+                  flex: bodyFlexHeight,
+                  child: Container(
+                    width: double.infinity,
+                    color: Colors.blue,
+                    child: Center(
+                      child: Text('hi'),
                     ),
                   ),
                 ),
                 Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                buildXylophoneNote(
-                  note: 2,
-                  color: const Color(0xFFd62b20),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                buildXylophoneNote(
-                  note: 3,
-                  color: const Color(0xFFda791f),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                buildXylophoneNote(
-                  note: 4,
-                  color: const Color(0xFFc29020),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(5);
-                    },
-                    child: Container(
-                      color: const Color(0xFF6b974f),
-                    ),
+                  flex: bodyFlexMarginTopBottom,
+                  child: Container(
+                    color: Colors.green,
                   ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(6);
-                    },
-                    child: Container(
-                      color: const Color(0xFF83c196),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(7);
-                    },
-                    child: Container(
-                      color: const Color(0xFF77b7bb),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Container(),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: InkWell(
-                    onTap: () {
-                      playNote(1);
-                    },
-                    child: Container(
-                      color: const Color(0xFFa99aab),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 7,
-                  child: Container(),
                 ),
               ]),
             ),
             Expanded(
-              flex: 1,
-              child: Container(),
+              flex: bodyFlexMarginLeftRight,
+              child: Container(
+                color: Colors.purpleAccent,
+              ),
             ),
           ]),
         ),

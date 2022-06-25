@@ -2,7 +2,7 @@ import 'destini_story.dart';
 
 class DestiniStoryBrain {
   int storyNumber = 0;
-  List<DestiniStory> _destiniStoryData = [
+  final List<DestiniStory> _destiniStoryData = [
     DestiniStory(
         storyTitle: "a title 0", choice1: "a choice 1", choice2: "a choice 2"),
     DestiniStory(
@@ -18,6 +18,9 @@ class DestiniStoryBrain {
   ];
 
   getStory(int storyNumber) {
+    print('.. getStory for story number $storyNumber');
+    print('.. title ${_destiniStoryData[storyNumber].storyTitle}');
+    print('.. title 0 ${_destiniStoryData[0].storyTitle}');
     return _destiniStoryData[storyNumber];
   }
 

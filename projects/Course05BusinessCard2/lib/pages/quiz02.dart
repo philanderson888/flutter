@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/quizItem.dart';
+import '../models/quiz_item.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Quiz02 extends StatefulWidget {
@@ -17,6 +17,53 @@ class _Quiz02State extends State<Quiz02> {
   int questionNumber = 0;
 
   static List<QuizItem> quizItems = [
+    QuizItem(question: "Dibby", answer: true),
+    QuizItem(question: "Raul", answer: true),
+    QuizItem(question: "Naz", answer: true),
+    QuizItem(question: "Mum", answer: true),
+    QuizItem(question: "Dad", answer: true),
+    QuizItem(question: "Jon", answer: true),
+    QuizItem(question: "Rosalyn", answer: true),
+    QuizItem(question: "Andrew", answer: true),
+    QuizItem(question: "Sarah", answer: true),
+    QuizItem(question: "John", answer: true),
+    QuizItem(question: "Jucon", answer: true),
+    QuizItem(question: "Alphonso", answer: true),
+    QuizItem(question: "Evelyln", answer: true),
+    QuizItem(question: "Robin", answer: true),
+    QuizItem(question: "Michael", answer: true),
+    QuizItem(question: "Brigit", answer: true),
+    QuizItem(question: "Mark", answer: true),
+    QuizItem(question: "Rachel", answer: true),
+    QuizItem(question: "Alex Kennedy", answer: true),
+    QuizItem(question: "Philemon", answer: true),
+    QuizItem(question: "Saba", answer: true),
+    QuizItem(question: "Suresh", answer: true),
+    QuizItem(question: "Paul on prayer line", answer: true),
+    QuizItem(question: "Cherise Prayer", answer: true),
+    QuizItem(question: "Peter Prayer", answer: true),
+    QuizItem(question: "Peter Kennelly", answer: true),
+    QuizItem(question: "Terry", answer: true),
+    QuizItem(question: "7am main router ON", answer: true),
+    QuizItem(question: "7am main desk ON ON", answer: true),
+    QuizItem(
+        question:
+            "705am If Screen 8 => turn on purple lights 1/3 way up in Screen 8",
+        answer: true),
+    QuizItem(question: "710am check JC 3 streams ON", answer: true),
+    QuizItem(question: "715am check lip sync ON 3 streams", answer: true),
+    QuizItem(
+        question:
+            "720am if lip sync issue then hard reboot local teradek : hold power in until the power cuts, then turn it on again",
+        answer: true),
+    QuizItem(
+        question:
+            "730am create Youtube Prism stream on Youtube Studio and Go Live",
+        answer: true),
+    QuizItem(
+        question:
+            "740am On Core, locate YouTube encode stream and click 'Go Live' so the stream reaches YouTube (will observe in Youtube Studio)",
+        answer: true),
     QuizItem(question: "Everest is the highest mountain", answer: true),
     QuizItem(question: "Dogs are reptiles", answer: false),
     QuizItem(question: "Cats are carnivores", answer: true),

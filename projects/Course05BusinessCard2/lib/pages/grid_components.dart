@@ -1,5 +1,7 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/pages/bmi_calculator_04.dart';
+import 'package:flutter_teaching_app/pages/containers_centred.dart';
 import '../models/page_item.dart';
 import '../main.dart';
 import 'audio_player.dart';
@@ -8,10 +10,11 @@ import 'quiz01.dart';
 import 'quiz02.dart';
 import 'padding.dart';
 import 'destini01.dart';
-import 'bmiCalculator03.dart';
-import 'themeDark.dart';
-import 'themeLight.dart';
-import 'themeCustom.dart';
+import 'bmi_calculator_03.dart';
+import 'theme_dark.dart';
+import 'theme_light.dart';
+import 'theme_custom.dart';
+import 'geolocation.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class GridAToZ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const gridSize = 70;
-    const columnCount = 10;
+    const columnCount = 9;
     const initialListLength = 0;
     const categoryButtonColor = Color(0xFFF2B64B);
 
@@ -74,6 +77,12 @@ class GridAToZ extends StatelessWidget {
       print('displaying container layout - rows and columns');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Destini01()));
+    }
+
+    goToContainersCentred() {
+      print('container layout with row/column, all centred');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const ContainersCentered()));
     }
 
     goToCourseLayoutExercise() {
@@ -142,6 +151,12 @@ class GridAToZ extends StatelessWidget {
           'viewing a function which returns a component - in this case, the Expanded component.  See the Xylophone example for its use here .. ');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Xylophone()));
+    }
+
+    goToGeolocation() {
+      print('show geolocation services in action');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Geolocation()));
     }
 
     gotoGridViewOfClickableImages() {
@@ -225,6 +240,12 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const BmiCalculator03()));
     }
 
+    goToStatelessWidgetWithParameters() {
+      print('goint to stateless widget passing parameters');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const BmiCalculator04()));
+    }
+
     goToStatefulWidget() {
       print('going to blank stateful widget template');
       Navigator.of(context).push(
@@ -274,11 +295,6 @@ class GridAToZ extends StatelessWidget {
 
     List<PageItem> pageItems = [
       PageItem(
-        functionName: doNothing,
-        buttonText: "Components ",
-        buttonColor: categoryButtonColor,
-      ),
-      PageItem(
         functionName: goToAlert,
         buttonText: "Alert",
       ),
@@ -305,6 +321,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToContainerLayout,
         buttonText: "Container Layout",
+      ),
+      PageItem(
+        functionName: goToContainersCentred,
+        buttonText: "Containers Centred",
       ),
       PageItem(
         functionName: goToCourseLayoutExercise,
@@ -348,11 +368,15 @@ class GridAToZ extends StatelessWidget {
       ),
       PageItem(
         functionName: goToFunctionReturnsComponent,
-        buttonText: "Function returns a component",
+        buttonText: "Function returns component",
+      ),
+      PageItem(
+        functionName: goToGeolocation,
+        buttonText: "Geolocation",
       ),
       PageItem(
         functionName: gotoGridViewOfClickableImages,
-        buttonText: "Grid View - Images Clickable",
+        buttonText: "Grid Images Clickable",
       ),
       PageItem(
         functionName: goToIcons,
@@ -411,6 +435,9 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Slider",
       ),
       PageItem(
+          functionName: goToStatelessWidgetWithParameters,
+          buttonText: "Stateless Widget Params"),
+      PageItem(
         functionName: goToStatefulWidget,
         buttonText: "Stateful Widget",
       ),
@@ -450,7 +477,7 @@ class GridAToZ extends StatelessWidget {
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.3),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Components A-Z'),
+          title: const Text('Flutter Features By Name'),
         ),
         body: GridView.count(
           crossAxisCount: columnCount,
@@ -460,7 +487,7 @@ class GridAToZ extends StatelessWidget {
                 key: null,
                 onPressed: pageItems[index - initialListLength].functionName,
                 child: Padding(
-                  padding: const EdgeInsets.all(7.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Center(
                       child: Text(
                           pageItems[index - initialListLength].buttonText)),

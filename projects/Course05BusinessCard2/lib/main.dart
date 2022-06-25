@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 import 'pages/home.dart';
+import 'pages/grid_main.dart';
 
 void main() => runApp(const MyApp());
 
@@ -11,12 +12,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Home(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const Home(),
+          '/page4': (context) => const Page4(),
+          '/page5': (context) => const Page5(),
+          '/grid2': (context) => const Grid2(),
+        });
   }
 }
 
