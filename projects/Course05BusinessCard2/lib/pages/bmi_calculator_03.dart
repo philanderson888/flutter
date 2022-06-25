@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants.dart';
@@ -18,15 +17,21 @@ class BmiCalculator03 extends StatefulWidget {
 
 enum Gender { male, female }
 
-class _BmiCalculator03State extends State<BmiCalculator03> {
-  final kCardBackgroundInactive = Color(0xFF111328);
-  final kCardBackgroundActive = Color(0xFF1D1E33);
+enum Counters { weight, age }
 
-  var cardMaleBackground = Color(0xFF111328);
-  var cardFemaleBackground = Color(0xFF111328);
+class _BmiCalculator03State extends State<BmiCalculator03> {
+  final kCardBackgroundInactive = const Color(0xFF111328);
+  final kCardBackgroundActive = const Color(0xFF1D1E33);
+
+  var cardMaleBackground = const Color(0xFF111328);
+  var cardFemaleBackground = const Color(0xFF111328);
 
   // slider
   int height = 160;
+
+  // variables
+  int weight = 70;
+  int age = 30;
 
   doNothing() {
     print('doing nothing');
@@ -50,6 +55,19 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
     setState(() {
       height = newValue.round();
       print('slider new value ${height.toString()}');
+    });
+  }
+
+  incrementCounter(Counters counter, int increment) {
+    print('counter = $counter');
+    setState(() {
+      if (counter == Counters.weight) {
+        print('incrementing weight from $weight to ${weight + increment}');
+        weight += increment;
+      } else if (counter == Counters.age) {
+        print('incrementing age from $age to ${age + increment}');
+        age += increment;
+      }
     });
   }
 
@@ -77,7 +95,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
 
     // app colors
     const backgroundColor = Color(0xFF29083B);
-    var appColor = Color(0xff4C2973);
+    var appColor = const Color(0xff4C2973);
     const colorPadding = Color(0xFF29083B);
 
     const cardForeground = Color(0xFF8D8E98);
@@ -100,16 +118,13 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
     String textMale = 'MALE';
     String textFemale = 'FEMALE';
     String textHeight = 'HEIGHT';
-    String textWeight = 'WEIGHT';
+    String textWeight = 'WEIGHT (kg)';
     String textAge = "AGE";
 
     // icons
-    const iconDataInstagram = FontAwesomeIcons.instagram;
     const iconSize = 80.0;
     const iconMale = FontAwesomeIcons.mars;
     const iconFemale = FontAwesomeIcons.venus;
-    const iconAge = FontAwesomeIcons.venus;
-    const iconWeight = FontAwesomeIcons.venus;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -193,7 +208,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                             color: Colors.green,
                                           ),
                                         ),
-                                        Expanded(
+                                        const Expanded(
                                           flex: 24,
                                           child: Center(
                                             child: FaIcon(
@@ -250,7 +265,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                             color: Colors.green,
                                           ),
                                         ),
-                                        Expanded(
+                                        const Expanded(
                                           flex: 24,
                                           child: Center(
                                             child: FaIcon(
@@ -385,22 +400,23 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                                       kBmiSliderColor,
                                                   inactiveTrackColor:
                                                       kBmiSliderColor,
-                                                  thumbColor: Color(0xFFEB1555),
+                                                  thumbColor:
+                                                      const Color(0xFFEB1555),
                                                   overlayColor:
-                                                      Color(0xCCEB1555),
+                                                      const Color(0xCCEB1555),
                                                   thumbShape:
-                                                      RoundSliderThumbShape(
+                                                      const RoundSliderThumbShape(
                                                           enabledThumbRadius:
                                                               15.0),
                                                   overlayShape:
-                                                      RoundSliderOverlayShape(
+                                                      const RoundSliderOverlayShape(
                                                           overlayRadius: 50.0),
                                                 ),
                                                 child: Slider(
                                                   value: height.toDouble(),
                                                   min: kBmiSliderMin,
                                                   max: kBmiSliderMax,
-                                                  divisions: 1,
+                                                  divisions: 100,
                                                   label: height.toString(),
                                                   onChanged: (double newValue) {
                                                     setSliderState(newValue);
@@ -447,6 +463,9 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                 flex: cardOuterPadding,
                                 child: Container(color: colorPadding),
                               ),
+                              //
+                              // weight
+                              //
                               Expanded(
                                 flex: cardWidth,
                                 child: Container(
@@ -457,22 +476,6 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                   ),
                                   child: Center(
                                     child: Column(children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: Colors.green,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 24,
-                                        child: Center(
-                                          child: FaIcon(
-                                            FontAwesomeIcons.venus,
-                                            color: cardForeground,
-                                            size: iconSize,
-                                          ),
-                                        ),
-                                      ),
                                       Expanded(
                                         flex: 1,
                                         child: Container(
@@ -489,6 +492,71 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                           color: Colors.green,
                                         ),
                                       ),
+                                      Expanded(
+                                        flex: 16,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 1, child: Container()),
+                                            Expanded(
+                                                flex: 16,
+                                                child: Center(
+                                                  child: Text(weight.toString(),
+                                                      style:
+                                                          kBmiLargeTextStyle),
+                                                )),
+                                            Expanded(
+                                                flex: 1, child: Container()),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child:
+                                              Container(color: Colors.green)),
+                                      Expanded(
+                                        flex: 16,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 14, child: Container()),
+                                            Expanded(
+                                                flex: 5,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    incrementCounter(
+                                                        Counters.weight, 1);
+                                                  },
+                                                  child: Center(
+                                                      child: Text('+',
+                                                          style:
+                                                              kBmiLargeTextStyle)),
+                                                )),
+                                            Expanded(
+                                                flex: 1, child: Container()),
+                                            Expanded(
+                                                flex: 5,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    incrementCounter(
+                                                        Counters.weight, -1);
+                                                  },
+                                                  child: Center(
+                                                      child: Text('-',
+                                                          style:
+                                                              kBmiLargeTextStyle)),
+                                                )),
+                                            Expanded(
+                                                flex: 14, child: Container()),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Container(
+                                          color: Colors.green,
+                                        ),
+                                      ),
                                     ]),
                                   ),
                                 ),
@@ -497,6 +565,9 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                 flex: cardInnerPadding,
                                 child: Container(color: colorPadding),
                               ),
+                              //
+                              // age
+                              //
                               Expanded(
                                 flex: cardWidth,
                                 child: Container(
@@ -514,14 +585,8 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 24,
-                                        child: Center(
-                                          child: FaIcon(
-                                            FontAwesomeIcons.venus,
-                                            color: cardForeground,
-                                            size: iconSize,
-                                          ),
-                                        ),
+                                        flex: 16,
+                                        child: Center(child: Text(textAge)),
                                       ),
                                       Expanded(
                                         flex: 1,
@@ -531,7 +596,62 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
                                       ),
                                       Expanded(
                                         flex: 16,
-                                        child: Center(child: Text(textAge)),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 1, child: Container()),
+                                            Expanded(
+                                                flex: 16,
+                                                child: Center(
+                                                  child: Text(age.toString(),
+                                                      style:
+                                                          kBmiLargeTextStyle),
+                                                )),
+                                            Expanded(
+                                                flex: 1, child: Container()),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                          flex: 1,
+                                          child:
+                                              Container(color: Colors.green)),
+                                      Expanded(
+                                        flex: 16,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                                flex: 14, child: Container()),
+                                            Expanded(
+                                                flex: 5,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    incrementCounter(
+                                                        Counters.age, 1);
+                                                  },
+                                                  child: Center(
+                                                      child: Text('+',
+                                                          style:
+                                                              kBmiLargeTextStyle)),
+                                                )),
+                                            Expanded(
+                                                flex: 1, child: Container()),
+                                            Expanded(
+                                                flex: 5,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    incrementCounter(
+                                                        Counters.age, -1);
+                                                  },
+                                                  child: Center(
+                                                      child: Text('-',
+                                                          style:
+                                                              kBmiLargeTextStyle)),
+                                                )),
+                                            Expanded(
+                                                flex: 14, child: Container()),
+                                          ],
+                                        ),
                                       ),
                                       Expanded(
                                         flex: 1,

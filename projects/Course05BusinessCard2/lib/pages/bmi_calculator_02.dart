@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
 // two colour from this app are background #090C21 container #1D1E33

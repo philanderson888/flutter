@@ -1,4 +1,4 @@
-import 'destiniStory.dart';
+import 'destini_story.dart';
 
 class DestiniStoryBrain {
   int storyNumber = 0;
