@@ -16,6 +16,7 @@ import 'bmi_calculator_02.dart';
 import 'bmi_calculator_03.dart';
 import 'bmi_calculator_04.dart';
 import 'weather_01.dart';
+import 'weather_02.dart';
 
 class Grid2 extends StatelessWidget {
   const Grid2({Key? key}) : super(key: key);
@@ -143,6 +144,12 @@ class Grid2 extends StatelessWidget {
       print('going to weather_01 app');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Weather01()));
+    }
+
+    goToWeather02() {
+      print('going to weather_02 app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Weather02()));
     }
 
     goToXylophone() {
@@ -363,6 +370,10 @@ class Grid2 extends StatelessWidget {
         buttonText: "Weather 01",
       ),
       PageItem(
+        functionName: goToWeather02,
+        buttonText: "Weather 02",
+      ),
+      PageItem(
         functionName: goToXylophone,
         buttonText: "Xylophone",
       ),
@@ -405,8 +416,6 @@ class Grid2 extends StatelessWidget {
         buttonText: "instantiate test class",
       ),
     ];
-
-    print("Page items count " + pageItems.length.toString());
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),

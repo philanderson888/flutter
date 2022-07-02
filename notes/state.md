@@ -9,6 +9,7 @@
   - [creating a stateful widget](#creating-a-stateful-widget)
   - [worked example](#worked-example)
   - [template - stateless and stateful multipage](#template---stateless-and-stateful-multipage)
+  - [stateful methods](#stateful-methods)
   - [`getx` state management](#getx-state-management)
 
 ## introduction
@@ -620,6 +621,14 @@ class Page5State extends State {
     );
   }
 }
+```
+
+## stateful methods
+
+```java
+void initState(){}
+Widget build(BuildContext context) {   return null; }
+void deactivate(){}
 ```
 
 ## `getx` state management

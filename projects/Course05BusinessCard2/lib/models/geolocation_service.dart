@@ -1,22 +1,43 @@
-class DestiniStory {
-  String storyTitle = "";
-  String choice1 = "";
-  String choice2 = "";
-  DestiniStory({
-    required storyTitle,
-    required choice1,
-    required choice2,
-  }) {
-    storyTitle = storyTitle;
-    choice1 = choice1;
-    choice2 = choice2;
-  }
+import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
 
-  getChoice1() {
-    return choice1;
-  }
+class GeolocationService {
+  Future<Position> getPosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-  getChoice2() {
-    return choice2;
+    print('is geolocation service enabled? $serviceEnabled');
+
+    if (!serviceEnabled) {
+      return Future.error('Location Services Are Disabled');
+    }
+
+    permission = await Geolocator.checkPermission();
+
+    print('geolocation permission is $permission');
+
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        return Future.error('Location Permissions Are Denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      return Future.error(
+          'Location Permissions Are Permanently Denied, We Cannot Request Permissions');
+    }
+
+    var position = await Geolocator.getCurrentPosition();
+
+    print('position is $position');
+
+    if (!kIsWeb) {
+      var lastKnownPosition = await Geolocator.getLastKnownPosition();
+      print('last known position is $lastKnownPosition');
+    }
+
+    return position;
   }
 }

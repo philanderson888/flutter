@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/constants.dart';
 import 'package:geolocator/geolocator.dart';
+import '../models/geolocation_service.dart';
 
 const bodyFlexMarginLeftRight = 1;
 const bodyFlexWidth = 20;
 const bodyFlexMarginTopBottom = 1;
 const bodyFlexHeight = 20;
+var positionAsString = 'Geolocation - formal version';
 
 class Geolocation extends StatefulWidget {
   const Geolocation({Key? key}) : super(key: key);
@@ -13,42 +16,18 @@ class Geolocation extends StatefulWidget {
 }
 
 class _GeolocationState extends State<Geolocation> {
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-    print('is geolocation service enabled? $serviceEnabled');
-
-    if (!serviceEnabled) {
-      return Future.error('Location Services Are Disabled');
-    }
-
-    permission = await Geolocator.checkPermission();
-
-    print('geolocation permission is $permission');
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        return Future.error('Location Permissions Are Denied');
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error(
-          'Location Permissions Are Permanently Denied, We Canno Request Permissions');
-    }
-
-    var position = await Geolocator.getCurrentPosition();
-    return position;
-  }
+  static var geolocationPosition = GeolocationService();
 
   @override
   Widget build(BuildContext context) {
-    var position = _determinePosition();
-
-    print('the current position is $position');
+    getPosition() async {
+      print('getPosition()');
+      var position = await geolocationPosition.getPosition();
+      print('the current position is $position');
+      setState(() {
+        positionAsString = position.toString();
+      });
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -76,11 +55,29 @@ class _GeolocationState extends State<Geolocation> {
                 ),
                 Expanded(
                   flex: bodyFlexHeight,
-                  child: Container(
-                    width: double.infinity,
-                    color: Colors.blue,
-                    child: Center(
-                      child: Text('hi'),
+                  child: GestureDetector(
+                    onTap: getPosition,
+                    child: Container(
+                      width: double.infinity,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(positionAsString,
+                            style: kTextStyleSize80ColorBEE4CB),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: bodyFlexHeight,
+                  child: GestureDetector(
+                    onTap: getPosition,
+                    child: Container(
+                      width: double.infinity,
+                      color: Colors.blue,
+                      child: Center(
+                        child: Text(positionAsString,
+                            style: kTextStyleSize80ColorBEE4CB),
+                      ),
                     ),
                   ),
                 ),
@@ -104,3 +101,9 @@ class _GeolocationState extends State<Geolocation> {
     );
   }
 }
+
+/*
+
+
+
+ */

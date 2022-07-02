@@ -1,7 +1,10 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/pages/async_await_01.dart';
 import 'package:flutter_teaching_app/pages/bmi_calculator_04.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
+import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
+import 'package:flutter_teaching_app/pages/weather_02.dart';
 import '../models/page_item.dart';
 import '../main.dart';
 import 'audio_player.dart';
@@ -185,10 +188,22 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const Xylophone()));
     }
 
+    goToLifeCycleMethods() {
+      print('going to lifecycle methods');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Weather02()));
+    }
+
     goToListTile() {
       print('going to list tile');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const ListTile01()));
+    }
+
+    goToLoadingAnimation01() {
+      print('going to loading animation 01');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const LoadingAnimation01()));
     }
 
     goToMaterialDesignColor() {
@@ -299,6 +314,10 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Alert",
       ),
       PageItem(
+        functionName: goToLoadingAnimation01,
+        buttonText: "Async Await",
+      ),
+      PageItem(
         functionName: goToAudioPlayer,
         buttonText: "Audio Player",
       ),
@@ -403,6 +422,14 @@ class GridAToZ extends StatelessWidget {
         buttonText: "List Tile",
       ),
       PageItem(
+        functionName: goToLifeCycleMethods,
+        buttonText: "Lifecycle Methods",
+      ),
+      PageItem(
+        functionName: goToLoadingAnimation01,
+        buttonText: "Loading Animation",
+      ),
+      PageItem(
         functionName: goToMaterialDesignColor,
         buttonText: "Material Design Color",
       ),
@@ -470,8 +497,6 @@ class GridAToZ extends StatelessWidget {
         buttonText: "typedef",
       ),
     ];
-
-    print("Page items count " + pageItems.length.toString());
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: 1.3),

@@ -21,7 +21,7 @@ var kBmiResultsTextStyle = const TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-var kBmiScoreTextStyle = const TextStyle(
+var kTextStyleSize80ColorBEE4CB = const TextStyle(
   color: const Color(0xFFBEE4CB),
   fontSize: 80.0,
   fontWeight: FontWeight.bold,

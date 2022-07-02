@@ -22,6 +22,7 @@ This is a respository for learning flutter from scratch
   - [containers](#containers)
   - [components](#components)
   - [state](#state)
+  - [lifecycle methods](#lifecycle-methods)
   - [styling](#styling)
   - [gestures](#gestures)
   - [painting shapes](#painting-shapes)
@@ -153,6 +154,10 @@ Next we progress into building and using components
 ## state
 
 - [state](notes/state.md)
+
+## lifecycle methods
+
+- [lifecycle](notes/lifecycle.md)
 
 ## styling
 

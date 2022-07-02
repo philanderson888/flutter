@@ -62,7 +62,7 @@ class BmiResultsPage04 extends StatelessWidget {
           Expanded(
             flex: 15,
             child: Container(
-              child: Text(bmi, style: kBmiScoreTextStyle),
+              child: Text(bmi, style: kTextStyleSize80ColorBEE4CB),
             ),
           ),
           Expanded(

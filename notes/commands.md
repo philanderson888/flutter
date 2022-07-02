@@ -107,7 +107,21 @@ flutter install
 
 ## run
 
+firstly view all potential devices that can be run on
+
 ```java
+// view devices
+flutter devices
+```
+
+then run on chosen device
+
+```java
+// web
+flutter run -d Chrome --web-renderer html
+// android
+flutter run -d 'SM T813'
+// release
 flutter run --release
 ```
 

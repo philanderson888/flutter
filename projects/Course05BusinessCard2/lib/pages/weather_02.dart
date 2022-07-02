@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
 
-class Weather01 extends StatefulWidget {
-  const Weather01({Key? key}) : super(key: key);
+class Weather02 extends StatefulWidget {
+  const Weather02({Key? key}) : super(key: key);
 
   @override
-  State<Weather01> createState() => _Weather01State();
+  State<Weather02> createState() => _Weather02State();
 }
 
-class _Weather01State extends State<Weather01> {
+class _Weather02State extends State<Weather02> {
   initState() {
-    print('Weather01State initState()');
+    print('Weather02State initState() - Parent');
   }
 
   doNothing() {
@@ -67,8 +67,10 @@ class _LoadingScreenState extends State<LoadingScreen> {
   var positionAsString = '';
   static var geolocationPosition = GeolocationService();
 
+  @override
   initState() {
-    print('Weather01State initState()');
+    super.initState();
+    print('Weather02State initState() - Child');
     print('showing loading state');
     setState(() {
       positionAsString = 'Getting loading data ';
@@ -88,6 +90,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
     });
   }
 
+  @override
+  deactivate() {
+    super.deactivate();
+  }
+
   getPosition() async {
     print('getPosition()');
     var position = await geolocationPosition.getPosition();
@@ -99,6 +106,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print('build method called');
     return Scaffold(
       body: GestureDetector(
         onTap: () {
