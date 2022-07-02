@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
 
-class Weather02 extends StatefulWidget {
-  const Weather02({Key? key}) : super(key: key);
+class Weather03 extends StatefulWidget {
+  const Weather03({Key? key}) : super(key: key);
 
   @override
-  State<Weather02> createState() => _Weather02State();
+  State<Weather03> createState() => _Weather03State();
 }
 
-class _Weather02State extends State<Weather02> {
+class _Weather03State extends State<Weather03> {
   initState() {
-    print('Weather02State initState() - Parent');
+    print('Weather03State initState() - Parent');
   }
 
   doNothing() {
@@ -70,7 +70,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   initState() {
     super.initState();
-    print('Weather02State initState() - Child');
+    print('Weather03State initState() - Child');
     print('showing loading state');
     setState(() {
       positionAsString = 'Getting loading data ';

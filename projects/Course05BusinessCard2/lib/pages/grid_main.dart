@@ -1,6 +1,7 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:http/http.dart';
 import '../models/page_item.dart';
 import '../models/test_class.dart';
 import 'dart:io';
@@ -17,6 +18,7 @@ import 'bmi_calculator_03.dart';
 import 'bmi_calculator_04.dart';
 import 'weather_01.dart';
 import 'weather_02.dart';
+import 'weather_03.dart';
 
 class Grid2 extends StatelessWidget {
   const Grid2({Key? key}) : super(key: key);
@@ -150,6 +152,12 @@ class Grid2 extends StatelessWidget {
       print('going to weather_02 app');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Weather02()));
+    }
+
+    goToWeather03() {
+      print('going to weather_03 app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Weather03()));
     }
 
     goToXylophone() {
@@ -372,6 +380,10 @@ class Grid2 extends StatelessWidget {
       PageItem(
         functionName: goToWeather02,
         buttonText: "Weather 02",
+      ),
+      PageItem(
+        functionName: goToWeather03,
+        buttonText: "Weather 03",
       ),
       PageItem(
         functionName: goToXylophone,

@@ -1,6 +1,5 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
-import 'package:flutter_teaching_app/pages/async_await_01.dart';
 import 'package:flutter_teaching_app/pages/bmi_calculator_04.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
 import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
