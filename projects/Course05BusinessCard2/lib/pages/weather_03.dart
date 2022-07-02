@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
 
+var weatherApiKey = const BuildConfig.WEATHER_SERVICE
+
 class Weather03 extends StatefulWidget {
   const Weather03({Key? key}) : super(key: key);
 
