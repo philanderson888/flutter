@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
 import '../models/weather_service.dart';
+import 'dart:async';
 
 class Weather03 extends StatefulWidget {
   const Weather03({Key? key}) : super(key: key);
@@ -66,6 +67,10 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   var positionAsString = '';
+  var weather =
+      'today we are just getting the weather for you to have a look at ...';
+  String weatherToday = 'today the weather is ...';
+
   static var geolocationPosition = GeolocationService();
   static var weatherApi = WeatherService();
 
@@ -91,8 +96,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
       getPosition();
     });
 
-    Future.delayed(Duration(seconds: 1), () {
-      var apiKey = weatherApi.getApiKey();
+    Future.delayed(Duration(seconds: 1), () async {
+      var apiKey = await weatherApi.getApiKey();
       print('apikey $apiKey');
     });
   }
@@ -110,10 +115,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
     } catch (e) {
       print(e);
     }
-
     setState(() {
       print('the current position is $position');
       positionAsString = position.toString();
+    });
+  }
+
+  getWeather() async {
+    print('getWeather()');
+    var weather = await weatherApi.getWeather();
+    setState(() {
+      var description = weather.description;
+      print('the current weather is $description}');
+      weatherToday = 'the weather today is .... $description';
     });
   }
 
@@ -121,11 +135,46 @@ class _LoadingScreenState extends State<LoadingScreen> {
   Widget build(BuildContext context) {
     print('build method called');
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          getPosition();
-        },
-        child: Center(child: Text(positionAsString)),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () {
+                getPosition();
+              },
+              child: Center(
+                child: Text('get position'),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Center(
+              child: Text(positionAsString),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () {
+                getWeather();
+              },
+              child: Center(
+                child: Text('get weather'),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: GestureDetector(
+              onTap: () {
+                getPosition();
+              },
+              child: Center(child: Text(weatherToday)),
+            ),
+          )
+        ],
       ),
     );
   }
