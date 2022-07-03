@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
-
-var weatherApiKey = const BuildConfig.WEATHER_SERVICE
+import '../models/weather_service.dart';
 
 class Weather03 extends StatefulWidget {
   const Weather03({Key? key}) : super(key: key);
@@ -68,6 +67,7 @@ class LoadingScreen extends StatefulWidget {
 class _LoadingScreenState extends State<LoadingScreen> {
   var positionAsString = '';
   static var geolocationPosition = GeolocationService();
+  static var weatherApi = WeatherService();
 
   @override
   initState() {
@@ -89,6 +89,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     Future.delayed(Duration(seconds: loadingTime), () {
       getPosition();
+    });
+
+    Future.delayed(Duration(seconds: 1), () {
+      var apiKey = weatherApi.getApiKey();
+      print('apikey $apiKey');
     });
   }
 
