@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
 import '../models/weather_service.dart';
+import '../constants.dart';
 import 'dart:async';
+
+const headerText = 'The Weather Today Is';
 
 class Weather03 extends StatefulWidget {
   const Weather03({Key? key}) : super(key: key);
@@ -22,21 +25,30 @@ class _Weather03State extends State<Weather03> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: SafeArea(
         child: Row(
           children: <Widget>[
             Expanded(
               flex: 1,
-              child: Container(color: Colors.black12),
+              child: Container(color: kColorLightGrey01),
             ),
             Expanded(
               flex: 10,
               child: Column(
                 children: <Widget>[
                   Expanded(
-                    flex: 1,
-                    child: Container(color: Colors.black26),
+                    flex: 2,
+                    child: Container(
+                      color: kColorLightGrey02,
+                      child: Center(
+                        child: Text(
+                          headerText,
+                          style: kTextStyleWhiteHeading01,
+                        ),
+                      ),
+                    ),
                   ),
                   Expanded(
                     flex: 10,
@@ -44,14 +56,14 @@ class _Weather03State extends State<Weather03> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Container(color: Colors.black26),
+                    child: Container(color: kColorLightGrey02),
                   ),
                 ],
               ),
             ),
             Expanded(
               flex: 1,
-              child: Container(color: Colors.black12),
+              child: Container(color: kColorLightGrey01),
             ),
           ],
         ),
@@ -138,42 +150,74 @@ class _LoadingScreenState extends State<LoadingScreen> {
       body: Column(
         children: [
           Expanded(
-            flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                getPosition();
-              },
-              child: Center(
-                child: Text('get position'),
-              ),
-            ),
+            flex: 3,
+            child: Container(),
           ),
           Expanded(
             flex: 1,
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Container()),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: () {
+                      getPosition();
+                    },
+                    child: Container(
+                      color: kColorGrey01,
+                      child: Center(
+                        child: Text('get position'),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 3,
             child: Center(
               child: Text(positionAsString),
             ),
           ),
           Expanded(
             flex: 1,
-            child: GestureDetector(
-              onTap: () {
-                getWeather();
-              },
-              child: Center(
-                child: Text('get weather'),
-              ),
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Container()),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: () {
+                      getWeather();
+                    },
+                    child: Container(
+                      color: kColorGrey01,
+                      child: Center(
+                        child: Text('get weather'),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
             ),
           ),
           Expanded(
-            flex: 1,
+            flex: 3,
             child: GestureDetector(
               onTap: () {
                 getPosition();
               },
               child: Center(child: Text(weatherToday)),
             ),
-          )
+          ),
+          Expanded(
+            flex: 2,
+            child: Container(),
+          ),
         ],
       ),
     );

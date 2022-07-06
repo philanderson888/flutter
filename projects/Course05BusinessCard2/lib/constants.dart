@@ -27,6 +27,18 @@ var kTextStyleSize80ColorBEE4CB = const TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+var kTextStyleWhiteHeading01 = const TextStyle(
+  fontSize: 55,
+  fontWeight: FontWeight.w400,
+  fontFamily: "Pacifico",
+  color: Colors.white,
+  decoration: TextDecoration.none,
+);
+
+var kColorLightGrey02 = Colors.black26;
+var kColorGrey01 = const Color(0xFF595c5b);
+var kColorLightGrey01 = Colors.black12;
+
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),
   100: Color.fromRGBO(136, 14, 79, .2),
