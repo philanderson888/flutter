@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_teaching_app/pages/bmi_calculator_brain.dart';
+import 'package:flutter_teaching_app/apps/bmi_calculator_brain.dart';
 import '../constants.dart';
 
 const footerHeight = 3;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../constants.dart';
-import './bmi_calculator_04_results_page.dart';
-import './bmi_calculator_brain.dart';
+import 'bmi_calculator_04_results_page.dart';
+import 'bmi_calculator_brain.dart';
 
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
 // colours

@@ -1,18 +1,18 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
-import 'package:flutter_teaching_app/pages/bmi_calculator_04.dart';
+import 'package:flutter_teaching_app/apps/bmi_calculator_04.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
 import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
-import 'package:flutter_teaching_app/pages/weather_02.dart';
+import 'package:flutter_teaching_app/apps/weather_02.dart';
 import '../models/page_item.dart';
 import '../main.dart';
 import 'audio_player.dart';
-import 'xylophone.dart';
-import 'quiz01.dart';
-import 'quiz02.dart';
+import '../apps/xylophone.dart';
+import '../apps/quiz01.dart';
+import '../apps/quiz02.dart';
 import 'padding.dart';
-import 'destini01.dart';
-import 'bmi_calculator_03.dart';
+import '../apps/destini01.dart';
+import '../apps/bmi_calculator_03.dart';
 import 'theme_dark.dart';
 import 'theme_light.dart';
 import 'theme_custom.dart';
