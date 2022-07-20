@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../constants.dart';
 
 class Padding01 extends StatelessWidget {
   const Padding01({Key? key}) : super(key: key);
@@ -22,9 +23,9 @@ class Padding01 extends StatelessWidget {
             Container(
               height: 0,
             ),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 75,
-              backgroundColor: Colors.black12,
+              backgroundColor: kColorLightPink01,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),

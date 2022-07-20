@@ -1,4 +1,3 @@
-/// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/apps/bmi_calculator_04.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
@@ -6,17 +5,18 @@ import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
 import 'package:flutter_teaching_app/apps/weather_02.dart';
 import '../models/page_item.dart';
 import '../main.dart';
-import 'audio_player.dart';
+import '../pages/audio_player.dart';
 import '../apps/xylophone.dart';
 import '../apps/quiz01.dart';
 import '../apps/quiz02.dart';
-import 'padding.dart';
+import '../pages/padding.dart';
 import '../apps/destini01.dart';
 import '../apps/bmi_calculator_03.dart';
-import 'theme_dark.dart';
-import 'theme_light.dart';
-import 'theme_custom.dart';
-import 'geolocation.dart';
+import '../pages/theme_dark.dart';
+import '../pages/theme_light.dart';
+import '../pages/theme_custom.dart';
+import '../pages/geolocation.dart';
+import '../pages/spinner_01.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class GridAToZ extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const gridSize = 70;
-    const columnCount = 9;
+    const columnCount = 7;
     const initialListLength = 0;
     const categoryButtonColor = Color(0xFFF2B64B);
 
@@ -254,6 +254,12 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const BmiCalculator03()));
     }
 
+    goToSpinner01() {
+      print('going to spinner 01');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Spinner01()));
+    }
+
     goToStatelessWidgetWithParameters() {
       print('goint to stateless widget passing parameters');
       Navigator.of(context).push(
@@ -461,6 +467,10 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Slider",
       ),
       PageItem(
+        functionName: goToSpinner01,
+        buttonText: "Spinner",
+      ),
+      PageItem(
           functionName: goToStatelessWidgetWithParameters,
           buttonText: "Stateless Widget Params"),
       PageItem(
@@ -498,7 +508,7 @@ class GridAToZ extends StatelessWidget {
     ];
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.3),
+      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter Features By Name'),

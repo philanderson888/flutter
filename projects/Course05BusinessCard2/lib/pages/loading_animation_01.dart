@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
+import '../constants.dart';
 
 class LoadingAnimation01 extends StatefulWidget {
   const LoadingAnimation01({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _LoadingAnimation01State extends State<LoadingAnimation01> {
           children: <Widget>[
             Expanded(
               flex: 1,
-              child: Container(color: Colors.black12),
+              child: Container(color: kColorLightPink01),
             ),
             Expanded(
               flex: 10,
@@ -34,7 +35,7 @@ class _LoadingAnimation01State extends State<LoadingAnimation01> {
                 children: <Widget>[
                   Expanded(
                     flex: 1,
-                    child: Container(color: Colors.black26),
+                    child: Container(color: kColorLightGrey02),
                   ),
                   Expanded(
                     flex: 10,
@@ -42,14 +43,14 @@ class _LoadingAnimation01State extends State<LoadingAnimation01> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Container(color: Colors.black26),
+                    child: Container(color: kColorLightGrey02),
                   ),
                 ],
               ),
             ),
             Expanded(
               flex: 1,
-              child: Container(color: Colors.black12),
+              child: Container(color: kColorLightPink01),
             ),
           ],
         ),

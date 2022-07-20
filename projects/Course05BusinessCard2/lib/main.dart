@@ -2,8 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
-import 'pages/home.dart';
-import 'pages/grid_main.dart';
+import 'routes/home.dart';
+import 'routes/grid_main.dart';
+import 'constants.dart';
 
 void main() => runApp(const MyApp());
 
@@ -191,9 +192,9 @@ class BusinessCard extends StatelessWidget {
             Container(
               height: 0,
             ),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 75,
-              backgroundColor: Colors.black12,
+              backgroundColor: kColorLightPink01,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
@@ -594,9 +595,9 @@ class Fonts01 extends StatelessWidget {
             Container(
               height: 0,
             ),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 75,
-              backgroundColor: Colors.black12,
+              backgroundColor: kColorLightPink01,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
@@ -893,9 +894,9 @@ class FontSize extends StatelessWidget {
             Container(
               height: 0,
             ),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 75,
-              backgroundColor: Colors.black12,
+              backgroundColor: kColorLightPink01,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
@@ -1132,9 +1133,9 @@ class ImageCircularAvatar extends StatelessWidget {
             Container(
               height: 0,
             ),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 75,
-              backgroundColor: Colors.black12,
+              backgroundColor: kColorLightPink01,
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),

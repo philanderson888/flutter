@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'package:geolocator/geolocator.dart';
 import '../models/geolocation_service.dart';
 
 const bodyFlexMarginLeftRight = 1;
@@ -62,7 +61,7 @@ class _GeolocationState extends State<Geolocation> {
                       color: Colors.blue,
                       child: Center(
                         child: Text(positionAsString,
-                            style: kTextStyleSize80ColorBEE4CB),
+                            style: kTextStyleSize60ColorBEE4CB),
                       ),
                     ),
                   ),
@@ -76,7 +75,7 @@ class _GeolocationState extends State<Geolocation> {
                       color: Colors.blue,
                       child: Center(
                         child: Text(positionAsString,
-                            style: kTextStyleSize80ColorBEE4CB),
+                            style: kTextStyleSize60ColorBEE4CB),
                       ),
                     ),
                   ),

@@ -27,6 +27,12 @@ var kTextStyleSize80ColorBEE4CB = const TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+var kTextStyleSize60ColorBEE4CB = const TextStyle(
+  color: const Color(0xFFBEE4CB),
+  fontSize: 60.0,
+  fontWeight: FontWeight.bold,
+);
+
 var kTextStyleWhiteHeading01 = const TextStyle(
   fontSize: 55,
   fontWeight: FontWeight.w400,
@@ -35,9 +41,9 @@ var kTextStyleWhiteHeading01 = const TextStyle(
   decoration: TextDecoration.none,
 );
 
+var kColorLightPink01 = Colors.black12;
 var kColorLightGrey02 = Colors.black26;
-var kColorGrey01 = const Color(0xFF595c5b);
-var kColorLightGrey01 = Colors.black12;
+var kColorDarkGrey01 = const Color(0xFF595c5b);
 
 Map<int, Color> color = {
   50: Color.fromRGBO(136, 14, 79, .1),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../models/geolocation_service.dart';
 import '../models/weather_service.dart';
-import '../constants.dart';
 import 'dart:async';
+import '../constants.dart';
 
 const headerText = 'The Weather Today Is';
 
@@ -32,7 +32,7 @@ class _Weather03State extends State<Weather03> {
           children: <Widget>[
             Expanded(
               flex: 1,
-              child: Container(color: kColorLightGrey01),
+              child: Container(color: kColorLightPink01),
             ),
             Expanded(
               flex: 10,
@@ -63,7 +63,7 @@ class _Weather03State extends State<Weather03> {
             ),
             Expanded(
               flex: 1,
-              child: Container(color: kColorLightGrey01),
+              child: Container(color: kColorLightPink01),
             ),
           ],
         ),
@@ -172,7 +172,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                       getPosition();
                     },
                     child: Container(
-                      color: kColorGrey01,
+                      color: kColorDarkGrey01,
                       child: Center(
                         child: Text('get position'),
                       ),
@@ -201,7 +201,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                       getWeather();
                     },
                     child: Container(
-                      color: kColorGrey01,
+                      color: kColorDarkGrey01,
                       child: Center(
                         child: Text('get weather'),
                       ),
