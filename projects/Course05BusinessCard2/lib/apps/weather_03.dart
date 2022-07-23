@@ -3,8 +3,7 @@ import '../models/geolocation_service.dart';
 import '../models/weather_service.dart';
 import 'dart:async';
 import '../constants.dart';
-
-const headerText = 'The Weather Today Is';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Weather03 extends StatefulWidget {
   const Weather03({Key? key}) : super(key: key);
@@ -44,8 +43,8 @@ class _Weather03State extends State<Weather03> {
                       color: kColorLightGrey02,
                       child: Center(
                         child: Text(
-                          headerText,
-                          style: kTextStyleWhiteHeading01,
+                          'The Weather Today Is',
+                          style: kPacifico55White,
                         ),
                       ),
                     ),
@@ -85,6 +84,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   static var geolocationPosition = GeolocationService();
   static var weatherApi = WeatherService();
+  var spinnerVisible = true;
 
   @override
   initState() {
@@ -106,12 +106,18 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     Future.delayed(Duration(seconds: loadingTime), () {
       getPosition();
+      setState(() {
+        spinnerVisible = false;
+      });
     });
 
     Future.delayed(Duration(seconds: 1), () async {
       var apiKey = await weatherApi.getApiKey();
       print('apikey $apiKey');
     });
+
+    print(
+        'initState() widget attached to state is $widget which is the parent object and which means we can now send data into our stateful widget using this method ...');
   }
 
   @override
@@ -153,6 +159,11 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   Widget build(BuildContext context) {
     print('build method called');
+
+    var spinner = Visibility(
+        visible: spinnerVisible,
+        child: SpinKitRotatingCircle(color: Colors.white));
+
     return Scaffold(
       body: Column(
         children: [
@@ -177,6 +188,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
                         child: Text('get position'),
                       ),
                     ),
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(),
+          ),
+          Expanded(
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Container()),
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: spinner,
                   ),
                 ),
                 Expanded(flex: 1, child: Container()),

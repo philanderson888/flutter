@@ -133,7 +133,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
           backgroundColor: appColor,
           titleTextStyle: TextStyle(
             fontSize: 30,
-            color: Colors.purple.shade400,
+            color: kPurple400,
           ),
         ),
         scaffoldBackgroundColor: backgroundColor,
@@ -704,7 +704,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
               color: Color(0xffab47bc),
             ),
           ),
-          data: const IconThemeData(color: Colors.purple),
+          data: IconThemeData(color: kPurple),
         ),
       ),
     );

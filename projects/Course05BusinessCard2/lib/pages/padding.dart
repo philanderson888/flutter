@@ -29,23 +29,10 @@ class Padding01 extends StatelessWidget {
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
-            const Text(
-              'Phil Anderson',
-              style: TextStyle(
-                fontSize: 55,
-                fontWeight: FontWeight.w400,
-                fontFamily: "Pacifico",
-                color: Colors.white,
-              ),
-            ),
+            Text('Phil Anderson', style: kPacifico55White),
             Text(
               'FLUTTER DEVELOPER',
-              style: TextStyle(
-                fontSize: 35,
-                fontFamily: "SourceSansPro",
-                color: Colors.teal.shade100,
-                fontWeight: FontWeight.bold,
-              ),
+              style: kSourceSansPro35Teal,
             ),
             Container(
               height: 5,
@@ -61,7 +48,7 @@ class Padding01 extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.phone,
-                      color: Colors.teal.shade800,
+                      color: kDarkTeal,
                       size: 30,
                     ),
                     Container(
@@ -69,12 +56,7 @@ class Padding01 extends StatelessWidget {
                     ),
                     Text(
                       '+447888849991',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: "SourceSansPro",
-                        color: Colors.teal.shade900,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kSourceSansPro30TealDark,
                     ),
                   ],
                 ),
@@ -93,7 +75,7 @@ class Padding01 extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.email,
-                    color: Colors.teal.shade800,
+                    color: kDarkTeal,
                     size: 30,
                   ),
                   Container(
@@ -101,12 +83,7 @@ class Padding01 extends StatelessWidget {
                   ),
                   Text(
                     'philanderson888@hotmail.com',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "SourceSansPro",
-                      color: Colors.teal.shade900,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: kSourceSansPro30TealDark,
                   ),
                 ],
               ),
@@ -115,7 +92,7 @@ class Padding01 extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),

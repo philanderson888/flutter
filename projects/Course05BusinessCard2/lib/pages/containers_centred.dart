@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/constants.dart';
 
 const bodyFlexMarginLeftRight = 1;
 const bodyFlexWidth = 20;
@@ -59,7 +60,7 @@ class _ContainersCenteredState extends State<ContainersCentered> {
             Expanded(
               flex: bodyFlexMarginLeftRight,
               child: Container(
-                color: Colors.purpleAccent,
+                color: kPurpleAccent,
               ),
             ),
           ]),

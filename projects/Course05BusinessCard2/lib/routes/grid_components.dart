@@ -3,6 +3,7 @@ import 'package:flutter_teaching_app/apps/bmi_calculator_04.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
 import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
 import 'package:flutter_teaching_app/apps/weather_02.dart';
+import 'package:flutter_teaching_app/pages/passing_data_screen_1.dart';
 import '../models/page_item.dart';
 import '../main.dart';
 import '../pages/audio_player.dart';
@@ -17,6 +18,7 @@ import '../pages/theme_light.dart';
 import '../pages/theme_custom.dart';
 import '../pages/geolocation.dart';
 import '../pages/spinner_01.dart';
+import '../pages/passing_data_screen_1.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -66,13 +68,6 @@ class GridAToZ extends StatelessWidget {
       print('going to button types');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const ButtonTypes()));
-    }
-
-    goToClass() {
-      print('displaying class details');
-      print(
-          'notice the special constructor which forces new instances to specify parameters by name');
-      print('see PageItem class details below');
     }
 
     goToContainerLayout() {
@@ -223,6 +218,12 @@ class GridAToZ extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const Padding01()));
     }
 
+    goToStatefulWidgetPassDataIn() {
+      print('stateful widget - passing data in');
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const StatefulWidgetPassDataIn01()));
+    }
+
     goToRandom() {
       print('going to randomise function - ');
       print('note - need the `import dart:math` library');
@@ -355,10 +356,6 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Course Layout Exercise",
       ),
       PageItem(
-        functionName: goToClass,
-        buttonText: "Class / Constructor",
-      ),
-      PageItem(
         functionName: goToDivider,
         buttonText: "Class / Constructor",
       ),
@@ -476,6 +473,10 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToStatefulWidget,
         buttonText: "Stateful Widget",
+      ),
+      PageItem(
+        functionName: goToStatefulWidgetPassDataIn,
+        buttonText: "Stateful Widget - Pass Data In",
       ),
       PageItem(
         functionName: goToStringInterpolationInVariable,

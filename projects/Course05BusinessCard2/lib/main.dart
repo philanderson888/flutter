@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'dart:math';
 import 'routes/home.dart';
 import 'routes/grid_main.dart';
+import 'routes/apps.dart';
 import 'constants.dart';
 
 void main() => runApp(const MyApp());
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
           '/page4': (context) => const Page4(),
           '/page5': (context) => const Page5(),
           '/grid2': (context) => const Grid2(),
+          '/apps': (context) => const Apps(),
         });
   }
 }
@@ -51,11 +53,11 @@ class _AskAnyQuestionState extends State<AskAnyQuestion> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Ask Any Question'),
-        backgroundColor: Colors.purple,
+        backgroundColor: kPurple,
       ),
       body: SafeArea(
         child: Container(
-          color: Colors.purple,
+          color: kPurple,
           child: Column(
             children: <Widget>[
               Expanded(
@@ -95,7 +97,7 @@ class _BackgroundImageState extends State<BackgroundImage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
               image: NetworkImage(
-                  'https://seekingtruth.co.uk/wp-content/uploads/2021/07/banner-galaxy.jpg'),
+                  'https://pngimg.com/uploads/mountain/mountain_PNG18.png'),
               fit: BoxFit.cover),
         ),
       ),
@@ -124,7 +126,7 @@ class BlankPageTemplate extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -162,7 +164,7 @@ class BlankStatefulWidgetState extends State {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -198,23 +200,13 @@ class BusinessCard extends StatelessWidget {
               backgroundImage: NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
-            const Text(
+            Text(
               'Phil Anderson',
-              style: TextStyle(
-                fontSize: 55,
-                fontWeight: FontWeight.w400,
-                fontFamily: "Pacifico",
-                color: Colors.white,
-              ),
+              style: kPacifico55White,
             ),
             Text(
               'FLUTTER DEVELOPER',
-              style: TextStyle(
-                fontSize: 35,
-                fontFamily: "SourceSansPro",
-                color: Colors.teal.shade100,
-                fontWeight: FontWeight.bold,
-              ),
+              style: kSourceSansPro35Teal,
             ),
             Container(
               height: 5,
@@ -234,7 +226,7 @@ class BusinessCard extends StatelessWidget {
                   children: [
                     Icon(
                       Icons.phone,
-                      color: Colors.teal.shade800,
+                      color: kDarkTeal,
                       size: 30,
                     ),
                     Container(
@@ -242,12 +234,7 @@ class BusinessCard extends StatelessWidget {
                     ),
                     Text(
                       '+447888849991',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: "SourceSansPro",
-                        color: Colors.teal.shade900,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kSourceSansPro30TealDark,
                     ),
                   ],
                 ),
@@ -266,7 +253,7 @@ class BusinessCard extends StatelessWidget {
                 children: [
                   Icon(
                     Icons.email,
-                    color: Colors.teal.shade800,
+                    color: kDarkTeal,
                     size: 30,
                   ),
                   Container(
@@ -274,12 +261,7 @@ class BusinessCard extends StatelessWidget {
                   ),
                   Text(
                     'philanderson888@hotmail.com',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontFamily: "SourceSansPro",
-                      color: Colors.teal.shade900,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: kSourceSansPro30TealDark,
                   ),
                 ],
               ),
@@ -295,7 +277,7 @@ class BusinessCard extends StatelessWidget {
                   children: [
                     FaIcon(
                       FontAwesomeIcons.instagram,
-                      color: Colors.teal.shade800,
+                      color: kDarkTeal,
                       size: 30,
                     ),
                     Container(
@@ -303,12 +285,7 @@ class BusinessCard extends StatelessWidget {
                     ),
                     Text(
                       '@philanderson888',
-                      style: TextStyle(
-                        fontSize: 30,
-                        fontFamily: "SourceSansPro",
-                        color: Colors.teal.shade900,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: kSourceSansPro30TealDark,
                     ),
                   ],
                 ),
@@ -318,7 +295,7 @@ class BusinessCard extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -380,7 +357,7 @@ class CourseLayoutExercise extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -612,24 +589,14 @@ class Fonts01 extends StatelessWidget {
             ),
             Text(
               'FLUTTER DEVELOPER - Source Sans Pro',
-              style: TextStyle(
-                fontSize: 35,
-                fontFamily: "SourceSansPro",
-                color: Colors.teal.shade100,
-                fontWeight: FontWeight.bold,
-              ),
+              style: kSourceSansPro35Teal,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'source sans pro, color teal, size 35',
-                  style: TextStyle(
-                    fontSize: 35,
-                    fontFamily: "SourceSansPro",
-                    color: Colors.teal.shade100,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: kSourceSansPro35Teal,
                 ),
               ],
             ),
@@ -637,7 +604,7 @@ class Fonts01 extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -739,7 +706,7 @@ class DisplayIcons extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -911,12 +878,7 @@ class FontSize extends StatelessWidget {
             ),
             Text(
               'FLUTTER DEVELOPER',
-              style: TextStyle(
-                fontSize: 35,
-                fontFamily: "SourceSansPro",
-                color: Colors.teal.shade100,
-                fontWeight: FontWeight.bold,
-              ),
+              style: kSourceSansPro35Teal,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -1006,7 +968,7 @@ class FontSize extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -1050,7 +1012,7 @@ class FontSizeWholePage extends StatelessWidget {
           }),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.teal.shade800,
+          backgroundColor: kDarkTeal,
           child: const Text(
             'back',
             style: TextStyle(fontSize: 8),
@@ -1103,7 +1065,7 @@ class GridViewOfClickableImages extends StatelessWidget {
         }),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -1143,7 +1105,7 @@ class ImageCircularAvatar extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -1180,17 +1142,12 @@ class ListTile01 extends StatelessWidget {
                 contentPadding: const EdgeInsets.symmetric(horizontal: 150),
                 leading: FaIcon(
                   FontAwesomeIcons.instagram,
-                  color: Colors.teal.shade800,
+                  color: kDarkTeal,
                   size: 30,
                 ),
                 title: Text(
                   '@philanderson888 (card with list tile)',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontFamily: "SourceSansPro",
-                    color: Colors.teal.shade900,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: kSourceSansPro30TealDark,
                 ),
               ),
             ),
@@ -1198,7 +1155,7 @@ class ListTile01 extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal.shade800,
+        backgroundColor: kDarkTeal,
         child: const Text("Back"),
         onPressed: goBack,
       ),
@@ -1267,7 +1224,7 @@ class TextScaleFactor01 extends StatelessWidget {
           }),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.teal.shade800,
+          backgroundColor: kDarkTeal,
           child: const Text(
             'back',
             style: TextStyle(fontSize: 8),
@@ -1400,7 +1357,7 @@ class MediaQuery01 extends StatelessWidget {
           }),
         ),
         floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.teal.shade800,
+          backgroundColor: kDarkTeal,
           child: const Text(
             'back',
             style: TextStyle(fontSize: 8),

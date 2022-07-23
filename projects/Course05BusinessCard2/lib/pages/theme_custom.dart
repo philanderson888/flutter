@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/constants.dart';
 
 class ThemeCustom extends StatefulWidget {
   const ThemeCustom({Key? key}) : super(key: key);
@@ -17,16 +18,16 @@ class _ThemeCustomState extends State<ThemeCustom> {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          backgroundColor: const Color(0xff4C2973),
+          backgroundColor: Color(0xff4C2973),
           titleTextStyle: TextStyle(
             fontSize: 30,
-            color: Colors.purple.shade400,
+            color: kPurple400,
           ),
         ),
         primarySwatch: Colors.yellow,
         scaffoldBackgroundColor: const Color(0xFF0a0d22),
-        textTheme: const TextTheme(
-          bodyText2: TextStyle(color: Colors.purple),
+        textTheme: TextTheme(
+          bodyText2: TextStyle(color: kPurple),
         ),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff4C2973)),
       ),

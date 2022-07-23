@@ -732,7 +732,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
               color: Color(0xffab47bc),
             ),
           ),
-          data: const IconThemeData(color: Colors.purple),
+          data: IconThemeData(color: kPurple),
         ),
       ),
     );

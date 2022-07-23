@@ -40,82 +40,16 @@ class Grid2 extends StatelessWidget {
       print('doing nothing');
     }
 
-    goToAskAnyQuestion() {
-      print('going to "ask any question"');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const AskAnyQuestion()));
-    }
-
     goToBlankPageTemplate() {
       print('going to blank page template');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
     }
 
-    goToBmi01() {
-      print('going to BMI Calculator 01');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const BmiCalculator01()));
-    }
-
-    goToBmi02() {
-      print('going to BMI Calculator 02');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const BmiCalculator02()));
-    }
-
-    goToBmi03() {
-      print('going to BMI Calculator 03');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const BmiCalculator03()));
-    }
-
-    goToBmi04() {
-      print('going to BMI Calculator 04');
-      Navigator.of(context).push(
-          MaterialPageRoute(builder: (context) => const BmiCalculator04()));
-    }
-
-    goToBusinessCard() {
-      print('going to business card');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
-    }
-
-    goToDice01() {
-      print('going to Dice01');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Dice01()));
-    }
-
-    goToDice02() {
-      print('going to Dice02');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Dice02()));
-    }
-
-    goToDice03() {
-      print('going to Dice03');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Dice03()));
-    }
-
-    goToDestini01() {
-      print('going to destini app - early layout stages');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Destini01()));
-    }
-
-    goToDestini02() {
-      print('going to destini app - containers linking into choices');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Destini02()));
-    }
-
-    goToDestini03() {
-      print('going to destini app - responding to choices');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Destini03()));
+    goToPageClass() {
+      print('displaying class details');
+      print('see PageItem class');
+      print('constructor specifies parameters by name');
     }
 
     goToEmpty() {
@@ -128,42 +62,6 @@ class Grid2 extends StatelessWidget {
       print('going to row/column layout example');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Quiz02()));
-    }
-
-    goToQuiz01() {
-      print('going to quiz app');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Quiz01()));
-    }
-
-    goToQuiz02() {
-      print('going to quiz02 app');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Quiz02()));
-    }
-
-    goToWeather01() {
-      print('going to weather_01 app');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Weather01()));
-    }
-
-    goToWeather02() {
-      print('going to weather_02 app');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Weather02()));
-    }
-
-    goToWeather03() {
-      print('going to weather_03 app');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Weather03()));
-    }
-
-    goToXylophone() {
-      print('going to app xylophone');
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => const Xylophone()));
     }
 
     instantiateTestClass() {
@@ -314,83 +212,6 @@ class Grid2 extends StatelessWidget {
       ),
       PageItem(
         functionName: doNothing,
-        buttonText: " Apps ",
-        buttonColor: categoryButtonColor,
-      ),
-      PageItem(
-        functionName: goToAskAnyQuestion,
-        buttonText: "Ask Any Question",
-      ),
-      PageItem(
-        functionName: goToBmi01,
-        buttonText: "BMI 01",
-      ),
-      PageItem(
-        functionName: goToBmi02,
-        buttonText: "BMI 02",
-      ),
-      PageItem(
-        functionName: goToBmi03,
-        buttonText: "BMI 03",
-      ),
-      PageItem(
-        functionName: goToBmi04,
-        buttonText: "BMI 04",
-      ),
-      PageItem(
-        functionName: goToBusinessCard,
-        buttonText: "Business Card",
-      ),
-      PageItem(
-        functionName: goToDestini01,
-        buttonText: " Destini 01 ",
-      ),
-      PageItem(
-        functionName: goToDestini02,
-        buttonText: " Destini 02",
-      ),
-      PageItem(
-        functionName: goToDestini03,
-        buttonText: " Destini 03",
-      ),
-      PageItem(
-        functionName: goToDice01,
-        buttonText: "Dice 01 ",
-      ),
-      PageItem(
-        functionName: goToDice02,
-        buttonText: "Dice 02 ",
-      ),
-      PageItem(
-        functionName: goToDice03,
-        buttonText: "Dice 03 ",
-      ),
-      PageItem(
-        functionName: goToQuiz01,
-        buttonText: "Quiz 01",
-      ),
-      PageItem(
-        functionName: goToQuiz02,
-        buttonText: "Quiz 02",
-      ),
-      PageItem(
-        functionName: goToWeather01,
-        buttonText: "Weather 01",
-      ),
-      PageItem(
-        functionName: goToWeather02,
-        buttonText: "Weather 02",
-      ),
-      PageItem(
-        functionName: goToWeather03,
-        buttonText: "Weather 03",
-      ),
-      PageItem(
-        functionName: goToXylophone,
-        buttonText: "Xylophone",
-      ),
-      PageItem(
-        functionName: doNothing,
         buttonText: " Print ",
         buttonColor: categoryButtonColor,
       ),
@@ -427,13 +248,17 @@ class Grid2 extends StatelessWidget {
         functionName: instantiateTestClass,
         buttonText: "instantiate test class",
       ),
+      PageItem(
+        functionName: goToPageClass,
+        buttonText: "Class / Constructor",
+      ),
     ];
 
     return MediaQuery(
       data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Layouts, Templates, Apps, Print Operations, OOP'),
+          title: const Text('Layouts, Templates, Print Operations, OOP'),
         ),
         body: GridView.count(
           crossAxisCount: columnCount,

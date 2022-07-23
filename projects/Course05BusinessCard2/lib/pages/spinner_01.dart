@@ -85,7 +85,6 @@ class _SpinnerScreen01State extends State<SpinnerScreen01>
 
   @override
   initState() {
-    super.initState();
     print('Spinner initState()');
     _controller = AnimationController(
       vsync: this,
@@ -97,8 +96,6 @@ class _SpinnerScreen01State extends State<SpinnerScreen01>
       size: 50.0,
       controller: _controller,
     );
-
-    print('Spinner initState()');
 
     int loadingTime = 5;
     for (int i = 0; i <= loadingTime; i++) {
@@ -113,6 +110,20 @@ class _SpinnerScreen01State extends State<SpinnerScreen01>
     Future.delayed(Duration(seconds: loadingTime), () {
       doNothing();
     });
+
+    super.initState();
+    print('Spinner initState()');
+  }
+
+  @override
+  deactivate() {
+    super.deactivate();
+  }
+
+  @override
+  dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override

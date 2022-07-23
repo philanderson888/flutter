@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'grid_components.dart';
+import 'package:flutter_teaching_app/constants.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -23,25 +24,35 @@ class Home extends StatelessWidget {
         children: <Widget>[
           Expanded(flex: 1, child: Container()),
           //
-          //  Teaching Grid (default route)
+          //  Features
           //
           Expanded(
             flex: 1,
             child: ElevatedButton(
               key: null,
               onPressed: goToGridAToZ,
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.yellow),
-              ),
+              style: kAppHeaderButtonStyle,
               child: Text(
                 'Features',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontFamily: "SourceSansPro",
-                  color: Colors.teal.shade600,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: kAppHomePageHeader,
+              ),
+            ),
+          ),
+          Expanded(flex: 1, child: Container()),
+          //
+          //  Grid 2
+          //
+          Expanded(
+            flex: 1,
+            child: ElevatedButton(
+              key: null,
+              onPressed: () {
+                Navigator.pushNamed(context, '/apps');
+              },
+              style: kAppHeaderButtonStyle,
+              child: Text(
+                'Apps',
+                style: kAppHomePageHeader,
               ),
             ),
           ),
@@ -56,18 +67,10 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/grid2');
               },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.yellow),
-              ),
+              style: kAppHeaderButtonStyle,
               child: Text(
-                'Flutter Layouts, Templates, Apps, Print Operations, OOP',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontFamily: "SourceSansPro",
-                  color: Colors.teal.shade600,
-                  fontWeight: FontWeight.bold,
-                ),
+                'Templates, Layouts, Features With Text Output, OOP',
+                style: kAppHomePageHeader,
               ),
             ),
           ),
@@ -82,18 +85,10 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/page4');
               },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.yellow),
-              ),
+              style: kAppHeaderButtonStyle,
               child: Text(
                 'Stateless Page',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontFamily: "SourceSansPro",
-                  color: Colors.teal.shade600,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: kAppHomePageHeader,
               ),
             ),
           ),
@@ -108,18 +103,10 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/page5');
               },
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(Colors.yellow),
-              ),
+              style: kAppHeaderButtonStyle,
               child: Text(
                 'Stateful Page With Counter',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontFamily: "SourceSansPro",
-                  color: Colors.teal.shade600,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: kAppHomePageHeader,
               ),
             ),
           ),

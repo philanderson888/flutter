@@ -91,7 +91,7 @@ class _GeolocationState extends State<Geolocation> {
             Expanded(
               flex: bodyFlexMarginLeftRight,
               child: Container(
-                color: Colors.purpleAccent,
+                color: kPurpleAccent,
               ),
             ),
           ]),

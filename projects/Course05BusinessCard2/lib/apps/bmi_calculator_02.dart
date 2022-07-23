@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/constants.dart';
 // based on https://dribbble.com/shots/4585382-Simple-BMI-Calculator
 // two colour from this app are background #090C21 container #1D1E33
 
@@ -54,14 +55,14 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
           backgroundColor: const Color(0xff4C2973),
           titleTextStyle: TextStyle(
             fontSize: 30,
-            color: Colors.purple.shade400,
+            color: kPurple400,
           ),
         ),
         scaffoldBackgroundColor: const Color(0xFF0a0d22),
-        textTheme: const TextTheme(
+        textTheme: TextTheme(
           headline1: TextStyle(color: Colors.yellow),
           headline3: TextStyle(color: Colors.yellow),
-          bodyText2: TextStyle(color: Colors.purple),
+          bodyText2: TextStyle(color: kPurple),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: const Color(0xff4C2973),
@@ -108,7 +109,7 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
               color: Color(0xffab47bc),
             ),
           ),
-          data: const IconThemeData(color: Colors.purple),
+          data: IconThemeData(color: kPurple),
         ),
       ),
     );

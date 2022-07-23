@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/constants.dart';
 
 class BmiCalculator01 extends StatefulWidget {
   const BmiCalculator01({Key? key}) : super(key: key);
@@ -20,12 +21,12 @@ class _BmiCalculator01State extends State<BmiCalculator01> {
           backgroundColor: const Color(0xff4C2973),
           titleTextStyle: TextStyle(
             fontSize: 30,
-            color: Colors.purple.shade400,
+            color: kPurple400,
           ),
         ),
         scaffoldBackgroundColor: const Color(0xFF0a0d22),
-        textTheme: const TextTheme(
-          bodyText2: TextStyle(color: Colors.purple),
+        textTheme: TextTheme(
+          bodyText2: TextStyle(color: kPurple),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           secondary: const Color(0xff4C2973),
@@ -64,7 +65,7 @@ class _BmiCalculator01State extends State<BmiCalculator01> {
               color: Color(0xffab47bc),
             ),
           ),
-          data: const IconThemeData(color: Colors.purple),
+          data: IconThemeData(color: kPurple),
         ),
       ),
     );
