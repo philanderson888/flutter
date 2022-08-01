@@ -26,7 +26,7 @@ class Padding01 extends StatelessWidget {
             CircleAvatar(
               radius: 75,
               backgroundColor: kColorLightPink01,
-              backgroundImage: NetworkImage(
+              backgroundImage: const NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
             Text('Phil Anderson', style: kPacifico55White),

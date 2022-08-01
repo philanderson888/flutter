@@ -52,7 +52,7 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
     return MaterialApp(
       theme: ThemeData.dark().copyWith(
         appBarTheme: AppBarTheme(
-          backgroundColor: const Color(0xff4C2973),
+          backgroundColor: kDeepPurple,
           titleTextStyle: TextStyle(
             fontSize: 30,
             color: kPurple400,
@@ -60,12 +60,12 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
         ),
         scaffoldBackgroundColor: const Color(0xFF0a0d22),
         textTheme: TextTheme(
-          headline1: TextStyle(color: Colors.yellow),
-          headline3: TextStyle(color: Colors.yellow),
+          headline1: const TextStyle(color: Colors.yellow),
+          headline3: const TextStyle(color: Colors.yellow),
           bodyText2: TextStyle(color: kPurple),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: const Color(0xff4C2973),
+          secondary: kDeepPurple,
         ),
       ),
       home: Scaffold(
@@ -104,9 +104,9 @@ class _BmiCalculator02State extends State<BmiCalculator02> {
         floatingActionButton: IconTheme(
           child: FloatingActionButton(
             onPressed: doNothing,
-            child: const Icon(
+            child: Icon(
               Icons.add,
-              color: Color(0xffab47bc),
+              color: kLightPurple,
             ),
           ),
           data: IconThemeData(color: kPurple),

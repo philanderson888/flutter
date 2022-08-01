@@ -10,19 +10,29 @@ var kColorDarkGrey01 = const Color(0xFF595c5b);
 var kDarkTeal = Colors.teal.shade800;
 var kPurple = Colors.purple;
 var kPurple400 = Colors.purple.shade400;
+var kLightPurple = const Color(0xffab47bc);
 var kPurpleAccent = Colors.purpleAccent;
+var kDarkPurple = const Color(0xFF46016E);
+var kDeepPurple = const Color(0xFF4C2973);
+var kSkyBlue = const Color(0xFF8997E7);
+var kLightSkyBlue = const Color(0xFFA6B2DE);
+var kVeryLightSkyBlue = const Color(0xFFBAC2E1);
+var kSuperLightSkyBlue = const Color(0xFFD1D3E8);
+
+var kGold = const Color(0xFFF2B64B);
+var kCerise = const Color(0xFFE31D6B);
 
 Map<int, Color> color = {
-  50: Color.fromRGBO(136, 14, 79, .1),
-  100: Color.fromRGBO(136, 14, 79, .2),
-  200: Color.fromRGBO(136, 14, 79, .3),
-  300: Color.fromRGBO(136, 14, 79, .4),
-  400: Color.fromRGBO(136, 14, 79, .5),
-  500: Color.fromRGBO(136, 14, 79, .6),
-  600: Color.fromRGBO(136, 14, 79, .7),
-  700: Color.fromRGBO(136, 14, 79, .8),
-  800: Color.fromRGBO(136, 14, 79, .9),
-  900: Color.fromRGBO(136, 14, 79, 1),
+  50: const Color.fromRGBO(136, 14, 79, .1),
+  100: const Color.fromRGBO(136, 14, 79, .2),
+  200: const Color.fromRGBO(136, 14, 79, .3),
+  300: const Color.fromRGBO(136, 14, 79, .4),
+  400: const Color.fromRGBO(136, 14, 79, .5),
+  500: const Color.fromRGBO(136, 14, 79, .6),
+  600: const Color.fromRGBO(136, 14, 79, .7),
+  700: const Color.fromRGBO(136, 14, 79, .8),
+  800: const Color.fromRGBO(136, 14, 79, .9),
+  900: const Color.fromRGBO(136, 14, 79, 1),
 };
 
 MaterialColor materialColorPurple = MaterialColor(0xFFAB47BC, color);
@@ -55,13 +65,13 @@ var kBmiResultsTextStyle = const TextStyle(
 );
 
 var kTextStyleSize80ColorBEE4CB = const TextStyle(
-  color: const Color(0xFFBEE4CB),
+  color: Color(0xFFBEE4CB),
   fontSize: 80.0,
   fontWeight: FontWeight.bold,
 );
 
 var kTextStyleSize60ColorBEE4CB = const TextStyle(
-  color: const Color(0xFFBEE4CB),
+  color: Color(0xFFBEE4CB),
   fontSize: 60.0,
   fontWeight: FontWeight.bold,
 );
@@ -71,7 +81,7 @@ var kBmiAppBarTextStyle = TextStyle(
   color: kPurple400,
 );
 
-var kPacifico55White = TextStyle(
+var kPacifico55White = const TextStyle(
   fontSize: 55,
   fontWeight: FontWeight.w400,
   fontFamily: "Pacifico",
@@ -106,10 +116,42 @@ var kAppHeaderButtonStyle = ButtonStyle(
 );
 
 // Text
-var kBmiScoreHeader = Container(child: Text('Your BMI Score'));
+var kBmiScoreHeader = const Text('Your BMI Score');
 
 // Forms
 
 // Sizes
 var kBmiSliderMin = 120.0;
 var kBmiSliderMax = 220.0;
+
+// Data for Bitcoin App
+
+const List<String> currenciesList = [
+  'AUD',
+  'BRL',
+  'CAD',
+  'CNY',
+  'EUR',
+  'GBP',
+  'HKD',
+  'IDR',
+  'ILS',
+  'INR',
+  'JPY',
+  'MXN',
+  'NOK',
+  'NZD',
+  'PLN',
+  'RON',
+  'RUB',
+  'SEK',
+  'SGD',
+  'USD',
+  'ZAR'
+];
+
+const List<String> cryptoList = [
+  'BTC',
+  'ETH',
+  'LTC',
+];

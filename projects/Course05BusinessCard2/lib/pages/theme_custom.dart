@@ -18,7 +18,7 @@ class _ThemeCustomState extends State<ThemeCustom> {
     return MaterialApp(
       theme: ThemeData(
         appBarTheme: AppBarTheme(
-          backgroundColor: Color(0xff4C2973),
+          backgroundColor: kDeepPurple,
           titleTextStyle: TextStyle(
             fontSize: 30,
             color: kPurple400,
@@ -29,7 +29,7 @@ class _ThemeCustomState extends State<ThemeCustom> {
         textTheme: TextTheme(
           bodyText2: TextStyle(color: kPurple),
         ),
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xff4C2973)),
+        colorScheme: ColorScheme.fromSeed(seedColor: kDeepPurple),
       ),
       home: Scaffold(
         appBar: AppBar(

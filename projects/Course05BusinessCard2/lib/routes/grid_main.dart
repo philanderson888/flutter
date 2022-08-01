@@ -1,24 +1,15 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
-import 'package:http/http.dart';
+import 'package:flutter_teaching_app/constants.dart';
+import 'package:flutter_teaching_app/templates/app_template_01.dart';
 import '../models/page_item.dart';
 import '../models/test_class.dart';
 import 'dart:io';
 import '../main.dart';
-import '../apps/xylophone.dart';
-import '../apps/quiz01.dart';
 import '../apps/quiz02.dart';
-import '../apps/destini01.dart';
-import '../apps/destini02.dart';
-import '../apps/destini03.dart';
-import '../apps/bmi_calculator_01.dart';
-import '../apps/bmi_calculator_02.dart';
-import '../apps/bmi_calculator_03.dart';
-import '../apps/bmi_calculator_04.dart';
-import '../apps/weather_01.dart';
-import '../apps/weather_02.dart';
-import '../apps/weather_03.dart';
+import '../templates/blank_page_template_01.dart';
+import '../constants.dart';
 
 class Grid2 extends StatelessWidget {
   const Grid2({Key? key}) : super(key: key);
@@ -28,7 +19,6 @@ class Grid2 extends StatelessWidget {
     const gridSize = 56;
     const columnCount = 8;
     const initialListLength = 0;
-    const categoryButtonColor = Color(0xFFF2B64B);
     const textScaleFactor = 1.4;
 
     List<String> buttonTexts = [
@@ -38,6 +28,12 @@ class Grid2 extends StatelessWidget {
 
     doNothing() {
       print('doing nothing');
+    }
+
+    goToAppTemplate01() {
+      print('going to app template 01');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const AppTemplate01()));
     }
 
     goToBlankPageTemplate() {
@@ -191,7 +187,11 @@ class Grid2 extends StatelessWidget {
       PageItem(
         functionName: doNothing,
         buttonText: "Templates",
-        buttonColor: categoryButtonColor,
+        buttonColor: kGold,
+      ),
+      PageItem(
+        functionName: goToAppTemplate01,
+        buttonText: "App Template 01",
       ),
       PageItem(
         functionName: goToBlankPageTemplate,
@@ -204,7 +204,7 @@ class Grid2 extends StatelessWidget {
       PageItem(
         functionName: doNothing,
         buttonText: " Layout ",
-        buttonColor: categoryButtonColor,
+        buttonColor: kGold,
       ),
       PageItem(
         functionName: goToLayout01,
@@ -213,7 +213,7 @@ class Grid2 extends StatelessWidget {
       PageItem(
         functionName: doNothing,
         buttonText: " Print ",
-        buttonColor: categoryButtonColor,
+        buttonColor: kGold,
       ),
       PageItem(
         functionName: fileOperationsSynchronous,
@@ -242,7 +242,7 @@ class Grid2 extends StatelessWidget {
       PageItem(
         functionName: doNothing,
         buttonText: " OOP ",
-        buttonColor: categoryButtonColor,
+        buttonColor: kGold,
       ),
       PageItem(
         functionName: instantiateTestClass,

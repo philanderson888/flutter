@@ -19,14 +19,16 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
   var lat = 0.0;
   var lon = 0.0;
   String weatherToday = 'today the weather is ...';
-  String geolocationDataForCity = 'geolocation data for entered city is';
+  String geolocationDataForCityAndCountry =
+      'geolocation data for city and country is';
   String weatherStringForCity = 'weather today for your chosen city is .... ';
-  String latitudeAndLongitudeForCity = 'lat: long:';
+  String latitudeAndLongitudeForCityAndCountry = 'lat: long:';
 
   static var geolocationPosition = GeolocationService();
   static var weatherApi = WeatherService();
   var spinnerVisible = true;
-  var textEditingController;
+  var textEditingControllerCity;
+  var textEditingControllerCountry;
 
   @override
   initState() {
@@ -35,7 +37,8 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
     print('showing loading state');
     setState(() {
       positionAsString = 'Getting loading data ';
-      textEditingController = TextEditingController(text: city);
+      textEditingControllerCity = TextEditingController(text: city);
+      textEditingControllerCountry = TextEditingController(text: country);
     });
     int loadingTime = 5;
     for (int i = 0; i <= loadingTime; i++) {
@@ -54,7 +57,7 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
       });
     });
 
-    Future.delayed(Duration(seconds: 1), () async {
+    Future.delayed(const Duration(seconds: 1), () async {
       var apiKey = await weatherApi.getApiKey();
       print('apikey $apiKey');
     });
@@ -103,21 +106,31 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
     print('name of city entered is $cityEntered');
     setState(() {
       city = cityEntered;
-      textEditingController.selection = TextSelection.fromPosition(
-          TextPosition(offset: textEditingController.text.length));
+      textEditingControllerCity.selection = TextSelection.fromPosition(
+          TextPosition(offset: textEditingControllerCity.text.length));
     });
   }
 
-  getGeolocationDataForCity() async {
+  printCountry(countryEntered) {
+    print('name of country entered is $countryEntered');
+    setState(() {
+      country = countryEntered;
+      textEditingControllerCountry.selection = TextSelection.fromPosition(
+          TextPosition(offset: textEditingControllerCountry.text.length));
+    });
+  }
+
+  getGeolocationDataForCityAndCountry() async {
     print('getting geolocation data for city $city in $country');
     var geoPosition = await weatherApi.getGeoPositionForCity(city, country);
     print(
         'geoPosition obtained from weather service for city $city in $country is $geoPosition');
     setState(() {
-      geolocationDataForCity = geoPosition.toString();
+      geolocationDataForCityAndCountry = geoPosition.toString();
       lat = geoPosition.lat ?? 0;
       lon = geoPosition.lon ?? 0;
-      latitudeAndLongitudeForCity = 'latitude : $lat, longitude: $lon';
+      latitudeAndLongitudeForCityAndCountry =
+          'latitude : $lat, longitude: $lon';
     });
   }
 
@@ -146,7 +159,7 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
 
     var spinner = Visibility(
         visible: spinnerVisible,
-        child: SpinKitRotatingCircle(color: Colors.white));
+        child: const SpinKitRotatingCircle(color: Colors.white));
 
     return Scaffold(
       body: Column(
@@ -168,7 +181,7 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
                     },
                     child: Container(
                       color: kColorDarkGrey01,
-                      child: Center(
+                      child: const Center(
                         child: Text('get position'),
                       ),
                     ),
@@ -216,7 +229,7 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
                     },
                     child: Container(
                       color: kColorDarkGrey01,
-                      child: Center(
+                      child: const Center(
                         child: Text('get weather'),
                       ),
                     ),
@@ -248,11 +261,11 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
                   flex: 1,
                   child: GestureDetector(
                     onTap: () {
-                      getGeolocationDataForCity();
+                      getGeolocationDataForCityAndCountry();
                     },
                     child: Container(
                       color: kColorDarkGrey01,
-                      child: Center(
+                      child: const Center(
                         child: Text('get geolocation data for your city'),
                       ),
                     ),
@@ -277,14 +290,14 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
                       color: kColorDarkGrey01,
                       child: Center(
                         child: TextField(
-                          controller: textEditingController,
+                          controller: textEditingControllerCity,
                           onChanged: (cityEntered) {
                             printCity(cityEntered);
                           },
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -306,12 +319,55 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
             ),
           ),
           Expanded(
-            flex: 3,
-            child: Center(child: Text(geolocationDataForCity)),
+            flex: 1,
+            child: Row(
+              children: [
+                Expanded(flex: 1, child: Container()),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: () {
+                      getWeather();
+                    },
+                    child: Container(
+                      color: kColorDarkGrey01,
+                      child: Center(
+                        child: TextField(
+                          controller: textEditingControllerCountry,
+                          onChanged: (countryEntered) {
+                            printCountry(countryEntered);
+                          },
+                          style: const TextStyle(
+                            color: Colors.black,
+                          ),
+                          decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(10.0),
+                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            hintText: 'Please enter country name ...',
+                            hintStyle: TextStyle(color: Colors.grey),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(flex: 1, child: Container()),
+              ],
+            ),
           ),
           Expanded(
             flex: 3,
-            child: Center(child: Text(latitudeAndLongitudeForCity)),
+            child: Center(child: Text(geolocationDataForCityAndCountry)),
+          ),
+          Expanded(
+            flex: 3,
+            child: Center(child: Text(latitudeAndLongitudeForCityAndCountry)),
           ),
           Expanded(
             flex: 1,
@@ -326,7 +382,7 @@ class _WeatherDisplay04State extends State<WeatherDisplay04> {
                     },
                     child: Container(
                       color: kColorDarkGrey01,
-                      child: Center(
+                      child: const Center(
                         child: Text('get weather data for your city'),
                       ),
                     ),

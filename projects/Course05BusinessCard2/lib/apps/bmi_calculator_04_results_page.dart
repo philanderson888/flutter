@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_teaching_app/apps/bmi_calculator_brain.dart';
 import '../constants.dart';
 
 const footerHeight = 3;
 
 // colors
 
-var footerColor = const Color(0xFFE31D6B);
 const footerTextColor = Colors.white;
 const footerFontWeight = FontWeight.w600;
 
@@ -23,7 +21,7 @@ String textWeight = 'WEIGHT (kg)';
 String textAge = "AGE";
 
 class BmiResultsPage04 extends StatelessWidget {
-  BmiResultsPage04(
+  const BmiResultsPage04(
       {required this.bmi,
       required this.bmiResult,
       required this.bmiInterpretation});
@@ -55,15 +53,11 @@ class BmiResultsPage04 extends StatelessWidget {
           ),
           Expanded(
             flex: 15,
-            child: Container(
-              child: Text(bmiResult, style: kBmiResultsTextStyle),
-            ),
+            child: Text(bmiResult, style: kBmiResultsTextStyle),
           ),
           Expanded(
             flex: 15,
-            child: Container(
-              child: Text(bmi, style: kTextStyleSize80ColorBEE4CB),
-            ),
+            child: Text(bmi, style: kTextStyleSize80ColorBEE4CB),
           ),
           Expanded(
             flex: 15,

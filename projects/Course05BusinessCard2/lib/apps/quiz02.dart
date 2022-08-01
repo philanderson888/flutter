@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/quiz_item.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:flutter_teaching_app/constants.dart';
 
 class Quiz02 extends StatefulWidget {
   const Quiz02({Key? key}) : super(key: key);
@@ -190,7 +191,7 @@ class _Quiz02State extends State<Quiz02> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF46016E),
+      backgroundColor: kDarkPurple,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -308,7 +309,7 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: const Color(0xFF637DE6),
+                          color: kSkyBlue,
                           child: Row(
                             children: <Widget>[
                               Expanded(
@@ -347,7 +348,7 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: const Color(0xFF637DE6),
+                          color: kSkyBlue,
                           child: Row(
                             children: <Widget>[
                               Expanded(
@@ -464,7 +465,7 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: const Color(0xFF637DE6),
+                          color: kSkyBlue,
                           child: Row(
                             children: scoreKeeper,
                           ),
@@ -476,7 +477,7 @@ class _Quiz02State extends State<Quiz02> {
                       child: Padding(
                         padding: EdgeInsets.all(quizPadding),
                         child: Container(
-                          color: const Color(0xFF637DE6),
+                          color: kSkyBlue,
                           child: Row(
                             children: <Widget>[
                               Expanded(

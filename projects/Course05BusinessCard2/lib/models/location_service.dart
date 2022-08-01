@@ -1,8 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'dart:convert';
-import 'weather_adjusted.dart';
 
 var apiKey = 'invalid_api_key';
 

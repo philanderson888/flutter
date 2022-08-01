@@ -36,10 +36,9 @@ class _AppTemplate01State extends State<AppTemplate01> {
                           flex: 1,
                           child: Container(color: kSuperLightSkyBlue),
                         ),
-                        Expanded(
+                        const Expanded(
                           flex: 1,
-                          child: Center(
-                              child: Container(child: Text('a bitcoin app'))),
+                          child: Center(child: Text('an app')),
                         ),
                         Expanded(
                           flex: 1,

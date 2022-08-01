@@ -28,11 +28,6 @@ class GridAToZ extends StatelessWidget {
     const gridSize = 70;
     const columnCount = 7;
     const initialListLength = 0;
-    const categoryButtonColor = Color(0xFFF2B64B);
-
-    doNothing() {
-      print('doing nothing');
-    }
 
     goToAlert() {
       print('going to rflutter alert');
@@ -219,7 +214,7 @@ class GridAToZ extends StatelessWidget {
     }
 
     goToStatefulWidgetPassDataIn() {
-      print('stateful widget - passing data in');
+      print('widget - pass data on push/pop');
       Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => const StatefulWidgetPassDataIn01()));
     }
@@ -476,7 +471,7 @@ class GridAToZ extends StatelessWidget {
       ),
       PageItem(
         functionName: goToStatefulWidgetPassDataIn,
-        buttonText: "Stateful Widget - Pass Data In",
+        buttonText: "Widget - Pass Data On Push/Pop",
       ),
       PageItem(
         functionName: goToStringInterpolationInVariable,

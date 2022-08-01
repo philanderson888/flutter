@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../models/destini_story_brain.dart';
-import '../models/destini_story.dart';
 
 class Destini01 extends StatefulWidget {
   const Destini01({Key? key}) : super(key: key);

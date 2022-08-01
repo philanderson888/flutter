@@ -126,46 +126,9 @@ class WeatherService {
 
       var id = weatherAsJson['weather'][0]['id'];
       var description = weatherAsJson['weather'][0]['description'];
-      var temperatureKelvin = weatherAsJson['main']['temp'];
-      var temperatureCelsius = (temperatureKelvin - 273.15);
-
+      var temperatureCelsius = weatherAsJson['main']['temp'];
       var weather = WeatherAdjusted(
           id: id, temperature: temperatureCelsius, description: description);
-      return weather;
-    } else {
-      throw Exception('Failed to load weather');
-    }
-  }
-
-  Future<WeatherAdjusted> getWeatherForFixedCity() async {
-    print('getting location');
-    var city = 'Enfield';
-    var state = '';
-    var country = '';
-    var limit = 10;
-
-    var url =
-        'https://api.openweathermap.org/geo/1.0/direct?q={city}&limit={limit}&appid=$apiKey&units=metric';
-    final response = await http.get(Uri.parse(url));
-    print('response status ${response.statusCode}');
-    if (response.statusCode == 200) {
-      var weatherAsResponseBody = response.body;
-
-      var weatherAsJson = json.decode(weatherAsResponseBody);
-      print('location data for $city is $weatherAsJson');
-      //var weatherSubObject = weatherAsJson['weather'];
-      //print('weatherSubObject is $weatherSubObject');
-      //return Weather.fromJson(weatherSubObject[0]);
-
-      //var id = weatherAsJson['weather'][0]['id'];
-      //var description = weatherAsJson['weather'][0]['description'];
-      //var temperatureCelsius = weatherAsJson['main']['temp'];
-
-      //var weather = WeatherAdjusted(
-      //id: id, temperature: temperatureCelsius, description: description);
-
-      var weather = WeatherAdjusted(
-          id: 1234, temperature: 10, description: 'a description');
       return weather;
     } else {
       throw Exception('Failed to load weather');

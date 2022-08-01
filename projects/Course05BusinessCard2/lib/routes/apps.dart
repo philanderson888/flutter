@@ -1,9 +1,5 @@
-/// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
 import '../models/page_item.dart';
-import '../models/test_class.dart';
-import 'dart:io';
 import '../main.dart';
 import '../apps/xylophone.dart';
 import '../apps/quiz01.dart';
@@ -19,6 +15,8 @@ import '../apps/weather_01.dart';
 import '../apps/weather_02.dart';
 import '../apps/weather_03.dart';
 import '../apps/weather_04.dart';
+import '../apps/bitcoin_01.dart';
+import '../apps/bitcoin_02.dart';
 
 class Apps extends StatelessWidget {
   const Apps({Key? key}) : super(key: key);
@@ -28,17 +26,24 @@ class Apps extends StatelessWidget {
     const gridSize = 56;
     const columnCount = 8;
     const initialListLength = 0;
-    const categoryButtonColor = Color(0xFFF2B64B);
     const textScaleFactor = 1.4;
-
-    doNothing() {
-      print('doing nothing');
-    }
 
     goToAskAnyQuestion() {
       print('going to "ask any question"');
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const AskAnyQuestion()));
+    }
+
+    goToBitCoin01() {
+      print('going to bitcoin 01');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Bitcoin01()));
+    }
+
+    goToBitCoin02() {
+      print('going to bitcoin 02');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Bitcoin02()));
     }
 
     goToBmi01() {
@@ -153,6 +158,14 @@ class Apps extends StatelessWidget {
       PageItem(
         functionName: goToAskAnyQuestion,
         buttonText: "Ask Any Question",
+      ),
+      PageItem(
+        functionName: goToBitCoin01,
+        buttonText: "Bitcoin 01",
+      ),
+      PageItem(
+        functionName: goToBitCoin02,
+        buttonText: "Bitcoin 02",
       ),
       PageItem(
         functionName: goToBmi01,

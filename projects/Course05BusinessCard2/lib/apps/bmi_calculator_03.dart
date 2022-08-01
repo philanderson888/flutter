@@ -95,7 +95,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
 
     // app colors
     const backgroundColor = Color(0xFF29083B);
-    var appColor = const Color(0xff4C2973);
+    var appColor = kDeepPurple;
     const colorPadding = Color(0xFF29083B);
 
     const cardForeground = Color(0xFF8D8E98);
@@ -104,8 +104,6 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
     var headerColor = backgroundColor;
 
     // footer colors
-    var footerColor = const Color(0xFFE31D6B);
-    footerColor = const Color(0xFFE31D6B);
     const footerTextColor = Colors.white;
     const footerFontWeight = FontWeight.w600;
 
@@ -144,7 +142,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
               TextStyle(color: cardForeground, fontSize: containerTextSize),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: const Color(0xff4C2973),
+          secondary: kDeepPurple,
         ),
       ),
       home: Scaffold(
@@ -689,7 +687,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
             Footer(
               footerHeight: footerHeight,
               footerTextSize: footerTextSize,
-              footerColor: footerColor,
+              footerColor: kCerise,
               footerTextColor: footerTextColor,
               footerFontWeight: footerFontWeight,
               footerText: footerText,
@@ -699,9 +697,9 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
         floatingActionButton: IconTheme(
           child: FloatingActionButton(
             onPressed: doNothing,
-            child: const Icon(
+            child: Icon(
               Icons.add,
-              color: Color(0xffab47bc),
+              color: kLightPurple,
             ),
           ),
           data: IconThemeData(color: kPurple),

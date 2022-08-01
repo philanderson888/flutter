@@ -10,15 +10,26 @@ class StatefulWidgetPassDataIn01 extends StatefulWidget {
 }
 
 class _StatefulWidgetPassDataIn01 extends State<StatefulWidgetPassDataIn01> {
+  final clickToGoToScreen2 = 'here is screen 1 - click to go to screen 2';
+  var dataReturnedFromScreen2 =
+      'data returned from screen 2 will be displayed here ... ';
+
   doNothing() {
     print('doing nothing');
   }
 
-  goToScreen2() {
-    Navigator.of(context).push(MaterialPageRoute(
+  goToScreen2() async {
+    final output = await Navigator.of(context).push(
+      MaterialPageRoute<String>(
         builder: (context) => const PassingDataScreen02(
-              passDataInHere: 'here is some data passed into a stateful widget',
-            )));
+          passDataInHere: 'here is some data passed into a stateful widget',
+        ),
+      ),
+    );
+    print('output returned from screen 2 back to screen 1 again is $output');
+    setState(() {
+      dataReturnedFromScreen2 = output ?? 'Error - no data has been returned';
+    });
   }
 
   @override
@@ -44,10 +55,20 @@ class _StatefulWidgetPassDataIn01 extends State<StatefulWidgetPassDataIn01> {
                     child: GestureDetector(
                       onTap: goToScreen2,
                       child: Center(
-                        child: Text(
-                            'here is screen 1 - click to go to screen 2',
+                        child: Text(clickToGoToScreen2,
                             style: kBmiResultsTextStyle),
                       ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 10,
+                    child: Container(color: kColorLightPink01),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Center(
+                      child: Text(dataReturnedFromScreen2,
+                          style: kBmiResultsTextStyle),
                     ),
                   ),
                   Expanded(
@@ -79,6 +100,10 @@ class PassingDataScreen02 extends StatefulWidget {
 
 class _PassingDataScreen02 extends State<PassingDataScreen02> {
   late final displayOutputText;
+  final clickToReturnToScreen1 =
+      'Click here to pass data back from screen 2 to screen 1';
+  final screen2DataPassedBackIntoScreen1 =
+      'Data passed back from screen 2 on pop() back into screen 1';
 
   @override
   void initState() {
@@ -89,6 +114,12 @@ class _PassingDataScreen02 extends State<PassingDataScreen02> {
 
   doNothing() {
     print('doing nothing');
+  }
+
+  passDataBackFromScreen2ToScreen1() async {
+    print('passing data back from screen 2 back into screen 1');
+    Navigator.pop(context, screen2DataPassedBackIntoScreen1);
+    return screen2DataPassedBackIntoScreen1;
   }
 
   @override
@@ -125,6 +156,20 @@ class _PassingDataScreen02 extends State<PassingDataScreen02> {
                     child: Center(
                       child:
                           Text(displayOutputText, style: kBmiResultsTextStyle),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(color: kColorLightPink01),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: GestureDetector(
+                      onTap: passDataBackFromScreen2ToScreen1,
+                      child: Center(
+                        child: Text(clickToReturnToScreen1,
+                            style: kBmiResultsTextStyle),
+                      ),
                     ),
                   ),
                   Expanded(

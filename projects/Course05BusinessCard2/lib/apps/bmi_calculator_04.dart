@@ -101,7 +101,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
 
     // app colors
     const backgroundColor = Color(0xFF29083B);
-    var appColor = const Color(0xff4C2973);
+    var appColor = kDeepPurple;
     const colorPadding = Color(0xFF29083B);
     const cardForeground = Color(0xFF8D8E98);
 
@@ -109,8 +109,6 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
     var headerColor = backgroundColor;
 
     // footer colors
-    var footerColor = const Color(0xFFE31D6B);
-    footerColor = const Color(0xFFE31D6B);
     const footerTextColor = Colors.white;
     const footerFontWeight = FontWeight.w600;
 
@@ -147,7 +145,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
               TextStyle(color: cardForeground, fontSize: containerTextSize),
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          secondary: const Color(0xff4C2973),
+          secondary: kDeepPurple,
         ),
       ),
       home: Scaffold(
@@ -708,11 +706,11 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                           bmiInterpretation: bmiInterpretation)));
                 },
                 child: Container(
-                  color: footerColor,
+                  color: kCerise,
                   child: Center(
                     child: Text(
                       footerText,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: footerTextSize,
                         fontWeight: footerFontWeight,
                         color: footerTextColor,
@@ -727,9 +725,9 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
         floatingActionButton: IconTheme(
           child: FloatingActionButton(
             onPressed: goBack,
-            child: const Icon(
+            child: Icon(
               Icons.clear,
-              color: Color(0xffab47bc),
+              color: kLightPurple,
             ),
           ),
           data: IconThemeData(color: kPurple),

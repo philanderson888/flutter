@@ -1,47 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
 
-class Bitcoin01 extends StatefulWidget {
-  const Bitcoin01({Key? key}) : super(key: key);
+class Bitcoin02 extends StatefulWidget {
+  const Bitcoin02({Key? key}) : super(key: key);
 
   @override
-  State<Bitcoin01> createState() => _Bitcoin01State();
+  State<Bitcoin02> createState() => _Bitcoin02State();
 }
 
-class _Bitcoin01State extends State<Bitcoin01> {
+class _Bitcoin02State extends State<Bitcoin02> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kSkyBlue,
       body: SafeArea(
-        child: Row(
+        child: Column(
           children: <Widget>[
             Expanded(
               flex: 1,
-              child: Container(color: kLightSkyBlue),
+              child: Container(
+                  color: kLightSkyBlue,
+                  child: Center(child: Text('😎    Coin Ticker'))),
             ),
             Expanded(
               flex: 10,
-              child: Column(
+              child: Row(
                 children: <Widget>[
                   Expanded(
                     flex: 1,
-                    child: Container(color: kVeryLightSkyBlue),
+                    child: Container(color: kSuperLightSkyBlue),
                   ),
                   Expanded(
-                    flex: 1,
-                    child: Row(
+                    flex: 20,
+                    child: Column(
                       children: <Widget>[
                         Expanded(
                           flex: 1,
                           child: Container(color: kSuperLightSkyBlue),
                         ),
-                        const Expanded(
-                          flex: 1,
-                          child: Center(child: Text('a bitcoin app')),
+                        Expanded(
+                          flex: 3,
+                          child: Container(
+                            color: kSuperLightSkyBlue,
+                            child: Container(
+                              width: double.infinity,
+                              decoration: ShapeDecoration(
+                                color: kLightSkyBlue,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(30.0),
+                                  ),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text('BitCoin Price'),
+                              ),
+                            ),
+                          ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 40,
                           child: Container(color: kSuperLightSkyBlue),
                         ),
                       ],
@@ -49,7 +67,7 @@ class _Bitcoin01State extends State<Bitcoin01> {
                   ),
                   Expanded(
                     flex: 1,
-                    child: Container(color: kVeryLightSkyBlue),
+                    child: Container(color: kSuperLightSkyBlue),
                   ),
                 ],
               ),

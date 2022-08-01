@@ -105,35 +105,6 @@ class _BackgroundImageState extends State<BackgroundImage> {
   }
 }
 
-class BlankPageTemplate extends StatelessWidget {
-  const BlankPageTemplate({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    goBack() {
-      print('going back');
-      Navigator.pop(context);
-    }
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Blank Page Template'),
-      ),
-      body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: const [],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: kDarkTeal,
-        child: const Text("Back"),
-        onPressed: goBack,
-      ),
-    );
-  }
-}
-
 class BlankStatefulWidget extends StatefulWidget {
   const BlankStatefulWidget({Key? key}) : super(key: key);
 
@@ -197,7 +168,7 @@ class BusinessCard extends StatelessWidget {
             CircleAvatar(
               radius: 75,
               backgroundColor: kColorLightPink01,
-              backgroundImage: NetworkImage(
+              backgroundImage: const NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
             Text(
@@ -575,7 +546,7 @@ class Fonts01 extends StatelessWidget {
             CircleAvatar(
               radius: 75,
               backgroundColor: kColorLightPink01,
-              backgroundImage: NetworkImage(
+              backgroundImage: const NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
             const Text(
@@ -864,7 +835,7 @@ class FontSize extends StatelessWidget {
             CircleAvatar(
               radius: 75,
               backgroundColor: kColorLightPink01,
-              backgroundImage: NetworkImage(
+              backgroundImage: const NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
             const Text(
@@ -1098,7 +1069,7 @@ class ImageCircularAvatar extends StatelessWidget {
             CircleAvatar(
               radius: 75,
               backgroundColor: kColorLightPink01,
-              backgroundImage: NetworkImage(
+              backgroundImage: const NetworkImage(
                   'https://raw.githubusercontent.com/philanderson888/data/master/images/2015-guessed-the-year-dad.png'),
             ),
           ],

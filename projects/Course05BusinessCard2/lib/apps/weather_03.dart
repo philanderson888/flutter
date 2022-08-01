@@ -111,7 +111,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
       });
     });
 
-    Future.delayed(Duration(seconds: 1), () async {
+    Future.delayed(const Duration(seconds: 1), () async {
       var apiKey = await weatherApi.getApiKey();
       print('apikey $apiKey');
     });
@@ -162,7 +162,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     var spinner = Visibility(
         visible: spinnerVisible,
-        child: SpinKitRotatingCircle(color: Colors.white));
+        child: const SpinKitRotatingCircle(color: Colors.white));
 
     return Scaffold(
       body: Column(
@@ -184,7 +184,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     },
                     child: Container(
                       color: kColorDarkGrey01,
-                      child: Center(
+                      child: const Center(
                         child: Text('get position'),
                       ),
                     ),
@@ -232,7 +232,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
                     },
                     child: Container(
                       color: kColorDarkGrey01,
-                      child: Center(
+                      child: const Center(
                         child: Text('get weather'),
                       ),
                     ),
