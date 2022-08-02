@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/apps/bitcoin_02.dart';
 import 'package:flutter_teaching_app/apps/bmi_calculator_04.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
 import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
@@ -19,6 +20,8 @@ import '../pages/theme_custom.dart';
 import '../pages/geolocation.dart';
 import '../pages/spinner_01.dart';
 import '../pages/passing_data_screen_1.dart';
+import 'package:flutter_teaching_app/constants.dart';
+import '../forms/drop_down_01.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -77,6 +80,12 @@ class GridAToZ extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const ContainersCentered()));
     }
 
+    goToContainersRounded() {
+      print('rounded container');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Bitcoin02()));
+    }
+
     goToCourseLayoutExercise() {
       print('TODO: fix this name as it is vague');
       print('going to course layout exercise');
@@ -88,6 +97,12 @@ class GridAToZ extends StatelessWidget {
       print('going to divider');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
+    }
+
+    goToDropDown() {
+      print('go to dropdown');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const DropDown01()));
     }
 
     goToExpanded01() {
@@ -347,6 +362,10 @@ class GridAToZ extends StatelessWidget {
         buttonText: "Containers Centred",
       ),
       PageItem(
+        functionName: goToContainersRounded,
+        buttonText: "Containers Rounded",
+      ),
+      PageItem(
         functionName: goToCourseLayoutExercise,
         buttonText: "Course Layout Exercise",
       ),
@@ -500,6 +519,15 @@ class GridAToZ extends StatelessWidget {
       PageItem(
         functionName: goToTypeDef,
         buttonText: "typedef",
+      ),
+      PageItem(
+        functionName: doNothing,
+        buttonText: " Form Features ",
+        buttonColor: kGold,
+      ),
+      PageItem(
+        functionName: goToDropDown,
+        buttonText: "DropDown",
       ),
     ];
 

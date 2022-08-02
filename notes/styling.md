@@ -7,6 +7,7 @@
   - [introduction](#introduction)
   - [finding components](#finding-components)
   - [material design](#material-design)
+  - [cupertino design](#cupertino-design)
   - [justifying](#justifying)
     - [center justify](#center-justify)
   - [margin](#margin)
@@ -86,6 +87,8 @@ flutter apps can be styled with [material design](https://material.io) or withou
 
 see https://www.materialpalette.com for an indication of how this styling can look in your app
 
+material design can be applied to both Android and iOS apps but Cupertino can only be applied to iOS apps
+
 with 
 
 ```java
@@ -111,6 +114,14 @@ void main() {
   );
 }
 ```
+
+## cupertino design
+
+cupertino is iOS only widgets 
+
+https://docs.flutter.dev/development/ui/widgets/cupertino
+
+
 
 ## justifying
 

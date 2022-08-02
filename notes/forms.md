@@ -9,6 +9,7 @@
   - [textfield](#textfield)
   - [textformfield](#textformfield)
   - [form example - text and numbers](#form-example---text-and-numbers)
+  - [dropdown](#dropdown)
   - [datetime picker](#datetime-picker)
     - [install](#install)
     - [use](#use)
@@ -431,6 +432,83 @@ class HomeState extends State<Home>{
   }
 }
 ```
+
+## dropdown
+
+from Material Design 
+
+see `DropDown01` example
+
+```java
+import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/constants.dart';
+
+class DropDown01 extends StatefulWidget {
+  const DropDown01({Key? key}) : super(key: key);
+
+  @override
+  State<DropDown01> createState() => _DropDown01State();
+}
+
+class _DropDown01State extends State<DropDown01> {
+  var dropDownValue = kCurrenciesList[0];
+
+  // Data for Bitcoin App
+
+  const List<String> kCurrenciesList = [
+    'GBP',
+    'USD',
+    'CAD',
+  ];
+
+  var kCurrenciesDropDownList =
+      kCurrenciesList.map<DropdownMenuItem<String>>((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value),
+    );
+  }).toList();
+
+  onDropDownSelected(String newValue) {
+    print('new dropdown item has been selected');
+    setState(() {
+      dropDownValue = newValue;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Center(
+            child: Text('Drop Down Box'),
+          ),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: DropdownButton<String>(
+                  value: dropDownValue,
+                  items: kCurrenciesDropDownList,
+                  onChanged: (String? newValue) {
+                    var value = newValue ?? '';
+                    onDropDownSelected(value);
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
+
 
 ## datetime picker
 

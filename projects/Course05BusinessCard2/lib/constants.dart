@@ -126,13 +126,13 @@ var kBmiSliderMax = 220.0;
 
 // Data for Bitcoin App
 
-const List<String> currenciesList = [
+const List<String> kCurrenciesList = [
+  'GBP',
   'AUD',
   'BRL',
   'CAD',
   'CNY',
   'EUR',
-  'GBP',
   'HKD',
   'IDR',
   'ILS',
@@ -150,8 +150,16 @@ const List<String> currenciesList = [
   'ZAR'
 ];
 
-const List<String> cryptoList = [
+List<String> cryptoList = [
   'BTC',
   'ETH',
   'LTC',
 ];
+
+var kCurrenciesDropDownList =
+    kCurrenciesList.map<DropdownMenuItem<String>>((String value) {
+  return DropdownMenuItem<String>(
+    value: value,
+    child: Text(value),
+  );
+}).toList();
