@@ -199,7 +199,7 @@ class Grid2 extends StatelessWidget {
       // cannot print(instance01._privateProperty);
     }
 
-    goToMixins() {
+    showMixins() {
       print('mixin demo');
       print(' ');
       var mixinParent = MixinParent();
@@ -284,7 +284,7 @@ class Grid2 extends StatelessWidget {
         buttonText: " Instantiation",
       ),
       PageItem(
-        functionName: goToMixins,
+        functionName: showMixins,
         buttonText: " Mixin ",
       ),
     ];
