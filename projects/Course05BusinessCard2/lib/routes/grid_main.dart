@@ -1,15 +1,15 @@
 /// the goal of this app is to be an all-in-one demo app with as many features built into one app as possible
 import 'package:flutter/material.dart';
+import 'dart:io';
 import 'package:english_words/english_words.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:flutter_teaching_app/templates/app_template_01.dart';
+import 'package:flutter_teaching_app/models/mixin.dart';
 import '../models/page_item.dart';
 import '../models/test_class.dart';
-import 'dart:io';
 import '../main.dart';
 import '../apps/quiz02.dart';
 import '../templates/blank_page_template_01.dart';
-import '../constants.dart';
 
 class Grid2 extends StatelessWidget {
   const Grid2({Key? key}) : super(key: key);
@@ -30,6 +30,10 @@ class Grid2 extends StatelessWidget {
       print('doing nothing');
     }
 
+    //
+    // Templates
+    //
+
     goToAppTemplate01() {
       print('going to app template 01');
       Navigator.of(context)
@@ -42,17 +46,15 @@ class Grid2 extends StatelessWidget {
           MaterialPageRoute(builder: (context) => const BlankPageTemplate()));
     }
 
-    goToPageClass() {
-      print('displaying class details');
-      print('see PageItem class');
-      print('constructor specifies parameters by name');
-    }
-
     goToEmpty() {
       print('going to empty page');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Empty()));
     }
+
+    //
+    // Layouts
+    //
 
     goToLayout01() {
       print('going to row/column layout example');
@@ -60,17 +62,9 @@ class Grid2 extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const Quiz02()));
     }
 
-    instantiateTestClass() {
-      print(" ");
-      print(" ");
-      print("instantiating a test class");
-      var instance01 = TestClass(a: 1, b: "hi", c: true, privateProperty: 2.2);
-      print(instance01);
-      print(instance01.a);
-      print(instance01.b);
-      print(instance01.c);
-      // cannot print(instance01._privateProperty);
-    }
+    //
+    // Examples With Text Output Only
+    //
 
     fileOperationsSynchronous() {
       // write access only is granted so I have to learn to ask for permissions to make this a write version
@@ -183,6 +177,43 @@ class Grid2 extends StatelessWidget {
       print("number $number to 4 decimal places ${number.toStringAsFixed(4)}");
     }
 
+    //
+    // OOP
+    //
+
+    goToPageClass() {
+      print('displaying class details');
+      print('see PageItem class');
+      print('constructor specifies parameters by name');
+    }
+
+    goToInstantiation() {
+      print(" ");
+      print(" ");
+      print("instantiating a test class");
+      var instance01 = TestClass(a: 1, b: "hi", c: true, privateProperty: 2.2);
+      print(instance01);
+      print(instance01.a);
+      print(instance01.b);
+      print(instance01.c);
+      // cannot print(instance01._privateProperty);
+    }
+
+    goToMixins() {
+      print('mixin demo');
+      print(' ');
+      var mixinParent = MixinParent();
+      var mixinChild01 = MixinChild01();
+      var mixinChild02 = MixinChild02();
+      var mixinChild03 = MixinChild03();
+      mixinParent.parentBehaviour();
+      mixinChild01.parentBehaviour();
+      mixinChild02.parentBehaviour();
+      mixinChild03.parentBehaviour();
+      mixinChild03.uniqueBehaviour01();
+      mixinChild03.uniqueBehaviour02();
+    }
+
     List<PageItem> pageItems = [
       PageItem(
         functionName: doNothing,
@@ -217,27 +248,27 @@ class Grid2 extends StatelessWidget {
       ),
       PageItem(
         functionName: fileOperationsSynchronous,
-        buttonText: "file operations synchronous",
+        buttonText: " Files ",
       ),
       PageItem(
         functionName: printEnglishWords,
-        buttonText: "English Words",
+        buttonText: " Create English Words",
       ),
       PageItem(
         functionName: printListOfInstances,
-        buttonText: "print <Page Item> list",
+        buttonText: " List<T> ",
       ),
       PageItem(
         functionName: printListOfStrings,
-        buttonText: "print list of strings",
+        buttonText: " List<String>",
       ),
       PageItem(
         functionName: printNumberToStringWithPrecisionSignificantDigits,
-        buttonText: "significant digits",
+        buttonText: " Numbers - Precision",
       ),
       PageItem(
         functionName: printNumberToStringWithFixedNumberOfDecimalPlaces,
-        buttonText: "fixed decimal place",
+        buttonText: " Number - Decimal Place",
       ),
       PageItem(
         functionName: doNothing,
@@ -245,12 +276,16 @@ class Grid2 extends StatelessWidget {
         buttonColor: kGold,
       ),
       PageItem(
-        functionName: instantiateTestClass,
-        buttonText: "instantiate test class",
+        functionName: goToPageClass,
+        buttonText: " Constructor",
       ),
       PageItem(
-        functionName: goToPageClass,
-        buttonText: "Class / Constructor",
+        functionName: goToInstantiation,
+        buttonText: " Instantiation",
+      ),
+      PageItem(
+        functionName: goToMixins,
+        buttonText: " Mixin ",
       ),
     ];
 
