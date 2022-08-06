@@ -13,11 +13,15 @@ class DropDown01 extends StatefulWidget {
 class _DropDown01State extends State<DropDown01> {
   var currencyAndroid = kCurrenciesList[0];
   var index = 0;
+  var dropDownValue = kCurrenciesList[0];
 
   onDropDownSelectedAndroid(String newValue) {
     print('currency $newValue selected');
     setState(() {
       currencyAndroid = newValue;
+      if (defaultTargetPlatform != TargetPlatform.iOS) {
+        dropDownValue = currencyAndroid;
+      }
     });
   }
 
@@ -25,6 +29,9 @@ class _DropDown01State extends State<DropDown01> {
     print('currency ${kCurrenciesList[selectedIndex]} selected');
     setState(() {
       index = selectedIndex;
+      if (defaultTargetPlatform == TargetPlatform.iOS) {
+        dropDownValue = kCurrenciesList[index];
+      }
     });
   }
 
@@ -103,6 +110,13 @@ class _DropDown01State extends State<DropDown01> {
                   ),
                   Expanded(
                     flex: 3,
+                    child: Center(
+                      child:
+                          Text('Android picker chooses value $currencyAndroid'),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
                     child: Container(),
                   ),
                 ],
@@ -129,7 +143,14 @@ class _DropDown01State extends State<DropDown01> {
                     ),
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 2,
+                    child: Center(
+                      child: Text(
+                          'iOS picker chooses value ${kCurrenciesList[index]}'),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
                     child: Container(),
                   ),
                 ],
@@ -155,7 +176,14 @@ class _DropDown01State extends State<DropDown01> {
                     child: picker(),
                   ),
                   Expanded(
-                    flex: 3,
+                    flex: 2,
+                    child: Center(
+                      child: Text(
+                          '..operating system agnostic text holds $dropDownValue'),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
                     child: Container(),
                   ),
                 ],

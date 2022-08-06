@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/apps/chat/chat_app_01.dart';
 import '../models/page_item.dart';
 import '../main.dart';
 import '../apps/xylophone.dart';
@@ -17,6 +18,8 @@ import '../apps/weather_03.dart';
 import '../apps/weather_04.dart';
 import '../apps/bitcoin_01.dart';
 import '../apps/bitcoin_02.dart';
+import '../apps/bitcoin_03.dart';
+import '../apps/chat/chat_app_01.dart';
 
 class Apps extends StatelessWidget {
   const Apps({Key? key}) : super(key: key);
@@ -44,6 +47,12 @@ class Apps extends StatelessWidget {
       print('going to bitcoin 02');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Bitcoin02()));
+    }
+
+    goToBitCoin03() {
+      print('going to bitcoin 03');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const Bitcoin03()));
     }
 
     goToBmi01() {
@@ -74,6 +83,12 @@ class Apps extends StatelessWidget {
       print('going to business card');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const BusinessCard()));
+    }
+
+    goToChatApp01() {
+      print('going to chat app 01');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const ChatApp01()));
     }
 
     goToDice01() {
@@ -168,6 +183,10 @@ class Apps extends StatelessWidget {
         buttonText: "Bitcoin 02",
       ),
       PageItem(
+        functionName: goToBitCoin03,
+        buttonText: "Bitcoin 03",
+      ),
+      PageItem(
         functionName: goToBmi01,
         buttonText: "BMI 01",
       ),
@@ -186,6 +205,10 @@ class Apps extends StatelessWidget {
       PageItem(
         functionName: goToBusinessCard,
         buttonText: "Business Card",
+      ),
+      PageItem(
+        functionName: goToChatApp01,
+        buttonText: "Chat App 01",
       ),
       PageItem(
         functionName: goToDestini01,
