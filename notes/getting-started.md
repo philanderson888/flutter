@@ -674,6 +674,100 @@ flutter:
 
 and then doing the `flutter packages get` command to install this folder as a default folder for images
 
+## installing on mac
+
+for the steps taken above which are worked through on a windows machine, the steps on mac will be very similar.
+
+In summary some of the key points to install on MAC are
+
+### download
+
+- download zip from https://docs.flutter.dev/get-started/install/macos
+- extract to a location of your choice eg ~/flutter/sdk
+
+```java
+cd ~
+mkdir flutter
+cd flutter
+mkdir sdk
+cd sdk
+curl -o flutter-sdk.zip 'https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.0.5-stable.zip'
+unzip flutter-sdk.zip
+```
+
+### add flutter to path
+
+https://docs.flutter.dev/get-started/install/macos#update-your-path
+
+```java
+echo $SHELL
+// /bin/zsh
+cd /bin/zsh
+// show hidden files and look for .zshrc file
+ls -lah
+// if absent create it
+touch .zshrc
+// edit it
+nano .zshrc
+// add flutter to path - add this line to file
+export PATH="$PATH:/Users/<<yourUsername>>/flutter/sdk/bin"
+```
+
+confirm flutter is in the path by opening a new shell and running
+
+```java
+// show path to flutter sdk
+echo $PATH
+// confirm mac knows about flutter
+where flutter
+// /users/yourUser/flutter/sdk/bin
+```
+
+
+### flutter doctor
+
+run flutter doctor and follow instructions to complete install
+
+```java
+flutter doctor
+```
+
+### cocoapods
+
+```java
+sudo gem install cocoapods
+```
+
+### xcode
+
+install xcode then run
+
+```java
+sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+sudo xcodebuild -runFirstLaunch
+```
+
+### simulator
+
+run the mac simulator with 
+
+```java
+open -a Simulator
+```
+
+### hello world
+
+```java
+flutter create testApp
+cd testApp
+flutter run
+```
+
+
+
+
+
+
 ## next steps
 
 to continue building on our app, follow the [next steps](next-steps.md) . . .  
