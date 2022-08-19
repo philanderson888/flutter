@@ -1,0 +1,98 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  print('running MyApp');
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    print('hello from MyApp');
+
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Firebase User Registration'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  int _counter = 0;
+  var textEditingControllerEmail;
+  var textEditingControllerPassword;
+  var email = '123@abc.com';
+  var password = '123Secret'
+
+  @override
+  void initState() {
+    print('hello from init state');
+
+    super.initState();
+    print('init state');
+    setState(() {
+      textEditingControllerEmail = TextEditingController(text: email);
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+            Expanded(flex: 1, child: Center(child: Text('hello'))),
+            Expanded(
+                flex: 1,
+                child: Center(
+                    child: TextField(
+                  controller: textEditingControllerEmail,
+                  onChanged: (value) {
+                    print('email $value');
+                  },
+                ))),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+                        Expanded(
+                flex: 1,
+                child: Center(
+                    child: TextField(
+                  controller: textEditingControllerPassword,
+                  onChanged: (value) {
+                    print('password $value');
+                  },
+                ))),
+            Expanded(
+              flex: 1,
+              child: Container(),
+            ),
+
+          ],
+        ),
+      ),
+    );
+  }
+}
