@@ -116,7 +116,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                 // username - email
                                 //
                                 Expanded(
-                                  flex: 1,
+                                  flex: 2,
                                   child: GestureDetector(
                                     onTap: () {
                                       print('entering username');
@@ -169,7 +169,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                 // password text field
                                 //
                                 Expanded(
-                                  flex: 1,
+                                  flex: 2,
                                   child: GestureDetector(
                                     onTap: () {
                                       print('entering password');
