@@ -138,5 +138,5 @@ app.*.symbols
 local.properties
 
 # firebase option
-# google-services.json
-# firebase_options.dart
+google-services.json
+firebase_options.dart
