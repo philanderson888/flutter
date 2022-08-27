@@ -7,8 +7,11 @@
   - [getting started](#getting-started)
   - [create new firebase project](#create-new-firebase-project)
   - [add firebase to android app](#add-firebase-to-android-app)
+  - [install Flutter CLI](#install-flutter-cli)
+  - [commands to use](#commands-to-use)
+  - [initialise the app to use Firebase](#initialise-the-app-to-use-firebase)
   - [add libraries](#add-libraries)
-  - [add authentication](#add-authentication)
+  - [register user](#register-user)
   - [add cloud firestore](#add-cloud-firestore)
 
 ## getting started
@@ -50,6 +53,44 @@ add the lines on the next page https://console.firebase.google.com/project/flutt
 minSdkVersion 19
 ```
 
+## install Flutter CLI 
+
+```java
+// from root of project
+npm install -g firebase-tools
+dart pub global activate flutterfire_cli
+// add to path the folder flagged during the above command
+C:\Users\phila\AppData\Local\Pub\Cache\bin
+// from root of project
+firebase login --reauth
+flutterfire configure
+// Firebase configuration file lib\firebase_options.dart generated successfully with the following Firebase apps:
+// Platform  Firebase App Id
+// web       1:702377681303:web:47135cab502788eed0a4d2
+// android   1:702377681303:android:8f9cc9df10f41b92d0a4d2
+```
+
+## commands to use 
+
+```java
+flutterfire configure 
+firebase 
+```
+
+## initialise the app to use Firebase
+
+```java
+// add this library
+import 'firebase_options.dart';
+
+// amend this code 
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const MyApp());
+}
+```
+
 ## add libraries
 
 we can add plugins from https://firebase.google.com/docs/flutter/setup?platform=ios#available-plugins
@@ -61,13 +102,34 @@ all packages depend on this one so this must be done first ...
 flutter pub add firebase_core
 flutter pub add firebase_auth 
 flutter pub add cloud_firestore
-// use
+// produces in pubspec.yaml
+firebase_auth: ^3.6.2
+firebase_core: ^1.20.0
+cloud_firestore: ^3.4.5
+// add libraries to page
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 ```
 
-## add authentication
+## register user
+
+```java
+Class _FirebaseState extends State<Firebase>{
+  final _auth = FirebaseAuth.instance;
+
+  // on page 
+  child: GestureDetector(
+    onTap: () {
+      print(
+          'attempting to register a new user with email $email password $password');
+      
+    },
+  },
+}
+
+
+```
 
 
 ## add cloud firestore
