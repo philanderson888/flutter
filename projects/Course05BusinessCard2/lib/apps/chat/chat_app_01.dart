@@ -3,6 +3,7 @@ import './chat_app_01_register.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'chat_app_01_login.dart';
 
 class ChatApp01 extends StatefulWidget {
   const ChatApp01({Key? key}) : super(key: key);
@@ -80,7 +81,7 @@ class _ChatApp01State extends State<ChatApp01> {
                                         child: Container(),
                                       ),
                                       Expanded(
-                                        flex: 1,
+                                        flex: 5,
                                         child: Center(
                                           child: Text(
                                               'Welcome to my beautuiful chat app ...'),
@@ -132,6 +133,10 @@ class _ChatApp01State extends State<ChatApp01> {
                                   child: GestureDetector(
                                     onTap: () {
                                       print('going to login screen');
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const ChatApp01Login()));
                                     },
                                     child: Container(
                                       color: kSuperLightSkyBlue,

@@ -13,7 +13,7 @@ const containerTextSize = 30.0;
 const footerTextSize = 21.0;
 String appHeader = 'BMI Calculator';
 String headerText = 'BMI CALCULATOR';
-String footerText = 'RECALCULATE YOUR BMI';
+String footerText = kBmiRecalculateText;
 String textMale = 'MALE';
 String textFemale = 'FEMALE';
 String textHeight = 'HEIGHT';
@@ -71,9 +71,9 @@ class BmiResultsPage04 extends StatelessWidget {
               onTap: goBack,
               child: Container(
                 color: const Color(0xff0D5411),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    'RECALCULATE YOUR BMI',
+                    footerText,
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,

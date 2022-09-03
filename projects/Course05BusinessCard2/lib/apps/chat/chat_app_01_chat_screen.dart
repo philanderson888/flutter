@@ -7,30 +7,78 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChatApp01Registration extends StatefulWidget {
-  const ChatApp01Registration({Key? key}) : super(key: key);
+class ChatApp01ChatScreen extends StatefulWidget {
+  ChatApp01ChatScreen({Key? key, required this.loggedInUser}) : super(key: key);
+
+  // well what would you know -I don't even need this variable.
+  // I can get everything I require
+  // from the _auth Firebase instance across the app -
+  // very handy indeed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  final Future<UserCredential> loggedInUser;
 
   @override
-  State<ChatApp01Registration> createState() => _ChatApp01RegistrationState();
+  State<ChatApp01ChatScreen> createState() => _ChatApp01RegistrationState();
 }
 
-class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
+class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
   final _auth = FirebaseAuth.instance;
   var textEditingControllerEmail;
   var textEditingControllerPassword;
-  var email = '123@abc.com';
-  var password = 'verySecure123';
+  var email = '';
+  var password = '';
   late var loggedInUser;
+  late var loggedInUser2;
 
   @override
   initState() {
     super.initState();
     print('chat app init state');
 
+    getLoggedInUser();
+    getLoggedInUser2();
+
     setState(() {
       textEditingControllerEmail = TextEditingController(text: email);
       textEditingControllerPassword = TextEditingController(text: password);
     });
+  }
+
+  getLoggedInUser() async {
+    try {
+      loggedInUser = await widget.loggedInUser;
+      print('UserCredential object passed in from login screen ... ' +
+          loggedInUser.toString());
+      print('user passed in from login screen ... ' +
+          loggedInUser.user.toString());
+      print('user uid .. ' + loggedInUser.user.uid);
+      print('user email .. ' + loggedInUser.user.email);
+      print('user created .. ' +
+          loggedInUser.user.metadata.creationTime.toString());
+      print('user last logged in .. ' +
+          loggedInUser.user.metadata.lastSignInTime.toString());
+      print('user display name .. ' + loggedInUser.user.displayName.toString());
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  getLoggedInUser2() async {
+    try {
+      print('.. trying to get loggedInUser2 ... waiting ...');
+      loggedInUser2 = await _auth.currentUser;
+      print('.. loggedInUser2 has arrived ...');
+      print(
+          'user2 passed in from login screen ... ' + loggedInUser2.toString());
+      print('user2 uid .. ' + loggedInUser2.uid);
+      print('user2 email .. ' + loggedInUser2.email);
+      print(
+          'user2 created .. ' + loggedInUser2.metadata.creationTime.toString());
+      print('user2 last logged in .. ' +
+          loggedInUser2.metadata.lastSignInTime.toString());
+      print('user2 display name .. ' + loggedInUser2.displayName.toString());
+    } catch (e) {
+      print(e);
+    }
   }
 
   setEmail(String value) {
@@ -91,7 +139,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                 ),
                               ),
                               child: Center(
-                                child: Text('Chat App Registration Screen'),
+                                child: Text('Chat App Chat Screen'),
                               ),
                             ),
                           ),
@@ -107,7 +155,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                   child: Container(),
                                 ),
                                 //
-                                // title - please register
+                                // title - please login
                                 //
                                 Expanded(
                                   flex: 1,
@@ -120,8 +168,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                       Expanded(
                                         flex: 2,
                                         child: Center(
-                                          child:
-                                              Text('Please Register Here ...'),
+                                          child: Text('Chat Here ...'),
                                         ),
                                       ),
                                       Expanded(
@@ -139,7 +186,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                   flex: 2,
                                   child: GestureDetector(
                                     onTap: () {
-                                      print('entering username');
+                                      print('adding text to chat app');
                                     },
                                     child: Container(
                                       color: kSuperLightSkyBlue,
@@ -170,8 +217,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
-                                                hintText:
-                                                    'please enter your email address',
+                                                hintText: '',
                                                 hintStyle: TextStyle(
                                                   color: Colors.black26,
                                                 ),
@@ -194,7 +240,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                   flex: 2,
                                   child: GestureDetector(
                                     onTap: () {
-                                      print('entering password');
+                                      print('entering text for chat app');
                                     },
                                     child: Container(
                                       color: kSuperLightSkyBlue,
@@ -227,8 +273,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
-                                                hintText:
-                                                    'please enter your password',
+                                                hintText: '',
                                                 hintStyle: TextStyle(
                                                   color: Colors.black26,
                                                 ),
@@ -249,23 +294,8 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                   flex: 1,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      print(
-                                          'attempting to register a new user with email $email password $password');
+                                      print('attempting to log user out');
                                       try {
-                                        final newUser = await _auth
-                                            .createUserWithEmailAndPassword(
-                                                email: email,
-                                                password: password);
-                                        print('new user created ');
-                                        print(newUser);
-                                        final newUserConfirmed =
-                                            _auth.currentUser;
-                                        print('new user confirmed');
-                                        print(newUserConfirmed);
-                                        if (newUserConfirmed != null) {
-                                          loggedInUser = newUserConfirmed;
-                                        }
-                                        loggedInUser = _auth.signOut();
                                         loggedInUser =
                                             _auth.signInWithEmailAndPassword(
                                                 email: email,
@@ -274,10 +304,13 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                           print('signing in successfully !!!');
                                           print(loggedInUser);
                                         }
+                                        loggedInUser = _auth.signOut();
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const ChatApp01Registration()));
+                                                    ChatApp01ChatScreen(
+                                                        loggedInUser:
+                                                            loggedInUser)));
                                       } catch (e) {
                                         print(e);
                                       }
@@ -295,7 +328,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                           ),
                                         ),
                                         child: Center(
-                                          child: Text('Register'),
+                                          child: Text('Sign Out'),
                                         ),
                                       ),
                                     ),

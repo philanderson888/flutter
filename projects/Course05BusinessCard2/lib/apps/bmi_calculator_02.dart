@@ -344,9 +344,9 @@ class Footer extends StatelessWidget {
       flex: footerHeight,
       child: Container(
         color: headerAndFooterColor,
-        child: const Center(
+        child: Center(
           child: Text(
-            'CALCULATE YOUR BMI',
+            kBmiCalculateText,
             style: TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w600,

@@ -112,7 +112,6 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
     const footerTextSize = 21.0;
     String appHeader = 'BMI Calculator';
     String headerText = 'BMI CALCULATOR';
-    String footerText = 'CALCULATE YOUR BMI';
     String textMale = 'MALE';
     String textFemale = 'FEMALE';
     String textHeight = 'HEIGHT';
@@ -690,7 +689,7 @@ class _BmiCalculator03State extends State<BmiCalculator03> {
               footerColor: kCerise,
               footerTextColor: footerTextColor,
               footerFontWeight: footerFontWeight,
-              footerText: footerText,
+              footerText: kBmiCalculateText,
             ),
           ],
         ),

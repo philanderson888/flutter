@@ -42,7 +42,7 @@ var kBmiPrimaryColor = const Color(0xFF0A0E21);
 // Text Styles
 
 var kAppHomePageHeader = TextStyle(
-  fontSize: 35,
+  fontSize: 25,
   fontFamily: "SourceSansPro",
   color: Colors.teal.shade600,
   fontWeight: FontWeight.bold,
@@ -117,6 +117,8 @@ var kAppHeaderButtonStyle = ButtonStyle(
 
 // Text
 var kBmiScoreHeader = const Text('Your BMI Score');
+var kBmiCalculateText = 'CALCULATE YOUR BMI';
+var kBmiRecalculateText = 'RECALCULATE YOUR BMI';
 
 // Forms
 

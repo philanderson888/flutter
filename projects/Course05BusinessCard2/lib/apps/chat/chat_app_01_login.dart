@@ -6,15 +6,16 @@ import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'chat_app_01_chat_screen.dart';
 
-class ChatApp01Registration extends StatefulWidget {
-  const ChatApp01Registration({Key? key}) : super(key: key);
+class ChatApp01Login extends StatefulWidget {
+  const ChatApp01Login({Key? key}) : super(key: key);
 
   @override
-  State<ChatApp01Registration> createState() => _ChatApp01RegistrationState();
+  State<ChatApp01Login> createState() => _ChatApp01RegistrationState();
 }
 
-class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
+class _ChatApp01RegistrationState extends State<ChatApp01Login> {
   final _auth = FirebaseAuth.instance;
   var textEditingControllerEmail;
   var textEditingControllerPassword;
@@ -91,7 +92,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                 ),
                               ),
                               child: Center(
-                                child: Text('Chat App Registration Screen'),
+                                child: Text('Chat App Login Screen'),
                               ),
                             ),
                           ),
@@ -107,7 +108,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                   child: Container(),
                                 ),
                                 //
-                                // title - please register
+                                // title - please login
                                 //
                                 Expanded(
                                   flex: 1,
@@ -120,8 +121,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                       Expanded(
                                         flex: 2,
                                         child: Center(
-                                          child:
-                                              Text('Please Register Here ...'),
+                                          child: Text('Please Login Here ...'),
                                         ),
                                       ),
                                       Expanded(
@@ -250,26 +250,16 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                   child: GestureDetector(
                                     onTap: () async {
                                       print(
-                                          'attempting to register a new user with email $email password $password');
+                                          'attempting to login a user with email $email password $password');
                                       try {
-                                        final newUser = await _auth
-                                            .createUserWithEmailAndPassword(
-                                                email: email,
-                                                password: password);
-                                        print('new user created ');
-                                        print(newUser);
-                                        final newUserConfirmed =
-                                            _auth.currentUser;
-                                        print('new user confirmed');
-                                        print(newUserConfirmed);
-                                        if (newUserConfirmed != null) {
-                                          loggedInUser = newUserConfirmed;
-                                        }
-                                        loggedInUser = _auth.signOut();
                                         loggedInUser =
                                             _auth.signInWithEmailAndPassword(
                                                 email: email,
                                                 password: password);
+                                        print(
+                                            'loggedInUser is dynamic and has type ' +
+                                                loggedInUser.runtimeType
+                                                    .toString());
                                         if (loggedInUser != null) {
                                           print('signing in successfully !!!');
                                           print(loggedInUser);
@@ -277,7 +267,9 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    const ChatApp01Registration()));
+                                                    ChatApp01ChatScreen(
+                                                        loggedInUser:
+                                                            loggedInUser)));
                                       } catch (e) {
                                         print(e);
                                       }
@@ -295,7 +287,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                           ),
                                         ),
                                         child: Center(
-                                          child: Text('Register'),
+                                          child: Text('Login'),
                                         ),
                                       ),
                                     ),

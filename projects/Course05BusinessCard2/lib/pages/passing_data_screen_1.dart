@@ -51,7 +51,7 @@ class _StatefulWidgetPassDataIn01 extends State<StatefulWidgetPassDataIn01> {
                     child: Container(color: kColorLightPink01),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 3,
                     child: GestureDetector(
                       onTap: goToScreen2,
                       child: Center(
@@ -61,11 +61,11 @@ class _StatefulWidgetPassDataIn01 extends State<StatefulWidgetPassDataIn01> {
                     ),
                   ),
                   Expanded(
-                    flex: 10,
+                    flex: 6,
                     child: Container(color: kColorLightPink01),
                   ),
                   Expanded(
-                    flex: 1,
+                    flex: 3,
                     child: Center(
                       child: Text(dataReturnedFromScreen2,
                           style: kBmiResultsTextStyle),
