@@ -119,6 +119,8 @@ var kAppHeaderButtonStyle = ButtonStyle(
 var kBmiScoreHeader = const Text('Your BMI Score');
 var kBmiCalculateText = 'CALCULATE YOUR BMI';
 var kBmiRecalculateText = 'RECALCULATE YOUR BMI';
+var kAskAnyQuestion = 'Ask Any Question';
+var kApps = 'Apps';
 
 // Forms
 

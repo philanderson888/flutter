@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
               },
               style: kAppHeaderButtonStyle,
               child: Text(
-                'Apps',
+                kApps,
                 style: kAppHomePageHeader,
               ),
             ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/apps/chat/chat_app_01.dart';
+import 'package:flutter_teaching_app/constants.dart';
 import '../models/page_item.dart';
 import '../main.dart';
 import '../apps/xylophone.dart';
@@ -26,13 +27,22 @@ class Apps extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const gridSize = 56;
-    const columnCount = 8;
+    int screenWidth = (MediaQuery.of(context).size.width).round();
+    int screenHeight = (MediaQuery.of(context).size.height).round();
+    print('width $screenWidth height $screenHeight');
+
     const initialListLength = 0;
-    const textScaleFactor = 1.4;
+    double textScaleFactor = 1.3;
+    const gridSize = 56;
+
+    int columnCount = 5;
+    if (screenWidth < 700) {
+      columnCount = 4;
+      textScaleFactor = 1.0;
+    }
 
     goToAskAnyQuestion() {
-      print('going to "ask any question"');
+      print('going to ' + kAskAnyQuestion);
       Navigator.of(context).push(
           MaterialPageRoute(builder: (context) => const AskAnyQuestion()));
     }
@@ -172,7 +182,7 @@ class Apps extends StatelessWidget {
     List<PageItem> pageItems = [
       PageItem(
         functionName: goToAskAnyQuestion,
-        buttonText: "Ask Any Question",
+        buttonText: kAskAnyQuestion,
       ),
       PageItem(
         functionName: goToBitCoin01,
@@ -268,7 +278,7 @@ class Apps extends StatelessWidget {
       data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Apps'),
+          title: Text(kApps),
         ),
         body: GridView.count(
           crossAxisCount: columnCount,

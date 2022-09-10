@@ -28,9 +28,20 @@ class GridAToZ extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const gridSize = 70;
-    const columnCount = 7;
+    int screenWidth = (MediaQuery.of(context).size.width).round();
+    int screenHeight = (MediaQuery.of(context).size.height).round();
+    print('width $screenWidth height $screenHeight');
+
     const initialListLength = 0;
+    double textScaleFactor = 1.4;
+
+    int gridSize = 70;
+    int columnCount = 6;
+
+    if (screenWidth < 700) {
+      columnCount = 4;
+      textScaleFactor = 1.0;
+    }
 
     goToAlert() {
       print('going to rflutter alert');
@@ -532,7 +543,7 @@ class GridAToZ extends StatelessWidget {
     ];
 
     return MediaQuery(
-      data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+      data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Flutter Features By Name'),

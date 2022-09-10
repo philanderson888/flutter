@@ -17,7 +17,7 @@ class Grid2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const gridSize = 56;
-    const columnCount = 8;
+    const columnCount = 6;
     const initialListLength = 0;
     const textScaleFactor = 1.4;
 

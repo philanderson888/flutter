@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_teaching_app/apps/chat/chat_app_01_login.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -296,21 +297,16 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                     onTap: () async {
                                       print('attempting to log user out');
                                       try {
-                                        loggedInUser =
-                                            _auth.signInWithEmailAndPassword(
-                                                email: email,
-                                                password: password);
-                                        if (loggedInUser != null) {
-                                          print('signing in successfully !!!');
-                                          print(loggedInUser);
-                                        }
                                         loggedInUser = _auth.signOut();
+                                        print(loggedInUser);
+
+                                        print(
+                                            'user successfully signed out ...');
+
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ChatApp01ChatScreen(
-                                                        loggedInUser:
-                                                            loggedInUser)));
+                                                    ChatApp01Login()));
                                       } catch (e) {
                                         print(e);
                                       }

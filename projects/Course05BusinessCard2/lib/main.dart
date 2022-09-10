@@ -58,7 +58,7 @@ class _AskAnyQuestionState extends State<AskAnyQuestion> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Ask Any Question'),
+        title: Text(kAskAnyQuestion),
         backgroundColor: kPurple,
       ),
       body: SafeArea(
