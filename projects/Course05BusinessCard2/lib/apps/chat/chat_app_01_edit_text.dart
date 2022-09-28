@@ -4,24 +4,17 @@ import 'package:flutter_teaching_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_spinbox/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ChatApp01ChatScreen extends StatefulWidget {
-  ChatApp01ChatScreen({Key? key, required this.loggedInUser2})
-      : super(key: key);
-
-  // well what would you know -I don't even need this variable.
-  // I can get everything I require
-  // from the _auth Firebase instance across the app -
-  // very handy indeed !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  final Future<UserCredential> loggedInUser2;
+class ChatApp01EditText extends StatefulWidget {
+  ChatApp01EditText({Key? key}) : super(key: key);
 
   @override
-  State<ChatApp01ChatScreen> createState() => _ChatApp01RegistrationState();
+  State<ChatApp01EditText> createState() => _ChatApp01RegistrationState();
 }
 
-class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
+class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
   var textEditingControllerChatText;
@@ -31,6 +24,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
   var chatTextCumulative = '';
   var chatTextItem = '';
   var chatTextArray = [];
+  var spinnerMax = 1;
+  var chatTextId = '';
+  var chatTextDatabaseIds = [];
+  var chatTextIndex = 0;
   late var loggedInUser;
   late var loggedInUser2;
 
@@ -40,9 +37,6 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
     print('chat app init state');
 
     getLoggedInUser();
-    getLoggedInUser2(); // passed in from previous screen
-    // actually is not required but code retained for sake of completeness
-    // and for future use where passing in parameter is required
     getChatMessages();
 
     setState(() {
@@ -63,26 +57,6 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
       print('user2 last logged in .. ' +
           loggedInUser.metadata.lastSignInTime.toString());
       print('user2 display name .. ' + loggedInUser.displayName.toString());
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  getLoggedInUser2() async {
-    try {
-      loggedInUser2 = await widget.loggedInUser2;
-      print('UserCredential object passed in from login screen ... ' +
-          loggedInUser2.toString());
-      print('user passed in from login screen ... ' +
-          loggedInUser2.user.toString());
-      print('user uid .. ' + loggedInUser2.user.uid);
-      print('user email .. ' + loggedInUser2.user.email);
-      print('user created .. ' +
-          loggedInUser2.user.metadata.creationTime.toString());
-      print('user last logged in .. ' +
-          loggedInUser2.user.metadata.lastSignInTime.toString());
-      print(
-          'user display name .. ' + loggedInUser2.user.displayName.toString());
     } catch (e) {
       print(e);
     }
@@ -114,12 +88,15 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
     print('getting firestore first message id ... waiting ...');
     _firestore
         .collection('messages')
+        .orderBy('created', descending: true)
         .get()
         .then((message) => {print(message.docs.first.id)});
 
     print('getting messages from firestore database ... waiting ...');
-    final messages =
-        await _firestore.collection('messages').orderBy('created').get();
+    final messages = await _firestore
+        .collection('messages')
+        .orderBy('created', descending: true)
+        .get();
     var messageArray = messages.docs;
     var count = messageArray.length.toString();
     print('the database has $count items');
@@ -131,15 +108,25 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
     messageArray.forEach(
       (element) => {
         chatTextItem = element.data()['text'],
-        chatTextCumulative += chatTextItem,
-        chatTextCumulative += '\n',
-        chatTextArray.add(chatTextItem)
+        chatTextId = element.id,
+        if (chatTextItem.isNotEmpty)
+          {
+            chatTextCumulative += chatTextItem,
+            chatTextCumulative += '\n',
+            chatTextArray.add(chatTextItem),
+            // temporary solution before I build a proper class to deal with database object
+            chatTextDatabaseIds.add(chatTextId)
+          }
       },
     );
 
     setState(() {
       chatTextCumulative = chatTextCumulative;
+      chatText = messageArray[0].data()['text'];
+      print('chat text value of single item isolated for editing is $chatText');
+      textEditingControllerChatText = TextEditingController(text: chatText);
       print('cumulative value of text chat is - $chatTextCumulative');
+      spinnerMax = chatTextArray.length;
     });
 
     var chatTextCumulative2 = '';
@@ -148,11 +135,76 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
         chatTextCumulative2 += element.id,
         chatTextCumulative2 += ' - ',
         chatTextCumulative2 += element.data().toString(),
-        chatTextCumulative2 += element.data()['text'],
+        chatTextItem = element.data()['text'],
+        chatTextCumulative2 += chatTextItem,
         chatTextCumulative2 += '   ',
       },
     );
     print('cumulative value of data records - $chatTextCumulative2');
+  }
+
+  incrementTextChatIndex(double index) {
+    chatTextIndex = index.toInt();
+
+    setState(() {
+      if (chatTextIndex <= chatTextArray.length) {
+        chatText = chatTextArray[chatTextIndex];
+        chatTextId = chatTextDatabaseIds[chatTextIndex];
+        textEditingControllerChatText = TextEditingController(text: chatText);
+        print(
+            'setting new chosen chat line index as $chatTextIndex with id $chatTextId');
+      }
+    });
+  }
+
+  updateChatText() {
+    print(
+        'attempting to update chat text for line $chatTextIndex id $chatTextId with new data $chatText');
+    chatTextArray[chatTextIndex] = chatText;
+    chatTextCumulative = '';
+    chatTextArray.forEach((item) {
+      chatTextCumulative += item + '\n';
+    });
+    final mergeData = {'text': chatText};
+    _firestore
+        .collection('messages')
+        .doc(chatTextId)
+        .set(mergeData, SetOptions(merge: true))
+        .onError((error, _) => print('Error $error'));
+
+    setState(() {
+      chatTextCumulative = chatTextCumulative;
+    });
+  }
+
+  deleteChatText() {
+    print(
+        'attempting to delete chat line $chatTextIndex with id $chatTextId from database');
+    _firestore.collection('messages').doc(chatTextId).delete().then(
+          (item) => print('Document delete'),
+          onError: (e) => print('Error deleting document'),
+        );
+    chatTextArray.removeAt(chatTextIndex);
+    chatTextDatabaseIds.removeAt(chatTextIndex);
+    chatTextCumulative = '';
+    chatTextArray.forEach((item) {
+      chatTextCumulative += item + '\n';
+    });
+
+    setState(() {
+      chatTextCumulative = chatTextCumulative;
+    });
+  }
+
+  getChatStream() async {
+    await for (var snapshot in _firestore
+        .collection('messages')
+        .orderBy('created', descending: true)
+        .snapshots()) {
+      for (var message in snapshot.docs) {
+        print('data streamed from id ${message.id} ${message.data()}');
+      }
+    }
   }
 
   @override
@@ -199,7 +251,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                 ),
                               ),
                               child: Center(
-                                child: Text('Chat App Chat Screen'),
+                                child: Text('Chat App Edit Screen'),
                               ),
                             ),
                           ),
@@ -224,7 +276,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                       Expanded(
                                         flex: 2,
                                         child: Center(
-                                          child: Text('Chat Here ...'),
+                                          child: Text('Line To Be Edited ...'),
                                         ),
                                       ),
                                       Expanded(
@@ -236,13 +288,13 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                 ),
 
                                 //
-                                // chat text entered
+                                // editing chat text
                                 //
                                 Expanded(
                                   flex: 3,
                                   child: GestureDetector(
                                     onTap: () {
-                                      print('adding text to chat app');
+                                      print('editing chat text');
                                     },
                                     child: Container(
                                       color: kSuperLightSkyBlue,
@@ -267,13 +319,13 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                               onChanged: (value) {
                                                 setChatText(value);
                                               },
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
                                                 hintText: '',
                                                 hintStyle: TextStyle(
-                                                  color: Colors.black26,
+                                                  color: kColorLightGrey02,
                                                 ),
                                               ),
                                             ),
@@ -291,7 +343,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                 // chat output
                                 //
                                 Expanded(
-                                  flex: 10,
+                                  flex: 5,
                                   child: GestureDetector(
                                     onTap: () {
                                       print('viewing output for text chat');
@@ -319,22 +371,111 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                   ),
                                 ),
 
+                                //
+                                // streaming output
+                                //
+
+                                Expanded(
+                                  flex: 5,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      print('viewing streaming chat output');
+                                    },
+                                    child: Container(
+                                      color: kSuperLightSkyBlue,
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: ShapeDecoration(
+                                          color: kLightSkyBlue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(30.0),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 20.0, vertical: 5.0),
+                                          //child: Text(chatTextCumulative, textAlign: TextAlign.center),
+                                          child: StreamBuilder<QuerySnapshot>(
+                                              stream: _firestore
+                                                  .collection('messages')
+                                                  .orderBy('created',
+                                                      descending: true)
+                                                  .snapshots(),
+                                              builder: (context, snapshot) {
+                                                if (!snapshot.hasData) {
+                                                  return Center(
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      backgroundColor: Colors
+                                                          .lightBlueAccent,
+                                                    ),
+                                                  );
+                                                }
+                                                final messages =
+                                                    snapshot.data!.docs;
+                                                print(
+                                                    'messages returned from firestore $messages');
+                                                var outputString = '';
+                                                for (int i = 0;
+                                                    i < messages.length;
+                                                    i++) {
+                                                  outputString += messages
+                                                      .elementAt(i)['text'];
+                                                  outputString += '\n';
+                                                }
+                                                for (var message in messages) {
+                                                  final messageText =
+                                                      message['text'];
+                                                  print('message text ' +
+                                                      messageText);
+                                                }
+                                                return Text(outputString);
+                                              }),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
                                 Expanded(
                                   flex: 1,
                                   child: Container(),
                                 ),
 
                                 //
-                                // Send Chat Text
+                                // number spinbox
+                                //
+
+                                Expanded(
+                                  flex: 2,
+                                  child: SpinBox(
+                                      min: 1,
+                                      max: spinnerMax.toDouble(),
+                                      value: 1,
+                                      decoration:
+                                          InputDecoration(labelText: 'Basic'),
+                                      onChanged: (value) {
+                                        incrementTextChatIndex(value - 1);
+                                      }),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(),
+                                ),
+
+                                //
+                                // Update Chat Text
                                 //
 
                                 Expanded(
                                   flex: 1,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      print('attempting to send chat text');
+                                      print('attempting to update chat text');
                                       try {
-                                        setChatTextCumulative();
+                                        updateChatText();
                                       } catch (e) {
                                         print(e);
                                       }
@@ -352,7 +493,88 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                           ),
                                         ),
                                         child: Center(
-                                          child: Text('Send Chat Text'),
+                                          child: Text('Update Chat Text'),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(),
+                                ),
+
+                                //
+                                // Get Streaming Chat Text
+                                //
+
+                                Expanded(
+                                  flex: 1,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      print(
+                                          'attempting to get streaming chat text');
+                                      try {
+                                        getChatStream();
+                                      } catch (e) {
+                                        print(e);
+                                      }
+                                    },
+                                    child: Container(
+                                      color: kSuperLightSkyBlue,
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: ShapeDecoration(
+                                          color: kLightSkyBlue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(30.0),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child:
+                                              Text('Get Streaming Chat Text'),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(),
+                                ),
+
+                                //
+                                // Delete Chat Text
+                                //
+
+                                Expanded(
+                                  flex: 1,
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      try {
+                                        deleteChatText();
+                                      } catch (e) {
+                                        print(e);
+                                      }
+                                    },
+                                    child: Container(
+                                      color: kSuperLightSkyBlue,
+                                      child: Container(
+                                        width: double.infinity,
+                                        decoration: ShapeDecoration(
+                                          color: kLightSkyBlue,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(30.0),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text('Delete Chat Text'),
                                         ),
                                       ),
                                     ),

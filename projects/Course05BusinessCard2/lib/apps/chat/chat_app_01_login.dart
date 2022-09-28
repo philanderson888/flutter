@@ -1,11 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'chat_app_01_chat_screen.dart';
 
 class ChatApp01Login extends StatefulWidget {
@@ -166,14 +163,14 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                               onChanged: (value) {
                                                 setEmail(value);
                                               },
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
                                                 hintText:
                                                     'please enter your email address',
                                                 hintStyle: TextStyle(
-                                                  color: Colors.black26,
+                                                  color: kColorLightGrey02,
                                                 ),
                                               ),
                                             ),
@@ -223,14 +220,14 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                               obscuringCharacter: '*',
                                               enableSuggestions: false,
                                               autocorrect: false,
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
                                                 hintText:
                                                     'please enter your password',
                                                 hintStyle: TextStyle(
-                                                  color: Colors.black26,
+                                                  color: kColorLightGrey02,
                                                 ),
                                               ),
                                             ),
@@ -268,7 +265,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     ChatApp01ChatScreen(
-                                                        loggedInUser:
+                                                        loggedInUser2:
                                                             loggedInUser)));
                                       } catch (e) {
                                         print(e);

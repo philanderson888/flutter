@@ -1,11 +1,8 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatApp01Registration extends StatefulWidget {
   const ChatApp01Registration({Key? key}) : super(key: key);
@@ -45,6 +42,34 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
       password = value;
       print('value of password updated - $password');
     });
+  }
+
+  registerNewUser() async {
+    print(
+        'attempting to register a new user with email $email password $password');
+    try {
+      final newUser = await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      print('new user created ');
+      print(newUser);
+      final newUserConfirmed = _auth.currentUser;
+      print('new user confirmed');
+      print(newUserConfirmed);
+      if (newUserConfirmed != null) {
+        loggedInUser = newUserConfirmed;
+      }
+      loggedInUser = _auth.signOut();
+      loggedInUser =
+          _auth.signInWithEmailAndPassword(email: email, password: password);
+      if (loggedInUser != null) {
+        print('signing in successfully !!!');
+        print(loggedInUser);
+      }
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const ChatApp01Registration()));
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -166,14 +191,14 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                               onChanged: (value) {
                                                 setEmail(value);
                                               },
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
                                                 hintText:
                                                     'please enter your email address',
                                                 hintStyle: TextStyle(
-                                                  color: Colors.black26,
+                                                  color: kColorLightGrey02,
                                                 ),
                                               ),
                                             ),
@@ -223,14 +248,14 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                               obscuringCharacter: '*',
                                               enableSuggestions: false,
                                               autocorrect: false,
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 border: OutlineInputBorder(
                                                   borderSide: BorderSide.none,
                                                 ),
                                                 hintText:
                                                     'please enter your password',
                                                 hintStyle: TextStyle(
-                                                  color: Colors.black26,
+                                                  color: kColorLightGrey02,
                                                 ),
                                               ),
                                             ),
@@ -248,40 +273,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                 Expanded(
                                   flex: 1,
                                   child: GestureDetector(
-                                    onTap: () async {
-                                      print(
-                                          'attempting to register a new user with email $email password $password');
-                                      try {
-                                        final newUser = await _auth
-                                            .createUserWithEmailAndPassword(
-                                                email: email,
-                                                password: password);
-                                        print('new user created ');
-                                        print(newUser);
-                                        final newUserConfirmed =
-                                            _auth.currentUser;
-                                        print('new user confirmed');
-                                        print(newUserConfirmed);
-                                        if (newUserConfirmed != null) {
-                                          loggedInUser = newUserConfirmed;
-                                        }
-                                        loggedInUser = _auth.signOut();
-                                        loggedInUser =
-                                            _auth.signInWithEmailAndPassword(
-                                                email: email,
-                                                password: password);
-                                        if (loggedInUser != null) {
-                                          print('signing in successfully !!!');
-                                          print(loggedInUser);
-                                        }
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ChatApp01Registration()));
-                                      } catch (e) {
-                                        print(e);
-                                      }
-                                    },
+                                    onTap: registerNewUser,
                                     child: Container(
                                       color: kSuperLightSkyBlue,
                                       child: Container(
