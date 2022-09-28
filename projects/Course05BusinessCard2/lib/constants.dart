@@ -5,6 +5,15 @@ var kColorLightPink01 = Colors.black12;
 var kColorLightGrey02 = Colors.black26;
 var kColorDarkGrey01 = const Color(0xFF595c5b);
 
+// color background greyscale for design
+
+var kColorLightGrey001 = const Color(0xFFEEEEEE);
+var kColorLightGrey002 = const Color(0xFFDDDDDD);
+var kColorLightGrey003 = const Color(0xFFCCCCCC);
+var kColorLightGrey004 = const Color(0xFFBBBBBB);
+var kColorLightGrey005 = const Color(0xFFAAAAAA);
+var kColorLightGrey006 = const Color(0xFF999999);
+
 // color background
 
 var kDarkTeal = Colors.teal.shade800;
@@ -18,6 +27,7 @@ var kSkyBlue = const Color(0xFF8997E7);
 var kLightSkyBlue = const Color(0xFFA6B2DE);
 var kVeryLightSkyBlue = const Color(0xFFBAC2E1);
 var kSuperLightSkyBlue = const Color(0xFFD1D3E8);
+var kSuperLight = const Color(0xFFe1edec);
 
 var kGold = const Color(0xFFF2B64B);
 var kCerise = const Color(0xFFE31D6B);
@@ -41,21 +51,68 @@ var kBmiPrimaryColor = const Color(0xFF0A0E21);
 
 // Text Styles
 
+var kTextStyle12 = const TextStyle(
+  fontSize: 12.0,
+);
+
+var kTextStyle12Bold = const TextStyle(
+  fontSize: 12.0,
+  fontWeight: FontWeight.bold,
+);
+
+var kTextStyle15 = const TextStyle(
+  fontSize: 15.0,
+);
+
+var kTextStyle15Bold = const TextStyle(
+  fontSize: 15.0,
+  fontWeight: FontWeight.bold,
+);
+
+var kTextStyle20 = const TextStyle(
+  fontSize: 20.0,
+);
+
+var kTextStyle20Bold = const TextStyle(
+  fontSize: 20.0,
+  fontWeight: FontWeight.bold,
+);
+
+var kTextStyle25 = const TextStyle(
+  fontSize: 25.0,
+);
+
+var kTextStyle30 = const TextStyle(
+  fontSize: 30.0,
+);
+
+var kTextStyle35 = const TextStyle(
+  fontSize: 35.0,
+);
+
+var kTextStyleSize40 = const TextStyle(
+  fontSize: 40.0,
+);
+
+var kTextStyle50 = const TextStyle(
+  fontSize: 50.0,
+);
+
+var kTextStyle50Bold = const TextStyle(
+  fontSize: 50.0,
+  fontWeight: FontWeight.w900,
+);
+
+var kTextStyle40Bold = const TextStyle(
+  fontSize: 40.0,
+  fontWeight: FontWeight.w900,
+);
+
 var kAppHomePageHeader = TextStyle(
   fontSize: 25,
   fontFamily: "SourceSansPro",
   color: Colors.teal.shade600,
   fontWeight: FontWeight.bold,
-);
-
-var kBmiHugeTextStyle = const TextStyle(
-  fontSize: 50.0,
-  fontWeight: FontWeight.w900,
-);
-
-var kBmiLargeTextStyle = const TextStyle(
-  fontSize: 40.0,
-  fontWeight: FontWeight.w900,
 );
 
 var kBmiResultsTextStyle = const TextStyle(
