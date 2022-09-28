@@ -388,7 +388,6 @@ class _HomeState extends State<Home> {
               visible: _cancel,
             ),
             DropdownButton<String>(
-                value: dropdownValue,
                 onTap: () => print('about to make a dropdown box selection'),
                 onChanged: (String? newValue) {
                   print('you chose item $newValue (was $dropdownValue)');

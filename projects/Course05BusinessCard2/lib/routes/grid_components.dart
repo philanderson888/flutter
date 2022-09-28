@@ -1,6 +1,8 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/apps/bitcoin_02.dart';
 import 'package:flutter_teaching_app/apps/bmi_calculator_04.dart';
+import 'package:flutter_teaching_app/apps/street_pastors/home.dart';
 import 'package:flutter_teaching_app/pages/containers_centred.dart';
 import 'package:flutter_teaching_app/pages/loading_animation_01.dart';
 import 'package:flutter_teaching_app/apps/weather_02.dart';
@@ -19,9 +21,10 @@ import '../pages/theme_light.dart';
 import '../pages/theme_custom.dart';
 import '../pages/geolocation.dart';
 import '../pages/spinner_01.dart';
-import '../pages/passing_data_screen_1.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import '../forms/drop_down_01.dart';
+import '../forms/date_time_picker_01.dart';
+import '../buttons/toggle_button.dart';
 
 class GridAToZ extends StatelessWidget {
   const GridAToZ({Key? key}) : super(key: key);
@@ -104,6 +107,12 @@ class GridAToZ extends StatelessWidget {
           builder: (context) => const CourseLayoutExercise()));
     }
 
+    goToDateTimePicker() {
+      print('go to date time picker');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => DateTimePicker01()));
+    }
+
     goToDivider() {
       print('going to divider');
       Navigator.of(context)
@@ -169,6 +178,23 @@ class GridAToZ extends StatelessWidget {
           'viewing a function which returns a component - in this case, the Expanded component.  See the Xylophone example for its use here .. ');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const Xylophone()));
+    }
+
+    goToFuture() {
+      print(
+          'seeing an async future call in operation .. see street pastors contact matrix for details ');
+      print('/*');
+      print('    goToFunctionReturnsComponent() ' '{');
+      print(
+          '       viewing a function which returns a component - in this case, the Expanded component.  See the Xylophone example for its use here .. ');
+      print('             Navigator.of(context)');
+      print(
+          '             .push(MaterialPageRoute(builder: (context) => const Xylophone())');
+      print('       );');
+      print('    }');
+      print('*/');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const StreetPastors()));
     }
 
     goToGeolocation() {
@@ -329,6 +355,12 @@ class GridAToZ extends StatelessWidget {
       print('going to theme - light');
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => const ThemeLight()));
+    }
+
+    goToToggleButton() {
+      print('going to toggle button');
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => const ToggleButton01()));
     }
 
     goToTypeDef() {
@@ -528,13 +560,22 @@ class GridAToZ extends StatelessWidget {
         buttonText: "theme dark",
       ),
       PageItem(
+        functionName: goToToggleButton,
+        buttonText: "Toggle Button",
+      ),
+      PageItem(
         functionName: goToTypeDef,
         buttonText: "typedef",
       ),
       PageItem(
         functionName: doNothing,
-        buttonText: " Form Features ",
+        buttonText: " Forms ",
         buttonColor: kGold,
+      ),
+      PageItem(functionName: goToFuture, buttonText: " Futures "),
+      PageItem(
+        functionName: goToDateTimePicker,
+        buttonText: "DateTime Picker",
       ),
       PageItem(
         functionName: goToDropDown,

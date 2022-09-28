@@ -371,15 +371,14 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                       flex: 20,
                                                       child: Text(
                                                         height.toString(),
-                                                        style:
-                                                            kBmiHugeTextStyle,
+                                                        style: kTextStyle50Bold,
                                                       ),
                                                     ),
                                                     Expanded(
                                                       flex: 15,
                                                       child: Text('cm',
                                                           style:
-                                                              kBmiLargeTextStyle),
+                                                              kTextStyle40Bold),
                                                     ),
                                                     Expanded(
                                                       flex: 80,
@@ -502,8 +501,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                 flex: 16,
                                                 child: Center(
                                                   child: Text(weight.toString(),
-                                                      style:
-                                                          kBmiLargeTextStyle),
+                                                      style: kTextStyle40Bold),
                                                 )),
                                             Expanded(
                                                 flex: 1, child: Container()),
@@ -530,7 +528,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                   child: Center(
                                                       child: Text('+',
                                                           style:
-                                                              kBmiLargeTextStyle)),
+                                                              kTextStyle40Bold)),
                                                 )),
                                             Expanded(
                                                 flex: 1, child: Container()),
@@ -544,7 +542,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                   child: Center(
                                                       child: Text('-',
                                                           style:
-                                                              kBmiLargeTextStyle)),
+                                                              kTextStyle40Bold)),
                                                 )),
                                             Expanded(
                                                 flex: 14, child: Container()),
@@ -604,8 +602,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                 flex: 16,
                                                 child: Center(
                                                   child: Text(age.toString(),
-                                                      style:
-                                                          kBmiLargeTextStyle),
+                                                      style: kTextStyle40Bold),
                                                 )),
                                             Expanded(
                                                 flex: 1, child: Container()),
@@ -632,7 +629,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                   child: Center(
                                                       child: Text('+',
                                                           style:
-                                                              kBmiLargeTextStyle)),
+                                                              kTextStyle40Bold)),
                                                 )),
                                             Expanded(
                                                 flex: 1, child: Container()),
@@ -646,7 +643,7 @@ class _BmiCalculator04State extends State<BmiCalculator04> {
                                                   child: Center(
                                                       child: Text('-',
                                                           style:
-                                                              kBmiLargeTextStyle)),
+                                                              kTextStyle40Bold)),
                                                 )),
                                             Expanded(
                                                 flex: 14, child: Container()),

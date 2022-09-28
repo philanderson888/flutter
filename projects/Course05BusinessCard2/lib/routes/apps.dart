@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/apps/chat/chat_app_01.dart';
+import 'package:flutter_teaching_app/apps/street_pastors/home.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import '../models/page_item.dart';
 import '../main.dart';
@@ -149,6 +150,12 @@ class Apps extends StatelessWidget {
           .push(MaterialPageRoute(builder: (context) => const Quiz02()));
     }
 
+    goToStreetPastors() {
+      print('going to street pastors app');
+      Navigator.of(context)
+          .push(MaterialPageRoute(builder: (context) => const StreetPastors()));
+    }
+
     goToWeather01() {
       print('going to weather_01 app');
       Navigator.of(context)
@@ -251,6 +258,10 @@ class Apps extends StatelessWidget {
       PageItem(
         functionName: goToQuiz02,
         buttonText: "Quiz 02",
+      ),
+      PageItem(
+        functionName: goToStreetPastors,
+        buttonText: "Street Pastors",
       ),
       PageItem(
         functionName: goToWeather01,
