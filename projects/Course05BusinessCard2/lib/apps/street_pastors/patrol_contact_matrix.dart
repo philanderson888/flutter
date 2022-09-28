@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_teaching_app/constants.dart';
+import 'package:flutter/foundation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PatrolPage01 extends StatefulWidget {
-  const PatrolPage01({Key? key}) : super(key: key);
+class PatrolContactMatrix extends StatefulWidget {
+  const PatrolContactMatrix({Key? key}) : super(key: key);
 
   @override
-  State<PatrolPage01> createState() => _PatrolPage01State();
+  State<PatrolContactMatrix> createState() => _PatrolContactMatrixState();
 }
 
-class _PatrolPage01State extends State<PatrolPage01> {
+class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
   GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
+  final _firestore = FirebaseFirestore.instance;
+
   var textEditingControllerEmail;
   var textEditingControllerPassword;
   var email = '123@abc.com';
@@ -38,6 +41,22 @@ class _PatrolPage01State extends State<PatrolPage01> {
   String valueToValidate = '2000-09-20';
   String valueSaved = '2000-09-20';
 
+  final genders = ['Male', 'Female'];
+  final ages = ['0-12', '13-17', '18-27', 'Over 25'];
+  final ethnicities = ['White', 'Afro/Caribbean', 'Asian', 'East European'];
+
+  final List<bool> _selectedGender = <bool>[true, false];
+  final List<bool> _selectedAge = <bool>[false, false, false, true];
+  final List<bool> _selectedEthnicity = <bool>[true, false, false, false];
+
+  final List<Widget> genderWidgets = [];
+  final List<Widget> ageWidgets = [];
+  final List<Widget> ethnicityWidgets = [];
+
+  late var age = 'Over 25';
+  late var gender = 'Male';
+  late var ethnicity = 'White';
+
   @override
   initState() {
     print('patrol details - page 01');
@@ -54,6 +73,19 @@ class _PatrolPage01State extends State<PatrolPage01> {
         TextEditingController(text: patrolLeader);
     textEditingControllerCadNumber = TextEditingController(text: cadNumber);
     _getValue();
+
+    for (int i = 0; i < genders.length; i++) {
+      var widget = Text(genders[i]);
+      genderWidgets.add(widget);
+    }
+    for (int i = 0; i < ages.length; i++) {
+      var widget = Text(ages[i]);
+      ageWidgets.add(widget);
+    }
+    for (int i = 0; i < ethnicities.length; i++) {
+      var widget = Text(ethnicities[i]);
+      ethnicityWidgets.add(widget);
+    }
   }
 
   getSignedInUser() async {
@@ -129,12 +161,13 @@ class _PatrolPage01State extends State<PatrolPage01> {
     if (loForm?.validate() == true) {
       loForm?.save();
     }
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const PatrolPage01()));
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const PatrolContactMatrix()));
   }
 
-  goToContactMatrix(){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => const PatrolContactMatrix()));
+  goToContactMatrix() {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => const PatrolContactMatrix()));
   }
 
   incrementBottleCounter(int increment) {
@@ -165,6 +198,44 @@ class _PatrolPage01State extends State<PatrolPage01> {
     });
   }
 
+  getPatrols() async {
+    print('getting patrol record from database ... waiting ...');
+    final patrols = await _firestore.collection('patrols').get();
+    final patrolsArray = patrols.docs;
+    final count = patrolsArray.length.toString();
+    print('there are $count patrols');
+    patrolsArray.forEach((patrol) {
+      var startDate = patrol.data()['startDate'];
+      var endDate = patrol.data()['endDate'];
+      var leader = patrol.data()['leader'];
+      var members = patrol.data()['members'];
+      var contactMatrix = patrol.data()['contactMatrix'];
+      print(
+          'patrol id ${patrol.id} start $startDate end $endDate leader $leader');
+      print('start date as timestamp seconds ${startDate.seconds}');
+      var startDateAsDate = startDate.toDate();
+      print('start date as dateTime string $startDateAsDate');
+      var startDateAsDateOnly =
+          DateFormat('dd/MM/yyyy').format(startDateAsDate);
+      print('start date $startDateAsDateOnly');
+      var endDateAsDate = DateFormat('dd/MM/yyyy').format(endDate.toDate());
+      print('end date $endDateAsDate');
+      members.forEach((memberId) => print('patrol member ${memberId}'));
+      contactMatrix.forEach((contact) => print('contact details $contact'));
+    });
+  }
+
+  submitContact() async {
+    try {
+      getPatrols();
+      //
+    } catch (e) {
+      print(e);
+    }
+    print(
+        'user ${signedInUser.email} has submitted form with values - $ethnicity $gender age $age');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,7 +257,7 @@ class _PatrolPage01State extends State<PatrolPage01> {
                   color: kColorLightGrey002,
                   child: Center(
                     child: Text(
-                      'Patrol Details',
+                      'New Contact',
                     ),
                   ),
                 ),
@@ -208,7 +279,7 @@ class _PatrolPage01State extends State<PatrolPage01> {
                     // form
                     //
                     Expanded(
-                      flex: 5,
+                      flex: 18,
                       child: Column(
                         children: [
                           Expanded(
@@ -217,502 +288,159 @@ class _PatrolPage01State extends State<PatrolPage01> {
                               color: kColorLightGrey004,
                             ),
                           ),
-                          //
-                          // bottle counter
-                          //
+
                           Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 7,
-                                  child: Container(
-                                    color: kColorLightGrey006,
-                                    child: Text('Bottles', style: kTextStyle35),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    color: kColorLightGrey006,
-                                    child: Center(
-                                      child: Text(bottleCounter.toString(),
-                                          style: kTextStyle40Bold),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            incrementBottleCounter(1);
-                                          },
-                                          child: Container(
-                                            color: kColorLightGrey003,
-                                            child: Center(
-                                              child: Text('+',
-                                                  style: kTextStyle20),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            incrementBottleCounter(-1);
-                                          },
-                                          child: Container(
-                                            color: kColorLightGrey003,
-                                            child: Center(
-                                              child: Text('-',
-                                                  style: kTextStyle20),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                              ],
+                            flex: 1,
+                            child: Container(
+                              color: kColorLightGrey001,
+                              child: Center(
+                                child: Text('New Contact',
+                                    style: kTextStyle40Bold),
+                              ),
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Container(
-                              color: kColorLightGrey004,
+                              color: kColorLightGrey002,
+                              child: Center(
+                                child: Center(child: Text('')),
+                              ),
                             ),
                           ),
-
                           //
-                          // people helped
+                          // gender
                           //
                           Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 7,
-                                  child: Container(
-                                    color: kColorLightGrey006,
-                                    child: Text('People Helped',
-                                        style: kTextStyle30),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    color: kColorLightGrey006,
-                                    child: Center(
-                                      child: Text(
-                                          peopleHelpedCounter.toString(),
-                                          style: kTextStyle40Bold),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            incrementPeopleHelpedCounter(1);
-                                          },
-                                          child: Container(
-                                            color: kColorLightGrey003,
-                                            child: Center(
-                                              child: Text('+',
-                                                  style: kTextStyle20),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            incrementPeopleHelpedCounter(-1);
-                                          },
-                                          child: Container(
-                                            color: kColorLightGrey003,
-                                            child: Center(
-                                              child: Text('-',
-                                                  style: kTextStyle20),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                              ],
+                            flex: 1,
+                            child: Container(
+                              color: kColorLightGrey001,
+                              child: Center(
+                                child: Center(
+                                    child: ToggleButtons(
+                                  children: genderWidgets,
+                                  isSelected: _selectedGender,
+                                  onPressed: (int index) {
+                                    gender = genders[index].toString();
+                                    print('selected gender is $gender');
+                                    setState(() {
+                                      for (int i = 0;
+                                          i < _selectedGender.length;
+                                          i++) {
+                                        _selectedGender[i] = i == index;
+                                      }
+                                    });
+                                  },
+                                )),
+                              ),
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Container(
-                              color: kColorLightGrey004,
+                              color: kColorLightGrey002,
+                              child: Center(child: Text('')),
                             ),
                           ),
-
                           //
-                          // people accompanied / observed to safety
+                          // age
                           //
                           Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 7,
-                                  child: Container(
-                                    color: kColorLightGrey006,
-                                    child: Text(
-                                        'People accompanied / observed to safety',
-                                        style: kTextStyle12),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(
-                                    color: kColorLightGrey006,
-                                    child: Center(
-                                      child: Text(
-                                          peopleToSafetyCounter.toString(),
-                                          style: kTextStyle40Bold),
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: Column(
-                                    children: [
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            incrementPeopleToSafetyCounter(1);
-                                          },
-                                          child: Container(
-                                            color: kColorLightGrey003,
-                                            child: Center(
-                                              child: Text('+',
-                                                  style: kTextStyle20),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 4,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            incrementPeopleToSafetyCounter(-1);
-                                          },
-                                          child: Container(
-                                            color: kColorLightGrey003,
-                                            child: Center(
-                                              child: Text('-',
-                                                  style: kTextStyle20),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          color: kColorLightGrey002,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                              ],
+                            flex: 1,
+                            child: Container(
+                              color: kColorLightGrey001,
+                              child: Center(
+                                child: Center(
+                                    child: ToggleButtons(
+                                  children: ageWidgets,
+                                  isSelected: _selectedAge,
+                                  onPressed: (int index) {
+                                    age = ages[index].toString();
+                                    print('selected age is $age');
+                                    setState(() {
+                                      for (int i = 0;
+                                          i < _selectedAge.length;
+                                          i++) {
+                                        _selectedAge[i] = i == index;
+                                      }
+                                    });
+                                  },
+                                )),
+                              ),
                             ),
                           ),
                           Expanded(
                             flex: 1,
                             child: Container(
-                              color: kColorLightGrey004,
+                              color: kColorLightGrey002,
+                              child: Center(child: Text('')),
                             ),
                           ),
-
                           //
-                          // location
+                          // ethnicity
                           //
-
-                          Expanded(
-                            flex: 1,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerLocation,
-                              onChanged: (value) {
-                                setLocation(value);
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'location',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
-                            ),
-                          ),
-
-                          Expanded(
-                            flex: 1,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                //
-                                // start time
-                                //
-                                Expanded(
-                                  flex: 1,
-                                  child: DateTimePicker(
-                                    type: DateTimePickerType.time,
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2024),
-                                    controller: timeControllerStart,
-                                    timeLabelText: 'Start',
-                                    locale: Locale('pt', 'BR'),
-                                    onChanged: (value) =>
-                                        {onDateChanged(value)},
-                                    validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
-                                      return null;
-                                    },
-                                    onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                //
-                                // end time
-                                //
-                                Expanded(
-                                  flex: 1,
-                                  child: DateTimePicker(
-                                    type: DateTimePickerType.time,
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2024),
-                                    controller: timeControllerEnd,
-                                    timeLabelText: 'End',
-                                    locale: Locale('pt', 'BR'),
-                                    onChanged: (value) =>
-                                        {onDateChanged(value)},
-                                    validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
-                                      return null;
-                                    },
-                                    onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
                           Expanded(
                             flex: 1,
                             child: Container(
-                              color: kColorLightGrey004,
+                              color: kColorLightGrey001,
+                              child: Center(
+                                child: Center(
+                                    child: ToggleButtons(
+                                  children: ethnicityWidgets,
+                                  isSelected: _selectedEthnicity,
+                                  onPressed: (int index) {
+                                    ethnicity = ethnicities[index].toString();
+                                    print('selected ethnicity is $ethnicity');
+                                    setState(() {
+                                      for (int i = 0;
+                                          i < _selectedEthnicity.length;
+                                          i++) {
+                                        _selectedEthnicity[i] = i == index;
+                                      }
+                                    });
+                                  },
+                                )),
+                              ),
                             ),
                           ),
-                          //
-                          // patrol leader
-                          //
                           Expanded(
                             flex: 1,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerPatrolLeader,
-                              onChanged: (value) {
-                                setPatrolLeader(value);
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'patrol leader',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 2,
                             child: Container(
-                              color: kColorLightGrey004,
+                              color: kColorLightGrey002,
+                              child: Center(child: Text('')),
                             ),
                           ),
-                          //
-                          // CAD number
-                          //
                           Expanded(
                             flex: 1,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerCadNumber,
-                              onChanged: (value) {
-                                setCadNumber(value);
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'Police CAD Number',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
+                            child: Container(
+                              color: kColorLightGrey001,
+                              child: GestureDetector(
+                                onTap: () {
+                                  submitContact();
+                                },
+                                child: Center(
+                                  child: Center(child: Text('Submit')),
+                                ),
+                              ),
                             ),
                           ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              color: kColorLightGrey002,
+                              child: Center(child: Text('')),
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              color: kColorLightGrey001,
+                              child: Center(
+                                child: Center(child: Text('')),
+                              ),
+                            ),
+                          ),
+
                           Expanded(
                             flex: 1,
                             child: Container(
@@ -743,14 +471,14 @@ class _PatrolPage01State extends State<PatrolPage01> {
                       child: Container(color: kColorLightGrey003),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Container(
                         color: kColorLightGrey004,
                         child: ElevatedButton(
                           onPressed: () {
-                            startPatrol();
+                            Navigator.pop(context);
                           },
-                          child: Text('Start Patrol'),
+                          child: Text('Previous'),
                         ),
                       ),
                     ),
@@ -759,14 +487,14 @@ class _PatrolPage01State extends State<PatrolPage01> {
                       child: Container(color: kColorLightGrey003),
                     ),
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Container(
                         color: kColorLightGrey004,
                         child: ElevatedButton(
                           onPressed: () {
                             goToContactMatrix();
                           },
-                          child: Text('Contact Matrix'),
+                          child: Text('Next'),
                         ),
                       ),
                     ),
@@ -778,7 +506,7 @@ class _PatrolPage01State extends State<PatrolPage01> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: Container(color: kColorLightGrey001),
               ),
             ],

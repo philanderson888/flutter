@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'login.dart';
 import 'package:flutter_teaching_app/constants.dart';
 
 class StreetPastors extends StatefulWidget {
@@ -11,25 +13,60 @@ class StreetPastors extends StatefulWidget {
 class _StreetPastorsState extends State<StreetPastors> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Container(
-            child: Center(
-              child: Text('Street Pastors'),
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: kColorLightGrey002,
+                child: Center(
+                  child: Text('Street Pastors'),
+                ),
+              ),
             ),
-          ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  print('register');
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const StreetPastorsLogin()));
+                },
+                child: Container(
+                  color: kColorLightGrey003,
+                  child: Center(
+                    child: Text('Register'),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: GestureDetector(
+                onTap: () {
+                  print('login');
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const StreetPastorsLogin()));
+                },
+                child: Container(
+                  color: kColorLightGrey003,
+                  child: Center(
+                    child: Text('Login'),
+                  ),
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Container(
+                color: kColorLightGrey002,
+              ),
+            ),
+          ],
         ),
-        Expanded(
-          flex: 1,
-          child: Container(),
-        ),
-        Expanded(
-          flex: 1,
-          child: Container(),
-        ),
-      ],
+      ),
     );
   }
 }
