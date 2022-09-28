@@ -192,6 +192,7 @@ How to run unit tests
 Next we progress into reading data from an api into our app, and displaying it
 
 - [api notes - reading and displaying api data](notes/api.md)
+- [async](notes/async.md)
 
 - api projects
   
