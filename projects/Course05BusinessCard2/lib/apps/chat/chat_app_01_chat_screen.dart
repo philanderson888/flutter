@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/apps/chat/chat_app_01_edit_text.dart';
 import 'package:flutter_teaching_app/apps/chat/chat_app_01_login.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatApp01ChatScreen extends StatefulWidget {
-  ChatApp01ChatScreen({Key? key, required this.loggedInUser2})
+  const ChatApp01ChatScreen({Key? key, required this.loggedInUser2})
       : super(key: key);
 
   // well what would you know -I don't even need this variable.
@@ -24,27 +22,27 @@ class ChatApp01ChatScreen extends StatefulWidget {
 class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  var textEditingControllerChatText;
+
   var email = '';
   var password = '';
   var chatText = '';
   var chatTextCumulative = '';
   var chatTextItem = '';
-  var chatTextArray = [];
+  List<String> chatTextArray = [];
+
   late var loggedInUser;
   late var loggedInUser2;
+  late TextEditingController textEditingControllerChatText;
 
   @override
   initState() {
     super.initState();
     print('chat app init state');
-
     getLoggedInUser();
     getLoggedInUser2(); // passed in from previous screen
     // actually is not required but code retained for sake of completeness
     // and for future use where passing in parameter is required
     getChatMessages();
-
     setState(() {
       textEditingControllerChatText = TextEditingController(text: chatText);
     });
@@ -54,7 +52,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
     try {
       print('.. trying to get loggedInUser ... waiting ...');
       loggedInUser = await _auth.currentUser;
-      print('.. loggedInUser has arrived ...');
+      print('.. loggedInUser has arrived ... of type ' + loggedInUser);
       print('user ... ' + loggedInUser.toString());
       print('user uid .. ' + loggedInUser.uid);
       print('user email .. ' + loggedInUser.email);
@@ -125,19 +123,17 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
     var messageArray = messages.docs;
     var count = messageArray.length.toString();
     print('the database has $count items');
-    messageArray.forEach(
-      (element) => print('firebase chat text ${element.id} ${element.data()}'),
-    );
+    for (var message in messageArray) {
+      print('firebase chat text ${message.id} ${message.data()}');
+    }
     chatTextCumulative = '';
 
-    messageArray.forEach(
-      (element) => {
-        chatTextItem = element.data()['text'],
-        chatTextCumulative += chatTextItem,
-        chatTextCumulative += '\n',
-        chatTextArray.add(chatTextItem)
-      },
-    );
+    for (var message in messageArray) {
+      chatTextItem = message.data()['text'];
+      chatTextCumulative += chatTextItem;
+      chatTextCumulative += '\n';
+      chatTextArray.add(chatTextItem);
+    }
 
     setState(() {
       chatTextCumulative = chatTextCumulative;
@@ -145,15 +141,14 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
     });
 
     var chatTextCumulative2 = '';
-    messageArray.forEach(
-      (element) => {
-        chatTextCumulative2 += element.id,
-        chatTextCumulative2 += ' - ',
-        chatTextCumulative2 += element.data().toString(),
-        chatTextCumulative2 += element.data()['text'],
-        chatTextCumulative2 += '   ',
-      },
-    );
+    for (var message in messageArray) {
+      chatTextCumulative2 += message.id;
+      chatTextCumulative2 += ' - ';
+      chatTextCumulative2 += message.data().toString();
+      chatTextCumulative2 += message.data()['text'];
+      chatTextCumulative2 += '   ';
+    }
+
     print('cumulative value of data records - $chatTextCumulative2');
   }
 
@@ -168,7 +163,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
               flex: 1,
               child: Container(
                   color: kLightSkyBlue,
-                  child: Center(child: Text('😎    Chat App'))),
+                  child: const Center(child: Text('😎    Chat App'))),
             ),
             Expanded(
               flex: 10,
@@ -194,13 +189,9 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                               width: double.infinity,
                               decoration: ShapeDecoration(
                                 color: kLightSkyBlue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30.0),
-                                  ),
-                                ),
+                                shape: kRoundedRectangleBorder30,
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Chat App Chat Screen'),
                               ),
                             ),
@@ -225,7 +216,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Chat Here ...'),
                                         ),
                                       ),
@@ -253,9 +244,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -270,9 +259,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                                 setChatText(value);
                                               },
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                ),
+                                                border: kOutlineInputBorderNone,
                                                 hintText: '',
                                                 hintStyle: TextStyle(
                                                   color: kColorLightGrey02,
@@ -300,7 +287,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                       Navigator.of(context).push(
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ChatApp01EditText()));
+                                                  const ChatApp01EditText()));
                                     },
                                     child: Container(
                                       color: kSuperLightSkyBlue,
@@ -309,9 +296,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Padding(
@@ -352,12 +337,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Send Chat Text'),
                                         ),
                                       ),
@@ -389,7 +372,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ChatApp01Login()));
+                                                    const ChatApp01Login()));
                                       } catch (e) {
                                         print(e);
                                       }
@@ -401,12 +384,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01ChatScreen> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Sign Out'),
                                         ),
                                       ),

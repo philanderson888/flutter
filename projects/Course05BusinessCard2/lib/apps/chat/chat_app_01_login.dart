@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'chat_app_01_chat_screen.dart';
 
@@ -14,8 +12,8 @@ class ChatApp01Login extends StatefulWidget {
 
 class _ChatApp01RegistrationState extends State<ChatApp01Login> {
   final _auth = FirebaseAuth.instance;
-  var textEditingControllerEmail;
-  var textEditingControllerPassword;
+  late TextEditingController textEditingControllerEmail;
+  late TextEditingController textEditingControllerPassword;
   var email = '123@abc.com';
   var password = 'verySecure123';
   late var loggedInUser;
@@ -56,7 +54,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
               flex: 1,
               child: Container(
                   color: kLightSkyBlue,
-                  child: Center(child: Text('😎    Chat App'))),
+                  child: const Center(child: Text('😎    Chat App'))),
             ),
             Expanded(
               flex: 10,
@@ -83,12 +81,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                               decoration: ShapeDecoration(
                                 color: kLightSkyBlue,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30.0),
-                                  ),
+                                  borderRadius: kBorderRadius30,
                                 ),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Chat App Login Screen'),
                               ),
                             ),
@@ -117,7 +113,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Please Login Here ...'),
                                         ),
                                       ),
@@ -145,9 +141,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -164,9 +158,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                                 setEmail(value);
                                               },
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                ),
+                                                border: kOutlineInputBorderNone,
                                                 hintText:
                                                     'please enter your email address',
                                                 hintStyle: TextStyle(
@@ -200,9 +192,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -221,9 +211,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                               enableSuggestions: false,
                                               autocorrect: false,
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                ),
+                                                border: kOutlineInputBorderNone,
                                                 hintText:
                                                     'please enter your password',
                                                 hintStyle: TextStyle(
@@ -278,12 +266,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01Login> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Login'),
                                         ),
                                       ),

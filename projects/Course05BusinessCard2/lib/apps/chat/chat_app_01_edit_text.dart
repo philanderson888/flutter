@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/apps/chat/chat_app_01_login.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_spinbox/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatApp01EditText extends StatefulWidget {
-  ChatApp01EditText({Key? key}) : super(key: key);
+  const ChatApp01EditText({Key? key}) : super(key: key);
 
   @override
   State<ChatApp01EditText> createState() => _ChatApp01RegistrationState();
@@ -17,7 +15,6 @@ class ChatApp01EditText extends StatefulWidget {
 class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  var textEditingControllerChatText;
   var email = '';
   var password = '';
   var chatText = '';
@@ -28,6 +25,8 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
   var chatTextId = '';
   var chatTextDatabaseIds = [];
   var chatTextIndex = 0;
+
+  late TextEditingController textEditingControllerChatText;
   late var loggedInUser;
   late var loggedInUser2;
 
@@ -218,7 +217,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
               flex: 1,
               child: Container(
                   color: kLightSkyBlue,
-                  child: Center(child: Text('😎    Chat App'))),
+                  child: const Center(child: Text('😎    Chat App'))),
             ),
             Expanded(
               flex: 10,
@@ -245,12 +244,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                               decoration: ShapeDecoration(
                                 color: kLightSkyBlue,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30.0),
-                                  ),
+                                  borderRadius: kBorderRadius30,
                                 ),
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Chat App Edit Screen'),
                               ),
                             ),
@@ -275,7 +272,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Line To Be Edited ...'),
                                         ),
                                       ),
@@ -303,9 +300,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -320,9 +315,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                                 setChatText(value);
                                               },
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                ),
+                                                border: kOutlineInputBorderNone,
                                                 hintText: '',
                                                 hintStyle: TextStyle(
                                                   color: kColorLightGrey02,
@@ -355,9 +348,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Padding(
@@ -388,9 +379,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Padding(
@@ -408,8 +397,8 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                                   return Center(
                                                     child:
                                                         CircularProgressIndicator(
-                                                      backgroundColor: Colors
-                                                          .lightBlueAccent,
+                                                      backgroundColor:
+                                                          kColorLightBlueAccent,
                                                     ),
                                                   );
                                                 }
@@ -454,8 +443,8 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                       min: 1,
                                       max: spinnerMax.toDouble(),
                                       value: 1,
-                                      decoration:
-                                          InputDecoration(labelText: 'Basic'),
+                                      decoration: const InputDecoration(
+                                          labelText: 'Basic'),
                                       onChanged: (value) {
                                         incrementTextChatIndex(value - 1);
                                       }),
@@ -487,9 +476,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -528,9 +515,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -568,13 +553,11 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
-                                          child: Text('Delete Chat Text'),
+                                          child: const Text('Delete Chat Text'),
                                         ),
                                       ),
                                     ),
@@ -605,7 +588,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    ChatApp01Login()));
+                                                    const ChatApp01Login()));
                                       } catch (e) {
                                         print(e);
                                       }
@@ -617,12 +600,10 @@ class _ChatApp01RegistrationState extends State<ChatApp01EditText> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Sign Out'),
                                         ),
                                       ),

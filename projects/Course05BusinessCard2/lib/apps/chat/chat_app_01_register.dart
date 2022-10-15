@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatApp01Registration extends StatefulWidget {
@@ -13,8 +11,8 @@ class ChatApp01Registration extends StatefulWidget {
 
 class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
   final _auth = FirebaseAuth.instance;
-  var textEditingControllerEmail;
-  var textEditingControllerPassword;
+  late TextEditingController textEditingControllerEmail;
+  late TextEditingController textEditingControllerPassword;
   var email = '123@abc.com';
   var password = 'verySecure123';
   late var loggedInUser;
@@ -110,9 +108,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                               decoration: ShapeDecoration(
                                 color: kLightSkyBlue,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30.0),
-                                  ),
+                                  borderRadius: kBorderRadius30,
                                 ),
                               ),
                               child: Center(
@@ -173,9 +169,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -192,9 +186,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                                 setEmail(value);
                                               },
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                ),
+                                                border: kOutlineInputBorderNone,
                                                 hintText:
                                                     'please enter your email address',
                                                 hintStyle: TextStyle(
@@ -228,9 +220,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(
@@ -249,9 +239,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                               enableSuggestions: false,
                                               autocorrect: false,
                                               decoration: InputDecoration(
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide.none,
-                                                ),
+                                                border: kOutlineInputBorderNone,
                                                 hintText:
                                                     'please enter your password',
                                                 hintStyle: TextStyle(
@@ -281,9 +269,7 @@ class _ChatApp01RegistrationState extends State<ChatApp01Registration> {
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
                                           shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
+                                            borderRadius: kBorderRadius30,
                                           ),
                                         ),
                                         child: Center(

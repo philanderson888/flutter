@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import './chat_app_01_register.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'chat_app_01_login.dart';
 
 class ChatApp01 extends StatefulWidget {
@@ -24,7 +22,7 @@ class _ChatApp01State extends State<ChatApp01> {
               flex: 1,
               child: Container(
                   color: kLightSkyBlue,
-                  child: Center(child: Text('😎    Chat App'))),
+                  child: const Center(child: Text('😎    Chat App'))),
             ),
             Expanded(
               flex: 10,
@@ -50,13 +48,9 @@ class _ChatApp01State extends State<ChatApp01> {
                               width: double.infinity,
                               decoration: ShapeDecoration(
                                 color: kLightSkyBlue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30.0),
-                                  ),
-                                ),
+                                shape: kRoundedRectangleBorder30,
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text('Chat App'),
                               ),
                             ),
@@ -80,7 +74,7 @@ class _ChatApp01State extends State<ChatApp01> {
                                         flex: 1,
                                         child: Container(),
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         flex: 5,
                                         child: Center(
                                           child: Text(
@@ -111,13 +105,9 @@ class _ChatApp01State extends State<ChatApp01> {
                                         width: double.infinity,
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
-                                          ),
+                                          shape: kRoundedRectangleBorder30,
                                         ),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Register'),
                                         ),
                                       ),
@@ -144,13 +134,9 @@ class _ChatApp01State extends State<ChatApp01> {
                                         width: double.infinity,
                                         decoration: ShapeDecoration(
                                           color: kLightSkyBlue,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(30.0),
-                                            ),
-                                          ),
+                                          shape: kRoundedRectangleBorder30,
                                         ),
-                                        child: Center(
+                                        child: const Center(
                                           child: Text('Login'),
                                         ),
                                       ),
