@@ -32,13 +32,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  var textEditingControllerEmail;
-  var textEditingControllerPassword;
+  late TextEditingController textEditingControllerEmail;
+  late TextEditingController textEditingControllerPassword;
   var email = '123@abc.com';
   var password = '123Secret'
 
   @override
   void initState() {
+    super.initState();
     print('hello from init state');
 
     super.initState();
