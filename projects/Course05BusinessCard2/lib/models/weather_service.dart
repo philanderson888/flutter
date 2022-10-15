@@ -45,9 +45,6 @@ class WeatherService {
   Future<WeatherAdjusted> getWeather2() async {
     print('getting location');
     var city = 'Enfield';
-    var state = '';
-    var country = '';
-    var limit = 10;
 
     var url =
         'https://api.openweathermap.org/geo/1.0/direct?q={city}&limit={limit}&appid=$apiKey&units=metric';
