@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
             child: ElevatedButton(
               key: null,
               onPressed: goToGridAToZ,
-              style: kAppHeaderButtonStyle,
+              style: kButtonStyleAppHeader,
               child: Text(
                 'Features',
                 style: kAppHomePageHeader,
@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/apps');
               },
-              style: kAppHeaderButtonStyle,
+              style: kButtonStyleAppHeader,
               child: Text(
                 kApps,
                 style: kAppHomePageHeader,
@@ -67,7 +67,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/grid2');
               },
-              style: kAppHeaderButtonStyle,
+              style: kButtonStyleAppHeader,
               child: Text(
                 'Templates, Layouts, Features With Text Output, OOP',
                 style: kAppHomePageHeader,
@@ -85,7 +85,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/page4');
               },
-              style: kAppHeaderButtonStyle,
+              style: kButtonStyleAppHeader,
               child: Text(
                 'Stateless Page',
                 style: kAppHomePageHeader,
@@ -103,7 +103,7 @@ class Home extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/page5');
               },
-              style: kAppHeaderButtonStyle,
+              style: kButtonStyleAppHeader,
               child: Text(
                 'Stateful Page With Counter',
                 style: kAppHomePageHeader,
