@@ -20,7 +20,7 @@ class _Bitcoin02State extends State<Bitcoin02> {
               flex: 1,
               child: Container(
                   color: kLightSkyBlue,
-                  child: Center(child: Text('😎    Coin Ticker'))),
+                  child: const Center(child: Text('😎    Coin Ticker'))),
             ),
             Expanded(
               flex: 10,
@@ -46,13 +46,9 @@ class _Bitcoin02State extends State<Bitcoin02> {
                               width: double.infinity,
                               decoration: ShapeDecoration(
                                 color: kLightSkyBlue,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30.0),
-                                  ),
-                                ),
+                                shape: kRoundedRectangleBorder30,
                               ),
-                              child: Center(
+                              child: const Center(
                                 child: Text('BitCoin Price'),
                               ),
                             ),
