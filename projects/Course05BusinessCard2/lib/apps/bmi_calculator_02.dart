@@ -347,7 +347,7 @@ class Footer extends StatelessWidget {
         child: Center(
           child: Text(
             kBmiCalculateText,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 25,
               fontWeight: FontWeight.w600,
               color: Colors.white70,

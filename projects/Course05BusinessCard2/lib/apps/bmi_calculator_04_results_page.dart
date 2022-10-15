@@ -22,9 +22,11 @@ String textAge = "AGE";
 
 class BmiResultsPage04 extends StatelessWidget {
   const BmiResultsPage04(
-      {required this.bmi,
+      {Key? key,
+      required this.bmi,
       required this.bmiResult,
-      required this.bmiInterpretation});
+      required this.bmiInterpretation})
+      : super(key: key);
 
   final String bmi;
   final String bmiResult;
@@ -39,7 +41,7 @@ class BmiResultsPage04 extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,9 +63,7 @@ class BmiResultsPage04 extends StatelessWidget {
           ),
           Expanded(
             flex: 15,
-            child: Container(
-              child: Text(bmiInterpretation, style: kBmiResultsTextStyle),
-            ),
+            child: Text(bmiInterpretation, style: kBmiResultsTextStyle),
           ),
           Expanded(
             flex: 10,
@@ -74,7 +74,7 @@ class BmiResultsPage04 extends StatelessWidget {
                 child: Center(
                   child: Text(
                     footerText,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                       color: Colors.white70,
