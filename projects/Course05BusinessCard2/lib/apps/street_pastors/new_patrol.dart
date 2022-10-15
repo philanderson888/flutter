@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_teaching_app/constants.dart';
-import 'patrol_page_01.dart';
+import 'patrol_details.dart';
+import '../../models/patrol.dart';
 
 class NewPatrol extends StatefulWidget {
   const NewPatrol({Key? key}) : super(key: key);
@@ -15,109 +16,202 @@ class NewPatrol extends StatefulWidget {
 }
 
 class _NewPatrolState extends State<NewPatrol> {
-  GlobalKey<FormState> _oFormKey = GlobalKey<FormState>();
+  final _oFormKey = GlobalKey<FormState>();
   final _auth = FirebaseAuth.instance;
-  var textEditingControllerEmail;
-  var textEditingControllerPassword;
+  final _firestore = FirebaseFirestore.instance;
+
   var email = '123@abc.com';
   var password = 'verySecure123';
-  var location = 'Enfield';
-  var patrolLeader = 'Phil';
-  var cadNumber = '123ABC';
-  var patrolMember = 'One';
 
-  late var signedInUser;
-  late TextEditingController textEditingControllerLocation;
+  late var loggedInUser;
+  var userId = '';
+
+  late Patrol patrol;
+  var location = '';
+  var leaderId = '';
+  var leaderName = '';
+  var cadNumber = '';
+  var members = '';
+
+  DateTime startDate = DateTime.now();
+  DateTime endDate = DateTime.now().add(const Duration(hours: 5));
+  late String startTime;
+  late String endTime;
+
   late TextEditingController dateController;
+  late TextEditingController textEditingControllerLocation;
   late TextEditingController timeControllerStart;
   late TextEditingController timeControllerEnd;
-  late TextEditingController textEditingControllerPatrolLeader;
+  late TextEditingController textEditingControllerLeaderName;
+  late TextEditingController textEditingControllerMembers;
   late TextEditingController textEditingControllerCadNumber;
   late var patrolMemberListView;
   late var patrolMemberWidget;
 
-  String valueChanged = '2000-09-20';
-  String valueToValidate = '2000-09-20';
-  String valueSaved = '2000-09-20';
+  // not used at present - use in later versions with more complex logic to identify individual patrol members
+  var patrolMember = 'One';
+  var membersList = [
+    'gb387psJFhunLF40VPbM',
+    'gb387psJFhunLF40VPbM',
+    'gb387psJFhunLF40VPbM'
+  ];
+
+  String tempDate01 = '2000-09-20';
+  String tempDate02 = '2000-09-20';
 
   @override
   initState() {
     print('street pastors new patrol');
     super.initState();
-    getSignedInUser();
+    getLoggedInUser();
     initializeDateFormatting();
-    Intl.defaultLocale = 'pt_BR';
-    dateController = TextEditingController(
-        text: DateTime.now().subtract(Duration(days: 1)).toString());
-    timeControllerStart = TextEditingController(text: getRoundedTimeNow());
-    timeControllerEnd = TextEditingController(text: getRoundedTimeThen());
+    dateController = TextEditingController(text: startDate.toString());
+    getStartAndEndTime();
+    timeControllerStart = TextEditingController(text: startTime);
+    timeControllerEnd = TextEditingController(text: endTime);
     textEditingControllerLocation = TextEditingController(text: location);
-    textEditingControllerPatrolLeader =
-        TextEditingController(text: patrolLeader);
+    textEditingControllerLeaderName = TextEditingController(text: leaderName);
     textEditingControllerCadNumber = TextEditingController(text: cadNumber);
+    textEditingControllerMembers = TextEditingController(text: members);
+
     _getValue();
+
+    patrol = Patrol(
+      startDate2: startDate,
+      endDate2: endDate,
+      leaderId2: leaderId,
+      leaderName2: leaderName,
+      location2: location,
+      membersList2: membersList,
+      members2: members,
+      cadNumber2: cadNumber,
+      userId2: userId,
+    );
+
     patrolMemberListView = ListView(
-      children: patrolMembers,
+      children: patrolMembersWidgetList,
     );
   }
 
-  getSignedInUser() async {
+  getLoggedInUser() async {
     try {
-      signedInUser = await _auth.currentUser;
+      loggedInUser = await _auth.currentUser;
+      userId = loggedInUser.uid;
       print(
-          'new patrol screen - user is signed in - email .. ${signedInUser.email} .. uid .. ${signedInUser.uid} .. ');
+          'new patrol screen - user is logged in - email .. ${loggedInUser.email} .. uid .. $userId .. ');
     } catch (e) {
       print(e);
     }
   }
 
-  String getRoundedTimeNow() {
-    String lsHour = TimeOfDay.now().hour.toString().padLeft(2, '0');
-    int minutes = TimeOfDay.now().minute;
-    var minutesRounded = 5 * ((minutes / 5).floor());
-    String lsMinute = minutesRounded.toString().padLeft(2, '0');
-    var outputTimeString = '$lsHour:$lsMinute';
-    return outputTimeString;
+  String getStartAndEndTime() {
+    startDate = DateTime.now();
+    var startHour = TimeOfDay.now().hour;
+    var endHour = (TimeOfDay.now().hour + 5);
+    var endHourSubtractFullDays = endHour % 24;
+    var addDay = 0;
+    if (endHour != endHourSubtractFullDays) {
+      addDay = 1;
+    }
+    String startHourAsString = startHour.toString().padLeft(2, '0');
+    String endHourAsString = endHourSubtractFullDays.toString().padLeft(2, '0');
+    int minute = TimeOfDay.now().minute;
+    var minuteRounded = 5 * ((minute / 5).floor());
+    String minuteRoundedAsString = minuteRounded.toString().padLeft(2, '0');
+    startTime = '$startHourAsString:$minuteRoundedAsString';
+    endTime = '$endHourAsString:$minuteRoundedAsString';
+    startDate = DateTime(startDate.year, startDate.month, startDate.day,
+        startHour, minuteRounded);
+    endDate = DateTime(startDate.year, startDate.month, startDate.day + addDay,
+        endHour, minuteRounded);
+    print('startDate is $startDate, startTime is $startTime');
+    print('endDate is $endDate, endTime is $endTime');
+    return startTime;
   }
 
-  String getRoundedTimeThen() {
-    var hour24 = (TimeOfDay.now().hour + 5) % 24;
-    String lsHour = hour24.toString().padLeft(2, '0');
-    int minutes = TimeOfDay.now().minute;
-    var minutesRounded = 5 * ((minutes / 5).floor());
-    String lsMinute = minutesRounded.toString().padLeft(2, '0');
-    var outputTimeString = '$lsHour:$lsMinute';
-    return outputTimeString;
+  String getTimeAsString(DateTime time) {
+    String timeAsHours = time.hour.toString().padLeft(2, '0');
+    var minutesRounded = 5 * ((time.minute / 5).floor());
+    String timeAsMinutes = minutesRounded.toString().padLeft(2, '0');
+    final timeAsString = '$timeAsHours:$timeAsMinutes';
+    print('time as string is $timeAsString');
+    return timeAsString;
   }
 
   /// This implementation is just to simulate a load data behavior
   /// from a data base sqlite or from a API
   Future<void> _getValue() async {
     await Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        dateController.text = DateTime.now().toString();
-      });
+      dateController.text = DateTime.now().toString();
     });
   }
 
+  //
+  // navigation
+  //
+  goToPatrols() {
+    Navigator.pop(context);
+  }
+
   onDateChanged(String value) {
-    print('date has changed');
+    print('date has changed - incoming raw data is $value');
     setState(() {
-      valueSaved = value;
+      tempDate02 = value;
+      final startDateParsed = DateTime.parse(value);
+      print('start date parsed $startDateParsed');
+      final startTimeParsed = DateFormat('HH:mm').parse(startTime);
+      print('start time parsed $startTimeParsed');
+      final endTimeParsed = DateFormat('HH:mm').parse(endTime);
+      print('end time parsed $endTimeParsed');
+      startDate = DateTime(startDateParsed.year, startDateParsed.month,
+          startDateParsed.day, startTimeParsed.hour, startTimeParsed.minute);
+      print('start date $startDate');
+      endDate = DateTime(startDateParsed.year, startDateParsed.month,
+          startDateParsed.day, endTimeParsed.hour, endTimeParsed.minute);
+      print('end date $endDate');
+    });
+  }
+
+  onStartTimeChanged(String value) {
+    final startTimeParsed = DateFormat('HH:mm').parse(value);
+    print('start time has changed to $startTimeParsed');
+    setState(() {
+      startDate = DateTime(startDate.year, startDate.month, startDate.day,
+          startTimeParsed.hour, startTimeParsed.minute);
+      startTime = value;
+      print('start date $startDate time $startTime');
+    });
+  }
+
+  onEndTimeChanged(String value) {
+    final endTimeParsed = DateFormat('HH:mm').parse(value);
+    print('end time has changed to $endTimeParsed');
+    setState(() {
+      endDate = DateTime(endDate.year, endDate.month, endDate.day,
+          endTimeParsed.hour, endTimeParsed.minute);
+      endTime = value;
+      print('end date $endDate time $endTime');
     });
   }
 
   setLocation(String value) {
-    print('Location has changed');
     setState(() {
       location = value;
+      print('Location has changed to $location');
     });
   }
 
-  setPatrolLeader(String value) {
+  setLeaderName(String value) {
     setState(() {
-      print('Patrol leader is $patrolLeader');
-      patrolLeader = value;
+      leaderName = value;
+      print('Patrol leader is $leaderName');
+    });
+  }
+
+  setMembers(String value) {
+    setState(() {
+      members = value;
+      print('Patrol members are $members');
     });
   }
 
@@ -128,17 +222,58 @@ class _NewPatrolState extends State<NewPatrol> {
     });
   }
 
-  startPatrol() {
-    print('patrol is being started');
+  createPatrol() {
     final loForm = _oFormKey.currentState;
     if (loForm?.validate() == true) {
       loForm?.save();
+      patrol = Patrol(
+        startDate2: startDate,
+        endDate2: endDate,
+        leaderId2: leaderId,
+        leaderName2: leaderName,
+        location2: location,
+        membersList2: membersList,
+        members2: members,
+        cadNumber2: cadNumber,
+        userId2: userId,
+      );
+      try {
+        _firestore.collection('patrols').add({
+          'startDate': patrol.startDate,
+          'endDate': patrol.endDate,
+          'leaderId': patrol.leaderId,
+          'leaderName': patrol.leaderName,
+          'location': patrol.location,
+          'membersList': patrol.membersList,
+          'members': patrol.members,
+          'cadNumber': cadNumber,
+          'userId': userId,
+        }).then((documentSnapshot) => {
+              print(
+                  'firebase new patrol created with fresh id ${documentSnapshot.id}'),
+              print(
+                  'new patrol created in firebase ${patrol.getStartDate()} ${patrol.location} leader ${patrol.leaderName} leaderId ${patrol.leaderId} members $members membersList ${membersList.toString()}'),
+              patrol.setPatrolId(documentSnapshot.id),
+            });
+        Navigator.of(context).push(MaterialPageRoute<Patrol>(
+            builder: (context) => PatrolDetails(patrol: patrol)));
+      } catch (e) {
+        print(e);
+      }
     }
-    Navigator.of(context)
-        .push(MaterialPageRoute(builder: (context) => const PatrolPage01()));
   }
 
-  var patrolMembers = [
+  viewPatrol() {
+    print('view patrol details');
+    final loForm = _oFormKey.currentState;
+    if (loForm?.validate() == true) {
+      loForm?.save();
+      Navigator.of(context).push(MaterialPageRoute<Patrol>(
+          builder: (context) => PatrolDetails(patrol: patrol)));
+    }
+  }
+
+  var patrolMembersWidgetList = [
     GestureDetector(onTap: () {}, child: Center(child: Text('Bob'))),
     GestureDetector(onTap: () {}, child: Center(child: Text('Harry'))),
     GestureDetector(onTap: () {}, child: Center(child: Text('Mildred'))),
@@ -156,9 +291,9 @@ class _NewPatrolState extends State<NewPatrol> {
               patrolMemberWidget = GestureDetector(
                   onTap: () {}, child: Center(child: Text(patrolMember))),
               print('patrolMemberWidget $patrolMemberWidget'),
-              patrolMembers.add(patrolMemberWidget),
+              patrolMembersWidgetList.add(patrolMemberWidget),
               print(
-                  'patrol has ${patrolMembers.length} members $patrolMembers'),
+                  'patrol has ${patrolMembersWidgetList.length} members $patrolMembersWidgetList'),
             },
         });
   }
@@ -216,7 +351,7 @@ class _NewPatrolState extends State<NewPatrol> {
                           // patrol date
                           //
                           Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: Row(
                               children: [
                                 Expanded(
@@ -231,16 +366,15 @@ class _NewPatrolState extends State<NewPatrol> {
                                     lastDate: DateTime(2024),
                                     controller: dateController,
                                     dateLabelText: 'Date',
-                                    locale: Locale('pt', 'BR'),
+                                    //locale: Locale('pt', 'BR'),
                                     onChanged: (value) =>
                                         {onDateChanged(value)},
                                     validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
+                                      setState(() => tempDate01 = value ?? ' ');
                                       return null;
                                     },
                                     onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
+                                        () => tempDate02 = value ?? ''),
                                   ),
                                 ),
                                 Expanded(
@@ -250,37 +384,13 @@ class _NewPatrolState extends State<NewPatrol> {
                               ],
                             ),
                           ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
-                            ),
-                          ),
+
                           //
-                          // location
+                          // start and end times
                           //
-                          Expanded(
-                            flex: 1,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerLocation,
-                              onChanged: (value) {
-                                setLocation(value);
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'location',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
-                            ),
-                          ),
 
                           Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: Row(
                               children: [
                                 Expanded(
@@ -300,16 +410,14 @@ class _NewPatrolState extends State<NewPatrol> {
                                     lastDate: DateTime(2024),
                                     controller: timeControllerStart,
                                     timeLabelText: 'Start',
-                                    locale: Locale('pt', 'BR'),
                                     onChanged: (value) =>
-                                        {onDateChanged(value)},
+                                        {onStartTimeChanged(value)},
                                     validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
+                                      setState(() => tempDate01 = value ?? ' ');
                                       return null;
                                     },
                                     onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
+                                        () => tempDate02 = value ?? ''),
                                   ),
                                 ),
                                 Expanded(
@@ -329,16 +437,14 @@ class _NewPatrolState extends State<NewPatrol> {
                                     lastDate: DateTime(2024),
                                     controller: timeControllerEnd,
                                     timeLabelText: 'End',
-                                    locale: Locale('pt', 'BR'),
                                     onChanged: (value) =>
-                                        {onDateChanged(value)},
+                                        {onEndTimeChanged(value)},
                                     validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
+                                      setState(() => tempDate01 = value ?? ' ');
                                       return null;
                                     },
                                     onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
+                                        () => tempDate02 = value ?? ''),
                                   ),
                                 ),
                                 Expanded(
@@ -357,16 +463,59 @@ class _NewPatrolState extends State<NewPatrol> {
                               color: kColorLightGrey004,
                             ),
                           ),
+
+                          //
+                          // location
+                          //
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              textAlign: TextAlign.center,
+                              controller: textEditingControllerLocation,
+                              onChanged: (value) {
+                                setLocation(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'please enter location';
+                                }
+                                return null;
+                              },
+                              enableSuggestions: true,
+                              autocorrect: true,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  hintText: 'location',
+                                  hintStyle:
+                                      TextStyle(color: kColorLightGrey02)),
+                            ),
+                          ),
+
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              color: kColorLightGrey004,
+                            ),
+                          ),
+
                           //
                           // patrol leader
                           //
                           Expanded(
                             flex: 1,
-                            child: TextField(
+                            child: TextFormField(
                               textAlign: TextAlign.center,
-                              controller: textEditingControllerPatrolLeader,
+                              controller: textEditingControllerLeaderName,
                               onChanged: (value) {
-                                setPatrolLeader(value);
+                                setLeaderName(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'please enter leader name';
+                                }
+                                return null;
                               },
                               enableSuggestions: true,
                               autocorrect: true,
@@ -389,34 +538,72 @@ class _NewPatrolState extends State<NewPatrol> {
                           //
                           // patrol members
                           //
-
+                          Expanded(
+                            flex: 1,
+                            child: TextFormField(
+                              textAlign: TextAlign.center,
+                              controller: textEditingControllerMembers,
+                              onChanged: (value) {
+                                setMembers(value);
+                              },
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'please enter patrol member names';
+                                }
+                                return null;
+                              },
+                              enableSuggestions: true,
+                              autocorrect: true,
+                              decoration: InputDecoration(
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                  ),
+                                  hintText: 'patrol members',
+                                  hintStyle:
+                                      TextStyle(color: kColorLightGrey02)),
+                            ),
+                          ),
                           Expanded(
                             flex: 1,
                             child: Container(
-                              color: kColorLightGrey003,
-                              child: DropdownButton<String>(
-                                  value: patrolMember,
-                                  onTap: () => print('choose patrol member'),
-                                  onChanged: (String? newPatrolMember) {
-                                    addPatrolMember(newPatrolMember);
-                                  },
-                                  items: <String>['One', 'Two', 'Three']
-                                      .map<DropdownMenuItem<String>>(
-                                          (String value) {
-                                    return DropdownMenuItem<String>(
-                                        value: value, child: Text(value));
-                                  }).toList()),
+                              color: kColorLightGrey004,
+                            ),
+                          ),
+
+                          Visibility(
+                            visible: false,
+                            child: Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: kColorLightGrey003,
+                                child: DropdownButton<String>(
+                                    value: patrolMember,
+                                    onTap: () => print('choose patrol member'),
+                                    onChanged: (String? newPatrolMember) {
+                                      addPatrolMember(newPatrolMember);
+                                    },
+                                    items: <String>['One', 'Two', 'Three']
+                                        .map<DropdownMenuItem<String>>(
+                                            (String value) {
+                                      return DropdownMenuItem<String>(
+                                          value: value, child: Text(value));
+                                    }).toList()),
+                              ),
                             ),
                           ),
 
                           //
                           // List View
                           //
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              color: kColorLightGrey005,
-                              child: patrolMemberListView,
+
+                          Visibility(
+                            visible: false,
+                            child: Expanded(
+                              flex: 4,
+                              child: Container(
+                                color: kColorLightGrey005,
+                                child: patrolMemberListView,
+                              ),
                             ),
                           ),
 
@@ -425,11 +612,14 @@ class _NewPatrolState extends State<NewPatrol> {
                           //
                           Expanded(
                             flex: 1,
-                            child: TextField(
+                            child: TextFormField(
                               textAlign: TextAlign.center,
                               controller: textEditingControllerCadNumber,
                               onChanged: (value) {
                                 setCadNumber(value);
+                              },
+                              validator: (value) {
+                                return null;
                               },
                               enableSuggestions: true,
                               autocorrect: true,
@@ -461,17 +651,44 @@ class _NewPatrolState extends State<NewPatrol> {
                 ),
               ),
               //
-              // submit
+              // create patrol
               //
               Expanded(
                 flex: 1,
-                child: ElevatedButton(
-                  onPressed: () {
-                    startPatrol();
-                  },
-                  child: Text('Start Patrol'),
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(color: kColorLightGrey001),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: ElevatedButton(
+                        onPressed: goToPatrols,
+                        child: Text('Cancel'),
+                        style: kButtonStyleCancel,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(color: kColorLightGrey001),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: ElevatedButton(
+                        onPressed: createPatrol,
+                        child: Text('Create Patrol'),
+                        style: kButtonStyleUpdate,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(color: kColorLightGrey001),
+                    ),
+                  ],
                 ),
               ),
+
               Expanded(
                 flex: 2,
                 child: Container(color: kColorLightGrey001),
