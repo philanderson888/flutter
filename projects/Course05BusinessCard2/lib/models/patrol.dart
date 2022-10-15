@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart';
+import 'patrol_conversation.dart';
 
 class Patrol {
+  // patrol stats
   String patrolId = '';
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
@@ -11,12 +13,14 @@ class Patrol {
   String members = '';
   String cadNumber = '';
   String userId = '';
+  // helping statistics data
   int bottleCount = 0;
   int peopleHelpedCount = 0;
   int peopleToSafetyCount = 0;
+  // contact statistics data
   int male = 0;
   int female = 0;
-  int ageUpTo12 = 0;
+  int ageZeroTo12 = 0;
   int age13To17 = 0;
   int age18To24 = 0;
   int age25AndOver = 0;
@@ -24,6 +28,8 @@ class Patrol {
   int ethnicAfroCaribbean = 0;
   int ethnicAsian = 0;
   int ethnicEastEuropean = 0;
+  // conversations
+  List<String> conversations = [];
 
   Patrol({
     required DateTime startDate2,
@@ -40,7 +46,7 @@ class Patrol {
     int peopleToSafetyCount2 = 0,
     int male2 = 0,
     int female2 = 0,
-    int ageUpToTwelve2 = 0,
+    int ageZeroToTwelve2 = 0,
     int ageThirteenToSeventeen2 = 0,
     int ageEighteenToTwentyFour2 = 0,
     int ageTwentyFiveAndOver2 = 0,
@@ -48,6 +54,7 @@ class Patrol {
     int ethnicAfroCaribbean2 = 0,
     int ethnicAsian2 = 0,
     int ethnicEastEuropean2 = 0,
+    List<String> conversations2 = const [],
   }) {
     startDate = startDate2;
     endDate = endDate2;
@@ -63,7 +70,7 @@ class Patrol {
     peopleToSafetyCount = peopleToSafetyCount2;
     male = male2;
     female = female2;
-    ageUpTo12 = ageUpToTwelve2;
+    ageZeroTo12 = ageZeroToTwelve2;
     age13To17 = ageThirteenToSeventeen2;
     age18To24 = ageEighteenToTwentyFour2;
     age25AndOver = ageTwentyFiveAndOver2;
@@ -71,6 +78,7 @@ class Patrol {
     ethnicAfroCaribbean = ethnicAfroCaribbean2;
     ethnicAsian = ethnicAsian2;
     ethnicEastEuropean = ethnicEastEuropean2;
+    conversations = conversations2;
   }
 
   String getStartDate() {
@@ -100,6 +108,14 @@ class Patrol {
     patrolAsString += " bottle count " + bottleCount.toString();
     patrolAsString += " people helped " + peopleHelpedCount.toString();
     patrolAsString += " people to safety " + peopleToSafetyCount.toString();
+    patrolAsString += " male " + male.toString();
+    patrolAsString += " female " + female.toString();
+    patrolAsString += " ageZeroTo12 " + ageZeroTo12.toString();
+    patrolAsString += " ethnicWhite " + ethnicWhite.toString();
+    for (int i = 0; i < conversations.length; i++) {
+      final conversation = conversations[i];
+      patrolAsString += ' conversation $i $conversation}';
+    }
     return patrolAsString;
   }
 }

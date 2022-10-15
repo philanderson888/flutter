@@ -86,6 +86,7 @@ class _NewPatrolState extends State<NewPatrol> {
       members2: members,
       cadNumber2: cadNumber,
       userId2: userId,
+      conversations2: [],
     );
 
     patrolMemberListView = ListView(
@@ -236,6 +237,7 @@ class _NewPatrolState extends State<NewPatrol> {
         members2: members,
         cadNumber2: cadNumber,
         userId2: userId,
+        conversations2: [],
       );
       try {
         _firestore.collection('patrols').add({

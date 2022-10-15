@@ -260,3 +260,5 @@ var kCurrenciesDropDownList =
 enum MODE { READ_ONLY, UPDATE }
 
 const Map<String, int> INCREMENT = {'POSITIVE': 1, 'NEGATIVE': -1};
+
+//const Map<String, String> gender = {'male': 'male', 'female': 'female'};

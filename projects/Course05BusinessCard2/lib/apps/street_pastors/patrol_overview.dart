@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:flutter_teaching_app/models/patrol_conversation.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'patrol_details.dart';
@@ -61,6 +62,7 @@ class _PatrolOverviewState extends State<PatrolOverview> {
   late int bottleCount;
   late int peopleHelpedCount;
   late int peopleToSafetyCount;
+  late List<String> conversations;
 
   String valueChanged = '2000-09-20';
   String valueToValidate = '2000-09-20';
@@ -85,6 +87,7 @@ class _PatrolOverviewState extends State<PatrolOverview> {
     bottleCount = patrol.bottleCount;
     peopleHelpedCount = patrol.peopleHelpedCount;
     peopleToSafetyCount = patrol.peopleToSafetyCount;
+    conversations = patrol.conversations;
 
     print('existing patrol passed in');
     print(patrol.toString());
@@ -214,6 +217,7 @@ class _PatrolOverviewState extends State<PatrolOverview> {
         members2: members,
         cadNumber2: cadNumber,
         userId2: userId,
+        conversations2: conversations,
       );
       patrol.patrolId = patrolId;
 

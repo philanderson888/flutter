@@ -1,6 +1,9 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_teaching_app/models/patrol_conversation.dart';
 import 'new_patrol.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -32,6 +35,7 @@ class _PatrolsState extends State<Patrols> {
   late int bottleCount;
   late int peopleHelpedCount;
   late int peopleToSafetyCount;
+  late List<String> conversations;
 
   late Map<String, String> member;
   var membersMapIdToName = Map<String, String>();
@@ -53,6 +57,7 @@ class _PatrolsState extends State<Patrols> {
     bottleCount2: 0,
     peopleHelpedCount2: 0,
     peopleToSafetyCount2: 0,
+    conversations2: [],
   );
 
   @override
@@ -114,8 +119,18 @@ class _PatrolsState extends State<Patrols> {
       var bottleCount = item.data()['bottleCount'] ?? 0;
       var peopleHelpedCount = item.data()['peopleHelpedCount'] ?? 0;
       var peopleToSafetyCount = item.data()['peopleToSafetyCount'] ?? 0;
-      final membersAsDynamic = item.data()['membersList'];
-      membersList = List<String>.from(membersAsDynamic);
+      var male = item.data()['male'];
+      var female = item.data()['female'];
+
+      var ageZeroTo12 = item.data()['ageZeroTo12'] ?? 0;
+      var age13To17 = item.data()['age13To17'] ?? 0;
+      var age18To24 = item.data()['age18To24'] ?? 0;
+      var age25AndOver = item.data()['age25AndOver'] ?? 0;
+
+      var ethnicWhite = item.data()['ethnicWhite'];
+      var ethnicAfroCaribbean = item.data()['ethnicAfroCaribbean'];
+      var ethnicAsian = item.data()['ethnicAsian'];
+      var ethnicEastEuropean = item.data()['ethnicEastEuropean'];
 
       print('start date as timestamp seconds ${startDate.seconds}');
       var startDateAsDate = startDate.toDate();
@@ -126,11 +141,35 @@ class _PatrolsState extends State<Patrols> {
 
       var endDateAsDate = DateFormat('dd/MM/yyyy').format(endDate.toDate());
       print('end date $endDateAsDate');
+
+      final conversationsAsDynamic = item.data()['conversations'] ?? [];
+      var conversations = List<String>.from(conversationsAsDynamic);
+      print(
+          'conversations received from firebase as a list of ${conversations.length} items');
+      conversations.forEach((conversationString) {
+        print('conversation string is $conversationString');
+      });
+
+      /*
+      List<PatrolConversation> conversationsList = [];
+      for (var conversation in conversations) {
+        var conversationClass = PatrolConversation(
+            name2: conversation['name'], notes2: conversation['notes']);
+        conversationsList.add(conversationClass);
+        print(
+            'conversation name ${conversationClass.name} notes ${conversationClass.notes}');
+      }
+       */
+
+      final membersAsDynamic = item.data()['membersList'];
+      membersList = List<String>.from(membersAsDynamic);
       membersList.forEach((memberId) => print('patrol member $memberId'));
       if (leaderId == 'no id') {
         leaderId = '';
       }
+
       var patrol = Patrol(
+        // patrol stats
         startDate2: startDate.toDate(),
         endDate2: endDate.toDate(),
         leaderId2: leaderId,
@@ -140,9 +179,23 @@ class _PatrolsState extends State<Patrols> {
         members2: members,
         cadNumber2: cadNumber,
         userId2: userId,
+        // helping statistics data
         bottleCount2: bottleCount,
         peopleHelpedCount2: peopleHelpedCount,
         peopleToSafetyCount2: peopleToSafetyCount,
+        // encounter statistics data
+        male2: male,
+        female2: female,
+        ageZeroToTwelve2: ageZeroTo12,
+        ageThirteenToSeventeen2: age13To17,
+        ageEighteenToTwentyFour2: age18To24,
+        ageTwentyFiveAndOver2: age25AndOver,
+        ethnicWhite2: ethnicWhite,
+        ethnicAfroCaribbean2: ethnicAfroCaribbean,
+        ethnicAsian2: ethnicAsian,
+        ethnicEastEuropean2: ethnicEastEuropean,
+        // conversation data
+        conversations2: conversations,
       );
       patrol.setPatrolId(item.id);
       print('adding patrol from firebase to local array of patrols');

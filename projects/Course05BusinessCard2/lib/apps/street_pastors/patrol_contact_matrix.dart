@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_teaching_app/models/patrol_conversation.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/patrol.dart';
 import 'package:flutter_teaching_app/constants.dart';
+import '../../models/patrol_conversation.dart';
 
 class PatrolContactMatrix extends StatefulWidget {
   const PatrolContactMatrix({Key? key, required this.patrol}) : super(key: key);
@@ -21,19 +23,13 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
 
-  var patrolId = 'this is a patrol id';
-  var location = 'Enfield';
-  var patrolLeader = 'Phil';
-  var cadNumber = '123ABC';
-  var members = '';
-
   final genders = ['Male', 'Female'];
   final ages = ['0-12', '13-17', '18-24', 'Over 25'];
   final ethnicities = ['White', 'Afro/Caribbean', 'Asian', 'East European'];
 
-  final List<bool> _selectedGender = <bool>[true, false];
-  final List<bool> _selectedAge = <bool>[false, false, false, true];
-  final List<bool> _selectedEthnicity = <bool>[true, false, false, false];
+  final List<bool> _selectedGender = <bool>[false, false];
+  final List<bool> _selectedAge = <bool>[false, false, false, false];
+  final List<bool> _selectedEthnicity = <bool>[false, false, false, false];
 
   final List<Widget> genderWidgets = [];
   final List<Widget> ageWidgets = [];
@@ -45,7 +41,7 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
 
   var male = 0;
   var female = 0;
-  var ageUpTo12 = 0;
+  var ageZeroTo12 = 0;
   var age13To17 = 0;
   var age18To24 = 0;
   var age25AndOver = 0;
@@ -53,66 +49,44 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
   var ethnicAfroCaribbean = 0;
   var ethnicAsian = 0;
   var ethnicEastEuropean = 0;
-
-  var conversations = [];
-  var conversationName = 'Rob';
-  var conversationNotes = 'we had a conversation';
+  var contactName = '';
+  var conversationNotes = '';
 
   late var loggedInUser;
   late String userId;
   late Patrol patrol;
+  late String patrolId;
+  late List<String> conversations;
 
-  late TextEditingController textEditingControllerEmail;
-  late TextEditingController textEditingControllerPassword;
-  late TextEditingController textEditingControllerLocation;
-  late TextEditingController dateController;
-  late TextEditingController timeControllerStart;
-  late TextEditingController timeControllerEnd;
-  late TextEditingController textEditingControllerPatrolLeader;
-  late TextEditingController textEditingControllerCadNumber;
   late TextEditingController textEditingControllerContactName;
   late TextEditingController textEditingControllerConversationNotes;
-  late int bottleCount;
-  late int peopleHelpedCount;
-  late int peopleToSafetyCount;
-
-  // refactor
-  String valueToValidate = '2000-09-20';
-  String valueSaved = '2000-09-20';
 
   @override
   initState() {
-    print('\n\nPatrol Conversation And Contact Matrix Page\n==============');
+    print(
+        '\n\nPatrol Conversation And Contact Matrix Page\n===========================================');
     super.initState();
     getLoggedInUser();
 
     patrol = widget.patrol;
+    patrolId = patrol.patrolId;
+
     male = patrol.male;
     female = patrol.female;
-    ageUpTo12 = patrol.ageUpTo12;
+    ageZeroTo12 = patrol.ageZeroTo12;
     age13To17 = patrol.age13To17;
     age18To24 = patrol.age18To24;
     age25AndOver = patrol.age25AndOver;
     ethnicWhite = patrol.ethnicWhite;
     ethnicAfroCaribbean = patrol.ethnicAfroCaribbean;
+    ethnicAsian = patrol.ethnicAsian;
     ethnicEastEuropean = patrol.ethnicEastEuropean;
-    bottleCount = patrol.bottleCount;
-    peopleHelpedCount = patrol.peopleHelpedCount;
-    peopleToSafetyCount = patrol.peopleToSafetyCount;
+    conversations = patrol.conversations;
 
     initializeDateFormatting();
-    dateController = TextEditingController(
-        text: DateTime.now().subtract(const Duration(days: 1)).toString());
-    timeControllerStart = TextEditingController(text: getRoundedTimeNow());
-    timeControllerEnd = TextEditingController(text: getRoundedTimeThen());
-    textEditingControllerLocation = TextEditingController(text: location);
-    textEditingControllerPatrolLeader =
-        TextEditingController(text: patrolLeader);
-    textEditingControllerCadNumber = TextEditingController(text: cadNumber);
-    textEditingControllerContactName =
-        TextEditingController(text: 'contact name');
-    textEditingControllerConversationNotes =
-        TextEditingController(text: 'conversation notes');
+
+    textEditingControllerContactName = TextEditingController(text: '');
+    textEditingControllerConversationNotes = TextEditingController(text: '');
 
     for (int i = 0; i < genders.length; i++) {
       var widget = Text(genders[i]);
@@ -133,36 +107,41 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
       loggedInUser = await _auth.currentUser;
       userId = loggedInUser.uid;
       print(
-          'new patrol screen - user is logged in - email .. ${loggedInUser.email} .. uid .. $userId .. ');
+          'user is logged in - email .. ${loggedInUser.email} .. uid .. $userId .. ');
     } catch (e) {
       print(e);
     }
   }
 
-  String getRoundedTimeNow() {
-    String lsHour = TimeOfDay.now().hour.toString().padLeft(2, '0');
-    int minutes = TimeOfDay.now().minute;
-    var minutesRounded = 5 * ((minutes / 5).floor());
-    String lsMinute = minutesRounded.toString().padLeft(2, '0');
-    var outputTimeString = '$lsHour:$lsMinute';
-    return outputTimeString;
+  updateGender(int index) {
+    gender = genders[index].toString();
+    print('selected gender is $gender');
+    setState(() {
+      for (int i = 0; i < _selectedGender.length; i++) {
+        _selectedGender[i] = i == index;
+      }
+    });
   }
 
-  String getRoundedTimeThen() {
-    var hour24 = (TimeOfDay.now().hour + 5) % 24;
-    String lsHour = hour24.toString().padLeft(2, '0');
-    int minutes = TimeOfDay.now().minute;
-    var minutesRounded = 5 * ((minutes / 5).floor());
-    String lsMinute = minutesRounded.toString().padLeft(2, '0');
-    var outputTimeString = '$lsHour:$lsMinute';
-    return outputTimeString;
+  updateAge(int index) {
+    age = age[index].toString();
+    print('selected age is $age');
+    setState(() {
+      for (int i = 0; i < _selectedGender.length; i++) {
+        _selectedGender[i] = i == index;
+      }
+    });
   }
 
   setConversationName(String value) {
-    setState(() {
-      conversationName = value;
-      print('Contact name is $conversationName');
-    });
+    final loForm = _oFormKey.currentState;
+    if (loForm?.validate() == true) {
+      loForm?.save();
+      setState(() {
+        contactName = value;
+        print('Contact name is $contactName');
+      });
+    }
   }
 
   setConversationNotes(String value) {
@@ -172,63 +151,66 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
     });
   }
 
-  startPatrol() {
-    print('patrol is being started');
-    final loForm = _oFormKey.currentState;
-    if (loForm?.validate() == true) {
-      loForm?.save();
-    }
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => PatrolContactMatrix(patrol: patrol)));
-  }
-
-  goToContactMatrix() {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => PatrolContactMatrix(patrol: patrol)));
-  }
-
   goToConversations() {
     print('going to conversations screen');
   }
 
-  getPatrols() async {
-    print('getting patrol record from database ... waiting ...');
-    final patrols = await _firestore.collection('patrols').get();
-    final patrolsArray = patrols.docs;
-    final count = patrolsArray.length.toString();
-    print('there are $count patrols');
-    patrolsArray.forEach((patrol) {
-      var startDate = patrol.data()['startDate'];
-      var endDate = patrol.data()['endDate'];
-      var leader = patrol.data()['leader'];
-      var members = patrol.data()['members'];
-      var contactMatrix = patrol.data()['contactMatrix'];
-      print(
-          'patrol id ${patrol.id} start $startDate end $endDate leader $leader');
-      print('start date as timestamp seconds ${startDate.seconds}');
-      var startDateAsDate = startDate.toDate();
-      print('start date as dateTime string $startDateAsDate');
-      var startDateAsDateOnly =
-          DateFormat('dd/MM/yyyy').format(startDateAsDate);
-      print('start date $startDateAsDateOnly');
-      var endDateAsDate = DateFormat('dd/MM/yyyy').format(endDate.toDate());
-      print('end date $endDateAsDate');
-      members.forEach((memberId) => print('patrol member $memberId'));
-      contactMatrix.forEach((contact) => print('contact details $contact'));
-    });
-  }
-
   submitContact() async {
+    int selectedGenderIndex = -1;
+    for (int i = 0; i < _selectedGender.length; i++) {
+      if (_selectedGender[i]) {
+        selectedGenderIndex = i;
+      }
+    }
+    if (selectedGenderIndex == 0) {
+      male++;
+    } else if (selectedGenderIndex == 1) {
+      female++;
+    }
+    int selectedAgeIndex = -1;
+    for (int i = 0; i < _selectedAge.length; i++) {
+      if (_selectedAge[i]) {
+        selectedAgeIndex = i;
+      }
+    }
+    if (selectedAgeIndex == 0) {
+      ageZeroTo12++;
+    } else if (selectedAgeIndex == 1) {
+      age13To17++;
+    } else if (selectedAgeIndex == 2) {
+      age18To24++;
+    } else if (selectedAgeIndex == 3) {
+      age25AndOver++;
+    }
+
+    int selectedEthnicityIndex = -1;
+    for (int i = 0; i < _selectedEthnicity.length; i++) {
+      if (_selectedEthnicity[i]) {
+        selectedEthnicityIndex = i;
+      }
+    }
+    if (selectedEthnicityIndex == 0) {
+      ethnicWhite++;
+    } else if (selectedEthnicityIndex == 1) {
+      ethnicAfroCaribbean++;
+    } else if (selectedEthnicityIndex == 2) {
+      ethnicAsian++;
+    } else if (selectedEthnicityIndex == 3) {
+      ethnicEastEuropean++;
+    }
+
     try {
       final patrolToUpdate = {
+        'contactName': contactName,
+        'conversationNotes': conversationNotes,
         'male': male,
         'female': female,
-        'ageUpTo12': ageUpTo12,
+        'ageZeroTo12': ageZeroTo12,
         'age13to17': age13To17,
         'age18to24': age18To24,
         'age25AndOver': age25AndOver,
         'ethnicWhite': ethnicWhite,
-        'ethicAfroCaribbean': ethnicAfroCaribbean,
+        'ethnicAfroCaribbean': ethnicAfroCaribbean,
         'ethnicAsian': ethnicAsian,
         'ethnicEastEuropean': ethnicEastEuropean,
       };
@@ -237,29 +219,49 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
           .doc(patrolId)
           .set(patrolToUpdate, SetOptions(merge: true));
       print(
-          'patrol stats updated in firebase male $male 0-12 $ageUpTo12 13-17 $age13To17 18-24 $age18To24 25+ $age25AndOver ');
-    } catch (e) {
-      print(e);
-    }
-    print(
-        'user ${loggedInUser.email} has submitted form with values - $ethnicity $gender age $age');
-  }
+          'patrol stats updated in firebase male $male 0-12 $ageZeroTo12 13-17 $age13To17 18-24 $age18To24 25+ $age25AndOver ');
+      print('name $contactName notes $conversationNotes');
+      print(
+          'user ${loggedInUser.email} has submitted form with values - $ethnicity $gender age $age');
+      setState(() {
+        for (int i = 0; i < _selectedGender.length; i++) {
+          _selectedGender[i] = false;
+        }
+        for (int i = 0; i < _selectedAge.length; i++) {
+          _selectedAge[i] = false;
+        }
 
-  submitConversation() async {
-    try {
-      _firestore.collection('patrolConversations').add({
-        'ageRange': age,
-        'conversationNotes': conversationNotes,
-        'ethnicity': ethnicity,
-        'gender': gender,
-        'name': conversationName,
-        'patrolId': patrolId,
+        for (int i = 0; i < _selectedEthnicity.length; i++) {
+          _selectedEthnicity[i] = false;
+        }
       });
     } catch (e) {
       print(e);
     }
-    print(
-        'user ${loggedInUser.email} has submitted form with values - $ethnicity $gender age $age');
+  }
+
+  submitConversation() async {
+    try {
+      var conversation = '$contactName::::$conversationNotes';
+      conversations.add(conversation);
+      final patrolToUpdate = {
+        'conversations': conversations,
+      };
+      _firestore
+          .collection('patrols')
+          .doc(patrolId)
+          .set(patrolToUpdate, SetOptions(merge: true));
+      print('conversation updated in firebase name $conversation}');
+      setState(() {
+        contactName = '';
+        conversationNotes = '';
+        textEditingControllerContactName = TextEditingController(text: '');
+        textEditingControllerConversationNotes =
+            TextEditingController(text: '');
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -328,15 +330,7 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
                                   children: genderWidgets,
                                   isSelected: _selectedGender,
                                   onPressed: (int index) {
-                                    gender = genders[index].toString();
-                                    print('selected gender is $gender');
-                                    setState(() {
-                                      for (int i = 0;
-                                          i < _selectedGender.length;
-                                          i++) {
-                                        _selectedGender[i] = i == index;
-                                      }
-                                    });
+                                    updateGender(index);
                                   },
                                 )),
                               ),
