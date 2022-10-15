@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'new_patrol.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_teaching_app/models/patrol.dart';
+import 'patrol_overview.dart';
 
 class Patrols extends StatefulWidget {
   const Patrols({Key? key}) : super(key: key);
@@ -17,159 +17,213 @@ class Patrols extends StatefulWidget {
 class _PatrolsState extends State<Patrols> {
   final _auth = FirebaseAuth.instance;
   final _firestore = FirebaseFirestore.instance;
-  var textEditingControllerEmail;
-  var textEditingControllerPassword;
+  late TextEditingController textEditingControllerEmail;
+  late TextEditingController textEditingControllerPassword;
+  var textEditingControllerLeader;
   var email = '123@abc.com';
   var password = 'verySecure123';
-  late var signedInUser;
-  late var patrolListView;
+  var patrolId = '';
+  var location = '';
+  var leaderId = '';
+  var leaderName = '';
+  var cadNumber = '';
+  var loggedInUser;
+  var userId = '';
+  late int bottleCount;
+  late int peopleHelpedCount;
+  late int peopleToSafetyCount;
 
-  var patrols = [
-    GestureDetector(
-      onTap: () {},
-      child: Center(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text(
-                  'Date',
-                  style: kTextStyle15Bold,
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text(
-                  'Leader',
-                  style: kTextStyle15Bold,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-    GestureDetector(
-      onTap: () {
-        print('requesting to see patrol details');
-      },
-      child: Center(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('1/1/2000'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('Geoge'),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-    GestureDetector(
-      onTap: () {
-        print('requesting to see patrol details');
-      },
-      child: Center(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('1/1/2000'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('Geoge'),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-    GestureDetector(
-      onTap: () {
-        print('requesting to see patrol details');
-      },
-      child: Center(
-        child: Row(
-          children: [
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('1/1/2000'),
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: Center(
-                child: Text('Geoge'),
-              ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  ];
+  late Map<String, String> member;
+  var membersMapIdToName = Map<String, String>();
+  late var memberName;
+  late List<String> membersList;
+  late String members;
+  late Map<String, String> leaderNames;
+  List<Patrol> patrols = [];
+  var patrol = Patrol(
+    startDate2: DateTime.now(),
+    endDate2: DateTime.now(),
+    leaderId2: '',
+    leaderName2: '',
+    location2: '',
+    membersList2: [],
+    members2: '',
+    cadNumber2: '',
+    userId2: '',
+    bottleCount2: 0,
+    peopleHelpedCount2: 0,
+    peopleToSafetyCount2: 0,
+  );
 
   @override
   initState() {
+    print('\n\nPatrols \n==============');
+    print('patrols page has been loaded');
     super.initState();
-    print('street pastors patrols');
-    getSignedInUser();
-    getPatrols();
-    patrolListView = ListView(
-      children: patrols,
-    );
+    getUserAndPatrols();
   }
 
-  getSignedInUser() async {
+  getUserAndPatrols() async {
+    await getLoggedInUser();
+    await getPatrols();
+  }
+
+  getLoggedInUser() async {
     try {
-      signedInUser = await _auth.currentUser;
+      loggedInUser = await _auth.currentUser;
+      userId = loggedInUser.uid;
       print(
-          'patrols screen - user is signed in - email .. ${signedInUser.email} .. uid .. ${signedInUser.uid} .. ');
+          'patrols screen - user is signed in - email .. ${loggedInUser.email} .. uid .. $userId .. ');
     } catch (e) {
       print(e);
     }
   }
 
-  // notice this is a duplicate function - best to create a class for it
   getPatrols() async {
     print('getting patrol record from database ... waiting ...');
-    final patrols = await _firestore.collection('patrols').get();
-    final patrolsArray = patrols.docs;
+    print('.. searching for patrols where userId = $userId');
+    final patrolRawData = await _firestore
+        .collection('patrols')
+        .orderBy('startDate', descending: true)
+        .where('userId', isEqualTo: userId)
+        .get();
+
+    print('firebase patrol raw data received');
+    final patrolsArray = patrolRawData.docs;
+    print('firebase raw data converted to local patrol array data');
     final count = patrolsArray.length.toString();
     print('there are $count patrols');
-    patrolsArray.forEach((patrol) {
-      var startDate = patrol.data()['startDate'];
-      var endDate = patrol.data()['endDate'];
-      var leader = patrol.data()['leader'];
-      var members = patrol.data()['members'];
-      var contactMatrix = patrol.data()['contactMatrix'];
-      print(
-          'patrol id ${patrol.id} start $startDate end $endDate leader $leader');
+    // think - is this necessary ? would be smarter to check if duplicates, and only add duplicates ...
+    // just do this for now ... but think can do better ...
+    patrols = [];
+    patrolsArray.forEach((item) {
+      var userId = item.data()['userId'];
+      final startDate = item.data()['startDate'];
+      final endDate = item.data()['endDate'];
+      String leaderId = item.data()['leaderId'];
+      if (leaderId == '') {
+        print('leader id was an empty string');
+        leaderId = 'no id';
+      } else {
+        print('leader id was present $leaderId');
+      }
+      var leaderName = item.data()['leaderName'] ?? '';
+      var location = item.data()['location'] ?? '';
+      var cadNumber = item.data()['cadNumber'] ?? '';
+      var members = item.data()['members'] ?? '';
+      var bottleCount = item.data()['bottleCount'] ?? 0;
+      var peopleHelpedCount = item.data()['peopleHelpedCount'] ?? 0;
+      var peopleToSafetyCount = item.data()['peopleToSafetyCount'] ?? 0;
+      final membersAsDynamic = item.data()['membersList'];
+      membersList = List<String>.from(membersAsDynamic);
+
       print('start date as timestamp seconds ${startDate.seconds}');
       var startDateAsDate = startDate.toDate();
       print('start date as dateTime string $startDateAsDate');
       var startDateAsDateOnly =
           DateFormat('dd/MM/yyyy').format(startDateAsDate);
       print('start date $startDateAsDateOnly');
+
       var endDateAsDate = DateFormat('dd/MM/yyyy').format(endDate.toDate());
       print('end date $endDateAsDate');
-      members.forEach((memberId) => print('patrol member ${memberId}'));
-      contactMatrix.forEach((contact) => print('contact details $contact'));
+      membersList.forEach((memberId) => print('patrol member $memberId'));
+      if (leaderId == 'no id') {
+        leaderId = '';
+      }
+      var patrol = Patrol(
+        startDate2: startDate.toDate(),
+        endDate2: endDate.toDate(),
+        leaderId2: leaderId,
+        leaderName2: leaderName,
+        location2: location,
+        membersList2: membersList,
+        members2: members,
+        cadNumber2: cadNumber,
+        userId2: userId,
+        bottleCount2: bottleCount,
+        peopleHelpedCount2: peopleHelpedCount,
+        peopleToSafetyCount2: peopleToSafetyCount,
+      );
+      patrol.setPatrolId(item.id);
+      print('adding patrol from firebase to local array of patrols');
+      print(patrol.toString());
+      print(
+          'patrol id ${item.id} start $startDate end $endDate leader $leaderName id $leaderId');
+      print(
+          'start ${DateFormat('dd/MM/yyyy').format(startDate.toDate())} end ${DateFormat('dd/MM/yyyy').format(endDate.toDate())} leader $leaderId $leaderName members ${members.length}');
+      setState(() {
+        addLeaderNameToPatrol(patrol);
+        patrols.add(patrol);
+      });
     });
+
+    print('there are ' +
+        patrols.length.toString() +
+        ' patrols read from firebase into the local patrols array');
+    patrols.forEach((patrol) {
+      membersList.forEach((memberId) {
+        memberName = getMemberNameFromId(memberId);
+      });
+    });
+  }
+
+  getMemberNameFromId(String memberId) async {
+    final memberNameAsObject =
+        await _firestore.collection('patrolMembers').doc(memberId).get();
+    var memberFirstName = memberNameAsObject.get('firstName');
+    var memberLastName = memberNameAsObject.get('lastName');
+    var memberName = memberFirstName + ' ' + memberLastName;
+    print('member id $memberId name $memberName');
+    member = {memberId: memberName};
+    membersMapIdToName.addAll(member);
+  }
+
+  addLeaderNameToPatrol(patrol) async {
+    var memberAsObject;
+
+    if (patrol.leaderId == null || patrol.leaderId == 'no id') {
+      print('leader id ${patrol.leaderId} name ${patrol.leaderName}');
+      setState(() {
+        patrol.setLeaderName(patrol.leaderName);
+      });
+    } else {
+      try {
+        memberAsObject = await _firestore
+            .collection('patrolMembers')
+            .doc(patrol.leaderId)
+            .get();
+
+        if (memberAsObject == null) {
+          leaderName = patrol.leaderName;
+        } else {
+          final leaderFirstName = memberAsObject.get('firstName');
+          final leaderLastName = memberAsObject.get('lastName');
+          leaderName = leaderFirstName + ' ' + leaderLastName;
+        }
+        print('leader id ${patrol.leaderId} name $leaderName');
+        setState(() {
+          patrol.setLeaderName(leaderName);
+        });
+      } catch (e) {
+        print('leader id ${patrol.leaderId} name ${patrol.leaderName}');
+        setState(() {
+          patrol.setLeaderName(patrol.leaderName);
+        });
+      }
+    }
+  }
+
+  refreshPatrols() {
+    print('refreshing patrol list');
+    getPatrols();
+  }
+
+  viewEditPatrol(int patrolIndex) {
+    print(
+        'trying to open up patrol for editing for patrol with index $patrolIndex');
+    patrol = patrols[patrolIndex];
+    Navigator.of(context).push(MaterialPageRoute<Patrol>(
+        builder: (context) => PatrolOverview(patrol: patrol)));
   }
 
   @override
@@ -202,15 +256,46 @@ class _PatrolsState extends State<Patrols> {
                         color: kColorLightGrey005,
                         child: GestureDetector(
                           onTap: () {
+                            refreshPatrols();
+                          },
+                          child: Container(
+                            child: Center(
+                              child: Text(
+                                'Refresh Patrols',
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        color: kColorLightGrey004,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        color: kColorLightGrey004,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: kColorLightGrey005,
+                        child: GestureDetector(
+                          onTap: () {
                             print('new patrol');
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => const NewPatrol()));
                           },
-                          child: Center(
-                            child: Container(
+                          child: Container(
+                            child: Center(
                               child: Text(
                                 'New Patrol',
-                                textAlign: TextAlign.right,
+                                textAlign: TextAlign.center,
                               ),
                             ),
                           ),
@@ -243,7 +328,51 @@ class _PatrolsState extends State<Patrols> {
               flex: 7,
               child: Container(
                 color: kColorLightGrey002,
-                child: patrolListView,
+                child: ListView.builder(
+                    itemCount: patrols.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {
+                          print('patrol with index $index selected');
+                        },
+                        onDoubleTap: () {
+                          viewEditPatrol(index);
+                        },
+                        child: Center(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    patrols[index].getStartDate(),
+                                    style: kTextStyle15,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    patrols[index].leaderName,
+                                    style: kTextStyle15,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Center(
+                                  child: Text(
+                                    patrols[index].location,
+                                    style: kTextStyle15,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
               ),
             ),
             Expanded(
