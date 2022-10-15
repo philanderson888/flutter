@@ -21,7 +21,6 @@ import '../apps/weather_04.dart';
 import '../apps/bitcoin_01.dart';
 import '../apps/bitcoin_02.dart';
 import '../apps/bitcoin_03.dart';
-import '../apps/chat/chat_app_01.dart';
 
 class Apps extends StatelessWidget {
   const Apps({Key? key}) : super(key: key);
