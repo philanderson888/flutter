@@ -10,7 +10,9 @@ class LoadingAnimation01 extends StatefulWidget {
 }
 
 class _LoadingAnimation01State extends State<LoadingAnimation01> {
+  @override
   initState() {
+    super.initState();
     print('Weather01State initState()');
   }
 
@@ -68,7 +70,9 @@ class _LoadingScreenState extends State<LoadingScreen> {
   var positionAsString = 'Getting loading data ';
   static var geolocationPosition = GeolocationService();
 
+  @override
   initState() {
+    super.initState();
     print('Weather01State initState()');
     print('showing loading state');
 

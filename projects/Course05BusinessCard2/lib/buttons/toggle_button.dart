@@ -10,7 +10,7 @@ class ToggleButton01 extends StatefulWidget {
 
 class _ToggleButton01State extends State<ToggleButton01> {
   final genders = ['Male', 'Female'];
-  final ages = ['0-12', '13-17', '18-27', 'Over 25'];
+  final ages = ['0-12', '13-17', '18-24', 'Over 25'];
   final ethnicities = ['White', 'Afro/Caribbean', 'Asian', 'East European'];
 
   final List<bool> _selectedGender = <bool>[true, false];
