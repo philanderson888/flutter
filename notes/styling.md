@@ -8,8 +8,9 @@
   - [finding components](#finding-components)
   - [material design](#material-design)
   - [cupertino design](#cupertino-design)
-  - [justifying](#justifying)
-    - [center justify](#center-justify)
+  - [align](#align)
+    - [center](#center)
+    - [align class](#align-class)
   - [margin](#margin)
     - [margin all](#margin-all)
     - [margin vertical](#margin-vertical)
@@ -123,9 +124,9 @@ https://docs.flutter.dev/development/ui/widgets/cupertino
 
 
 
-## justifying
+## align
 
-### center justify
+### center
 
 ```java
 class Home extends StatelessWidget {
@@ -142,7 +143,18 @@ class Home extends StatelessWidget {
 }
 ```
 
+### align class
 
+we can use the `Align` class to align objects exactly to our specifications
+
+```java
+child: Align(
+  alignment: Alignment.centerLeft,
+  child: Text(
+    'some left aligned text',
+  ),
+),
+```
 
 
 
