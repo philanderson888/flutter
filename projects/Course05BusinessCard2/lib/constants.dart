@@ -25,12 +25,15 @@ var kDarkPurple = const Color(0xFF46016E);
 var kDeepPurple = const Color(0xFF4C2973);
 var kSkyBlue = const Color(0xFF8997E7);
 var kLightSkyBlue = const Color(0xFFA6B2DE);
+var kColorLightBlueAccent = Colors.lightBlueAccent;
 var kVeryLightSkyBlue = const Color(0xFFBAC2E1);
 var kSuperLightSkyBlue = const Color(0xFFD1D3E8);
 var kSuperLight = const Color(0xFFe1edec);
 
 var kGold = const Color(0xFFF2B64B);
 var kCerise = const Color(0xFFE31D6B);
+var kUpdateButtonGreen = const Color(0xFF78bf68);
+var kCancelButtonRed = const Color(0xFFC55D4C);
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(136, 14, 79, .1),
@@ -86,6 +89,11 @@ var kTextStyle30 = const TextStyle(
   fontSize: 30.0,
 );
 
+var kTextStyle30Bold = const TextStyle(
+  fontSize: 30.0,
+  fontWeight: FontWeight.bold,
+);
+
 var kTextStyle35 = const TextStyle(
   fontSize: 35.0,
 );
@@ -94,17 +102,17 @@ var kTextStyleSize40 = const TextStyle(
   fontSize: 40.0,
 );
 
+var kTextStyle40Bold = const TextStyle(
+  fontSize: 40.0,
+  fontWeight: FontWeight.w900,
+);
+
 var kTextStyle50 = const TextStyle(
   fontSize: 50.0,
 );
 
 var kTextStyle50Bold = const TextStyle(
   fontSize: 50.0,
-  fontWeight: FontWeight.w900,
-);
-
-var kTextStyle40Bold = const TextStyle(
-  fontSize: 40.0,
   fontWeight: FontWeight.w900,
 );
 
@@ -168,8 +176,22 @@ var kSourceSansPro30TealDark = TextStyle(
 
 // Button
 
-var kAppHeaderButtonStyle = ButtonStyle(
+var kButtonStyleAppHeader = ButtonStyle(
   backgroundColor: MaterialStateProperty.all<Color>(Colors.yellow),
+);
+
+var kButtonStyleCancel = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+);
+
+var kButtonStyleUpdate = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+);
+
+// Form Input
+
+var kOutlineInputBorderNone = const OutlineInputBorder(
+  borderSide: BorderSide.none,
 );
 
 // Text
@@ -185,7 +207,17 @@ var kApps = 'Apps';
 var kBmiSliderMin = 120.0;
 var kBmiSliderMax = 220.0;
 
-// Data for Bitcoin App
+// Border Radius
+
+var kBorderRadius30 = const BorderRadius.all(
+  Radius.circular(30.0),
+);
+
+var kRoundedRectangleBorder30 = const RoundedRectangleBorder(
+  borderRadius: BorderRadius.all(
+    Radius.circular(30.0),
+  ),
+); // Data for Bitcoin App
 
 const List<String> kCurrenciesList = [
   'GBP',
@@ -224,3 +256,7 @@ var kCurrenciesDropDownList =
     child: Text(value),
   );
 }).toList();
+
+enum MODE { READ_ONLY, UPDATE }
+
+const Map<String, int> INCREMENT = {'POSITIVE': 1, 'NEGATIVE': -1};
