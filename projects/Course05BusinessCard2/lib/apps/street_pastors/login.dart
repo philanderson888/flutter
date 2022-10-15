@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'patrols.dart';
@@ -13,11 +12,11 @@ class StreetPastorsLogin extends StatefulWidget {
 
 class _StreetPastorsLoginState extends State<StreetPastorsLogin> {
   final _auth = FirebaseAuth.instance;
-  var textEditingControllerEmail;
-  var textEditingControllerPassword;
+  late TextEditingController textEditingControllerEmail;
+  late TextEditingController textEditingControllerPassword;
   var email = '123@abc.com';
   var password = 'verySecure123';
-  late var signedInUser;
+  late var loggedInUser;
 
   @override
   initState() {
@@ -45,11 +44,11 @@ class _StreetPastorsLoginState extends State<StreetPastorsLogin> {
     print('sign in');
     print('attempting to sign in user with email $email password $password');
     try {
-      signedInUser =
+      loggedInUser =
           _auth.signInWithEmailAndPassword(email: email, password: password);
-      if (signedInUser != null) {
-        print('signed in - signedInUser = ');
-        print(signedInUser);
+      if (loggedInUser != null) {
+        print('signed in - loggedInUser = ');
+        print(loggedInUser);
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => const Patrols()));
       }
@@ -163,10 +162,8 @@ class _StreetPastorsLoginState extends State<StreetPastorsLogin> {
                           onTap: () {
                             signIn();
                           },
-                          child: Container(
-                            child: Center(
-                              child: Text('Login', style: kTextStyle20),
-                            ),
+                          child: Center(
+                            child: Text('Login', style: kTextStyle20),
                           ),
                         ),
                       ),
