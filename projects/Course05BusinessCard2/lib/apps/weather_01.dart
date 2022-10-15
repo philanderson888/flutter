@@ -11,6 +11,7 @@ class Weather01 extends StatefulWidget {
 
 class _Weather01State extends State<Weather01> {
   initState() {
+    super.initState();
     print('Weather01State initState()');
   }
 
@@ -69,6 +70,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
   static var geolocationPosition = GeolocationService();
 
   initState() {
+    super.initState();
     print('Weather01State initState()');
     print('showing loading state');
     setState(() {

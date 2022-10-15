@@ -14,6 +14,7 @@ class Weather03 extends StatefulWidget {
 
 class _Weather03State extends State<Weather03> {
   initState() {
+    super.initState();
     print('Weather03State initState() - Parent');
   }
 
@@ -51,7 +52,7 @@ class _Weather03State extends State<Weather03> {
                   ),
                   Expanded(
                     flex: 10,
-                    child: LoadingScreen(),
+                    child: const LoadingScreen(),
                   ),
                   Expanded(
                     flex: 1,
@@ -72,6 +73,8 @@ class _Weather03State extends State<Weather03> {
 }
 
 class LoadingScreen extends StatefulWidget {
+  const LoadingScreen({Key? key}) : super(key: key);
+
   @override
   _LoadingScreenState createState() => _LoadingScreenState();
 }

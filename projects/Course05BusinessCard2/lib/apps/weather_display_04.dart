@@ -6,6 +6,8 @@ import '../constants.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class WeatherDisplay04 extends StatefulWidget {
+  const WeatherDisplay04({Key? key}) : super(key: key);
+
   @override
   _WeatherDisplay04State createState() => _WeatherDisplay04State();
 }
