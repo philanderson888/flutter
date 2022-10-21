@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_time_picker/date_time_picker.dart';
-import 'package:flutter_teaching_app/models/patrol_conversation.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'patrol_details.dart';
@@ -108,6 +107,10 @@ class _PatrolOverviewState extends State<PatrolOverview> {
     );
   }
 
+  //
+  // initialise
+  //
+
   getLoggedInUser() async {
     try {
       loggedInUser = await _auth.currentUser;
@@ -117,31 +120,6 @@ class _PatrolOverviewState extends State<PatrolOverview> {
     } catch (e) {
       print(e);
     }
-  }
-
-  String getTime(DateTime dateTime) {
-    String lsHour = dateTime.hour.toString().padLeft(2, '0');
-    String lsMinute = dateTime.minute.toString().padLeft(2, '0');
-    var outputTimeString = '$lsHour:$lsMinute';
-    return outputTimeString;
-  }
-
-  String getRoundedTimeThen() {
-    var hour24 = (TimeOfDay.now().hour + 5) % 24;
-    String lsHour = hour24.toString().padLeft(2, '0');
-    int minutes = TimeOfDay.now().minute;
-    var minutesRounded = 5 * ((minutes / 5).floor());
-    String lsMinute = minutesRounded.toString().padLeft(2, '0');
-    var outputTimeString = '$lsHour:$lsMinute';
-    return outputTimeString;
-  }
-
-  /// This implementation is just to simulate a load data behavior
-  /// from a data base sqlite or from a API
-  Future<void> _getValueOnInit() async {
-    await Future.delayed(const Duration(seconds: 3), () {
-      dateController.text = DateTime.now().toString();
-    });
   }
 
   //
@@ -170,12 +148,33 @@ class _PatrolOverviewState extends State<PatrolOverview> {
     }
   }
 
+  //
+  // update local data
+  //
+
   onDateChanged(String value) {
     print('date has changed');
     setState(() {
       mode = MODE.UPDATE;
       valueSaved = value;
     });
+  }
+
+  String getTime(DateTime dateTime) {
+    String lsHour = dateTime.hour.toString().padLeft(2, '0');
+    String lsMinute = dateTime.minute.toString().padLeft(2, '0');
+    var outputTimeString = '$lsHour:$lsMinute';
+    return outputTimeString;
+  }
+
+  String getRoundedTimeThen() {
+    var hour24 = (TimeOfDay.now().hour + 5) % 24;
+    String lsHour = hour24.toString().padLeft(2, '0');
+    int minutes = TimeOfDay.now().minute;
+    var minutesRounded = 5 * ((minutes / 5).floor());
+    String lsMinute = minutesRounded.toString().padLeft(2, '0');
+    var outputTimeString = '$lsHour:$lsMinute';
+    return outputTimeString;
   }
 
   setLocation(String value) {
@@ -201,6 +200,28 @@ class _PatrolOverviewState extends State<PatrolOverview> {
       print('CAD Number $cadNumber');
     });
   }
+
+  addPatrolMember(String? newPatrolMember) {
+    print('adding new member $newPatrolMember to patrol');
+    setState(() => {
+          if (newPatrolMember != null)
+            {
+              print('hello'),
+              patrolMember = newPatrolMember,
+              print('patrolMember $patrolMember'),
+              patrolMemberWidget = GestureDetector(
+                  onTap: () {}, child: Center(child: Text(patrolMember))),
+              print('patrolMemberWidget $patrolMemberWidget'),
+              patrolMembersWidgetList.add(patrolMemberWidget),
+              print(
+                  'patrol has ${patrolMembersWidgetList.length} members $patrolMembersWidgetList'),
+            },
+        });
+  }
+
+  //
+  // update database
+  //
 
   updatePatrol() {
     final loForm = _oFormKey.currentState;
@@ -245,29 +266,19 @@ class _PatrolOverviewState extends State<PatrolOverview> {
     }
   }
 
+  //
+  // not used
+  //
   var patrolMembersWidgetList = [
-    GestureDetector(onTap: () {}, child: Center(child: Text('Bob'))),
-    GestureDetector(onTap: () {}, child: Center(child: Text('Harry'))),
-    GestureDetector(onTap: () {}, child: Center(child: Text('Mildred'))),
-    GestureDetector(onTap: () {}, child: Center(child: Text('George'))),
+    GestureDetector(onTap: () {}, child: Center(child: Text(''))),
   ];
 
-  addPatrolMember(String? newPatrolMember) {
-    print('adding new member $newPatrolMember to patrol');
-    setState(() => {
-          if (newPatrolMember != null)
-            {
-              print('hello'),
-              patrolMember = newPatrolMember,
-              print('patrolMember $patrolMember'),
-              patrolMemberWidget = GestureDetector(
-                  onTap: () {}, child: Center(child: Text(patrolMember))),
-              print('patrolMemberWidget $patrolMemberWidget'),
-              patrolMembersWidgetList.add(patrolMemberWidget),
-              print(
-                  'patrol has ${patrolMembersWidgetList.length} members $patrolMembersWidgetList'),
-            },
-        });
+  /// This implementation is just to simulate a load data behavior
+  /// from a data base sqlite or from a API
+  Future<void> _getValueOnInit() async {
+    await Future.delayed(const Duration(seconds: 3), () {
+      dateController.text = DateTime.now().toString();
+    });
   }
 
   @override
@@ -276,436 +287,453 @@ class _PatrolOverviewState extends State<PatrolOverview> {
       body: SafeArea(
         child: Form(
           key: _oFormKey,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: Container(color: kColorLightGrey001),
-              ),
-              //
-              // heading
-              //
-              Expanded(
-                flex: 1,
-                child: Container(
-                  color: kColorLightGrey002,
-                  child: Center(
-                    child: Text(
-                      'Existing Patrol',
+          child: Container(
+            color: kPatrolLight002,
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(color: kPatrolLight002),
+                ),
+                //
+                // heading
+                //
+                Expanded(
+                  flex: 2,
+                  child: Container(
+                    color: kPatrolLight002,
+                    child: Center(
+                      child: Text(
+                        'Existing Patrol',
+                        style: kTextStyle20Bold,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              //
-              // main data form
-              //
-              Expanded(
-                flex: 20,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: kColorLightGrey003,
+                //
+                // main data form
+                //
+                Expanded(
+                  flex: 20,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          color: kPatrolLight002,
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      flex: 5,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
-                            ),
-                          ),
-                          //
-                          // patrol date
-                          //
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: DateTimePicker(
-                                    type: DateTimePickerType.date,
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2024),
-                                    controller: dateController,
-                                    dateLabelText: 'Date',
-                                    onChanged: (value) =>
-                                        {onDateChanged(value)},
-                                    validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
-                                      return null;
-                                    },
-                                    onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Container(),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          //
-                          // start and end times
-                          //
-
-                          Expanded(
-                            flex: 2,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                //
-                                // start time
-                                //
-                                Expanded(
-                                  flex: 1,
-                                  child: DateTimePicker(
-                                    type: DateTimePickerType.time,
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2024),
-                                    controller: timeControllerStart,
-                                    timeLabelText: 'Start',
-                                    onChanged: (value) =>
-                                        {onDateChanged(value)},
-                                    validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
-                                      return null;
-                                    },
-                                    onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                                //
-                                // end time
-                                //
-                                Expanded(
-                                  flex: 1,
-                                  child: DateTimePicker(
-                                    type: DateTimePickerType.time,
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2024),
-                                    controller: timeControllerEnd,
-                                    timeLabelText: 'End',
-                                    onChanged: (value) =>
-                                        {onDateChanged(value)},
-                                    validator: (value) {
-                                      setState(
-                                          () => valueToValidate = value ?? ' ');
-                                      return null;
-                                    },
-                                    onSaved: (value) => setState(
-                                        () => valueSaved = value ?? ''),
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 1,
-                                  child: Container(
-                                    color: kColorLightGrey005,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
-                            ),
-                          ),
-
-                          //
-                          // location
-                          //
-                          Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerLocation,
-                              onChanged: (value) {
-                                setLocation(value);
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'please enter location';
-                                }
-                                return null;
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'location',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
-                            ),
-                          ),
-
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
-                            ),
-                          ),
-
-                          //
-                          // patrol leader
-                          //
-                          Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerLeaderName,
-                              onChanged: (value) {
-                                setLeaderName(value);
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'please enter leader name';
-                                }
-                                return null;
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'patrol leader',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
-                            ),
-                          ),
-
-                          //
-                          // patrol members
-                          //
-                          Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerMembers,
-                              onChanged: (value) {
-                                setLeaderName(value);
-                              },
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'please enter patrol member names';
-                                }
-                                return null;
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
-                                  ),
-                                  hintText: 'patrol members',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
-                            ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
-                            ),
-                          ),
-
-                          Visibility(
-                            visible: false,
-                            child: Expanded(
+                      Expanded(
+                        flex: 5,
+                        child: Column(
+                          children: [
+                            Expanded(
                               flex: 1,
                               child: Container(
-                                color: kColorLightGrey003,
-                                child: DropdownButton<String>(
-                                    value: patrolMember,
-                                    onTap: () => print('choose patrol member'),
-                                    onChanged: (String? newPatrolMember) {
-                                      addPatrolMember(newPatrolMember);
-                                    },
-                                    items: <String>['One', 'Two', 'Three']
-                                        .map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                      return DropdownMenuItem<String>(
-                                          value: value, child: Text(value));
-                                    }).toList()),
+                                color: kPatrolLight002,
                               ),
                             ),
-                          ),
-
-                          //
-                          // List View
-                          //
-
-                          Visibility(
-                            visible: false,
-                            child: Expanded(
-                              flex: 4,
-                              child: Container(
-                                color: kColorLightGrey005,
-                                child: patrolMemberListView,
-                              ),
-                            ),
-                          ),
-
-                          //
-                          // CAD number
-                          //
-                          Expanded(
-                            flex: 1,
-                            child: TextFormField(
-                              textAlign: TextAlign.center,
-                              controller: textEditingControllerCadNumber,
-                              onChanged: (value) {
-                                setCadNumber(value);
-                              },
-                              validator: (value) {
-                                return null;
-                              },
-                              enableSuggestions: true,
-                              autocorrect: true,
-                              decoration: InputDecoration(
-                                  border: OutlineInputBorder(
-                                    borderSide: BorderSide.none,
+                            //
+                            // patrol date
+                            //
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      color: kPatrolLight002,
+                                    ),
                                   ),
-                                  hintText: 'Police CAD Number',
-                                  hintStyle:
-                                      TextStyle(color: kColorLightGrey02)),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      color: kPatrolLight002,
+                                      child: DateTimePicker(
+                                        type: DateTimePickerType.date,
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2024),
+                                        controller: dateController,
+                                        dateLabelText: 'Date',
+                                        onChanged: (value) =>
+                                            {onDateChanged(value)},
+                                        validator: (value) {
+                                          setState(() =>
+                                              valueToValidate = value ?? ' ');
+                                          return null;
+                                        },
+                                        onSaved: (value) => setState(
+                                            () => valueSaved = value ?? ''),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: Container(
+                                      color: kColorLightGrey002,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              color: kColorLightGrey004,
+
+                            //
+                            // start and end times
+                            //
+
+                            Expanded(
+                              flex: 2,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: kColorLightGrey002,
+                                    ),
+                                  ),
+                                  //
+                                  // start time
+                                  //
+                                  Expanded(
+                                    flex: 1,
+                                    child: DateTimePicker(
+                                      type: DateTimePickerType.time,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(2024),
+                                      controller: timeControllerStart,
+                                      timeLabelText: 'Start',
+                                      onChanged: (value) =>
+                                          {onDateChanged(value)},
+                                      validator: (value) {
+                                        setState(() =>
+                                            valueToValidate = value ?? ' ');
+                                        return null;
+                                      },
+                                      onSaved: (value) => setState(
+                                          () => valueSaved = value ?? ''),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: kColorLightGrey002,
+                                    ),
+                                  ),
+                                  //
+                                  // end time
+                                  //
+                                  Expanded(
+                                    flex: 1,
+                                    child: DateTimePicker(
+                                      type: DateTimePickerType.time,
+                                      firstDate: DateTime(2000),
+                                      lastDate: DateTime(2024),
+                                      controller: timeControllerEnd,
+                                      timeLabelText: 'End',
+                                      onChanged: (value) =>
+                                          {onDateChanged(value)},
+                                      validator: (value) {
+                                        setState(() =>
+                                            valueToValidate = value ?? ' ');
+                                        return null;
+                                      },
+                                      onSaved: (value) => setState(
+                                          () => valueSaved = value ?? ''),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      color: kColorLightGrey002,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: kColorLightGrey003,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              //
-              // create patrol
-              //
-              Visibility(
-                visible: mode == MODE.READ_ONLY,
-                child: Expanded(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(color: kColorLightGrey001),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: ElevatedButton(
-                          onPressed: goToPatrols,
-                          child: Text('Patrols'),
+
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: kColorLightGrey002,
+                              ),
+                            ),
+
+                            //
+                            // location
+                            //
+
+                            Expanded(
+                              flex: 1,
+                              child: TextFormField(
+                                textAlign: TextAlign.center,
+                                controller: textEditingControllerLocation,
+                                onChanged: (value) {
+                                  setLocation(value);
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'please enter location';
+                                  }
+                                  return null;
+                                },
+                                enableSuggestions: true,
+                                autocorrect: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    hintText: 'location',
+                                    hintStyle:
+                                        TextStyle(color: kColorLightGrey002)),
+                              ),
+                            ),
+
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: kColorLightGrey002,
+                              ),
+                            ),
+
+                            //
+                            // patrol leader
+                            //
+                            Expanded(
+                              flex: 1,
+                              child: TextFormField(
+                                textAlign: TextAlign.center,
+                                controller: textEditingControllerLeaderName,
+                                onChanged: (value) {
+                                  setLeaderName(value);
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'please enter leader name';
+                                  }
+                                  return null;
+                                },
+                                enableSuggestions: true,
+                                autocorrect: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    hintText: 'patrol leader',
+                                    hintStyle:
+                                        TextStyle(color: kColorLightGrey02)),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: kColorLightGrey002,
+                              ),
+                            ),
+
+                            //
+                            // patrol members
+                            //
+                            Expanded(
+                              flex: 1,
+                              child: TextFormField(
+                                textAlign: TextAlign.center,
+                                controller: textEditingControllerMembers,
+                                onChanged: (value) {
+                                  setLeaderName(value);
+                                },
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'please enter patrol member names';
+                                  }
+                                  return null;
+                                },
+                                enableSuggestions: true,
+                                autocorrect: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    hintText: 'patrol members',
+                                    hintStyle:
+                                        TextStyle(color: kColorLightGrey02)),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: kColorLightGrey002,
+                              ),
+                            ),
+
+                            //
+                            // patrol members drop down - hidden for now
+                            //
+
+                            Visibility(
+                              visible: false,
+                              child: Expanded(
+                                flex: 1,
+                                child: Container(
+                                  color: kColorLightGrey003,
+                                  child: DropdownButton<String>(
+                                      value: patrolMember,
+                                      onTap: () =>
+                                          print('choose patrol member'),
+                                      onChanged: (String? newPatrolMember) {
+                                        addPatrolMember(newPatrolMember);
+                                      },
+                                      items: <String>['One', 'Two', 'Three']
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                        return DropdownMenuItem<String>(
+                                            value: value, child: Text(value));
+                                      }).toList()),
+                                ),
+                              ),
+                            ),
+
+                            //
+                            // List View - hidden for now
+                            //
+
+                            Visibility(
+                              visible: false,
+                              child: Expanded(
+                                flex: 4,
+                                child: Container(
+                                  color: kColorLightGrey002,
+                                  child: patrolMemberListView,
+                                ),
+                              ),
+                            ),
+
+                            //
+                            // CAD number
+                            //
+                            Expanded(
+                              flex: 1,
+                              child: TextFormField(
+                                textAlign: TextAlign.center,
+                                controller: textEditingControllerCadNumber,
+                                onChanged: (value) {
+                                  setCadNumber(value);
+                                },
+                                validator: (value) {
+                                  return null;
+                                },
+                                enableSuggestions: true,
+                                autocorrect: true,
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    hintText: 'Police CAD Number',
+                                    hintStyle:
+                                        TextStyle(color: kColorLightGrey02)),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Container(
+                                color: kColorLightGrey002,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Expanded(
                         flex: 1,
-                        child: Container(color: kColorLightGrey001),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: ElevatedButton(
-                          onPressed: goToPatrolDetails,
-                          child: Text('Patrol Details'),
+                        child: Container(
+                          color: kColorLightGrey002,
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(color: kColorLightGrey001),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Visibility(
-                visible: mode == MODE.UPDATE,
-                child: Expanded(
-                  flex: 1,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(color: kColorLightGrey001),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: ElevatedButton(
-                          onPressed: cancelUpdate,
-                          child: Text('Cancel'),
-                          style: kButtonStyleCancel,
+                //
+                // create patrol
+                //
+                Visibility(
+                  visible: mode == MODE.READ_ONLY,
+                  child: Expanded(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(color: kPatrolLight002),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(color: kColorLightGrey001),
-                      ),
-                      Expanded(
-                        flex: 3,
-                        child: ElevatedButton(
-                          onPressed: updatePatrol,
-                          child: Text('Update'),
-                          style: kButtonStyleUpdate,
+                        Expanded(
+                          flex: 3,
+                          child: ElevatedButton(
+                            onPressed: goToPatrols,
+                            child: Text('Patrols'),
+                          ),
                         ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Container(color: kColorLightGrey001),
-                      ),
-                    ],
+                        Expanded(
+                          flex: 1,
+                          child: Container(color: kPatrolLight002),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: ElevatedButton(
+                            onPressed: goToPatrolDetails,
+                            child: Text('Patrol Details'),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(color: kPatrolLight002),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Container(color: kColorLightGrey001),
-              ),
-            ],
+                Visibility(
+                  visible: mode == MODE.UPDATE,
+                  child: Expanded(
+                    flex: 1,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(color: kPatrolLight002),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: ElevatedButton(
+                            onPressed: cancelUpdate,
+                            child: Text('Cancel'),
+                            style: kButtonStyleCancel,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(color: kPatrolLight002),
+                        ),
+                        Expanded(
+                          flex: 3,
+                          child: ElevatedButton(
+                            onPressed: updatePatrol,
+                            child: Text('Update'),
+                            style: kButtonStyleUpdate,
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Container(color: kPatrolLight002),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Container(color: kPatrolLight002),
+                ),
+              ],
+            ),
           ),
         ),
       ),

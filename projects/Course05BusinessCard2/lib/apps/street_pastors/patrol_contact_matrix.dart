@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_teaching_app/models/patrol_conversation.dart';
-import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../models/patrol.dart';
-import 'package:flutter_teaching_app/constants.dart';
-import '../../models/patrol_conversation.dart';
+import 'patrol_conversations.dart';
 
 class PatrolContactMatrix extends StatefulWidget {
   const PatrolContactMatrix({Key? key, required this.patrol}) : super(key: key);
@@ -113,6 +110,19 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
     }
   }
 
+  //
+  // navigation
+  //
+  goToConversations() {
+    print('going to conversations screen');
+    Navigator.of(context).push(MaterialPageRoute<Patrol>(
+        builder: (context) => PatrolConversations(patrol: patrol)));
+  }
+
+  //
+  // update fields
+  //
+
   updateGender(int index) {
     gender = genders[index].toString();
     print('selected gender is $gender');
@@ -151,9 +161,9 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
     });
   }
 
-  goToConversations() {
-    print('going to conversations screen');
-  }
+  //
+  // update database
+  //
 
   submitContact() async {
     int selectedGenderIndex = -1;
@@ -201,8 +211,6 @@ class _PatrolContactMatrixState extends State<PatrolContactMatrix> {
 
     try {
       final patrolToUpdate = {
-        'contactName': contactName,
-        'conversationNotes': conversationNotes,
         'male': male,
         'female': female,
         'ageZeroTo12': ageZeroTo12,

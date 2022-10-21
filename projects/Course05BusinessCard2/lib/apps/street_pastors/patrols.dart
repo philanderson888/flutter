@@ -1,9 +1,6 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_teaching_app/constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_teaching_app/models/patrol_conversation.dart';
 import 'new_patrol.dart';
 import 'package:intl/intl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -59,6 +56,10 @@ class _PatrolsState extends State<Patrols> {
     peopleToSafetyCount2: 0,
     conversations2: [],
   );
+
+  //
+  // initialise
+  //
 
   @override
   initState() {
@@ -119,18 +120,18 @@ class _PatrolsState extends State<Patrols> {
       var bottleCount = item.data()['bottleCount'] ?? 0;
       var peopleHelpedCount = item.data()['peopleHelpedCount'] ?? 0;
       var peopleToSafetyCount = item.data()['peopleToSafetyCount'] ?? 0;
-      var male = item.data()['male'];
-      var female = item.data()['female'];
+      var male = item.data()['male'] ?? 0;
+      var female = item.data()['female'] ?? 0;
 
       var ageZeroTo12 = item.data()['ageZeroTo12'] ?? 0;
       var age13To17 = item.data()['age13To17'] ?? 0;
       var age18To24 = item.data()['age18To24'] ?? 0;
       var age25AndOver = item.data()['age25AndOver'] ?? 0;
 
-      var ethnicWhite = item.data()['ethnicWhite'];
-      var ethnicAfroCaribbean = item.data()['ethnicAfroCaribbean'];
-      var ethnicAsian = item.data()['ethnicAsian'];
-      var ethnicEastEuropean = item.data()['ethnicEastEuropean'];
+      var ethnicWhite = item.data()['ethnicWhite'] ?? 0;
+      var ethnicAfroCaribbean = item.data()['ethnicAfroCaribbean'] ?? 0;
+      var ethnicAsian = item.data()['ethnicAsian'] ?? 0;
+      var ethnicEastEuropean = item.data()['ethnicEastEuropean'] ?? 0;
 
       print('start date as timestamp seconds ${startDate.seconds}');
       var startDateAsDate = startDate.toDate();
@@ -149,17 +150,6 @@ class _PatrolsState extends State<Patrols> {
       conversations.forEach((conversationString) {
         print('conversation string is $conversationString');
       });
-
-      /*
-      List<PatrolConversation> conversationsList = [];
-      for (var conversation in conversations) {
-        var conversationClass = PatrolConversation(
-            name2: conversation['name'], notes2: conversation['notes']);
-        conversationsList.add(conversationClass);
-        print(
-            'conversation name ${conversationClass.name} notes ${conversationClass.notes}');
-      }
-       */
 
       final membersAsDynamic = item.data()['membersList'];
       membersList = List<String>.from(membersAsDynamic);
@@ -266,10 +256,18 @@ class _PatrolsState extends State<Patrols> {
     }
   }
 
+  //
+  // refresh data
+  //
+
   refreshPatrols() {
     print('refreshing patrol list');
     getPatrols();
   }
+
+  //
+  // navigation
+  //
 
   viewEditPatrol(int patrolIndex) {
     print(
@@ -286,89 +284,89 @@ class _PatrolsState extends State<Patrols> {
         child: Column(
           children: [
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
-                color: kColorLightGrey001,
+                color: kPatrolLight002,
               ),
             ),
             Expanded(
-              flex: 1,
-              child: Container(
-                color: kColorLightGrey003,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 6,
-                      child: Container(
-                        color: kColorLightGrey004,
-                      ),
+              flex: 3,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 6,
+                    child: Container(
+                      color: kPatrolLight002,
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: kColorLightGrey005,
-                        child: GestureDetector(
-                          onTap: () {
-                            refreshPatrols();
-                          },
-                          child: Container(
-                            child: Center(
-                              child: Text(
-                                'Refresh Patrols',
-                                textAlign: TextAlign.center,
-                              ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: kPatrolDark002,
+                      child: GestureDetector(
+                        onTap: () {
+                          refreshPatrols();
+                        },
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              'Refresh Patrols',
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: kColorLightGrey004,
-                      ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: kPatrolLight002,
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: kColorLightGrey004,
-                      ),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: kColorLightGrey005,
-                        child: GestureDetector(
-                          onTap: () {
-                            print('new patrol');
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const NewPatrol()));
-                          },
-                          child: Container(
-                            child: Center(
-                              child: Text(
-                                'New Patrol',
-                                textAlign: TextAlign.center,
-                              ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: kPatrolDark002,
+                      child: GestureDetector(
+                        onTap: () {
+                          print('new patrol');
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const NewPatrol()));
+                        },
+                        child: Container(
+                          child: Center(
+                            child: Text(
+                              'New Patrol',
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),
                       ),
                     ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                        color: kColorLightGrey004,
-                      ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      color: kPatrolLight002,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
             Expanded(
               flex: 1,
               child: Container(
-                color: kColorLightGrey002,
+                color: kPatrolLight002,
+              ),
+            ),
+            //
+            // patrols header
+            //
+            Expanded(
+              flex: 3,
+              child: Container(
+                color: kPatrolLight002,
                 child: Center(
                   child: Text(
                     'Patrols',
@@ -378,9 +376,18 @@ class _PatrolsState extends State<Patrols> {
               ),
             ),
             Expanded(
-              flex: 7,
+              flex: 1,
               child: Container(
-                color: kColorLightGrey002,
+                color: kPatrolLight002,
+              ),
+            ),
+            //
+            // patrols list view
+            //
+            Expanded(
+              flex: 24,
+              child: Container(
+                color: kPatrolLight002,
                 child: ListView.builder(
                     itemCount: patrols.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -391,47 +398,57 @@ class _PatrolsState extends State<Patrols> {
                         onDoubleTap: () {
                           viewEditPatrol(index);
                         },
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    patrols[index].getStartDate(),
-                                    style: kTextStyle15,
+                        child: Column(
+                          children: [
+                            Container(
+                              height: 5,
+                            ),
+                            Center(
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: Text(
+                                        patrols[index].getStartDate(),
+                                        style: kTextStyle15,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    patrols[index].leaderName,
-                                    style: kTextStyle15,
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: Text(
+                                        patrols[index].leaderName,
+                                        style: kTextStyle15,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Center(
-                                  child: Text(
-                                    patrols[index].location,
-                                    style: kTextStyle15,
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      child: Text(
+                                        patrols[index].location,
+                                        style: kTextStyle15,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                            Container(
+                              height: 5,
+                            ),
+                          ],
                         ),
                       );
                     }),
               ),
             ),
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
-                color: kColorLightGrey001,
+                color: kPatrolLight002,
               ),
             ),
           ],

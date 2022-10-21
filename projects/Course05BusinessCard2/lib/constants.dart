@@ -31,9 +31,12 @@ var kSuperLightSkyBlue = const Color(0xFFD1D3E8);
 var kSuperLight = const Color(0xFFe1edec);
 
 var kGold = const Color(0xFFF2B64B);
+var kColorRed001 = const Color(0xFFC55D4C);
+
+var kCancelButtonRed2 = const Color(0xFFC63A3A);
 var kCerise = const Color(0xFFE31D6B);
+
 var kUpdateButtonGreen = const Color(0xFF78bf68);
-var kCancelButtonRed = const Color(0xFFC55D4C);
 
 Map<int, Color> color = {
   50: const Color.fromRGBO(136, 14, 79, .1),
@@ -51,6 +54,13 @@ Map<int, Color> color = {
 MaterialColor materialColorPurple = MaterialColor(0xFFAB47BC, color);
 var kBmiSliderColor = const Color(0xFF8D8E98);
 var kBmiPrimaryColor = const Color(0xFF0A0E21);
+
+// App specific background colours
+var kPatrolLight001 = kColorLightGrey001;
+var kPatrolLight002 = kColorLightGrey002;
+var kPatrolLight003 = kColorLightGrey003;
+var kPatrolDark001 = kColorLightGrey004;
+var kPatrolDark002 = kColorLightGrey005;
 
 // Text Styles
 
@@ -181,11 +191,19 @@ var kButtonStyleAppHeader = ButtonStyle(
 );
 
 var kButtonStyleCancel = ButtonStyle(
-  backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
+  backgroundColor: MaterialStateProperty.all<Color>(kColorRed001),
 );
 
 var kButtonStyleUpdate = ButtonStyle(
   backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+);
+
+var kButtonStyleDark001 = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(kPatrolDark001),
+);
+
+var kButtonStyleDark002 = ButtonStyle(
+  backgroundColor: MaterialStateProperty.all<Color>(kPatrolDark002),
 );
 
 // Form Input
