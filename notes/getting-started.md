@@ -3,11 +3,14 @@
 ## table of contents
 - [getting started](#getting-started)
   - [table of contents](#table-of-contents)
+  - [changelog](#changelog)
   - [getting started with an online ide](#getting-started-with-an-online-ide)
   - [samples](#samples)
   - [references](#references)
-  - [install java](#install-java)
-  - [dart sdk](#dart-sdk)
+  - [install java (not required any more - updated note 2023)](#install-java-not-required-any-more---updated-note-2023)
+  - [flutter sdk](#flutter-sdk)
+  - [verify install](#verify-install)
+  - [visual studio](#visual-studio)
   - [android sdk](#android-sdk)
     - [updating sdk](#updating-sdk)
   - [emulator](#emulator)
@@ -17,8 +20,6 @@
   - [device manager](#device-manager)
   - [using docker image with android studio](#using-docker-image-with-android-studio)
   - [device manager](#device-manager-1)
-  - [install flutter sdk](#install-flutter-sdk)
-  - [verify install](#verify-install)
     - [configure android studio path](#configure-android-studio-path)
     - [accept android licenses](#accept-android-licenses)
     - [install android studio command line tools](#install-android-studio-command-line-tools)
@@ -38,7 +39,20 @@
   - [app name](#app-name)
   - [app icon](#app-icon)
   - [app images](#app-images)
+  - [installing on mac](#installing-on-mac)
+    - [download](#download)
+    - [add flutter to path](#add-flutter-to-path)
+    - [flutter doctor](#flutter-doctor)
+    - [cocoapods](#cocoapods)
+    - [xcode](#xcode)
+    - [simulator](#simulator)
+    - [hello world](#hello-world-2)
   - [next steps](#next-steps)
+
+## changelog
+
+- 27/04/2023
+  - updated install process
 
 ## getting started with an online ide
 
@@ -66,7 +80,9 @@ please see the following references for further help with regards to installing 
 
 - https://www.javatpoint.com/flutter-installation
 
-## install java
+## install java (not required any more - updated note 2023)
+
+*** updated note 2023 - flutter includes its own version of java sdk and recommends that you use the version bundled with flutter, so no need to separately pre-install java sdk ***
 
 following steps in this youtube video https://www.youtube.com/watch?v=0zx_eFyHRU0
 
@@ -116,20 +132,82 @@ javac 17.0.2
 */
 ```
 
-## dart sdk
 
-unzip to c:\dart and add to path
+## flutter sdk
+
+unzip to eg `c:\sdk\flutter` and add to path eg `c:\sdk\flutter\bin`
+
+restart windows and run the commands
+
+```powershell
+cd $env:
+ls
+echo $env:PATH
+$env:PATH = $env:PATH + "c:\flutter\bin;"
+restart-computer
+# after restart
+flutter
+flutter doctor
+dart
+# show install locations on mac
+where flutter dart
+# show install locations on windows
+where.exe flutter dart
+/*
+c:\sdk\flutter\bin\flutter
+c:\sdk\flutter\bin\flutter.bat
+c:\sdk\flutter\bin\dart
+c:\sdk\flutter\bin\dart.bat
+*/
+```
+
+next run this command 
+
+```powershell
+flutter doctor
+```
+
+This should identify which programs need to be installed for the full flutter experience to work properly.
+
+```
+PS C:\github> flutter doctor
+Running "flutter pub get" in flutter_tools...                      10.8s
+Doctor summary (to see all details, run flutter doctor -v):
+[√] Flutter (Channel stable, 2.2.3, on Microsoft Windows [Version 10.0.19043.1165], locale en-GB)
+[!] Android toolchain - develop for Android devices (Android SDK version 31.0.0)
+    X cmdline-tools component is missing
+      Run `path/to/sdkmanager --install "cmdline-tools;latest"`
+      See https://developer.android.com/studio/command-line for more details.
+    X Android license status unknown.
+      Run `flutter doctor --android-licenses` to accept the SDK licenses.
+      See https://flutter.dev/docs/get-started/install/windows#android-setup for more details.
+[√] Chrome - develop for the web
+[!] Android Studio (not installed)
+[√] IntelliJ IDEA Community Edition (version 2020.2)
+[√] VS Code, 64-bit edition (version 1.58.2)
+[√] Connected device (2 available)
+```
+
+to install the command line tools go to `Android Studio => Tools => SDK Manager => Tools tab` and tick `Command Line Tools`
+
+## verify install
+
+check the install has worked by running
+
+```bash
+flutter doctor
+```
+
+
+
+## visual studio
+
+flutter doctor should highlight that `visual studio` should be installed - please go ahead and download and install it from https://visualstudio.microsoft.com/downloads
+
 ## android sdk
 
-can separately download this and put it wherever you want and perhaps add it to path
+download and unzip this to eg c:\sdk\android\sdk and add to path
 
-default is `~\AppData\Local\Android\Sdk`
-
-notice that we need this whenever we create a new project ie
-
-file=>new=>flutter project
-
-the path to the SDK is present.
 
 ### updating sdk
 
@@ -160,7 +238,7 @@ Pixel_3_API_27_2
 
 ## install android studio
 
-install android studio from https://developer.android.com/studio before installing `flutter`
+install android studio from https://developer.android.com/studio 
 
 Android Studio will install at `C:\Program Files\Android\Android Studio` and the binary at`C:\Program Files\Android\Android Studio\bin`
 
@@ -215,95 +293,6 @@ if we are getting the message that the emulator is not running we can go to `C:\
 
 
 
-## install flutter sdk
-
-download the flutter sdk from https://flutter.dev/docs/get-started/install and extract to a folder such as c:\flutter 
-
-add `c:\flutter\bin` to `path` and restart the computer
-
-```powershell
-# does this work? maybe not, try it but then do it manual way
-cd $env:
-ls
-echo $env:PATH
-$env:PATH = $env:PATH + "c:\flutter\bin;"
-restart-computer
-# after restart
-flutter
-```
-
-On Windows, to do this, complete the following steps
-1. Hit the Windows key
-2. Type `env`
-3. Select `edit system environment variables`
-4. Choose `environment variables`
-5. In `system variables` find `path` and click `edit` 
-6. Click `new` to add a new entry to the path variables
-7. Paste `c:\users\username\flutter\bin`
-8. Press OK several times to save and exit
-   
-*note - changes may not take place until after a windows restart*
-
-to test this has worked, simply run these commands
-
-```js
-flutter
-dart
-//show install locations on mac
-where flutter dart
-// show install locations on windows
-where.exe flutter dart
-/*
-c:\Users\phila\flutter\bin\flutter
-c:\Users\phila\flutter\bin\flutter.bat
-c:\Users\phila\flutter\bin\dart
-c:\Users\phila\flutter\bin\dart.bat
-*/
-```
-
-and if the install has worked, these commands will produce output with further options
-
-```js
-c:\Users\phila\flutter\bin\flutter
-c:\Users\phila\flutter\bin\flutter.bat
-c:\Users\phila\flutter\bin\dart
-c:\Users\phila\flutter\bin\dart.bat
-```
-
-next run this command 
-
-```js
-flutter doctor
-```
-
-This should identify which programs need to be installed for the full flutter experience to work properly.
-
-```
-PS C:\github> flutter doctor
-Running "flutter pub get" in flutter_tools...                      10.8s
-Doctor summary (to see all details, run flutter doctor -v):
-[√] Flutter (Channel stable, 2.2.3, on Microsoft Windows [Version 10.0.19043.1165], locale en-GB)
-[!] Android toolchain - develop for Android devices (Android SDK version 31.0.0)
-    X cmdline-tools component is missing
-      Run `path/to/sdkmanager --install "cmdline-tools;latest"`
-      See https://developer.android.com/studio/command-line for more details.
-    X Android license status unknown.
-      Run `flutter doctor --android-licenses` to accept the SDK licenses.
-      See https://flutter.dev/docs/get-started/install/windows#android-setup for more details.
-[√] Chrome - develop for the web
-[!] Android Studio (not installed)
-[√] IntelliJ IDEA Community Edition (version 2020.2)
-[√] VS Code, 64-bit edition (version 1.58.2)
-[√] Connected device (2 available)
-```
-
-## verify install
-
-check the install has worked by running
-
-```bash
-flutter doctor
-```
 
 ### configure android studio path
 
