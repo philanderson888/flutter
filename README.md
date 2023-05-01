@@ -38,6 +38,8 @@ This is a respository for learning flutter from scratch
   - [performance](#performance)
   - [geolocation](#geolocation)
   - [firebase](#firebase)
+  - [debugging your app](#debugging-your-app)
+  - [publishing your app](#publishing-your-app)
 
 
 ## author
@@ -238,3 +240,14 @@ A list of all projects is below
 ## firebase
 
 [firebase](notes/firebase.md)
+
+
+## debugging your app
+
+[debugging](notes/debugging.md)
+
+## publishing your app
+
+[publishing](notes/debugging.md)
+
+

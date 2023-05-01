@@ -9,6 +9,7 @@
   - [add firebase to android app](#add-firebase-to-android-app)
   - [install Flutter CLI](#install-flutter-cli)
   - [commands to use](#commands-to-use)
+  - [2023 update](#2023-update)
   - [initialise the app to use Firebase](#initialise-the-app-to-use-firebase)
   - [add libraries](#add-libraries)
   - [register user](#register-user)
@@ -81,16 +82,36 @@ flutterfire configure
 firebase 
 ```
 
+## 2023 update
+
+just following this to activate flutter fire
+
+https://firebase.google.com/docs/flutter/setup?platform=android
+https://firebase.google.com/docs/android/setup
+
+```powershell
+firebase login
+dart pub global activate flutterfire_cli
+flutterfire configure
+# Platform  Firebase App Id
+# web       1:589695807592:web:a878078901ab2c4cc98bdd
+# android   1:589695807592:android:9b2ef5a5f998df0bc98bdd
+
+```
+
 ## initialise the app to use Firebase
 
 ```java
 // add this library
+import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 // amend this code 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 ```
