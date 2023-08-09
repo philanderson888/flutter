@@ -53,6 +53,8 @@
 
 - 27/04/2023
   - updated install process
+- 08/08/2023
+  - added install for MAC
 
 ## getting started with an online ide
 
@@ -74,11 +76,18 @@ to see examples of samples available online please see
   - material design icons 
     - https://fonts.google.com/icons
     - https://www.materialpalette.com/icons
+
 ## references
 
 please see the following references for further help with regards to installing and getting started with using flutter
 
 - https://www.javatpoint.com/flutter-installation
+
+## install instructions for windows
+
+please see at the bottom for install instructions for mac
+
+the instructions below are for Windows
 
 ## install java (not required any more - updated note 2023)
 
@@ -343,6 +352,76 @@ Restart Android Studio
 ```
 
 now can select File, New, Flutter Project
+
+
+
+
+## install flutter on mac
+
+the following are instructions to install flutter on a MAC
+
+### install vscode
+
+install VSCode from https://code.visualstudio.com/download
+
+###
+
+add vscode to path 
+
+```
+command-shift-p
+choose 'Shell Command: Install 'code' command in path
+```
+
+### install xcode
+
+install xcode from the apple app store
+
+xcode will include git which is required for this install
+
+git can be installed separately but it is recommended to use xcode anyway, so this step is recommended by the flutter team
+
+### install rosetta tools
+
+if you are on an apple silicon mac, follow these steps
+
+```bash
+sudo softwareupdate --install-rosetta
+# Install of Rosetta 2 finished successfully
+```
+
+### install flutter sdk
+
+download flutter sdk from https://docs.flutter.dev/get-started/install
+
+```
+mv zip-file to-desired-location
+unzip zip-file
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ##  hello world
 
