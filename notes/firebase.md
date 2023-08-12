@@ -80,6 +80,22 @@ flutterfire configure
 // android   1:702377681303:android:8f9cc9df10f41b92d0a4d2
 ```
 
+## install flutter CLI on MAC
+
+```bash
+curl -sL https://firebase.tools | bash
+curl -sL firebase.tools | upgrade=true bash
+```
+
+
+## login to firebase cli
+
+```bash
+firebase login
+firebase projects:list
+firebase init
+```
+
 ## commands to use 
 
 ```java
@@ -87,7 +103,7 @@ flutterfire configure
 firebase 
 ```
 
-## 2023 update
+## activate flutter fire
 
 just following this to activate flutter fire
 
@@ -102,6 +118,30 @@ flutterfire configure
 # web       1:589695807592:web:a878078901ab2c4cc98bdd
 # android   1:589695807592:android:9b2ef5a5f998df0bc98bdd
 
+```
+
+
+## activate flutter fire mac
+
+```bash
+dart pub global activate flutterfire_cli
+flutterfire configure
+# phil@philips-air street_pastors % flutterfire configure
+# i Found 8 Firebase projects. Selecting project streetpastors-4f654.             
+# ? Which platforms should your configuration support 
+# (use arrow keys & space to s✔ Which platforms should your configuration support (use arrow keys & space to select)? · android, ios, web 
+# i Firebase android app uk.co.philanderson.street_pastors registered.            
+# i Firebase ios app uk.co.philanderson.streetPastors is not registered on Firebase project streetpastors-4f654.
+# i Registered a new Firebase ios app on Firebase project streetpastors-4f654.    
+# i Firebase web app street_pastors (web) registered.                             
+# ? Generated FirebaseOptions file lib/firebase_options.dart already exists, do yo? Generated FirebaseOptions file lib/firebase_options.dart already exists, do yo✔ Generated FirebaseOptions file lib/firebase_options.dart already exists, do you want to override it? · yes 
+
+# Firebase configuration file lib/firebase_options.dart generated successfully with the following Firebase apps:
+
+# Platform  Firebase App Id
+# web       1:589695807592:web:a878078901ab2c4cc98bdd
+# android   1:589695807592:android:9b2ef5a5f998df0bc98bdd
+# ios       1:589695807592:ios:5f01c8f9e9fff4a0c98bdd
 ```
 
 ## initialise the app to use Firebase
