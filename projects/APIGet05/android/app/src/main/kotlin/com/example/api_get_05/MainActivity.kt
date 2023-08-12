@@ -1,4 +1,4 @@
-package com.example.APIGet01
+package com.example.api_get_05
 
 import io.flutter.embedding.android.FlutterActivity
 
