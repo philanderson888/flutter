@@ -44,7 +44,7 @@ class Album {
   final int id;
   final String title;
 
-  Album({this.userId, this.id, this.title});
+  Album({this.userId = 0, this.id = 0, this.title = " "});
 
   factory Album.fromJson(Map<String, dynamic> json) {
     return Album(
@@ -58,7 +58,7 @@ class Album {
 void main() => runApp(MyApp());
 
 class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -69,9 +69,9 @@ class _MyAppState extends State<MyApp> {
   List<Color> cardColors = [];
   String cardColorString = "blue";
   // holds one album
-  Future<Album> futureAlbum;
+  late Future<Album> futureAlbum;
   // holds list of albums
-  Future<List<Album>> futureAlbums;
+  late Future<List<Album>> futureAlbums;
   @override
   void initState() {
     super.initState();
@@ -121,7 +121,7 @@ class _MyAppState extends State<MyApp> {
               future: futureAlbum,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  String output = snapshot.data.title;
+                  String output = ''; // snapshot.data.title;
                   return Container(
                     alignment: Alignment.center,
                     padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
@@ -150,50 +150,50 @@ class _MyAppState extends State<MyApp> {
               flex: 1,
               fit: FlexFit.tight,
               child: FutureBuilder<List<Album>>(
-                future: futureAlbums,
-                builder: (context, snapshot) {
-                  assert(debugCheckHasMaterial(context));
-                  if (snapshot.hasData) {
-                    List<Album> dataList = snapshot.data;
-                    for (var i = 0; i< dataList.length - 1; i++){
-                      cardColors.add(Colors.blue);
-                    }
-                    return ListView.builder(
-                      itemCount: dataList.length,
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap:true,
-                      itemBuilder: (context, index){
-                        var album = dataList[index];
-                        String output = album.id.toString() + ' ' + album.userId.toString() + ' ' + album.title;
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            GestureDetector(
-                              child: ConstrainedBox(
-                                constraints: BoxConstraints(
-                                  minWidth: 600.0
-                                ),
-                                child: Card(
-                                  child: Padding(
-                                    padding: EdgeInsets.all(5.0),
-                                    child: Text(output),
+                  future: futureAlbums,
+                  builder: (context, snapshot) {
+                    assert(debugCheckHasMaterial(context));
+                    if (snapshot.hasData) {
+                      List<Album>? dataList = snapshot.data;
+                      for (var i = 0; i< dataList!.length - 1; i++){
+                        cardColors.add(Colors.blue);
+                      }
+                      return ListView.builder(
+                        itemCount: dataList.length,
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap:true,
+                        itemBuilder: (context, index){
+                          var album = dataList[index];
+                          String output = album.id.toString() + ' ' + album.userId.toString() + ' ' + album.title;
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              GestureDetector(
+                                  child: ConstrainedBox(
+                                    constraints: BoxConstraints(
+                                        minWidth: 600.0
+                                    ),
+                                    child: Card(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Text(output),
+                                      ),
+                                      color: cardColors[index],
+                                    ),
                                   ),
-                                  color: cardColors[index],                                
-                                ),
+                                  onTap: (){
+                                    _toggleCardColor(index);
+                                    print('you clicked on this card with content $output');
+                                  }
                               ),
-                              onTap: (){ 
-                                _toggleCardColor(index);
-                                print('you clicked on this card with content $output');
-                              }
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  } else {
-                    return CircularProgressIndicator();
+                            ],
+                          );
+                        },
+                      );
+                    } else {
+                      return CircularProgressIndicator();
+                    }
                   }
-                }
               ),
             ),
           ],
