@@ -18,6 +18,11 @@
   - [read records](#read-records)
   - [update](#update)
   - [delete](#delete)
+  - [update for MAC](#update-for-mac)
+  - [install flutter CLI](#install-flutter-cli-1)
+  - [log in to firebase](#log-in-to-firebase)
+  - [initiate firebase for your projects](#initiate-firebase-for-your-projects)
+  - [install private files](#install-private-files)
 
 ## getting started
 
@@ -310,3 +315,39 @@ deleteChatText() {
   });
 }
 ```
+
+## update for MAC
+
+to update these steps for MAC please add the following steps
+
+## install flutter CLI
+
+```bash
+curl -sL https://firebase.tools | bash
+curl -sL https://firebase.tools | upgrade=true bash
+```
+
+## log in to firebase
+
+```bash
+firebase login
+```
+
+## initiate firebase for your projects
+
+```bash
+firebase projects:list
+```
+
+## install private files
+
+we have certain private files which are not published to github and therefore must be part of your `gitignore` file
+
+please check now that they are indeed part of your `gitignore` file and add them to your project
+
+- android/app/google-services.json
+- lib/firebase_options.dart
+
+
+the app should now compile and run for Android on your MAC
+
