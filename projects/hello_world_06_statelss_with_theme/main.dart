@@ -1,3 +1,5 @@
+// hello world totally minimal stateless widget
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,6 +15,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const Text('hello world from phil2'));
+        home: const Text('hello world - stateless - using build, title and a theme'));
   }
 }
