@@ -1,4 +1,4 @@
-// first hello world app that actually looks nice - stateless
+// hello world stateful app with counter
 
 import 'package:flutter/material.dart';
 
