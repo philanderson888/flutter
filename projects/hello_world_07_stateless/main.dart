@@ -61,7 +61,7 @@ class MyScaffold extends StatelessWidget {
           ),
           const Expanded(
             child: Center(
-              child: Text('Hello, world!'),
+              child: Text('Hello, world!  \n\nthis is the first app\n\nto look nice'),
             ),
           ),
         ],
