@@ -1,3 +1,9 @@
+// icon button
+
+// single button on the screen
+
+// responds to click events
+
 import 'package:flutter/material.dart';
 void main() => runApp(const App());
 class App extends StatelessWidget {
