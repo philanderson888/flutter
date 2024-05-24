@@ -1,73 +1,155 @@
-// button
-
-// increment with visible counter on the screen
-
-// and event logic prints out to the console as well
-
+// #region import
 import 'package:flutter/material.dart';
 
-class Counter extends StatefulWidget {
-  // This class is the configuration for the state.
-  // It holds the values (in this case nothing) provided
-  // by the parent and used by the build  method of the
-  // State. Fields in a Widget subclass are always marked
-  // "final".
-
-  const Counter({Key? key}) : super(key: key);
-
-  @override
-  _CounterState createState() => _CounterState();
+// #endregion
+// #region main
+void main() {
+  runApp(const App());
 }
 
-class _CounterState extends State<Counter> {
-  int _counter = 0;
-
-  void _increment() {
-    setState(() {
-      // This call to setState tells the Flutter framework
-      // that something has changed in this State, which
-      // causes it to rerun the build method below so that
-      // the display can reflect the updated values. If you
-      // change _counter without calling setState(), then
-      // the build method won't be called again, and so
-      // nothing would appear to happen.
-      _counter++;
-    });
-    // ignore: avoid_print
-    print('button has been clicked ' + _counter.toString() + ' times');
-  }
-
+// #endregion
+// #region App => MaterialApp => Home page
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+  static const String _title = 'Flutter';
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called,
-    // for instance, as done by the _increment method above.
-    // The Flutter framework has been optimized to make
-    // rerunning build methods fast, so that you can just
-    // rebuild anything that needs updating rather than
-    // having to individually changes instances of widgets
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        ElevatedButton(
-          onPressed: _increment,
-          child: const Text('Increment', textDirection: TextDirection.ltr),
-        ),
-        const SizedBox(width: 16),
-        Text('Count: $_counter'),
-      ],
+    return MaterialApp(
+      title: _title,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Home(title: _title),
     );
   }
 }
 
-void main() {
-  runApp(
-    const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Counter(),
-        ),
-      ),
-    ),
-  );
+// #endregion
+// #region Home state => _HomeState
+class Home extends StatefulWidget {
+  const Home({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  State<Home> createState() => _HomeState();
 }
+
+// #endregion
+// #region _HomeState extends state
+class _HomeState extends State<Home> {
+  // #region initialise variables
+  int _counter = 0;
+  bool _ok = false;
+  bool _cancel = false;
+  // #endregion
+  // #region incrementCounter()
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _registerAlertOK() {
+    setState(() {
+      _ok = true;
+      _cancel = false;
+      _counter++;
+    });
+    print('ok set to $_ok');
+  }
+
+  void _registerAlertCancel() {
+    setState(() {
+      _ok = false;
+      _cancel = true;
+      _counter++;
+    });
+    print('_cancel set to $_cancel');
+  }
+
+  // #endregion
+  // #region widget builder
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // #region app bar
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      // #endregion
+      // #region body
+      body: Center(
+        // #region column
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.orange,
+                  textStyle: const TextStyle(fontSize: 20)),
+              onPressed: () => {
+                _incrementCounter(),
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('This is an alert'),
+                    content: const Text('This is an alert description.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => {
+                          print('You pressed "cancel"'),
+                          _registerAlertCancel(),
+                          Navigator.pop(context, 'Cancel')
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => {
+                          _registerAlertOK(),
+                          print('You pressed "OK"'),
+                          Navigator.pop(context, 'OK')
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                ),
+              },
+              child: const Text('Show Dialog'),
+            ),
+            Visibility(
+              child: const Text(
+                'You pressed OK button - well done',
+              ),
+              visible: _ok,
+            ),
+            Visibility(
+              child: const Text(
+                'You pressed the cancel button this time to cancel the dialog',
+              ),
+              visible: _cancel,
+            ),
+          ],
+        ),
+        // #endregion
+      ),
+      // #endregion
+      // #region floating action button
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+      // #endregion
+    );
+  }
+// #endregion
+}
+// #endregion
