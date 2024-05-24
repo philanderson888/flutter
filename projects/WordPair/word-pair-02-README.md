@@ -99,7 +99,7 @@ However it's not running by default from VSCode but demands a path to the file `
     "configurations": [
         {
             "name": "Dart",
-            "program": "c:/github/flutter/Projects/WordPair01/lib/main.dart",
+            "program": "c:/github/flutter/projects/WordPair01/lib/main.dart",
             "request": "launch",
             "type": "dart"
         }
@@ -189,7 +189,7 @@ However it's not running by default from VSCode but demands a path to the file `
     "configurations": [
         {
             "name": "Dart",
-            "program": "c:/github/flutter/Projects/WordPair01/lib/main.dart",
+            "program": "c:/github/flutter/projects/WordPair01/lib/main.dart",
             "request": "launch",
             "type": "dart"
         }

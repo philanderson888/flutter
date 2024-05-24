@@ -60,7 +60,7 @@ Control-F5
     "configurations": [
         {
             "name": "Dart",
-            "program": "c:/github/flutter/Projects/WordPair03/lib/main.dart",
+            "program": "c:/github/flutter/projects/WordPair03/lib/main.dart",
             "request": "launch",
             "type": "dart"
         }
