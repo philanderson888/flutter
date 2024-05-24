@@ -1,3 +1,7 @@
+// button 02
+
+// click the run console to view the output logs on click event
+
 import 'package:flutter/material.dart';
 
 class MyButton extends StatelessWidget {
@@ -19,9 +23,10 @@ class MyButton extends StatelessWidget {
           color: Colors.lightGreen[500],
         ),
         child: const Center(
-          child: Text('Engage'),
+          child: Text('Click button Then View Logs\nTo See Click Event Output ...'),
         ),
       ),
+
     );
   }
 }
