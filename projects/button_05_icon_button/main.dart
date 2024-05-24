@@ -1,3 +1,9 @@
+// navigation
+
+// just switch between two screens
+
+// also contains icon button which is nice
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const MyApp());
