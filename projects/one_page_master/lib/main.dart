@@ -1,32 +1,61 @@
-// button 02
+// button
 
-// click the run console to view the output logs on click event
+// increment with visible counter on the screen
+
+// and event logic prints out to the console as well
 
 import 'package:flutter/material.dart';
 
-class MyButton extends StatelessWidget {
-  const MyButton({Key? key}) : super(key: key);
+class Counter extends StatefulWidget {
+  // This class is the configuration for the state.
+  // It holds the values (in this case nothing) provided
+  // by the parent and used by the build  method of the
+  // State. Fields in a Widget subclass are always marked
+  // "final".
+
+  const Counter({Key? key}) : super(key: key);
+
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+  int _counter = 0;
+
+  void _increment() {
+    setState(() {
+      // This call to setState tells the Flutter framework
+      // that something has changed in this State, which
+      // causes it to rerun the build method below so that
+      // the display can reflect the updated values. If you
+      // change _counter without calling setState(), then
+      // the build method won't be called again, and so
+      // nothing would appear to happen.
+      _counter++;
+    });
+    // ignore: avoid_print
+    print('button has been clicked ' + _counter.toString() + ' times');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // ignore: avoid_print
-        print('MyButton was tapped!');
-      },
-      child: Container(
-        height: 50.0,
-        padding: const EdgeInsets.all(8.0),
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: Colors.lightGreen[500],
+    // This method is rerun every time setState is called,
+    // for instance, as done by the _increment method above.
+    // The Flutter framework has been optimized to make
+    // rerunning build methods fast, so that you can just
+    // rebuild anything that needs updating rather than
+    // having to individually changes instances of widgets
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        ElevatedButton(
+          onPressed: _increment,
+          child: const Text('Increment', textDirection: TextDirection.ltr),
         ),
-        child: const Center(
-          child: Text('Click button Then View Logs\nTo See Click Event Output ...'),
-        ),
-      ),
-
+        const SizedBox(width: 16),
+        Text('Count: $_counter'),
+      ],
     );
   }
 }
@@ -36,7 +65,7 @@ void main() {
     const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: MyButton(),
+          child: Counter(),
         ),
       ),
     ),

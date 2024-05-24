@@ -1,3 +1,9 @@
+// button
+
+// increment with visible counter on the screen
+
+// and event logic prints out to the console as well
+
 import 'package:flutter/material.dart';
 
 class Counter extends StatefulWidget {
@@ -38,9 +44,9 @@ class _CounterState extends State<Counter> {
     // The Flutter framework has been optimized to make
     // rerunning build methods fast, so that you can just
     // rebuild anything that needs updating rather than
-    // having to individually changes instances of widgets.
+    // having to individually changes instances of widgets
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,  
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         ElevatedButton(
