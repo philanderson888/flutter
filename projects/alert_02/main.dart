@@ -1,3 +1,5 @@
+// alert_02
+
 // #region import
 import 'package:flutter/material.dart';
 
@@ -94,7 +96,7 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.orange,
                   textStyle: const TextStyle(fontSize: 20)),
-              onPressed: () => { 
+              onPressed: () => {
                 _incrementCounter(),
                 showDialog<String>(
                   context: context,
@@ -150,6 +152,6 @@ class _HomeState extends State<Home> {
       // #endregion
     );
   }
-  // #endregion
+// #endregion
 }
 // #endregion
