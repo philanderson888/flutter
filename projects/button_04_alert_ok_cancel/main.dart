@@ -1,7 +1,13 @@
-// #region import
-import 'package:flutter/material.dart';
+// button with counter
 
+// button with alert OK and cancel
+
+// records result of OK or cancel
+
+// #region library
+import 'package:flutter/material.dart';
 // #endregion
+
 // #region main
 void main() {
   runApp(const App());
@@ -94,7 +100,7 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.orange,
                   textStyle: const TextStyle(fontSize: 20)),
-              onPressed: () => { 
+              onPressed: () => {
                 _incrementCounter(),
                 showDialog<String>(
                   context: context,
@@ -150,6 +156,6 @@ class _HomeState extends State<Home> {
       // #endregion
     );
   }
-  // #endregion
+// #endregion
 }
 // #endregion
