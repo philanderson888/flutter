@@ -1,3 +1,5 @@
+// first hello world app that actually looks nice - stateless
+
 import 'package:flutter/material.dart';
 
 void main() {
