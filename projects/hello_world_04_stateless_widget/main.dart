@@ -1,3 +1,5 @@
+// hello world totally minimal stateless widget
+
 import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
@@ -6,7 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Text('hello world from phil')
+        home: Text('hello world from phil totally minimal stateless widget')
     );
   }
 }

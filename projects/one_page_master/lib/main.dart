@@ -1,13 +1,14 @@
-// hello world 03 totallyl minimal app centered
+// hello world totally minimal stateless widget
 
 import 'package:flutter/material.dart';
-
 void main() {
-  runApp(
-    const MaterialApp(
-      home: Center(
-        child: Text('this is my app'),
-      ),
-    ),
-  );
+  runApp(MyApp());
+}
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Text('hello world from phil totally minimal stateless widget')
+    );
+  }
 }
