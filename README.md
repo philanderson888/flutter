@@ -17,7 +17,10 @@ This is a respository for learning flutter from scratch
   - [libraries](#libraries)
   - [commands](#commands)
   - [regions](#regions)
+  - [buttons](#buttons)
   - [navigation](#navigation)
+    - [navigation notes](#navigation-notes)
+    - [navigation projects](#navigation-projects)
   - [visibility](#visibility)
   - [containers](#containers)
   - [components](#components)
@@ -74,13 +77,6 @@ Instructions on how to get started with flutter
 
 - hello world projects
 
-  - [Hello World 01](projects/HelloWorld01)
-  - [Hello World 02](projects/HelloWorld02)
-  - [Hello World 03](projects/HelloWorld03)
-  - [Hello World 04](projects/HelloWorld04)
-  - [Hello World 05](projects/HelloWorld05)
-
-
 ## next steps
 
 [Next Steps](notes/next-steps.md)
@@ -94,6 +90,7 @@ Instructions on how to get started with flutter
 an introduction to flutter syntax
 
 [syntax](notes/syntax.md)
+
 ## libraries
 
 [libraries](notes/libraries.md)
@@ -110,6 +107,10 @@ regions are very useful for tidying up code
 
 [regions](notes/regions.md)
 
+## buttons
+
+after you have learned the super basics in hello world, next step will be to have a few buttons clicked.  please see the button_nn sequence of projects and work your way through them
+
 ## navigation
 
 Navigation uses tabs and drawers.
@@ -118,8 +119,11 @@ Route - tells us where to go from now
 
 Stack - keeps track of navigation so far and how to go back
 
-- [navigation notes](notes/navigation.md)
-- navigation projects
+### [navigation notes](notes/navigation.md)
+
+### navigation projects
+
+  - [navigation_01_two_pages](projects/navigation_01_two_pages)
   - [MultiPage01](Projects/MultiPage01)
   - [MultiPage02](Projects/MultiPage02)
   - [MultiPage03](Projects/MultiPage03)
