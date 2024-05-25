@@ -1,3 +1,5 @@
+// navigation two page stateless application
+
 import 'package:flutter/material.dart';
 void main() {
   runApp(MyApp());
@@ -14,21 +16,19 @@ class MyApp extends StatelessWidget {
 class FirstScreen extends StatelessWidget {
   @override
   Widget build (BuildContext ctxt) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Multi Page Application"),
-      ),
-      body: new Checkbox(
-          value: false,
-          onChanged: (bool newValue) {
-            Navigator.push(
-              ctxt,
-              new MaterialPageRoute(
-                builder: (ctxt) => new SecondScreen()
-              ),
-            ); // navigator.push
-          } // onchanged
-      )
+    return Scaffold(
+        appBar: new AppBar(
+          title: new Text("Multi Page Application"),
+        ),
+        body: Checkbox(
+            value: false,
+            onChanged: (bool? newValue) {
+              Navigator.push(ctxt, MaterialPageRoute(
+                    builder: (ctxt) => SecondScreen()
+                ),
+              ); // navigator.push
+            } // onchanged
+        )
     );
   }
 }

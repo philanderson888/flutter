@@ -1,61 +1,46 @@
-// navigation stateleess two page
+// navigation two page stateless application
 
 import 'package:flutter/material.dart';
-void main() => runApp(MyApp());
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Home(),
-    );
-  }
+void main() {
+  runApp(MyApp());
 }
-class Home extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
-  Widget build (BuildContext context) {
-    doThis(){
-      print('you clicked');
-      Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => Page2()),
-      );
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Home"),
-      ),
-      body: Center(
-        child: ElevatedButton(
-            key:null,
-            onPressed: doThis,
-            child: Text("Go To Page 2")
-        ),
-      ),
+  Widget build(BuildContext ctxt) {
+    return new MaterialApp(
+      home: new FirstScreen(),
     );
   }
 }
 
-class Page2 extends StatelessWidget {
+class FirstScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
-    goBack(){
-      print('going back');
-      Navigator.pop(context);
-    }
+  Widget build (BuildContext ctxt) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Page2'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          key: null,
-          onPressed: goBack,
-          child: Text('go back'),
+        appBar: new AppBar(
+          title: new Text("Multi Page Application"),
         ),
+        body: Checkbox(
+            value: false,
+            onChanged: (bool? newValue) {
+              Navigator.push(ctxt, MaterialPageRoute(
+                    builder: (ctxt) => SecondScreen()
+                ),
+              ); // navigator.push
+            } // onchanged
+        )
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  @override
+  Widget build (BuildContext ctxt) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Multi Page Application Page-1"),
       ),
+      body: new Text("Another Page...!!!!!!"),
     );
   }
 }
