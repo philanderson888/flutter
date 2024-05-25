@@ -124,9 +124,10 @@ Stack - keeps track of navigation so far and how to go back
 ### navigation projects
 
   - [navigation_01_two_pages](projects/navigation_01_two_pages/main.dart)
-  - [MultiPage01](projects/MultiPage01)
-  - [MultiPage02](projects/MultiPage02)
-  - [MultiPage03](projects/MultiPage03)
+  - [navigation_02_three_pages](projects/navigation_02_three_pages/main.dart)
+  
+
+  
   - [MultiPage04](projects/MultiPage04) for a demonstration of code which navigates 4 pages and back.
   - [MultiPage05](projects/MultiPage05) This project clicks through to `Page5` where an item may be clicked on.  After a 2-second delay the user is taken either to `Page6` or `Page7` depending on which index is clicked.  Clicking on items index 0 or 1 takes to `Page6` which is `stateless` and clicking on any other index takes to `Page7` which is `stateful`
 
