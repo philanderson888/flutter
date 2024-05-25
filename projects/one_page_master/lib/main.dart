@@ -1,92 +1,61 @@
+// navigation stateleess two page
+
 import 'package:flutter/material.dart';
-void main() => {
-  runApp(MaterialApp(
-    home:MyApp(),
-    theme:theme,
-  )
-  )
-};
-
-// create a colour
-final ThemeData theme = ThemeData(
-  canvasColor: Colors.lightGreenAccent,
-  colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.amberAccent),
-);
-
+void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
   @override
-  Widget build(BuildContext ctx){
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: Home(),
+    );
+  }
+}
+class Home extends StatelessWidget {
+  @override
+  Widget build (BuildContext context) {
+    doThis(){
+      print('you clicked');
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => Page2()),
+      );
+    }
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
       body: Center(
-        child: TextButton(
-            onPressed: (){
-              Navigator.push(ctx,PageTwo());
-            },
-            child:Text('Go to page 2')
+        child: ElevatedButton(
+            key:null,
+            onPressed: doThis,
+            child: Text("Go To Page 2")
         ),
       ),
     );
   }
 }
 
-// Material Page Route allows us to replace the screen with new transitional screen
-// on button click go to new page but original page stays in memory
-// can remove from memory by setting maintain state = false
-// null means route returns nothing as there is no state to return
-class PageTwo extends MaterialPageRoute<Null>{
-  // constructor - can pass in items if we want
-  PageTwo(): super(builder:(BuildContext ctx){
-    // return element we are creating
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context){
+    goBack(){
+      print('going back');
+      Navigator.pop(context);
+    }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(ctx).canvasColor,
-        elevation:1.0,
+        title: Text('Page2'),
       ),
-      body:Center(
+      body: Center(
         child: ElevatedButton(
-          onPressed: (){
-            Navigator.push(
-                ctx,
-                PageThree()
-            );
-          },
-          child: Text('Go to page 3'),
+          key: null,
+          onPressed: goBack,
+          child: Text('go back'),
         ),
       ),
     );
-  });
-}
-
-
-class PageThree extends MaterialPageRoute<Null>{
-  // constructor - can pass in items if we want
-  PageThree(): super(builder:(BuildContext ctx){
-    // return element we are creating
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('last page'),
-        backgroundColor: Theme.of(ctx).backgroundColor,
-        elevation:2.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: (){
-              Navigator.pop(ctx);
-            },
-          ),
-        ],
-      ),
-      body:Center(
-        child: MaterialButton(
-          onPressed: (){
-            Navigator.popUntil(
-                ctx,
-                ModalRoute.withName(Navigator.defaultRouteName)
-            );
-          },
-          child: Text('Go Home!'),
-        ),
-      ),
-    );
-  });
+  }
 }
