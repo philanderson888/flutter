@@ -1,3 +1,15 @@
+// proper stateful app with 
+
+// 4 screens
+
+// button counter 
+
+// back stack all working 
+
+// go from screen 4 to 2 as well 
+
+// all workign
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         // applies to whole app if applied like this - fontFamily: 'Arial',
         colorScheme:
-            ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
+        ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
         textTheme: TextTheme(
           bodyText1: TextStyle(
             fontSize: 15,
@@ -36,8 +48,8 @@ class UpdateStatefulHome extends State {
   clickButton() {
     counter++;
     setState(() => {
-          if (counter % 2 == 0) {buttonText = 'Even'} else {buttonText = 'Odd'}
-        });
+      if (counter % 2 == 0) {buttonText = 'Even'} else {buttonText = 'Odd'}
+    });
   }
 
   goToPage2() {
