@@ -1,122 +1,157 @@
+// alert_02
+
+// #region import
 import 'package:flutter/material.dart';
 
-class MyAppBar extends StatelessWidget {
-  const MyAppBar({required this.title, Key? key}) : super(key: key);
-
-  // Fields in a Widget subclass are always marked "final".
-
-  final Widget title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 56.0, // in logical pixels
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      decoration: BoxDecoration(color: Colors.blue[500]),
-      // Row is a horizontal, linear layout.
-      child: Row(
-        // <Widget> is the type of items in the list.
-        children: const [
-          Text('Hello World   '),
-          Text('   Hello World   '),
-          Text('   Hello World   '),
-        ],
-      ),
-    );
-  }
-}
-
-class MyScaffold extends StatelessWidget {
-  const MyScaffold({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    // Material is a conceptual piece
-    // of paper on which the UI appears.
-    return Material(
-      // Column is a vertical, linear layout.
-      child: Column(
-        children: [
-          MyAppBar(
-            title: Text(
-              'Example title',
-              style: Theme.of(context) //
-                  .primaryTextTheme
-                  .headline6,
-            ),
-          ),
-          const Expanded(
-
-            child: Center(
-              child: Text('Hello, world!!!!!'),
-            ),
-          ),
-          const Expanded(
-
-            child: Center(
-              child: Text('Hello, world!!!!!'),
-            ),
-
-          ),
-          const Expanded(
-
-            child: Center(
-              child: Text('Hello, world!!!!!'),
-            ),
-
-          ),
-          Expanded(
-
-            child: Center(
-              child: Image.asset(
-                'images/mountain.jpg',
-                fit: BoxFit.cover,
-              ),
-
-            ),
-
-          ),
-          Expanded(
-
-            child: Center(
-                child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Image.network('https://picsum.photos/250' ,
-                      fit: BoxFit.cover,
-                    )
-
-                )
-
-            ),
-
-          ),
-
-          Expanded(
-
-            child: Center(
-                child: Image.network('https://media3.giphy.com/media/3oz8xUK8V7suY7W9SE/giphy.gif' ,
-                  fit: BoxFit.cover,
-                )
-
-            ),
-
-          ),
-
-
-        ],
-
-      ),
-    );
-  }
-}
-
+// #endregion
+// #region main
 void main() {
-  runApp(
-    const MaterialApp(
-      title: 'My app', // used by the OS task switcher
-      home: SafeArea(
-        child: MyScaffold(),
-      ),
-    ),
-  );
+  runApp(const App());
 }
+
+// #endregion
+// #region App => MaterialApp => Home page
+class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+  static const String _title = 'Flutter';
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: const Home(title: _title),
+    );
+  }
+}
+
+// #endregion
+// #region Home state => _HomeState
+class Home extends StatefulWidget {
+  const Home({Key? key, required this.title}) : super(key: key);
+  final String title;
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+// #endregion
+// #region _HomeState extends state
+class _HomeState extends State<Home> {
+  // #region initialise variables
+  int _counter = 0;
+  bool _ok = false;
+  bool _cancel = false;
+  // #endregion
+  // #region incrementCounter()
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
+
+  void _registerAlertOK() {
+    setState(() {
+      _ok = true;
+      _cancel = false;
+      _counter++;
+    });
+    print('ok set to $_ok');
+  }
+
+  void _registerAlertCancel() {
+    setState(() {
+      _ok = false;
+      _cancel = true;
+      _counter++;
+    });
+    print('_cancel set to $_cancel');
+  }
+
+  // #endregion
+  // #region widget builder
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      // #region app bar
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      // #endregion
+      // #region body
+      body: Center(
+        // #region column
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            TextButton(
+              style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.orange,
+                  textStyle: const TextStyle(fontSize: 20)),
+              onPressed: () => {
+                _incrementCounter(),
+                showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    title: const Text('This is an alert'),
+                    content: const Text('This is an alert description.'),
+                    actions: <Widget>[
+                      TextButton(
+                        onPressed: () => {
+                          print('You pressed "cancel"'),
+                          _registerAlertCancel(),
+                          Navigator.pop(context, 'Cancel')
+                        },
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () => {
+                          _registerAlertOK(),
+                          print('You pressed "OK"'),
+                          Navigator.pop(context, 'OK')
+                        },
+                        child: const Text('OK'),
+                      ),
+                    ],
+                  ),
+                ),
+              },
+              child: const Text('Show Dialog'),
+            ),
+            Visibility(
+              child: const Text(
+                'You pressed OK button - well done',
+              ),
+              visible: _ok,
+            ),
+            Visibility(
+              child: const Text(
+                'You pressed the cancel button this time to cancel the dialog',
+              ),
+              visible: _cancel,
+            ),
+          ],
+        ),
+        // #endregion
+      ),
+      // #endregion
+      // #region floating action button
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
+      // #endregion
+    );
+  }
+// #endregion
+}
+// #endregion
