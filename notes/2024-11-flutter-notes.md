@@ -50,3 +50,12 @@ to add permissions we need to adjust the `AndroidManifest.xml` as follows
     <application
         ...
 ```
+
+all is now working
+
+<img src="/images/geolocator-02.png" width="600" />
+
+with gui output
+
+<img src="/images/geolocator-01.png" width="300" />
+
