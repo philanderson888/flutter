@@ -241,7 +241,7 @@ A list of all projects is below
 
 ## geolocation
 
-[geolocation](notes/geolocation.md)
+[geolocation](notes/2024-11-flutter-notes.md#geolocation)
 
 ## firebase
 
