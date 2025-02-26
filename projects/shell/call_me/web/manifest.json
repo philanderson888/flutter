@@ -1,6 +1,6 @@
 {
-    "name": "geolocation_02",
-    "short_name": "geolocation_02",
+    "name": "call_me",
+    "short_name": "call_me",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

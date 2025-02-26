@@ -363,7 +363,7 @@ class MyApp extends StatelessWidget {
 
 this displays a list of images, displayed in a grid layout
 
-![gridview02](../images/27e6a47bb21218ab2c411313a1212530ebe015227f3646690463c08a325f70ab.png)  
+![gridview02](../../../images/27e6a47bb21218ab2c411313a1212530ebe015227f3646690463c08a325f70ab.png)  
 
 [gridview02](../projects/GridView02)
 
@@ -419,7 +419,7 @@ class MyApp extends StatelessWidget {
 
 this displays a list of 20 images in a grid layout, with margins added
 
-![gridview03](../images/e330c99bdcfa1bbedd9257b5b9ea3003b542896a7e4d322abaac321e77b8dfde.png)  
+![gridview03](../../imagese330c99bdcfa1bbedd9257b5b9ea3003b542896a7e4d322abaac321e77b8dfde.png)  
 
 [gridview03](../projects/gridview03)
 
