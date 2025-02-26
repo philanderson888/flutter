@@ -7,6 +7,7 @@
   - [getting started with an online ide](#getting-started-with-an-online-ide)
   - [samples](#samples)
   - [references](#references)
+  - [install instructions for windows](#install-instructions-for-windows)
   - [install java (not required any more - updated note 2023)](#install-java-not-required-any-more---updated-note-2023)
   - [flutter sdk](#flutter-sdk)
   - [verify install](#verify-install)
@@ -27,6 +28,12 @@
     - [enable google usb driver in android studio](#enable-google-usb-driver-in-android-studio)
   - [Add a device](#add-a-device)
   - [configure android studio for flutter](#configure-android-studio-for-flutter)
+  - [install flutter on mac](#install-flutter-on-mac)
+    - [install vscode](#install-vscode)
+    - [](#)
+    - [install xcode](#install-xcode)
+    - [install rosetta tools](#install-rosetta-tools)
+    - [install flutter sdk](#install-flutter-sdk)
   - [hello world](#hello-world)
     - [build](#build)
     - [run](#run)
@@ -172,13 +179,13 @@ c:\sdk\flutter\bin\dart.bat
 
 next run this command 
 
-```powershell
+```bash
 flutter doctor
 ```
 
 This should identify which programs need to be installed for the full flutter experience to work properly.
 
-```
+```bash
 PS C:\github> flutter doctor
 Running "flutter pub get" in flutter_tools...                      10.8s
 Doctor summary (to see all details, run flutter doctor -v):
@@ -292,7 +299,7 @@ docker pull kelvinlawson/android-studio
 
 or this linux one (will have to install docker desktop and from the system tray switch to using linux containers)
 
-```powershell
+```bash
 docker pull deadolus/android-studio
 ```
 
@@ -307,7 +314,7 @@ if we are getting the message that the emulator is not running we can go to `C:\
 
 if android studio is not installed or detected, please install it as above and optionally, if still not detected, specify the path using 
 
-```
+```bash
 flutter config --android-studio-dir <<path to android studio sdk folder>>
 ```
 
@@ -315,7 +322,7 @@ flutter config --android-studio-dir <<path to android studio sdk folder>>
 
 type
 
-```
+```bash
 flutter doctor --android-licenses
 ```
 
@@ -339,7 +346,7 @@ Next, run Android Studio, Tools, SDK Manager and tick `Google USB Driver`
 
 Other commands to run are 
 
-```
+```bash
 flutter devices
 ```
 
@@ -368,7 +375,7 @@ install VSCode from https://code.visualstudio.com/download
 
 add vscode to path 
 
-```
+```bash
 command-shift-p
 choose 'Shell Command: Install 'code' command in path
 ```
@@ -397,7 +404,6 @@ download flutter sdk from https://docs.flutter.dev/get-started/install
 ```
 mv zip-file to-desired-location
 unzip zip-file
-
 ```
 
 

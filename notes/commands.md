@@ -38,7 +38,7 @@ flutter upgrade
 
 if you want to investigate `flutter create` samples you can do so by running the command below and then inspecting `flutter-samples.json`
 
-```java
+```bash
 flutter create --list-samples=flutter-samples.json
 ```
 
