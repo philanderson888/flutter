@@ -1,125 +1,318 @@
+// proper stateful app with
+
+// 4 screens
+
+// button counter
+
+// back stack all working
+
+// go from screen 4 to 2 as well
+
+// all workign
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
+  final textBackground = Color(0xFFC4F3E0);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      home: StatefulHome(),
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        // applies to whole app if applied like this - fontFamily: 'Arial',
+        colorScheme:
+        ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
+        textTheme: TextTheme(
+          bodyLarge: TextStyle(
+            fontSize: 15,
+            backgroundColor: textBackground,
+            color: Color(0xFF2C0313),
+          ),
+        ),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
+class StatefulHome extends StatefulWidget {
+  UpdateStatefulHome createState() => UpdateStatefulHome();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+class UpdateStatefulHome extends State {
+  String buttonText = 'some text';
+  int counter = 0;
+  clickButton() {
+    counter++;
+    setState(() => {
+      if (counter % 2 == 0) {buttonText = 'Even'} else {buttonText = 'Odd'}
     });
+  }
+
+  goToPage2() {
+    Navigator.push(
+      (context),
+      MaterialPageRoute(builder: (context) => Page2()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Center(child: Text("Home Screen")),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              Container(
+                child: Text(
+                  'here is some text',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              Container(
+                child: Text(
+                  'here is some more text',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+              Container(
+                child: Text('here is a third line'),
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 10.0),
+                child: ElevatedButton(
+                    key: null, onPressed: null, child: Text('a button')),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: Text('counter is $counter'),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.all(20),
+                      child: Text(buttonText),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 5,
+                            blurRadius: 7,
+                            offset: Offset(0, 3), // changes position of shadow
+                          ),
+                        ],
+                      ),
+                      child: ElevatedButton.icon(
+                        autofocus: true,
+                        clipBehavior: Clip.none,
+                        onPressed: () => clickButton(),
+                        icon: Icon(Icons.access_alarm),
+                        label: Text(buttonText),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.blue,
+                          padding: const EdgeInsets.all(30),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18.0),
+                            side: BorderSide(color: Colors.lightBlue),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.only(left: 15.0),
+                      child: Text(counter.toString()),
+                    )
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(5),
+                child: ElevatedButton(
+                  autofocus: true,
+                  clipBehavior: Clip.none,
+                  onPressed: () => clickButton(),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFFF5A9C6),
+                    padding: const EdgeInsets.all(15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(18.0),
+                      side: BorderSide(color: Colors.lightBlue),
+                    ),
+                  ),
+                  child: Text(
+                    'go to next screen',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                child: ElevatedButton.icon(
+                  onPressed: () => clickButton(),
+                  icon: Icon(Icons.arrow_forward),
+                  label: Text('a button'),
+                ),
+              ),
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  onPressed: () => goToPage2(),
+                  child: Text("Click To Go To Page 2"),
+                ),
+              ),
+              Tooltip(
+                message: 'This is some help text to understand what to do ',
+                child: const Text('This is some text without much explanation'),
+                waitDuration: const Duration(seconds: 1),
+                showDuration: const Duration(seconds: 4),
+                height: 50,
+                textStyle: const TextStyle(fontSize: 24),
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: const LinearGradient(
+                      colors: <Color>[Colors.amber, Colors.red]),
+                ),
+              ),
+              Tooltip(
+                message: 'Tooltip Help Text',
+                child: Container(
+                  width: 250,
+                  child: ElevatedButton(
+                    onPressed: () => goToPage2(),
+                    child: Text("Click To Go To Page 2"),
+                  ),
+                ),
+                waitDuration: const Duration(seconds: 1),
+                showDuration: const Duration(seconds: 4),
+                height: 50,
+                textStyle: const TextStyle(fontSize: 24),
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  gradient: const LinearGradient(
+                      colors: <Color>[Colors.amber, Colors.red]),
+                ),
+              ),
+            ],
+          )),
     );
+  }
+}
+
+class Page2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    goToPage3() {
+      Navigator.push(
+        (context),
+        MaterialPageRoute(builder: (context) => Page3()),
+      );
+    }
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Page 2'),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  onPressed: () => goToPage3(),
+                  child: Row(
+                    children: <Widget>[
+                      Text("Click To Go To Page 3"),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class Page3 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    goToPage4() {
+      Navigator.push(
+        (context),
+        MaterialPageRoute(builder: (context) => Page4()),
+      );
+    }
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Page 3'),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  onPressed: () => goToPage4(),
+                  child: Row(
+                    children: <Widget>[
+                      Text("Click To Go To Page 4"),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
+  }
+}
+
+class Page4 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    goToPage2() {
+      Navigator.pop(context);
+      Navigator.pop(context);
+    }
+
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Page 4'),
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 250,
+                child: ElevatedButton(
+                  onPressed: () => goToPage2(),
+                  child: Row(
+                    children: <Widget>[
+                      Text("Click To Go To Page 2"),
+                      Icon(Icons.arrow_forward),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ));
   }
 }
